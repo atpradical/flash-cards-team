@@ -8,7 +8,7 @@
 
 
 4. название таски даем по маске: <span style="color: orange;">[Область]:<Название></span> (пример: <span style="color: green;">[Component]:Button)</span>).
-5. Для верстки и стилей делаем отдельную таску и ветку (пример: <span style="color: green;">[STYLES]:[Component]:Button)</span>).
+5. Для верстки и стилей делаем отдельную таску и ветку (пример: <span style="color: green;">[Styles]:[Component]:Button)</span>).
 
 
 6. <span style="color: orange;">Мерджим таску в Main только после ревью обоих напарников.</span>
