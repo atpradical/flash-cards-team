@@ -130,13 +130,13 @@ export const Link2: Story = {
     as: 'a',
     href: '#',
     children: mocText,
-    variant: 'error',
+    variant: 'link2',
   },
 }
 
 export const TypographyError: Story = {
   args: {
     children: mocText,
-    variant: 'link2',
+    variant: 'error',
   },
 }
