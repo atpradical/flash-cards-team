@@ -23,7 +23,9 @@ const ImageOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =
         }
       />
       <path
-        d={'M9.5 8.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5C6.5 7.67 7.17 7 8 7c.82 0 1.5.67 1.5 1.5'}
+        d={
+          'M9.5 8.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5C6.5 7.67 7.17 7 8 7c.82 0 1.5.67 1.5 1.5'
+        }
         fillRule={'evenodd'}
       />
     </g>

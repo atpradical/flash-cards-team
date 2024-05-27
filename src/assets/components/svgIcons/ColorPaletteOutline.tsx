@@ -23,7 +23,9 @@ const ColorPaletteOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElem
         }
       />
       <path
-        d={'M13.5 6.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'}
+        d={
+          'M13.5 6.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'
+        }
         fillRule={'evenodd'}
       />
       <path
