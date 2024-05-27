@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgPaypalSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const PaypalSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'24'}
+    ref={ref}
+    viewBox={'0 0 24 16'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'paypal-svgrepo-com-4_svg__a'}>
         <path d={'M0 0h24v16H0z'} fill={'currentColor'} fillOpacity={0} />
@@ -60,7 +68,7 @@ const SvgPaypalSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgPaypalSvgrepoCom4)
+const ForwardRef = forwardRef(PaypalSvgrepoCom4)
 const Memo = memo(ForwardRef)
 
 export default Memo

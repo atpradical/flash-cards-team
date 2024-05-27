@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgColorPaletteOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const ColorPaletteOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'24'}
+    ref={ref}
+    viewBox={'0 0 24 24'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'color-palette-outline_svg__a'}>
         <path d={'M0 0h24v24H0z'} fill={'currentColor'} fillOpacity={0} />
@@ -15,9 +23,7 @@ const SvgColorPaletteOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGE
         }
       />
       <path
-        d={
-          'M13.5 6.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'
-        }
+        d={'M13.5 6.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'}
         fillRule={'evenodd'}
       />
       <path
@@ -28,7 +34,7 @@ const SvgColorPaletteOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGE
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgColorPaletteOutline)
+const ForwardRef = forwardRef(ColorPaletteOutline)
 const Memo = memo(ForwardRef)
 
 export default Memo

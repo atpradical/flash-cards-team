@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgArrowIosForward = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const ArrowIosForward = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'24'}
+    ref={ref}
+    viewBox={'0 0 24 24'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'arrow-ios-forward_svg__a'}>
         <path d={'M0 0h24v24H0z'} fill={'currentColor'} fillOpacity={0} />
@@ -18,7 +26,7 @@ const SvgArrowIosForward = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEleme
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgArrowIosForward)
+const ForwardRef = forwardRef(ArrowIosForward)
 const Memo = memo(ForwardRef)
 
 export default Memo

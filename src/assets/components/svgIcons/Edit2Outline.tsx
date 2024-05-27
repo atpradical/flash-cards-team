@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgEdit2Outline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const Edit2Outline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'24'}
+    ref={ref}
+    viewBox={'0 0 24 24'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'edit-2-outline_svg__a'}>
         <path d={'M0 0h24v24H0z'} fill={'currentColor'} fillOpacity={0} />
@@ -17,7 +25,7 @@ const SvgEdit2Outline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgEdit2Outline)
+const ForwardRef = forwardRef(Edit2Outline)
 const Memo = memo(ForwardRef)
 
 export default Memo

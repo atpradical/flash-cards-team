@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgPaid = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const Paid = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'24'}
+    ref={ref}
+    viewBox={'0 0 24 24'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'paid_svg__a'}>
         <path d={'M4 4h16v16H4z'} fill={'currentColor'} fillOpacity={0} />
@@ -29,7 +37,7 @@ const SvgPaid = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgPaid)
+const ForwardRef = forwardRef(Paid)
 const Memo = memo(ForwardRef)
 
 export default Memo

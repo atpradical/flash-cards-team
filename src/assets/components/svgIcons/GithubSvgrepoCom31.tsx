@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgGithubSvgrepoCom31 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const GithubSvgrepoCom31 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'24'}
+    ref={ref}
+    viewBox={'0 0 24 24'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'github-svgrepo-com-3-1_svg__a'}>
         <path d={'M0 0h24v24H0z'} fill={'currentColor'} fillOpacity={0} />
@@ -18,7 +26,7 @@ const SvgGithubSvgrepoCom31 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEl
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgGithubSvgrepoCom31)
+const ForwardRef = forwardRef(GithubSvgrepoCom31)
 const Memo = memo(ForwardRef)
 
 export default Memo

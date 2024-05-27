@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgImageOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const ImageOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'24'}
+    ref={ref}
+    viewBox={'0 0 24 24'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'image-outline_svg__a'}>
         <path d={'M0 0h24v24H0z'} fill={'currentColor'} fillOpacity={0} />
@@ -15,15 +23,13 @@ const SvgImageOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>
         }
       />
       <path
-        d={
-          'M9.5 8.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5C6.5 7.67 7.17 7 8 7c.82 0 1.5.67 1.5 1.5'
-        }
+        d={'M9.5 8.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5C6.5 7.67 7.17 7 8 7c.82 0 1.5.67 1.5 1.5'}
         fillRule={'evenodd'}
       />
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgImageOutline)
+const ForwardRef = forwardRef(ImageOutline)
 const Memo = memo(ForwardRef)
 
 export default Memo

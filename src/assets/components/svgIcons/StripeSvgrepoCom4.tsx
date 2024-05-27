@@ -1,7 +1,15 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg fill={'none'} ref={ref} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+const StripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+  <svg
+    fill={'none'}
+    height={'16'}
+    ref={ref}
+    viewBox={'0 0 24 16'}
+    width={'24'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
     <defs>
       <clipPath id={'stripe-svgrepo-com-4_svg__a'}>
         <path d={'M0 0h24v16H0z'} fill={'currentColor'} fillOpacity={0} />
@@ -32,7 +40,7 @@ const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgStripeSvgrepoCom4)
+const ForwardRef = forwardRef(StripeSvgrepoCom4)
 const Memo = memo(ForwardRef)
 
 export default Memo
