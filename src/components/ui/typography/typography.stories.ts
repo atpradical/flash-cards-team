@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Typography from './typography'
+import { Typography } from './typography'
 
 const mocText = 'Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH'
 
@@ -129,6 +129,13 @@ export const Link2: Story = {
   args: {
     as: 'a',
     href: '#',
+    children: mocText,
+    variant: 'error',
+  },
+}
+
+export const TypographyError: Story = {
+  args: {
     children: mocText,
     variant: 'link2',
   },

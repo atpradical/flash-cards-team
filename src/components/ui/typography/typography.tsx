@@ -1,28 +1,37 @@
 import React from 'react'
 import s from './typography.module.scss'
-import { TypographyVariant } from './types'
+import clsx from 'clsx'
+
+export type TypographyVariant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'body1'
+  | 'body2'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'caption'
+  | 'overline'
+  | 'link1'
+  | 'link2'
+  | 'error'
 
 type TypographyProps<T extends React.ElementType> = {
   as?: T
-  children: React.ReactNode
   variant?: TypographyVariant
   className?: string
 } & React.ComponentPropsWithoutRef<T>
 
-const Typography = <T extends React.ElementType = 'p'>({
+export const Typography = <T extends React.ElementType = 'p'>({
   as,
-  children,
   variant,
   className,
   ...restProps
 }: TypographyProps<T>) => {
   const Component = as || 'p'
-  const variantClass = variant ? s[`typography-${variant}`] : ''
+
   return (
-    <Component className={`${className ? className + ' ' : ''}${variantClass}`} {...restProps}>
-      {children}
-    </Component>
+    <Component className={clsx(className, variant && s[`typography-${variant}`])} {...restProps} />
   )
 }
-
-export default Typography

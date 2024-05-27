@@ -66,4 +66,9 @@
   &-link2 {
     color: var(--color-info-500);
   }
+
+  &-error {
+    font-size: var(--font-size-s);
+    color: var(--color-danger-500);
+  }
 }
