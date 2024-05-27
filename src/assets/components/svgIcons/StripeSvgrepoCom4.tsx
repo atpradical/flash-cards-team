@@ -1,11 +1,12 @@
-import type { SVGProps } from 'react'
-import { Ref, forwardRef, memo } from 'react'
-const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+import { Ref, SVGProps, forwardRef, memo } from 'react'
+
+const StripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={16}
+    height={'16'}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 16'}
+    width={'24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -39,7 +40,7 @@ const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgStripeSvgrepoCom4)
+const ForwardRef = forwardRef(StripeSvgrepoCom4)
 const Memo = memo(ForwardRef)
 
 export default Memo

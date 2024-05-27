@@ -1,11 +1,12 @@
-import type { SVGProps } from 'react'
-import { Ref, forwardRef, memo } from 'react'
-const SvgExpand = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+import { Ref, SVGProps, forwardRef, memo } from 'react'
+
+const Expand = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
+    height={'24'}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
+    width={'24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -24,7 +25,7 @@ const SvgExpand = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgExpand)
+const ForwardRef = forwardRef(Expand)
 const Memo = memo(ForwardRef)
 
 export default Memo

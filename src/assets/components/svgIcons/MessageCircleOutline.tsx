@@ -1,11 +1,12 @@
-import type { SVGProps } from 'react'
-import { Ref, forwardRef, memo } from 'react'
-const SvgMessageCircleOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+import { Ref, SVGProps, forwardRef, memo } from 'react'
+
+const MessageCircleOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
+    height={'24'}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
+    width={'24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -30,7 +31,7 @@ const SvgMessageCircleOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVG
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgMessageCircleOutline)
+const ForwardRef = forwardRef(MessageCircleOutline)
 const Memo = memo(ForwardRef)
 
 export default Memo

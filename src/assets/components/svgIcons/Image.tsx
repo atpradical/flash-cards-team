@@ -1,11 +1,12 @@
-import type { SVGProps } from 'react'
-import { Ref, forwardRef, memo } from 'react'
-const SvgImage = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+import { Ref, SVGProps, forwardRef, memo } from 'react'
+
+const Image = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
+    height={'24'}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
+    width={'24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -22,15 +23,13 @@ const SvgImage = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
         }
       />
       <path
-        d={
-          'M9.5 8.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5C6.5 7.67 7.17 7 8 7c.82 0 1.5.67 1.5 1.5'
-        }
+        d={'M9.5 8.5c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5C6.5 7.67 7.17 7 8 7c.82 0 1.5.67 1.5 1.5'}
         fillRule={'evenodd'}
       />
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgImage)
+const ForwardRef = forwardRef(Image)
 const Memo = memo(ForwardRef)
 
 export default Memo

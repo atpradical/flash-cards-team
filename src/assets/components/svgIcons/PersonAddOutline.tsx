@@ -1,11 +1,12 @@
-import type { SVGProps } from 'react'
-import { Ref, forwardRef, memo } from 'react'
-const SvgPersonAddOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+import { Ref, SVGProps, forwardRef, memo } from 'react'
+
+const PersonAddOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
+    height={'24'}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
+    width={'24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -24,7 +25,7 @@ const SvgPersonAddOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElem
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgPersonAddOutline)
+const ForwardRef = forwardRef(PersonAddOutline)
 const Memo = memo(ForwardRef)
 
 export default Memo

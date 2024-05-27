@@ -1,11 +1,12 @@
-import type { SVGProps } from 'react'
-import { Ref, forwardRef, memo } from 'react'
-const SvgSettings = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+import { Ref, SVGProps, forwardRef, memo } from 'react'
+
+const Settings = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
+    height={'24'}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
+    width={'24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -17,9 +18,7 @@ const SvgSettings = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =>
     <path d={'M0 0h24v24H0z'} fill={'none'} />
     <g clipPath={'url(#settings_svg__a)'} fill={'currentColor'}>
       <path
-        d={
-          'M13.5 12c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'
-        }
+        d={'M13.5 12c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'}
         fillRule={'evenodd'}
       />
       <path
@@ -30,7 +29,7 @@ const SvgSettings = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =>
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(SvgSettings)
+const ForwardRef = forwardRef(Settings)
 const Memo = memo(ForwardRef)
 
 export default Memo
