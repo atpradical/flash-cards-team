@@ -1,32 +1,34 @@
 import React from 'react'
-import s from './typography.module.scss'
+
 import clsx from 'clsx'
 
+import s from './typography.module.scss'
+
 export type TypographyVariant =
+  | 'body1'
+  | 'body2'
+  | 'caption'
+  | 'error'
   | 'h1'
   | 'h2'
   | 'h3'
   | 'h4'
-  | 'body1'
-  | 'body2'
-  | 'subtitle1'
-  | 'subtitle2'
-  | 'caption'
-  | 'overline'
   | 'link1'
   | 'link2'
-  | 'error'
+  | 'overline'
+  | 'subtitle1'
+  | 'subtitle2'
 
 type TypographyProps<T extends React.ElementType> = {
   as?: T
-  variant?: TypographyVariant
   className?: string
+  variant?: TypographyVariant
 } & React.ComponentPropsWithoutRef<T>
 
 export const Typography = <T extends React.ElementType = 'p'>({
   as,
-  variant,
   className,
+  variant,
   ...restProps
 }: TypographyProps<T>) => {
   const Component = as || 'p'

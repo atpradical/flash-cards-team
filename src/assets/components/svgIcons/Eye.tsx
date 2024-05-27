@@ -10,7 +10,9 @@ const SvgEye = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     <path d={'M0 0h24v24H0z'} fill={'none'} />
     <g clipPath={'url(#eye_svg__a)'} fill={'currentColor'}>
       <path
-        d={'M13.5 12c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'}
+        d={
+          'M13.5 12c0 .82-.68 1.5-1.5 1.5-.83 0-1.5-.68-1.5-1.5 0-.83.67-1.5 1.5-1.5.82 0 1.5.67 1.5 1.5'
+        }
         fillRule={'evenodd'}
       />
       <path

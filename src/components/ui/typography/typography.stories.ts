@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+
 import { Typography } from './typography'
 
 const mocText = 'Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH'
@@ -11,9 +12,11 @@ const meta = {
     children: {
       control: { type: 'text' },
     },
+    className: {
+      control: { type: 'text' },
+    },
     variant: {
       control: {
-        type: 'select',
         options: [
           'h1',
           'h2',
@@ -28,10 +31,8 @@ const meta = {
           'link1',
           'link2',
         ],
+        type: 'select',
       },
-    },
-    className: {
-      control: { type: 'text' },
     },
   },
   component: Typography,
@@ -119,8 +120,8 @@ export const Overline: Story = {
 export const Link1: Story = {
   args: {
     as: 'a',
-    href: '#',
-    children: mocText,
+    children: 'google',
+    href: 'https://google.com',
     variant: 'link1',
   },
 }
@@ -128,8 +129,8 @@ export const Link1: Story = {
 export const Link2: Story = {
   args: {
     as: 'a',
-    href: '#',
-    children: mocText,
+    children: 'facebook',
+    href: 'https://facebook.com',
     variant: 'link2',
   },
 }
