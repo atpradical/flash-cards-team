@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Input } from './Input'
+import { Input } from './input'
 
 const meta = {
   argTypes: {
@@ -15,7 +15,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    label: 'Label',
+    placeholder: 'Placeholder',
+  },
 }
 
 export const Active: Story = {
@@ -23,7 +26,11 @@ export const Active: Story = {
 }
 
 export const Error: Story = {
-  args: {},
+  args: {
+    label: 'Label',
+    placeholder: 'Error',
+    helperText: 'Error',
+  },
 }
 
 export const Hover: Story = {
