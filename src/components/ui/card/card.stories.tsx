@@ -34,7 +34,6 @@ type Story = StoryObj<typeof meta>
 
 export const CardSample: Story = {
   args: {
-    as: 'div',
     style: {
       height: '288px',
       width: '420px',
@@ -42,11 +41,11 @@ export const CardSample: Story = {
   },
 }
 
-export const CardExample = () => {
+export const CardWithQuestion = () => {
   return (
-    <Card as={'div'}>
+    <Card>
       <Typography as={'h1'} variant={'h1'}>
-        Learn “Deck Name”
+        Learn &quot;Deck Name&quot;
       </Typography>
       <Typography as={'p'} variant={'subtitle1'}>
         Question: How &quot;This&quot; works in JavaScript?

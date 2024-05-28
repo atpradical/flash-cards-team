@@ -1,0 +1,13 @@
+:root {
+  /* box-shadow */
+  --offset-x: -1px;
+  --offset-y: -1px;
+  --blur: 2px;
+  --scale: 0;
+  --color: 0, 0, 0;
+  --transparency: 0.1;
+  --shadow-box-top-left: var(--offset-x) var(--offset-y) var(--blur) var(--scale)
+    rgb(var(--color) var(--transparency));
+  --shadow-box-bottom-right: calc(-1 * var(--offset-x)) calc(-1 * var(--offset-y)) var(--blur)
+    var(--scale) rgb(var(--color) var(--transparency));
+}
