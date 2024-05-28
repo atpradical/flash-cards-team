@@ -15,6 +15,12 @@ const mockTabs2: TabType[] = [
   { title: 'Tab title 3', value: 'tab-value-3' },
   { title: 'Tab title 4', value: 'tab-value-4' },
 ]
+const mockTabs3: TabType[] = [
+  { disabled: true, title: 'Tab title 1', value: 'tab-value-1' },
+  { disabled: true, title: 'Tab title 2', value: 'tab-value-2' },
+  { disabled: true, title: 'Tab title 3', value: 'tab-value-3' },
+  { disabled: true, title: 'Tab title 4', value: 'tab-value-4' },
+]
 
 const meta = {
   argTypes: {},
@@ -42,7 +48,7 @@ export const BaseTabSwitcher: Story = {
 
 export const TabSwitcherWithDefaultValue: Story = {
   args: {
-    defaultValue: 'tabSwitcher-value-2',
+    defaultValue: mockTabs1[1].value,
     onValueChange: action('Mock action invoked'),
     tabs: mockTabs1,
   },
@@ -52,5 +58,11 @@ export const TabSwitcherWithSeveralDisabledTabs: Story = {
   args: {
     onValueChange: action('Mock action invoked'),
     tabs: mockTabs2,
+  },
+}
+export const TabSwitcherAllDisabledTabs: Story = {
+  args: {
+    onValueChange: action('Mock action invoked'),
+    tabs: mockTabs3,
   },
 }

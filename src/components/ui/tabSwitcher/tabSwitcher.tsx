@@ -27,13 +27,13 @@ export const TabSwitcher = ({ className, defaultValue, label, tabs, ...rest }: T
     trigger: clsx(s.tabsTrigger),
   }
 
-  const firstNotDisabledTab = tabs.find(tab => !tab.disabled)
+  const firstNotDisabledTabValue = tabs.find(tab => !tab.disabled)?.value
 
   return (
     <Tabs.Root
       activationMode={'automatic'}
       className={classNames.root}
-      defaultValue={defaultValue ?? firstNotDisabledTab!.value ?? tabs[0].value}
+      defaultValue={defaultValue ?? firstNotDisabledTabValue}
       {...rest}
     >
       {label && (
