@@ -27,9 +27,9 @@ export const Active: Story = {
 
 export const Error: Story = {
   args: {
+    helperText: 'Error',
     label: 'Label',
     placeholder: 'Error',
-    helperText: 'Error',
   },
 }
 

@@ -1,26 +1,29 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
+
 import clsx from 'clsx'
+
 import s from './input.module.scss'
+
 import { Typography } from '../typography'
 
 type InputVariant = 'active' | 'default' | 'disabled' | 'error' | 'focus' | 'hover'
 
 type Props<T extends ElementType> = {
   className?: string
-  placeholder?: string
   helperText?: string
   label?: string
   labelPosition?: 'left' | 'top'
+  placeholder?: string
   size?: 'large' | 'medium' | 'small'
   variant: InputVariant
 } & ComponentPropsWithoutRef<T>
 
 export const Input = <T extends ElementType = 'input'>({
   className,
-  label,
   helperText,
-  placeholder = 'input',
+  label,
   labelPosition = 'top',
+  placeholder = 'input',
   size,
   variant,
   ...rest
@@ -29,8 +32,8 @@ export const Input = <T extends ElementType = 'input'>({
 
   const inputElement = (
     <input
-      id={inputId}
       className={clsx(s.input, s[`input-${variant}`], size && s[`input-${size}`], className)}
+      id={inputId}
       {...rest}
     />
   )
@@ -52,7 +55,7 @@ export const Input = <T extends ElementType = 'input'>({
       ) : (
         inputElement
       )}
-      {helperText && <Typography variant="error">{helperText}</Typography>}
+      {helperText && <Typography variant={'error'}>{helperText}</Typography>}
     </div>
   )
 }
