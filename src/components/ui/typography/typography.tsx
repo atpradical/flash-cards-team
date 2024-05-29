@@ -1,8 +1,7 @@
-import React from 'react'
-
 import clsx from 'clsx'
 
 import s from './typography.module.scss'
+import { ComponentPropsWithoutRef, ElementType } from 'react'
 
 export type TypographyVariant =
   | 'body1'
@@ -19,21 +18,15 @@ export type TypographyVariant =
   | 'subtitle1'
   | 'subtitle2'
 
-type TypographyProps<T extends React.ElementType> = {
+type Props<T extends ElementType> = {
   as?: T
-  className?: string
   variant?: TypographyVariant
-} & React.ComponentPropsWithoutRef<T>
+} & ComponentPropsWithoutRef<T>
 
-export const Typography = <T extends React.ElementType = 'p'>({
-  as,
-  className,
-  variant,
-  ...restProps
-}: TypographyProps<T>) => {
-  const Component = as || 'p'
+export const Typography = <T extends ElementType = 'p'>(props: Props<T>) => {
+  const { as: Component = 'p', className, variant = 'caption', ...rest } = props
 
-  return (
-    <Component className={clsx(className, variant && s[`typography-${variant}`])} {...restProps} />
-  )
+  const classNames = clsx(s.typography, variant && s[`typography-${variant}`], className)
+
+  return <Component className={classNames} {...rest} />
 }
