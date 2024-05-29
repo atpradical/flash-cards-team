@@ -43,7 +43,7 @@ export const CardSample: Story = {
 
 export const CardWithQuestion = () => {
   return (
-    <Card>
+    <Card style={{ width: '420px' }}>
       <Typography as={'h1'} variant={'h1'}>
         Learn &quot;Deck Name&quot;
       </Typography>
