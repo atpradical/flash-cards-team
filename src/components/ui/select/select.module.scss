@@ -1,0 +1,89 @@
+.dropdownArrow {
+  transform: rotate(90deg);
+}
+
+.selectTrigger {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 6px 12px;
+
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  border-top-left-radius: var(--border-radius-s);
+  border-top-right-radius: var(--border-radius-s);
+  outline: none;
+
+  &:hover {
+    background-color: var(--color-dark-500);
+    border-color: var(--color-dark-100);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-info-300);
+  }
+
+  &[data-state='open'] .dropdownArrow {
+    transform: rotate(270deg);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &[data-state='closed'] .dropdownArrow {
+    transition: all 0.3s ease-in-out;
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    color: var(--color-dark-300);
+    border-color: var(--color-dark-300);
+  }
+}
+
+.selectContent {
+  width: var(--radix-select-trigger-width);
+
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  border-bottom-right-radius: var(--border-radius-s);
+  border-bottom-left-radius: var(--border-radius-s);
+}
+
+.selectItem {
+  cursor: pointer;
+  width: 100%;
+  padding: 7px 12px;
+
+  &[data-highlighted] {
+    color: var(--color-accent-300);
+    outline: none;
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-info-300);
+  }
+
+  &:hover {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+    outline: none;
+  }
+}
+
+.ItemIndicator {
+  width: 40px;
+  border: 1px solid green;
+}
+
+.label {
+  cursor: default;
+  margin: 0;
+  color: var(--color-dark-100);
+}
+
+.disabled {
+  color: var(--color-dark-300);
+}
