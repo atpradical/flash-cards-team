@@ -27,6 +27,8 @@ const mockOptions3: SelectItem[] = [
   { disabled: true, title: 'some option 5', value: 'option-5' },
 ]
 
+const mockNoOptions: SelectItem[] = []
+
 const meta = {
   argTypes: {
     onValueChange: action('Mock action invoked'),
@@ -70,5 +72,11 @@ export const SelectDisabled: Story = {
   args: {
     disabled: true,
     items: mockOptions3,
+  },
+}
+
+export const SelectEmpty: Story = {
+  args: {
+    items: mockNoOptions,
   },
 }
