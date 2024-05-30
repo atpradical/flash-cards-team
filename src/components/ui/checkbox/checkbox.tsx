@@ -12,11 +12,11 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof CheckboxRdx.Root>
 
 export const Checkbox = (props: Props) => {
-  const { checked, className: string, disabled, label, onCheckedChange, ...rest } = props
+  const { className: string, disabled, label, onCheckedChange, ...rest } = props
   const classNames = {
-    icon: clsx(s.icon),
-    indicator: clsx(s.indicator),
-    label: clsx(s.label),
+    icon: clsx(s.icon, disabled && s.disabled),
+    indicator: clsx(s.indicator, disabled && s.disabled),
+    label: clsx(s.label, disabled && s.disabled),
     root: clsx(s.root),
     wrapper: clsx(s.wrapper),
   }
@@ -25,7 +25,6 @@ export const Checkbox = (props: Props) => {
     <form>
       <div className={classNames.wrapper}>
         <CheckboxRdx.Root
-          checked={checked}
           className={classNames.root}
           defaultChecked
           disabled={disabled}
