@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { TabSwitcher, TabType } from '@/components/ui/tabSwitcher/tabSwitcher'
+import { Tab, TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher'
 import { action } from '@storybook/addon-actions'
 
-const mockTabs1: TabType[] = [
+const mockTabs1: Tab[] = [
   { title: 'Tab title 1', value: 'tab-value-1' },
   { title: 'Tab title 2', value: 'tab-value-2' },
   { title: 'Tab title 3', value: 'tab-value-3' },
 ]
 
-const mockTabs2: TabType[] = [
+const mockTabs2: Tab[] = [
   { disabled: true, title: 'Tab title 1', value: 'tab-value-1' },
   { disabled: true, title: 'Tab title 2', value: 'tab-value-2' },
   { title: 'Tab title 3', value: 'tab-value-3' },
   { title: 'Tab title 4', value: 'tab-value-4' },
 ]
-const mockTabs3: TabType[] = [
+const mockTabs3: Tab[] = [
   { disabled: true, title: 'Tab title 1', value: 'tab-value-1' },
   { disabled: true, title: 'Tab title 2', value: 'tab-value-2' },
   { disabled: true, title: 'Tab title 3', value: 'tab-value-3' },

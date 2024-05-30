@@ -7,19 +7,19 @@ import s from './tabSwitcher.module.scss'
 
 import { Typography } from '../typography'
 
-export type TabType = {
+export type Tab = {
   disabled?: boolean
   title: string
   value: string
 }
 
-type TabProps = {
+type Props = {
   label?: string
-  tabs: TabType[]
+  tabs: Tab[]
 } & ComponentPropsWithoutRef<typeof Tabs.Root>
 
-export const TabSwitcher = ({ className, defaultValue, label, tabs, ...rest }: TabProps) => {
-  const classNames = {
+export const TabSwitcher = ({ className, defaultValue, label, tabs, ...rest }: Props) => {
+  const cn = {
     label: clsx(s.label),
     list: clsx(s.tabsList),
     root: clsx(s.tabsRoot, className),
@@ -27,34 +27,29 @@ export const TabSwitcher = ({ className, defaultValue, label, tabs, ...rest }: T
     trigger: clsx(s.tabsTrigger),
   }
 
-  const firstNotDisabledTabValue = tabs.find(tab => !tab.disabled)?.value
+  const firstNotDisabledTabValue = tabs.find((tab: Tab) => !tab.disabled)?.value
+
+  const TabsTriggers = tabs.map((tab: Tab) => (
+    <Tabs.Trigger className={cn.trigger} disabled={tab.disabled} key={tab.value} value={tab.value}>
+      <Typography className={cn.tabTitle} variant={'body1'}>
+        {tab.title}
+      </Typography>
+    </Tabs.Trigger>
+  ))
 
   return (
     <Tabs.Root
       activationMode={'automatic'}
-      className={classNames.root}
+      className={cn.root}
       defaultValue={defaultValue ?? firstNotDisabledTabValue}
       {...rest}
     >
       {label && (
-        <Typography className={classNames.label} variant={'body2'}>
+        <Typography className={cn.label} variant={'body2'}>
           {label}
         </Typography>
       )}
-      <Tabs.List className={classNames.list}>
-        {tabs.map(tab => (
-          <Tabs.Trigger
-            className={classNames.trigger}
-            disabled={tab.disabled}
-            key={tab.value}
-            value={tab.value}
-          >
-            <Typography className={classNames.tabTitle} variant={'body1'}>
-              {tab.title}
-            </Typography>
-          </Tabs.Trigger>
-        ))}
-      </Tabs.List>
+      <Tabs.List className={cn.list}>{TabsTriggers}</Tabs.List>
     </Tabs.Root>
   )
 }
