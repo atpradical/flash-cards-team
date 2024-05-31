@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DeckListTable } from '@/components/ui/table/DeckListTableExample'
+import { Table } from '@/components/ui/table/table'
+import { Typography } from '@/components/ui/typography'
 
 const mockTableData = [
   {
@@ -9,7 +10,6 @@ const mockTableData = [
     id: '1',
     lastUpdated: '01.01.2023',
     name: 'Как надоела верстка и CSS',
-    owner: true,
   },
   {
     cards: '41',
@@ -17,7 +17,6 @@ const mockTableData = [
     id: '2',
     lastUpdated: '15.07.2022',
     name: 'JavaScript для чайников',
-    owner: false,
   },
   {
     cards: '52',
@@ -25,7 +24,6 @@ const mockTableData = [
     id: '3',
     lastUpdated: '30.03.2021',
     name: 'О да, снова эти баги',
-    owner: false,
   },
   {
     cards: '27',
@@ -33,7 +31,6 @@ const mockTableData = [
     id: '4',
     lastUpdated: '10.12.2020',
     name: 'Когда ты фулл-стек и спишь 2 часа',
-    owner: true,
   },
   {
     cards: '11',
@@ -41,31 +38,49 @@ const mockTableData = [
     id: '5',
     lastUpdated: '05.05.2019',
     name: 'Бывает же такой legacy код',
-    owner: false,
   },
 ]
 
 const meta = {
   argTypes: {},
-  component: DeckListTable,
+  component: Table.Container,
   tags: ['autodocs'],
   title: 'Components/Table',
-} satisfies Meta<typeof DeckListTable>
+} satisfies Meta<typeof Table.Container>
 
 type Story = StoryObj<typeof meta>
 
-export const PrimaryTable: Story = {
-  args: {
-    data: mockTableData,
-    label: 'Deck List',
-  },
+export const PlainTableExample: Story = {
+  args: {},
   render: () => {
-    return <DeckListTable data={PrimaryTable.args.data} label={PrimaryTable.args.label} />
+    return (
+      <Table.Container>
+        <Typography variant={'body2'}>Just plaint table</Typography>
+        <Table.Container>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Cards</Table.HeaderCell>
+              <Table.HeaderCell>Last Updated</Table.HeaderCell>
+              <Table.HeaderCell>Created by</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {mockTableData.map(el => {
+              return (
+                <Table.Row key={el.id}>
+                  <Table.TableCell>{el.name}</Table.TableCell>
+                  <Table.TableCell>{el.cards}</Table.TableCell>
+                  <Table.TableCell>{el.createdBy}</Table.TableCell>
+                  <Table.TableCell>{el.lastUpdated}</Table.TableCell>
+                </Table.Row>
+              )
+            })}
+          </Table.Body>
+        </Table.Container>
+      </Table.Container>
+    )
   },
 }
 
 export default meta
-
-//todo: сделать базовый пример таблицы из макета (components) для сторибука.
-//todo: закончить пример Deck List для сторибука.
-//todo: разложить компоненты по файлам и папкам.
