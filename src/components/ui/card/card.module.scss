@@ -1,0 +1,13 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 34px 36px 24px;
+  margin: 10px;
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: var(--border-radius-xs);
+  box-shadow: var(--box-shadow-offset-x-min) var(--box-shadow-offset-y-min)
+    var(--box-shadow-blur-min) var(--box-shadow-scale-min)
+    rgba(var(--shadow-color-dark-900), var(--box-shadow-transparency-min));
+}
