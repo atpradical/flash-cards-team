@@ -47,7 +47,7 @@ export const Select = (props: Props) => {
   return (
     <RadixSelect.Root defaultValue={defaultValue} disabled={disabled} {...rest}>
       {label && (
-        <Typography as={'label'} className={`${cn.label}`} variant={'body2'}>
+        <Typography as={'label'} className={cn.label} variant={'body2'}>
           {label}
         </Typography>
       )}

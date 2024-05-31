@@ -31,6 +31,7 @@ const mockNoOptions: SelectItem[] = []
 
 const meta = {
   argTypes: {
+    disabled: { control: 'boolean' },
     onValueChange: action('Mock action invoked'),
   },
   component: Select,
