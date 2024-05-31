@@ -18,12 +18,12 @@ type Props = {
   items?: SelectItem[]
   label?: string
   placeholder?: string
-} & ComponentPropsWithoutRef<any>
+} & ComponentPropsWithoutRef<typeof RadixSelect.Root>
 
 export const Select = (props: Props) => {
-  const { className, defaultValue, disabled, items, label, placeholder, ...rest } = props
+  const { defaultValue, disabled, items, label, placeholder, ...rest } = props
 
-  const classNames = {
+  const cn = {
     disabled: clsx(s.disabled),
     dropdownArrow: clsx(s.dropdownArrow),
     label: clsx(s.label, disabled && s.disabled),
@@ -33,35 +33,34 @@ export const Select = (props: Props) => {
     selectTrigger: clsx(s.selectTrigger),
   }
 
+  const selectItems = items?.map(item => (
+    <RadixSelect.Item
+      className={`${cn.selectItem} ${item.disabled && cn.disabled}`}
+      disabled={item.disabled}
+      key={item.value}
+      value={item.value}
+    >
+      <RadixSelect.ItemText>{item.title}</RadixSelect.ItemText>
+    </RadixSelect.Item>
+  ))
+
   return (
     <RadixSelect.Root defaultValue={defaultValue} disabled={disabled} {...rest}>
       {label && (
-        <Typography className={`${classNames.label}`} variant={'body2'}>
+        <Typography as={'label'} className={cn.label} variant={'body2'}>
           {label}
         </Typography>
       )}
-      <RadixSelect.Trigger className={classNames.selectTrigger}>
+      <RadixSelect.Trigger className={cn.selectTrigger}>
         <RadixSelect.Value placeholder={placeholder ?? '...'} />
         <RadixSelect.Icon asChild>
-          <ArrowIosForward className={classNames.dropdownArrow} />
+          <ArrowIosForward className={cn.dropdownArrow} />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
       <RadixSelect.Portal>
-        <RadixSelect.Content className={classNames.selectContent} position={'popper'}>
+        <RadixSelect.Content className={cn.selectContent} position={'popper'}>
           <RadixSelect.Viewport>
-            <RadixSelect.Group>
-              {items &&
-                items.map((item, index) => (
-                  <RadixSelect.Item
-                    className={`${classNames.selectItem} ${item.disabled && classNames.disabled}`}
-                    disabled={item.disabled}
-                    key={index}
-                    value={item.value}
-                  >
-                    <RadixSelect.ItemText>{item.title}</RadixSelect.ItemText>
-                  </RadixSelect.Item>
-                ))}
-            </RadixSelect.Group>
+            <RadixSelect.Group>{selectItems}</RadixSelect.Group>
           </RadixSelect.Viewport>
         </RadixSelect.Content>
       </RadixSelect.Portal>
