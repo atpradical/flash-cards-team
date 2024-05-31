@@ -1,4 +1,3 @@
-/* reset */
 button {
   all: unset;
 }
@@ -7,41 +6,60 @@ button {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  //delete in the future
-  margin: 20px;
 }
 
-.radioWrapper {
+.wrapper {
   display: flex;
   align-items: center;
 }
 
 .item {
+  cursor: pointer;
+
   position: relative;
-  border: 2px solid var(--color-accent-500);
+
   width: 12px;
   height: 12px;
-  border-radius: 100%;
 
-  &:hover::after {
-    position: absolute;
-    top: -12px;
-    left: -12px;
+  border: 2px solid var(--color-accent-500);
+  border-radius: var(--border-radius-rounded);
+
+  &::after {
     content: '';
+
+    position: absolute;
+    z-index: -1;
+    top: -100%;
+    left: -100%;
+
     width: 36px;
     height: 36px;
-    border-radius: 50%;
-    background-color: var(--color-dark-500);
-    z-index: -1;
-    transition: all 0.1s ease-in-out;
+
+    background-color: transparent;
+    border-radius: var(--border-radius-rounded);
+
+    transition: all var(--transition-duration-fast) ease-in-out;
   }
 
-  &:hover::after.disabled {
+  &:hover::after {
+    background-color: var(--color-dark-500);
+  }
+
+  &:active::after {
+    background-color: var(--color-accent-900);
+  }
+
+  &:focus-visible::after {
+    background-color: var(--color-dark-700);
+  }
+
+  &:hover:disabled::after {
     display: none;
   }
 
-  &:focus {
-    //box-shadow: 0 0 0 2px black;
+  &[data-disabled] {
+    cursor: default;
+    border-color: var(--color-accent-900);
   }
 }
 
@@ -49,29 +67,33 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 100%;
-  position: relative;
-  &::after {
+
+  &::after,
+  &[data-checked] {
     content: '';
+
     display: block;
+
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+
     background-color: var(--color-accent-500);
+    border-radius: var(--border-radius-rounded);
   }
-  &[data-disabled] {
-    background-color: red;
+
+  &[data-disabled]::after {
+    background-color: var(--color-accent-900);
   }
 }
 
 .label {
-  color: white;
-  font-size: 15px;
-  line-height: 1;
-  padding-left: 15px;
+  padding-left: 12px;
+  color: var(--color-light-100);
 
-  &[data-disabled] {
-    color: red;
+  &.disabled {
+    color: var(--color-light-900);
   }
 }
