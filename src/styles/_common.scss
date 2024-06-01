@@ -1,4 +1,16 @@
 :root {
+  /* border-radius */
+  --border-radius-rounded: 50%;
+  --border-radius-s: 0.25rem;
+  --border-radius-xs: 0.125rem;
+
+  /* box-shadow */
+  --box-shadow-offset-x-min: 1px;
+  --box-shadow-offset-y-min: 1px;
+  --box-shadow-blur-min: 2px;
+  --box-shadow-scale-min: 0;
+  --box-shadow-transparency-min: 0.1;
+
   /* Rotation angle */
   --90-deg: 90deg;
   --180-deg: 180deg;
