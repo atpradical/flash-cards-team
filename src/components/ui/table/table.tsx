@@ -20,7 +20,7 @@ export const Container = (props: ContainerProps) => {
   )
 }
 
-type HeaderProps = {} & ComponentPropsWithoutRef<'thead'>
+type HeaderProps = ComponentPropsWithoutRef<'thead'>
 
 export const Header = (props: HeaderProps) => {
   const { children, className, ...rest } = props
@@ -33,7 +33,7 @@ export const Header = (props: HeaderProps) => {
   )
 }
 
-type RowProps = {} & ComponentPropsWithoutRef<'tr'>
+type RowProps = ComponentPropsWithoutRef<'tr'>
 
 export const Row = (props: RowProps) => {
   const { children, className, ...rest } = props
@@ -46,7 +46,7 @@ export const Row = (props: RowProps) => {
   )
 }
 
-type HeaderCellProps = {} & ComponentPropsWithoutRef<'th'>
+type HeaderCellProps = ComponentPropsWithoutRef<'th'>
 
 export const HeaderCell = (props: HeaderCellProps) => {
   const { children, className, ...rest } = props
@@ -59,7 +59,7 @@ export const HeaderCell = (props: HeaderCellProps) => {
   )
 }
 
-type BodyProps = {} & ComponentPropsWithoutRef<'tbody'>
+type BodyProps = ComponentPropsWithoutRef<'tbody'>
 
 export const Body = (props: BodyProps) => {
   const { children, className, ...rest } = props
@@ -72,7 +72,7 @@ export const Body = (props: BodyProps) => {
   )
 }
 
-type TableCellProps = {} & ComponentPropsWithoutRef<'td'>
+type TableCellProps = ComponentPropsWithoutRef<'td'>
 
 export const TableCell = (props: TableCellProps) => {
   const { children, className, ...rest } = props
