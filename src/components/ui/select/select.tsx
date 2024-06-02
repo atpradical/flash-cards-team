@@ -15,13 +15,14 @@ export type SelectItem = {
 }
 
 type Props = {
+  className?: string
   items?: SelectItem[]
   label?: string
   placeholder?: string
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
 
 export const Select = (props: Props) => {
-  const { defaultValue, disabled, items, label, placeholder, ...rest } = props
+  const { className, defaultValue, disabled, items, label, placeholder, ...rest } = props
 
   const cn = {
     disabled: clsx(s.disabled),
@@ -30,7 +31,7 @@ export const Select = (props: Props) => {
     placeholder: clsx(s.placeholder),
     selectContent: clsx(s.selectContent),
     selectItem: clsx(s.selectItem),
-    selectTrigger: clsx(s.selectTrigger),
+    selectTrigger: clsx(s.selectTrigger, className),
   }
 
   const selectItems = items?.map(item => (
@@ -40,7 +41,11 @@ export const Select = (props: Props) => {
       key={item.value}
       value={item.value}
     >
-      <RadixSelect.ItemText>{item.title}</RadixSelect.ItemText>
+      <RadixSelect.ItemText>
+        <Typography as={'span'} variant={'body2'}>
+          {item.title}
+        </Typography>
+      </RadixSelect.ItemText>
     </RadixSelect.Item>
   ))
 
