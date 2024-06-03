@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useId } from 'react'
 
 import { Typography } from '@/components/ui/typography'
 import * as CheckboxRdx from '@radix-ui/react-checkbox'
@@ -12,37 +12,38 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof CheckboxRdx.Root>
 
 export const Checkbox = (props: Props) => {
-  const { className: string, disabled, label, onCheckedChange, ...rest } = props
-  const classNames = {
+  const { className, disabled, id, label, onCheckedChange, ...rest } = props
+  const cn = {
+    container: clsx(s.container),
     icon: clsx(s.icon, disabled && s.disabled),
     indicator: clsx(s.indicator, disabled && s.disabled),
     label: clsx(s.label, disabled && s.disabled),
-    root: clsx(s.root),
+    root: clsx(s.root, className),
     wrapper: clsx(s.wrapper),
   }
+  const generatedId = useId()
+  const finalId = id || generatedId
 
   return (
-    <form>
-      <div className={classNames.wrapper}>
+    <>
+      <div className={cn.container}>
         <CheckboxRdx.Root
-          className={classNames.root}
+          className={cn.root}
           defaultChecked
           disabled={disabled}
-          id={'c1'}
+          id={finalId}
           {...rest}
         >
-          <div className={s.indicator}>
-            <CheckboxRdx.Indicator>
-              <CheckIcon className={classNames.icon} />
-            </CheckboxRdx.Indicator>
-            {label && (
-              <Typography as={'label'} className={classNames.label} variant={'body2'}>
-                {label}
-              </Typography>
-            )}
-          </div>
+          <CheckboxRdx.Indicator className={cn.indicator}>
+            <CheckIcon className={cn.icon} />
+          </CheckboxRdx.Indicator>
+          {label && (
+            <Typography as={'label'} className={cn.label} htmlFor={finalId} variant={'body2'}>
+              {label}
+            </Typography>
+          )}
         </CheckboxRdx.Root>
       </div>
-    </form>
+    </>
   )
 }

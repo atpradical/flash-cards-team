@@ -2,78 +2,97 @@ button {
   all: unset;
 }
 
-.wrapper {
-  height: 36px;
-  margin-left: 20px;
+.container {
+  margin: 20px;
 }
 
 .root {
-  border-radius: var(--border-radius-xs);
-  width: 18px;
-  height: 18px;
-  background-color: var(--color-light-100);
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 16px;
+  height: 16px;
+
+  background-color: transparent;
+  border: 2px solid var(--color-light-100);
+  border-radius: 2px;
+
+  &:disabled {
+    cursor: default;
+    color: var(--color-dark-100);
+    background-color: var(--color-dark-100);
+    border: 2px solid var(--color-dark-100);
+  }
+
+  &[data-state='checked'] {
+    position: relative;
+
+    width: 16px;
+    height: 16px;
+
+    background-color: var(--color-light-100);
+    border: 2px solid var(--color-light-100);
+    border-radius: 2px;
+  }
 
   &[data-state='unchecked'] {
-    border: 1px solid var(--color-light-900);
     background-color: transparent;
-  }
-  &[data-disabled] {
-    background-color: transparent;
+
+    &:disabled {
+      background-color: transparent;
+    }
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--color-info-700);
-    border-radius: 2px;
+  &:disabled::after {
+    display: none;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+
+    width: 36px;
+    height: 36px;
+
+    background-color: var(--color-dark-500);
+    border-radius: var(--border-radius-rounded);
+  }
+
+  &:active::after {
+    background-color: var(--color-dark-100);
   }
 }
 
 .indicator {
-  position: relative;
   display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-dark-900);
-  cursor: pointer;
 
   &.disabled {
-    border: 3px solid red;
     color: var(--color-light-100);
-    height: 20px;
-    width: 20px;
-    background-color: var(--color-dark-100);
-  }
-
-  &::after {
-    position: absolute;
-    top: -9px;
-    left: -9px;
-    content: '';
-    width: 36px;
-    height: 36px;
-    background-color: transparent;
-    border-radius: 50%;
-    z-index: -1;
-    transition: background-color 0.1s ease-in;
-  }
-
-  &:hover::after {
-    background-color: var(--color-dark-500);
   }
 }
 
 .icon {
   width: 18px;
   height: 18px;
-  border-radius: var(--border-radius-xs);
-
-  &.disabled {
-    color: var(--color-light-100);
-  }
 }
 
 .label {
   position: absolute;
-  left: 25px;
-  //align-items: center;
+  top: -4px;
+  left: 32px;
   white-space: nowrap;
+
   &.disabled {
     color: var(--color-dark-100);
   }
