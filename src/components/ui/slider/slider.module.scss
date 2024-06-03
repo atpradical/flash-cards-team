@@ -1,5 +1,22 @@
 .sliderForm {
-  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  display: block;
+}
+
+.outputWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
 }
 
 .sliderRoot {
@@ -11,8 +28,9 @@
   display: flex;
   align-items: center;
 
-  width: 200px;
+  width: 155px;
   height: 20px;
+  margin: 0 15px;
 }
 
 .sliderTrack {
@@ -20,35 +38,45 @@
 
   flex-grow: 1;
 
-  height: 3px;
+  height: 5px;
 
-  background-color: var(--color-accent-500);
-  border-radius: 9999px;
+  background-color: var(--color-accent-900);
+  border-radius: 10px;
 }
 
 .sliderRange {
   position: absolute;
   height: 100%;
-  background-color: white;
-  border-radius: 9999px;
+  background-color: var(--color-accent-500);
+  border-radius: 10px;
 }
 
 .sliderThumb {
+  // cursor: pointer; ? оставить?
+
   display: block;
 
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 2px 10px green;
+
+  transition:
+    width 0.3s,
+    height 0.3s,
+    box-shadow 0.3s;
 }
 
 .sliderThumb:hover {
-  background-color: gray;
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 0 6px var(--color-accent-500);
 }
 
 .sliderThumb:focus {
+  width: 14px;
+  height: 14px;
   outline: none;
-  box-shadow: 0 0 0 5px red;
+  box-shadow: 0 0 0 5px var(--color-accent-500);
 }
