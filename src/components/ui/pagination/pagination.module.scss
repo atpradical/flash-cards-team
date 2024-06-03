@@ -16,6 +16,8 @@
   border-radius: var(--border-radius-xs);
   box-shadow: none;
 
+  transition: background-color var(--transition-duration-default) ease;
+
   &:not(.selected):hover {
     background-color: var(--color-dark-500);
   }
