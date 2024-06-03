@@ -1,101 +1,92 @@
-import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, useMemo, useState } from 'react'
 
-import { EyeOutline, SearchOutline } from '@/assets/components/svgIcons'
+import {
+  CloseOutline,
+  EyeOffOutline,
+  EyeOutline,
+  SearchOutline,
+} from '@/assets/components/svgIcons'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'
 
 import { Typography } from '../typography'
-
-type inputVariant = 'password' | 'search' | 'text'
+import { Button } from '../button'
 
 type Props = {
-  disabled?: boolean
   error?: boolean
   helperText?: string
   label?: string
-  onSearchIconClick: () => void
-  placeholder?: string
-  type?: inputVariant
+  variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = (props: Props) => {
   const {
     className,
     disabled,
-    error = false,
+    error,
     helperText,
-    label = 'Label',
-    onSearchIconClick,
-    placeholder = 'Enter here...',
-    type = 'text',
+    label,
+    placeholder,
+    variant = 'text',
     ...rest
   } = props
-  const [inputType, setInputType] = useState<inputVariant>(type)
-  const [inputValue, setInputValue] = useState<string>('')
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const [showPassword, setShowPassword] = useState(false)
+  const [inputValue, setInputValue] = useState('')
+
+  const inputType = useMemo(() => (showPassword ? 'text' : variant), [showPassword, variant])
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
   }
 
-  const togglePasswordVisibility = () => {
-    if (inputType === 'password') {
-      setInputType('text')
-    } else {
-      setInputType('password')
-    }
+  const handleClearInput = () => {
+    setInputValue('')
   }
 
-  const variantClass = s[`input-${type}`]
-
-  const inputElement = (
-    <div className={clsx(s.inputContainer, { [s['inputContainer-disabled']]: disabled })}>
-      {type === 'search' ? (
-        <div className={s.iconSearch} onClick={onSearchIconClick}>
-          {' '}
-          <SearchOutline />{' '}
-        </div>
-      ) : null}
-      <input
-        className={clsx(
-          s.input,
-          className,
-          variantClass,
-          error && s[`input-error`],
-          type === 'password' && s.inputWithIconEye,
-          type === 'search' && s.inputWithIconSearch,
-          { [s.disabled]: disabled }
-        )}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        type={type}
-        value={inputValue}
-        {...rest}
-      />
-      {type === 'password' ? (
-        <div className={clsx(s.iconEye, variantClass)} onClick={togglePasswordVisibility}>
-          <EyeOutline />
-        </div>
-      ) : null}
-      {/* {inputType === 'search' && inputValue.length ? (
-        <div className={clsx(s.iconEye, s.iconClose, variantClass)} onClick={onClearInput}>
-          <CloseOutline />
-        </div>
-      ) : null} */}
-    </div>
-  )
-
-  const labelElement = (
-    <Typography className={s.label} variant={'body2'}>
-      {label}
-    </Typography>
-  )
-
   return (
-    <>
-      {labelElement}
-      {inputElement}
+    <div className={clsx(s.inputContainer, { [s['inputContainer-disabled']]: disabled })}>
+      {label && (
+        <Typography className={s.label} variant={'body2'}>
+          {label}
+        </Typography>
+      )}
+      <div className={s.inputSvgWrapper}>
+        {variant === 'search' && (
+          <>
+            <SearchOutline className={clsx(s.icon, s['icon-iconSearch'])} />
+            {inputValue.length > 0 && (
+              <CloseOutline
+                onClick={handleClearInput}
+                className={clsx(s.icon, s['icon-iconClose'])}
+              />
+            )}
+          </>
+        )}
+        <input
+          className={clsx(className, { [s.error]: error })}
+          type={inputType}
+          value={inputValue}
+          placeholder={placeholder}
+          onChange={handleChangeInput}
+          {...rest}
+        />
+        {variant === 'password' && (
+          <Button onClick={handleShowPassword} variant="icon">
+            {showPassword ? (
+              <EyeOffOutline className={clsx(s.icon, s['icon-iconEye'])} />
+            ) : (
+              <EyeOutline className={clsx(s.icon, s['icon-iconEye'])} />
+            )}
+          </Button>
+        )}
+      </div>
       {helperText && <Typography variant={'error'}>{helperText}</Typography>}
-    </>
+    </div>
   )
 }
