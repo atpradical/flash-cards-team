@@ -1,7 +1,8 @@
+import { ComponentPropsWithoutRef, ElementType } from 'react'
+
 import clsx from 'clsx'
 
 import s from './typography.module.scss'
-import { ComponentPropsWithoutRef, ElementType } from 'react'
 
 export type TypographyVariant =
   | 'body1'

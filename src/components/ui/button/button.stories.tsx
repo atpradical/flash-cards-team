@@ -17,6 +17,7 @@ const meta = {
   title: 'Components/Button',
 } satisfies Meta<typeof Button>
 
+export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
@@ -86,5 +87,3 @@ export const ButtonAsLink: Story = {
     target: '_blank',
   },
 }
-
-export default meta
