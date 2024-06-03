@@ -13,19 +13,15 @@ type Props = {
 export const Slider = (props: Props) => {
   const { defaultValue, onValueChange, value, ...rest } = props
 
-  const changeHandler = (value: number[]) => {
-    onValueChange(value)
-  }
-
   return (
     <form className={s.sliderForm}>
       <div className={s.outputWrap}>
-        <Typography variant={'body1'}>{value ? value[0] : null}</Typography>
+        <Typography variant={'body1'}>{value ? value[0] : defaultValue[0]}</Typography>
       </div>
       <RadixSlider.Root
         className={s.sliderRoot}
         defaultValue={defaultValue}
-        onValueChange={changeHandler}
+        onValueChange={onValueChange}
         step={1}
         value={value}
         {...rest}
@@ -37,7 +33,7 @@ export const Slider = (props: Props) => {
         <RadixSlider.Thumb aria-label={'End Thumb'} className={s.sliderThumb} />
       </RadixSlider.Root>
       <div className={s.outputWrap}>
-        <Typography variant={'body1'}> {value ? value[1] : null}</Typography>
+        <Typography variant={'body1'}> {value ? value[1] : defaultValue[1]}</Typography>
       </div>
     </form>
   )
