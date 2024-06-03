@@ -37,11 +37,14 @@ export const Pagination = (props: Props) => {
     totalCount,
   } = props
 
+  const totalPageCount = Math.ceil(totalCount / pageSize)
+
   const paginationRange = usePagination({
     currentPage,
     pageSize,
     siblingCount,
     totalCount,
+    totalPageCount,
   })
 
   // If there are less than 2 times in pagination range we shall not render the component
@@ -64,7 +67,7 @@ export const Pagination = (props: Props) => {
   }
 
   const isFirstPage = currentPage === 1
-  const isLastPage = currentPage === paginationRange.length
+  const isLastPage = currentPage === totalPageCount
 
   const cn = {
     arrow: clsx(s.arrow),
@@ -77,7 +80,7 @@ export const Pagination = (props: Props) => {
   }
 
   const options = paginationRange.map((el, index) => {
-    const key = Number(el) + index
+    const key = `${el}${index}`
     const isOptionSelected = el === currentPage ? cn.selectedOption : cn.option
 
     // If the pageItem is a DOT, render the DOTS unicode character

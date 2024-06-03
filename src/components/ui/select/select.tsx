@@ -58,8 +58,8 @@ export const Select = (props: Props) => {
       )}
       <RadixSelect.Trigger className={cn.selectTrigger}>
         <RadixSelect.Value placeholder={placeholder ?? '...'} />
-        <RadixSelect.Icon asChild>
-          <ArrowIosForward className={cn.dropdownArrow} />
+        <RadixSelect.Icon asChild className={cn.dropdownArrow}>
+          <ArrowIosForward />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
       <RadixSelect.Portal>

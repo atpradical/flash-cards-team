@@ -20,13 +20,13 @@ export const PaginationBase: Story = {
     currentPage: 1,
     onPageChange: action('onPageChange invoked'),
     onPageSizeChange: action('onPageSizeChange invoked'),
-    pageSize: 1,
-    totalCount: 1000,
+    pageSize: 10,
+    totalCount: 90,
   },
 
   render: () => {
     const [currentPage, setCurrentPage] = useState(PaginationBase.args.currentPage)
-    const [pageSize, setPageSize] = useState(1)
+    const [pageSize, setPageSize] = useState(PaginationBase.args.pageSize)
 
     function pageSizeChangeHandler(value: string) {
       setPageSize(+value)
@@ -42,7 +42,7 @@ export const PaginationBase: Story = {
         onPageChange={pageChangeHandler}
         onPageSizeChange={pageSizeChangeHandler}
         pageSize={pageSize}
-        totalCount={1000}
+        totalCount={PaginationBase.args.totalCount}
       />
     )
   },
