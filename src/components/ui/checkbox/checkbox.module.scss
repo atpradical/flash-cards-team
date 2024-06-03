@@ -20,7 +20,7 @@ button {
 
   background-color: transparent;
   border: 2px solid var(--color-light-100);
-  border-radius: 2px;
+  border-radius: var(--border-radius-xs);
 
   &:disabled {
     cursor: default;
@@ -30,21 +30,24 @@ button {
   }
 
   &[data-state='checked'] {
-    position: relative;
-
     width: 16px;
     height: 16px;
 
     background-color: var(--color-light-100);
     border: 2px solid var(--color-light-100);
-    border-radius: 2px;
+    border-radius: var(--border-radius-xs);
+
+    &:disabled {
+      background-color: var(--color-dark-100);
+      border-color: var(--color-dark-100);
+    }
   }
 
   &[data-state='unchecked'] {
     background-color: transparent;
 
     &:disabled {
-      background-color: transparent;
+      background-color: inherit;
     }
   }
 

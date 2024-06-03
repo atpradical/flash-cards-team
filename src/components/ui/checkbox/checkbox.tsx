@@ -25,25 +25,23 @@ export const Checkbox = (props: Props) => {
   const finalId = id || generatedId
 
   return (
-    <>
-      <div className={cn.container}>
-        <CheckboxRdx.Root
-          className={cn.root}
-          defaultChecked
-          disabled={disabled}
-          id={finalId}
-          {...rest}
-        >
-          <CheckboxRdx.Indicator className={cn.indicator}>
-            <CheckIcon className={cn.icon} />
-          </CheckboxRdx.Indicator>
-          {label && (
-            <Typography as={'label'} className={cn.label} htmlFor={finalId} variant={'body2'}>
-              {label}
-            </Typography>
-          )}
-        </CheckboxRdx.Root>
-      </div>
-    </>
+    <div className={cn.container}>
+      <CheckboxRdx.Root
+        className={cn.root}
+        defaultChecked
+        disabled={disabled}
+        id={finalId}
+        {...rest}
+      >
+        <CheckboxRdx.Indicator className={cn.indicator}>
+          <CheckIcon className={cn.icon} />
+        </CheckboxRdx.Indicator>
+        {label && (
+          <Typography as={'label'} className={cn.label} htmlFor={finalId} variant={'body2'}>
+            {label}
+          </Typography>
+        )}
+      </CheckboxRdx.Root>
+    </div>
   )
 }
