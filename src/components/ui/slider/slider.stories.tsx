@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Slider } from './slider'
 import { useState } from 'react'
+
 import { action } from '@storybook/addon-actions'
+
+import { Slider } from './slider'
 
 const meta = {
   argTypes: {
@@ -28,7 +30,7 @@ const SliderWithHooks = (args: {
     args.onValueChange(newValue)
   }
 
-  return <Slider onValueChange={handleOnChange} value={value} defaultValue={[0, 100]} />
+  return <Slider defaultValue={[0, 100]} onValueChange={handleOnChange} value={value} />
 }
 
 export const SliderInteractive: Story = {

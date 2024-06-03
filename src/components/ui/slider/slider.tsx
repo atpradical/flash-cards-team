@@ -1,6 +1,7 @@
 import * as RadixSlider from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
+
 import { Typography } from '../typography'
 
 type Props = {
