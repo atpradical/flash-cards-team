@@ -5,22 +5,36 @@ import s from './slider.module.scss'
 import { Typography } from '../typography'
 
 type Props = {
-  defaultValue: number[]
+  defaultValue?: number[]
+  max?: number
+  min?: number
+  minStepsBetweenThumbs?: number
   onValueChange: (value: number[]) => void
-  value?: number[] //current value
+  value?: number[]
 }
 
 export const Slider = (props: Props) => {
-  const { defaultValue, onValueChange, value, ...rest } = props
+  const {
+    defaultValue,
+    max,
+    min = 0,
+    minStepsBetweenThumbs = 1,
+    onValueChange,
+    value,
+    ...rest
+  } = props
 
   return (
     <form className={s.sliderForm}>
-      <div className={s.outputWrap}>
-        <Typography variant={'body1'}>{value ? value[0] : defaultValue[0]}</Typography>
-      </div>
+      <Typography className={s.outputWrap} variant={'body1'}>
+        {value ? value[0].toFixed(0) : null}
+      </Typography>
       <RadixSlider.Root
         className={s.sliderRoot}
         defaultValue={defaultValue}
+        max={max ? max : undefined}
+        min={min}
+        minStepsBetweenThumbs={1}
         onValueChange={onValueChange}
         step={1}
         value={value}
@@ -32,9 +46,9 @@ export const Slider = (props: Props) => {
         <RadixSlider.Thumb aria-label={'Start Thumb'} className={s.sliderThumb} />
         <RadixSlider.Thumb aria-label={'End Thumb'} className={s.sliderThumb} />
       </RadixSlider.Root>
-      <div className={s.outputWrap}>
-        <Typography variant={'body1'}> {value ? value[1] : defaultValue[1]}</Typography>
-      </div>
+      <Typography className={s.outputWrap} variant={'body1'}>
+        {value ? value[1].toFixed(0) : null}
+      </Typography>
     </form>
   )
 }
