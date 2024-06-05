@@ -1,4 +1,16 @@
-.root {
+img {
+  height: 36px;
+  width: 36px;
+  border-radius: var(--border-radius-rounded);
+}
+
+.arrow {
+  position: relative;
+  top: -1px;
+  fill: var(--color-dark-700);
+  height: 8px;
+  width: 16px;
+  border-top: 1px solid var(--color-dark-700);
 }
 
 .icon {
@@ -8,4 +20,32 @@
 
 button {
   all: unset;
+}
+
+.trigger {
+  cursor: pointer;
+  &:focus-visible:active {
+    border-radius: 5px;
+    outline: 1px solid var(--color-info-500);
+    outline-offset: 2px;
+  }
+}
+
+.menuContent {
+  padding: 0 12px;
+  border: 1px solid var(--color-dark-500);
+  border-radius: var(--border-radius-s);
+  background-color: var(--color-dark-700);
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  animation: scaleIn var(--transition-duration-fast) ease-in-out;
+}
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
