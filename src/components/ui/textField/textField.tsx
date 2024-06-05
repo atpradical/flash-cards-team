@@ -45,6 +45,8 @@ export const TextField = (props: Props) => {
   const [inputValue, setInputValue] = useState('')
 
   const inputType = showPassword && variant === 'password' ? 'text' : variant
+  const isSearch = variant === 'search'
+  const isPassword = variant === 'password'
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
@@ -66,16 +68,6 @@ export const TextField = (props: Props) => {
         </Typography>
       )}
       <div className={s.inputSvgWrapper}>
-        {variant === 'search' && (
-          <>
-            <SearchOutline className={cn.searchOutline} />
-            {inputValue.length > 0 && (
-              <Button onClick={handleClearInput} variant={'icon'}>
-                <CloseOutline className={cn.closeOutline} />
-              </Button>
-            )}
-          </>
-        )}
         <input
           className={cn.input}
           disabled={disabled}
@@ -85,14 +77,21 @@ export const TextField = (props: Props) => {
           value={inputValue}
           {...rest}
         />
-        {variant === 'password' && (
+        {isPassword && (
           <Button disabled={disabled} onClick={handleShowPassword} variant={'icon'}>
-            {showPassword ? (
-              <EyeOffOutline className={cn.eye} />
-            ) : (
-              <EyeOutline className={cn.eye} />
-            )}
+            {inputValue.length ? <EyeOutline className={cn.eye} /> : null}
+            {showPassword && <EyeOffOutline className={cn.eye} />}
           </Button>
+        )}
+        {isSearch && (
+          <>
+            <SearchOutline className={cn.searchOutline} />
+            {inputValue.length > 0 && (
+              <Button onClick={handleClearInput} variant={'icon'}>
+                <CloseOutline className={cn.closeOutline} />
+              </Button>
+            )}
+          </>
         )}
       </div>
       {helperText && <Typography variant={'error'}>{helperText}</Typography>}

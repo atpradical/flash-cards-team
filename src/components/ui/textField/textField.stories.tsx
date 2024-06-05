@@ -36,7 +36,7 @@ export const Password: Story = {
   args: {
     label: 'Label',
     placeholder: 'Enter password...',
-    variant: 'search',
+    variant: 'password',
   },
 }
 
