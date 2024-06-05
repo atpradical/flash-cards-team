@@ -36,7 +36,7 @@ export const Password: Story = {
   args: {
     label: 'Label',
     placeholder: 'Enter password...',
-    variant: 'password',
+    variant: 'search',
   },
 }
 
@@ -49,7 +49,6 @@ export const Search: Story = {
 
 export const Disabled: Story = {
   args: {
-    variant: 'text',
     disabled: true,
     placeholder: 'Disabled',
   },

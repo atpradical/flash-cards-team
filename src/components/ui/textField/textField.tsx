@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, useMemo, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
 
 import {
   CloseOutline,
@@ -10,8 +10,8 @@ import clsx from 'clsx'
 
 import s from './textField.module.scss'
 
-import { Typography } from '../typography'
 import { Button } from '../button'
+import { Typography } from '../typography'
 
 type Props = {
   error?: boolean
@@ -32,10 +32,19 @@ export const TextField = (props: Props) => {
     ...rest
   } = props
 
+  const cn = {
+    closeOutline: clsx(s.icon, s.close),
+    container: clsx(s.container, disabled && s.disabled),
+    eye: clsx(s.icon, s.eye, disabled && s.disabled),
+    input: clsx(className, s.input, error && s.error),
+    label: clsx(s.label),
+    searchOutline: clsx(s.icon, s.search),
+  }
+
   const [showPassword, setShowPassword] = useState(false)
   const [inputValue, setInputValue] = useState('')
 
-  const inputType = useMemo(() => (showPassword ? 'text' : variant), [showPassword, variant])
+  const inputType = showPassword && variant === 'password' ? 'text' : variant
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
@@ -50,38 +59,38 @@ export const TextField = (props: Props) => {
   }
 
   return (
-    <div className={clsx(s.inputContainer, { [s['inputContainer-disabled']]: disabled })}>
+    <div className={cn.container}>
       {label && (
-        <Typography className={s.label} variant={'body2'}>
+        <Typography as={'label'} className={s.label} variant={'body2'}>
           {label}
         </Typography>
       )}
       <div className={s.inputSvgWrapper}>
         {variant === 'search' && (
           <>
-            <SearchOutline className={clsx(s.icon, s['icon-iconSearch'])} />
+            <SearchOutline className={cn.searchOutline} />
             {inputValue.length > 0 && (
-              <CloseOutline
-                onClick={handleClearInput}
-                className={clsx(s.icon, s['icon-iconClose'])}
-              />
+              <Button onClick={handleClearInput} variant={'icon'}>
+                <CloseOutline className={cn.closeOutline} />
+              </Button>
             )}
           </>
         )}
         <input
-          className={clsx(className, { [s.error]: error })}
+          className={cn.input}
+          disabled={disabled}
+          onChange={handleChangeInput}
+          placeholder={placeholder}
           type={inputType}
           value={inputValue}
-          placeholder={placeholder}
-          onChange={handleChangeInput}
           {...rest}
         />
         {variant === 'password' && (
-          <Button onClick={handleShowPassword} variant="icon">
+          <Button disabled={disabled} onClick={handleShowPassword} variant={'icon'}>
             {showPassword ? (
-              <EyeOffOutline className={clsx(s.icon, s['icon-iconEye'])} />
+              <EyeOffOutline className={cn.eye} />
             ) : (
-              <EyeOutline className={clsx(s.icon, s['icon-iconEye'])} />
+              <EyeOutline className={cn.eye} />
             )}
           </Button>
         )}
