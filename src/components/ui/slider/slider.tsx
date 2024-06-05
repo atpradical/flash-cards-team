@@ -10,7 +10,6 @@ type Props = {
   max?: number
   min?: number
   onValueChange: (value: number[]) => void
-  value?: number[]
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 export const Slider = (props: Props) => {
@@ -25,14 +24,14 @@ export const Slider = (props: Props) => {
   } = props
 
   return (
-    <div className={s.sliderForm}>
+    <div className={s.container}>
       <Typography className={s.outputWrap} variant={'body1'}>
         {value && value[0].toFixed(0)}
       </Typography>
       <RadixSlider.Root
-        className={s.sliderRoot}
+        className={s.root}
         defaultValue={defaultValue}
-        max={max ? max : undefined}
+        max={max}
         min={min}
         minStepsBetweenThumbs={minStepsBetweenThumbs}
         onValueChange={onValueChange}
@@ -40,11 +39,11 @@ export const Slider = (props: Props) => {
         value={value}
         {...rest}
       >
-        <RadixSlider.Track className={s.sliderTrack}>
-          <RadixSlider.Range className={s.sliderRange} />
+        <RadixSlider.Track className={s.track}>
+          <RadixSlider.Range className={s.range} />
         </RadixSlider.Track>
-        <RadixSlider.Thumb aria-label={'Start Thumb'} className={s.sliderThumb} />
-        <RadixSlider.Thumb aria-label={'End Thumb'} className={s.sliderThumb} />
+        <RadixSlider.Thumb aria-label={'Start Thumb'} className={s.thumb} />
+        <RadixSlider.Thumb aria-label={'End Thumb'} className={s.thumb} />
       </RadixSlider.Root>
       <Typography className={s.outputWrap} variant={'body1'}>
         {value && value[1].toFixed(0)}

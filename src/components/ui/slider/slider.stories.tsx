@@ -10,7 +10,7 @@ const meta = {
   argTypes: {
     max: { control: 'number' },
     min: { control: 'number' },
-    onValueChange: action('changed'),
+    onValueChange: action('slider onValueChange callback invoked'),
   },
   component: Slider,
   tags: ['autodocs'],
@@ -25,14 +25,14 @@ const SliderWithHooks: React.FC<{
   min?: number
   onValueChange: (value: number[]) => void
 }> = ({ max = 100, min = 0, onValueChange }) => {
-  const [value, setValue] = useState<number[]>([min, max])
+  const [_value, setValue] = useState<number[]>([min, max])
 
-  const handleOnChange = (newValue: number[]) => {
+  const handleSliderValueChange = (newValue: number[]) => {
     setValue(newValue)
     onValueChange(newValue)
   }
 
-  return <Slider max={max} min={min} onValueChange={handleOnChange} value={value} />
+  return <Slider max={max} min={min} onValueChange={handleSliderValueChange} />
 }
 
 export const SliderInteractive: Story = {
