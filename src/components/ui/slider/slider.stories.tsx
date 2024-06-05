@@ -8,8 +8,7 @@ import { Slider } from './slider'
 
 const meta = {
   argTypes: {
-    max: { control: 'number' },
-    min: { control: 'number' },
+    value: { control: 'object' },
     onValueChange: action('slider onValueChange callback invoked'),
   },
   component: Slider,
@@ -20,26 +19,27 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const SliderWithHooks: React.FC<{
-  max?: number
-  min?: number
+const SliderWithHooks = ({
+  value: initialValue,
+  onValueChange,
+}: {
+  value: number[]
   onValueChange: (value: number[]) => void
-}> = ({ max = 100, min = 0, onValueChange }) => {
-  const [_value, setValue] = useState<number[]>([min, max])
+}) => {
+  const [value, setValue] = useState<number[]>(initialValue)
 
   const handleSliderValueChange = (newValue: number[]) => {
     setValue(newValue)
     onValueChange(newValue)
   }
 
-  return <Slider max={max} min={min} onValueChange={handleSliderValueChange} />
+  return <Slider onValueChange={handleSliderValueChange} value={value} />
 }
 
 export const SliderInteractive: Story = {
   args: {
-    max: 100,
-    min: 0,
-    onValueChange: (_value: number[]) => {},
+    value: [0, 100],
+    onValueChange: action('slider onValueChange callback invoked'),
   },
   render: args => <SliderWithHooks {...args} />,
 }

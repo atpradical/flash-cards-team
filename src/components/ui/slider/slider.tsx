@@ -7,32 +7,21 @@ import s from './slider.module.scss'
 import { Typography } from '../typography'
 
 type Props = {
-  max?: number
-  min?: number
+  value: number[]
   onValueChange: (value: number[]) => void
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 export const Slider = (props: Props) => {
-  const {
-    defaultValue,
-    max,
-    min = 0,
-    minStepsBetweenThumbs = 1,
-    onValueChange,
-    value,
-    ...rest
-  } = props
+  const { defaultValue, minStepsBetweenThumbs = 1, onValueChange, value, ...rest } = props
 
   return (
     <div className={s.container}>
       <Typography className={s.outputWrap} variant={'body1'}>
-        {value && value[0].toFixed(0)}
+        {value[0]}
       </Typography>
       <RadixSlider.Root
         className={s.root}
         defaultValue={defaultValue}
-        max={max}
-        min={min}
         minStepsBetweenThumbs={minStepsBetweenThumbs}
         onValueChange={onValueChange}
         step={1}
@@ -46,7 +35,7 @@ export const Slider = (props: Props) => {
         <RadixSlider.Thumb aria-label={'End Thumb'} className={s.thumb} />
       </RadixSlider.Root>
       <Typography className={s.outputWrap} variant={'body1'}>
-        {value && value[1].toFixed(0)}
+        {value[1]}
       </Typography>
     </div>
   )
