@@ -29,10 +29,6 @@
   border: 1px solid var(--color-dark-300);
   border-radius: var(--border-radius-xxs);
 
-  &:focus {
-    border: 1px solid var(--color-info-700);
-  }
-
   &:hover {
     background-color: var(--color-dark-700);
   }
@@ -40,6 +36,11 @@
   &:active {
     color: var(--color-light-100);
     border: 1px solid var(--color-light-100);
+  }
+
+  &:focus,
+  &:focus-visible {
+    border: 2px solid var(--color-info-700);
   }
 
   &.error {
