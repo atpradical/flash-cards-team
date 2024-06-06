@@ -1,7 +1,5 @@
-img {
-  height: 36px;
-  width: 36px;
-  border-radius: var(--border-radius-rounded);
+button {
+  all: unset;
 }
 
 .arrow {
@@ -18,14 +16,10 @@ img {
   height: 24px;
 }
 
-button {
-  all: unset;
-}
-
 .trigger {
   cursor: pointer;
   &:focus-visible:active {
-    border-radius: 5px;
+    border-radius: var(--border-radius-m);
     outline: 1px solid var(--color-info-500);
     outline-offset: 2px;
   }

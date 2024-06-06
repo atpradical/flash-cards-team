@@ -1,42 +1,38 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 
-import { DeckSettingsDropdown } from '@/components/layout/deckSettingsDropdown/deckSettingsDropdown'
-import { UserDropdown } from '@/components/layout/userDropdown/userDropdown'
+import { DropdownSettings } from '@/components/layout/deckSettingsDropdown/dropdownSettings'
+import { DropdownProfile } from '@/components/layout/userDropdown/dropdownProfile'
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
 
-const meta = {
-  argTypes: {
-    defaultOpen: { type: 'boolean' },
+type User = {
+  email: string
+  name: string
+  photo: {
+    alt: string
+    src: string
+  }
+}
+const mockUser: User = {
+  email: 'j&johnson@gmail.com',
+  name: 'Ivan',
+  photo: {
+    alt: 'Avatar',
+    src: 'src/assets/webp/avatar-default.webp',
   },
+}
+
+const meta = {
   component: Dropdown,
   tags: ['autodocs'],
   title: 'Components/Dropdown',
 } satisfies Meta<typeof Dropdown>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const DropdownWithUserAvatar: Story = {
+export const DropdownWithUserAvatar = {
   render: () => {
-    type User = {
-      email: string
-      name: string
-      photo: {
-        alt: string
-        src: string
-      }
-    }
-    const mockUser: User = {
-      email: 'j&johnson@gmail.com',
-      name: 'Ivan',
-      photo: {
-        alt: 'UserPhoto',
-        src: 'src/assets/img/userPhotoExample.png',
-      },
-    }
-
     return (
-      <UserDropdown
+      <DropdownProfile
         email={mockUser.email}
         name={mockUser.name}
         photo={mockUser.photo.src}
@@ -45,10 +41,22 @@ export const DropdownWithUserAvatar: Story = {
       />
     )
   },
-} satisfies Story
+}
 
-export const DropdownWithSettings: Story = {
+export const DropdownWithoutUserAvatar = {
   render: () => {
-    return <DeckSettingsDropdown />
+    return (
+      <DropdownProfile
+        email={mockUser.email}
+        name={mockUser.name}
+        profilePageHref={'https://google.com'}
+      />
+    )
+  },
+}
+
+export const DropdownWithSettings = {
+  render: () => {
+    return <DropdownSettings />
   },
 }

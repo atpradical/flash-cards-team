@@ -6,31 +6,37 @@ import { Dropdown } from '@/components/ui/dropdown/dropdown'
 import { DropdownItem } from '@/components/ui/dropdown/dropdownItem/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/dropdown/dropdownSeparator/dropdownSeparator'
 import { Typography } from '@/components/ui/typography'
+import clsx from 'clsx'
 
-import s from '@/components/ui/dropdown/dropdownItem/dropdownItem.module.scss'
+import s from './dropdownSettings.module.scss'
 
-export const DeckSettingsDropdown = () => {
+export const DropdownSettings = () => {
+  const cn = {
+    icon: clsx(s.icon),
+    settingsItem: clsx(s.settingsItem),
+  }
+
   return (
     <Dropdown trigger={<MoreVerticalOutline />}>
       <DropdownItem asChild>
-        <a>
-          <PlayCircleOutline style={{ width: '16px' }} />
-          <Typography variant={'caption'}>Learn</Typography>
-        </a>
+        <Typography as={'a'} className={cn.settingsItem} variant={'caption'}>
+          <PlayCircleOutline className={cn.icon} />
+          Learn
+        </Typography>
       </DropdownItem>
       <DropdownSeparator />
       <DropdownItem asChild>
-        <a>
-          <Edit2Outline style={{ width: '16px' }} />
-          <Typography variant={'caption'}>Edit</Typography>
-        </a>
+        <Typography className={cn.settingsItem} variant={'caption'}>
+          <Edit2Outline className={cn.icon} />
+          Edit
+        </Typography>
       </DropdownItem>
       <DropdownSeparator />
-      <DropdownItem asChild className={s.item}>
-        <a className={s.item}>
-          <TrashOutline style={{ width: '16px' }} />
-          <Typography variant={'caption'}>Delete</Typography>
-        </a>
+      <DropdownItem asChild>
+        <Typography className={cn.settingsItem} variant={'caption'}>
+          <TrashOutline className={cn.icon} />
+          Delete
+        </Typography>
       </DropdownItem>
     </Dropdown>
   )

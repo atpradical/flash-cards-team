@@ -6,11 +6,12 @@ import clsx from 'clsx'
 import s from './dropdown.module.scss'
 
 type Props = {
-  trigger?: ReactNode
+  modal?: boolean
+  trigger: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixDropdown.Root>
 
 export const Dropdown = (props: Props) => {
-  const { children, trigger, ...rest } = props
+  const { children, modal, trigger, ...rest } = props
   const cn = {
     arrow: clsx(s.arrow),
     content: clsx(s.menuContent),
