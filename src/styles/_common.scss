@@ -1,6 +1,8 @@
 :root {
   /* border-radius */
   --border-radius-rounded: 50%;
+  --border-radius-l: 0.625rem;
+  --border-radius-m: 0.313rem;
   --border-radius-s: 0.25rem;
   --border-radius-xs: 0.125rem;
 
@@ -10,6 +12,9 @@
   --box-shadow-blur-min: 2px;
   --box-shadow-scale-min: 0;
   --box-shadow-transparency-min: 0.1;
+
+  /* marginForDropdownItem */
+  --margin-12px-0: 12px 0;
 
   /* Rotation angle */
   --90-deg: 90deg;
