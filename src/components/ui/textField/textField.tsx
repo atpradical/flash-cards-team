@@ -17,6 +17,7 @@ type Props = {
   error?: boolean
   helperText?: string
   label?: string
+  fullWidth?: boolean
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
@@ -28,13 +29,14 @@ export const TextField = (props: Props) => {
     helperText,
     label,
     placeholder,
+    fullWidth,
     variant = 'text',
     ...rest
   } = props
 
   const cn = {
+    container: clsx(s.container, fullWidth && s.fullWidth, disabled && s.disabled, className),
     closeOutline: clsx(s.icon, s.close),
-    container: clsx(s.container, disabled && s.disabled),
     eye: clsx(s.icon, s.eye, disabled && s.disabled),
     input: clsx(className, s.input, error && s.error),
     label: clsx(s.label),
