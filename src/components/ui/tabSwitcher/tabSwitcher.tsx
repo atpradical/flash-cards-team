@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as Tabs from '@radix-ui/react-tabs'
 import clsx from 'clsx'
@@ -18,38 +18,48 @@ type Props = {
   tabs: Tab[]
 } & ComponentPropsWithoutRef<typeof Tabs.Root>
 
-export const TabSwitcher = ({ className, defaultValue, label, tabs, ...rest }: Props) => {
-  const cn = {
-    label: clsx(s.label),
-    list: clsx(s.tabsList),
-    root: clsx(s.tabsRoot, className),
-    tabTitle: clsx(s.tabTitle),
-    trigger: clsx(s.tabsTrigger),
-  }
+type PropsRef = ElementRef<typeof Tabs.Root>
 
-  const firstNotDisabledTabValue = tabs.find((tab: Tab) => !tab.disabled)?.value
+export const TabSwitcher = forwardRef<PropsRef, Props>(
+  ({ className, defaultValue, label, tabs, ...rest }, ref) => {
+    const cn = {
+      label: clsx(s.label),
+      list: clsx(s.tabsList),
+      root: clsx(s.tabsRoot, className),
+      tabTitle: clsx(s.tabTitle),
+      trigger: clsx(s.tabsTrigger),
+    }
 
-  const TabsTriggers = tabs.map((tab: Tab) => (
-    <Tabs.Trigger className={cn.trigger} disabled={tab.disabled} key={tab.value} value={tab.value}>
-      <Typography className={cn.tabTitle} variant={'body1'}>
-        {tab.title}
-      </Typography>
-    </Tabs.Trigger>
-  ))
+    const firstNotDisabledTabValue = tabs.find((tab: Tab) => !tab.disabled)?.value
 
-  return (
-    <Tabs.Root
-      activationMode={'automatic'}
-      className={cn.root}
-      defaultValue={defaultValue ?? firstNotDisabledTabValue}
-      {...rest}
-    >
-      {label && (
-        <Typography className={cn.label} variant={'body2'}>
-          {label}
+    const TabsTriggers = tabs.map((tab: Tab, index) => (
+      <Tabs.Trigger
+        className={cn.trigger}
+        disabled={tab.disabled}
+        key={index + tab.value}
+        value={tab.value}
+      >
+        <Typography className={clsx(cn.tabTitle, tab.disabled && s.disabled)} variant={'body1'}>
+          {tab.title}
         </Typography>
-      )}
-      <Tabs.List className={cn.list}>{TabsTriggers}</Tabs.List>
-    </Tabs.Root>
-  )
-}
+      </Tabs.Trigger>
+    ))
+
+    return (
+      <Tabs.Root
+        activationMode={'automatic'}
+        className={cn.root}
+        defaultValue={defaultValue ?? firstNotDisabledTabValue}
+        ref={ref}
+        {...rest}
+      >
+        {label && (
+          <Typography className={cn.label} variant={'body2'}>
+            {label}
+          </Typography>
+        )}
+        <Tabs.List className={cn.list}>{TabsTriggers}</Tabs.List>
+      </Tabs.Root>
+    )
+  }
+)
