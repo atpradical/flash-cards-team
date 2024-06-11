@@ -19,12 +19,12 @@ export type TypographyVariant =
   | 'subtitle1'
   | 'subtitle2'
 
-type Props<T extends ElementType> = {
+export type TypographyProps<T extends ElementType> = {
   as?: T
   variant?: TypographyVariant
 } & ComponentPropsWithoutRef<T>
 
-export const Typography = <T extends ElementType = 'p'>(props: Props<T>) => {
+export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T>) => {
   const { as: Component = 'p', className, variant = 'caption', ...rest } = props
 
   const classNames = clsx(s.typography, variant && s[`typography-${variant}`], className)

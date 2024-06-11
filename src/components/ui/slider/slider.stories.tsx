@@ -8,8 +8,8 @@ import { Slider } from './slider'
 
 const meta = {
   argTypes: {
-    value: { control: 'object' },
     onValueChange: action('slider onValueChange callback invoked'),
+    value: { control: 'object' },
   },
   component: Slider,
   tags: ['autodocs'],
@@ -20,11 +20,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const SliderWithHooks = ({
-  value: initialValue,
   onValueChange,
+  value: initialValue,
 }: {
-  value: number[]
   onValueChange: (value: number[]) => void
+  value: number[]
 }) => {
   const [value, setValue] = useState<number[]>(initialValue)
 
@@ -38,8 +38,8 @@ const SliderWithHooks = ({
 
 export const SliderInteractive: Story = {
   args: {
-    value: [0, 100],
     onValueChange: action('slider onValueChange callback invoked'),
+    value: [0, 100],
   },
   render: args => <SliderWithHooks {...args} />,
 }

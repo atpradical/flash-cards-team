@@ -1,30 +1,48 @@
-import * as React from 'react'
+import {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ElementRef,
+  ElementType,
+  HTMLAttributes,
+  forwardRef,
+} from 'react'
+
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { Typography } from '../typography'
 import clsx from 'clsx'
+
 import s from './modal.module.scss'
+
+import { Typography, TypographyProps } from '../typography'
 
 const Root = DialogPrimitive.Root
 const Trigger = DialogPrimitive.Trigger
 const Portal = DialogPrimitive.Portal
 const Close = DialogPrimitive.Close
 
-type OverlayProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+type OverlayProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+const Overlay = forwardRef<ElementRef<typeof DialogPrimitive.Overlay>, OverlayProps>(
+  ({ className, ...rest }, ref) => {
+    const cn = {
+      overlay: clsx(s.overlay, className),
+    }
 
-const Overlay = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Overlay>, OverlayProps>(
-  ({ className, ...props }, ref) => {
-    return <DialogPrimitive.Overlay ref={ref} className={clsx(s.overlay, className)} {...props} />
+    return <DialogPrimitive.Overlay className={cn.overlay} ref={ref} {...rest} />
   }
 )
 
-type ContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+Overlay.displayName = DialogPrimitive.Overlay.displayName
 
-const Content = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Content>, ContentProps>(
-  ({ className, children, ...props }, ref) => {
+type ContentProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+const Content = forwardRef<ElementRef<typeof DialogPrimitive.Content>, ContentProps>(
+  ({ children, className, ...rest }, ref) => {
+    const cn = {
+      content: clsx(s.content, className),
+    }
+
     return (
       <Portal>
         <Overlay />
-        <DialogPrimitive.Content ref={ref} className={clsx(s.content, className)} {...props}>
+        <DialogPrimitive.Content className={cn.content} ref={ref} {...rest}>
           {children}
         </DialogPrimitive.Content>
       </Portal>
@@ -32,52 +50,66 @@ const Content = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Content
   }
 )
 
-interface TitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>, 'ref'>,
-    React.ComponentProps<typeof Typography> {
-  as?: React.ElementType
-}
+Content.displayName = DialogPrimitive.Content.displayName
 
-const Title = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Title>, TitleProps>(
-  ({ children, ...props }, ref) => {
+type TitleProps<T extends ElementType> = Omit<ComponentProps<typeof DialogPrimitive.Title>, 'ref'> &
+  TypographyProps<T>
+const Title = forwardRef<ElementRef<typeof DialogPrimitive.Title>, TitleProps<ElementType>>(
+  ({ children, ...rest }, ref) => {
     return (
-      <Typography ref={ref} {...props}>
+      <Typography ref={ref} {...rest}>
         {children}
       </Typography>
     )
   }
 )
 
-type DescriptionProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+Title.displayName = DialogPrimitive.Title.displayName
 
-const Description = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Description>,
-  DescriptionProps
->(({ className, children, ...props }, ref) => {
-  return (
-    <DialogPrimitive.Description ref={ref} className={clsx(s.description, className)} {...props}>
-      {children}
-    </DialogPrimitive.Description>
-  )
-})
+type DescriptionProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+const Description = forwardRef<ElementRef<typeof DialogPrimitive.Description>, DescriptionProps>(
+  ({ children, className, ...rest }, ref) => {
+    const cn = {
+      description: clsx(s.description, className),
+    }
 
-const Header = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
-  return <div className={clsx(s.header, className)} {...props} />
+    return (
+      <DialogPrimitive.Description className={cn.description} ref={ref} {...rest}>
+        {children}
+      </DialogPrimitive.Description>
+    )
+  }
+)
+
+Description.displayName = DialogPrimitive.Description.displayName
+
+type HeaderProps = HTMLAttributes<HTMLDivElement>
+const Header = ({ className, ...rest }: HeaderProps) => {
+  const cn = {
+    header: clsx(s.header, className),
+  }
+
+  return <div className={cn.header} {...rest} />
 }
 
-const Footer = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
-  return <div className={clsx(s.footer, className)} {...props} />
+type FooterProps = HTMLAttributes<HTMLDivElement>
+const Footer = ({ className, ...rest }: FooterProps) => {
+  const cn = {
+    footer: clsx(s.footer, className),
+  }
+
+  return <div className={cn.footer} {...rest} />
 }
 
 export const Modal = {
-  Root,
-  Portal,
   Close,
-  Overlay,
-  Trigger,
   Content,
-  Title,
   Description,
   Footer,
   Header,
+  Overlay,
+  Portal,
+  Root,
+  Title,
+  Trigger,
 }

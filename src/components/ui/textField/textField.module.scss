@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 284px;
+  width: 100%;
 
   .label,
   ::placeholder {
@@ -87,10 +87,6 @@
       color: var(--color-light-100);
     }
   }
-}
-
-.fullWidth {
-  width: 100%;
 }
 
 input[type='search'] {

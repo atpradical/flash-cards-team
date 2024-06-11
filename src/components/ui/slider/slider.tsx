@@ -7,8 +7,8 @@ import s from './slider.module.scss'
 import { Typography } from '../typography'
 
 type Props = {
-  value: number[]
   onValueChange: (value: number[]) => void
+  value: number[]
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 export const Slider = (props: Props) => {

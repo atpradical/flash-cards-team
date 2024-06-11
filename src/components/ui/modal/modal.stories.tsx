@@ -1,58 +1,48 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Modal } from './modal'
-import { TextField } from '../textField'
-import { Button } from '../button'
-import { Checkbox } from '../checkbox'
-import s from './modal.module.scss'
-import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
+
+import { ComponentType, useState } from 'react'
+
+import { action } from '@storybook/addon-actions'
+
+import { ModalAddNewCard } from './addNewCard'
+import { ModalAddNewDesk } from './addNewDesk'
+import { ModalDeleteCard } from './deleteCard'
 
 const meta = {
   argTypes: {},
-  component: Modal.Root,
+  component: ModalAddNewDesk,
   tags: ['autodocs'],
   title: 'Components/Modal',
-} satisfies Meta<typeof Modal.Root>
+} satisfies Meta<typeof ModalAddNewDesk>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ModalAddNewDesk: Story = {
-  args: {},
-  render: () => {
-    return (
-      <Modal.Root>
-        <Modal.Trigger asChild>
-          <Button>Open</Button>
-        </Modal.Trigger>
-        <Modal.Content>
-          <Modal.Header>
-            <Modal.Title as={'h3'} variant={'h3'}>
-              Add new Desk
-            </Modal.Title>
-            <Modal.Close asChild>
-              <Button variant="icon">
-                <CloseOutline />
-              </Button>
-            </Modal.Close>
-          </Modal.Header>
-
-          <Modal.Description>
-            <TextField fullWidth={true} label={'Label'} className={s.textField}></TextField>
-            <Button fullWidth={true} variant="secondary">
-              <ImageOutline />
-              Upload image
-            </Button>
-            <Checkbox label={'Private pack'}></Checkbox>
-          </Modal.Description>
-
-          <Modal.Footer>
-            <Modal.Close asChild>
-              <Button variant="secondary">Cancel</Button>
-            </Modal.Close>
-            <Button>Add New Pack</Button>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal.Root>
-    )
+const createStory = (Component: ComponentType<any>, extraArgs: Partial<any> = {}): Story => ({
+  args: {
+    addNewPack: action('add new pack button was clicked'),
+    cancel: action('cancel button was clicked'),
+    changeCheckbox: action('checkbox was toggled'),
+    close: action('close modal was invoked'),
+    open: action('open modal was invoked'),
+    uploadImage: action('upload image button was clicked'),
+    ...extraArgs,
   },
-}
+  render: args => {
+    const [isChecked, setIsChecked] = useState(false)
+
+    const handleChangeCheckbox = () => {
+      setIsChecked(!isChecked)
+      args.changeCheckbox()
+    }
+
+    return <Component {...args} changeCheckbox={handleChangeCheckbox} />
+  },
+})
+
+export const ModalExample: Story = createStory(ModalAddNewDesk)
+export const ModalExample2: Story = createStory(ModalAddNewCard)
+export const ModalExample3: Story = createStory(ModalDeleteCard, {
+  cardName: 'Card Name',
+  deleteCard: action('delete card button was clicked'),
+})
