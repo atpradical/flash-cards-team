@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { ArrowIosForward } from '@/assets/components/svgIcons'
 import * as RadixSelect from '@radix-ui/react-select'
@@ -8,7 +8,7 @@ import s from './select.module.scss'
 
 import { Typography } from '../typography'
 
-export type SelectItem = {
+export type SelectOption = {
   disabled?: boolean
   title: string
   value: string
@@ -16,13 +16,15 @@ export type SelectItem = {
 
 type Props = {
   className?: string
-  items?: SelectItem[]
   label?: string
+  options?: SelectOption[]
   placeholder?: string
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
 
-export const Select = (props: Props) => {
-  const { className, defaultValue, disabled, items, label, placeholder, ...rest } = props
+type PropsRef = ElementRef<typeof RadixSelect.Trigger>
+
+export const Select = forwardRef<PropsRef, Props>((props, ref) => {
+  const { className, defaultValue, disabled, label, options, placeholder, ...rest } = props
 
   const cn = {
     disabled: clsx(s.disabled),
@@ -30,20 +32,20 @@ export const Select = (props: Props) => {
     label: clsx(s.label, disabled && s.disabled),
     placeholder: clsx(s.placeholder),
     selectContent: clsx(s.selectContent),
-    selectItem: clsx(s.selectItem),
+    selectOption: clsx(s.selectItem),
     selectTrigger: clsx(s.selectTrigger, className),
   }
 
-  const selectItems = items?.map(item => (
+  const selectItems = options?.map((option, index) => (
     <RadixSelect.Item
-      className={`${cn.selectItem} ${item.disabled && cn.disabled}`}
-      disabled={item.disabled}
-      key={item.value}
-      value={item.value}
+      className={`${cn.selectOption} ${option.disabled && cn.disabled}`}
+      disabled={option.disabled}
+      key={index + option.value}
+      value={option.value}
     >
       <RadixSelect.ItemText>
         <Typography as={'span'} variant={'body2'}>
-          {item.title}
+          {option.title}
         </Typography>
       </RadixSelect.ItemText>
     </RadixSelect.Item>
@@ -56,7 +58,7 @@ export const Select = (props: Props) => {
           {label}
         </Typography>
       )}
-      <RadixSelect.Trigger className={cn.selectTrigger}>
+      <RadixSelect.Trigger className={cn.selectTrigger} ref={ref}>
         <RadixSelect.Value placeholder={placeholder ?? '...'} />
         <RadixSelect.Icon asChild className={cn.dropdownArrow}>
           <ArrowIosForward />
@@ -71,4 +73,4 @@ export const Select = (props: Props) => {
       </RadixSelect.Portal>
     </RadixSelect.Root>
   )
-}
+})

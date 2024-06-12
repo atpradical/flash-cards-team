@@ -39,7 +39,11 @@ export const TabSwitcher = forwardRef<PropsRef, Props>(
         key={index + tab.value}
         value={tab.value}
       >
-        <Typography className={clsx(cn.tabTitle, tab.disabled && s.disabled)} variant={'body1'}>
+        <Typography
+          as={'span'}
+          className={clsx(cn.tabTitle, tab.disabled && s.disabled)}
+          variant={'body1'}
+        >
           {tab.title}
         </Typography>
       </Tabs.Trigger>
@@ -54,7 +58,7 @@ export const TabSwitcher = forwardRef<PropsRef, Props>(
         {...rest}
       >
         {label && (
-          <Typography className={cn.label} variant={'body2'}>
+          <Typography as={'label'} className={cn.label} variant={'body2'}>
             {label}
           </Typography>
         )}

@@ -59,7 +59,9 @@ export const HeaderCell = forwardRef<HeaderCellPropsRef, HeaderCellProps>((props
 
   return (
     <th className={cn} ref={ref} {...rest}>
-      <Typography variant={'subtitle2'}>{children}</Typography>
+      <Typography as={'span'} variant={'subtitle2'}>
+        {children}
+      </Typography>
     </th>
   )
 })
@@ -87,7 +89,9 @@ export const TableCell = forwardRef<TableCellPropsRef, TableCellProps>((props, r
 
   return (
     <td className={cn} ref={ref} {...rest}>
-      <Typography variant={'body2'}>{children}</Typography>
+      <Typography as={'span'} variant={'body2'}>
+        {children}
+      </Typography>
     </td>
   )
 })
