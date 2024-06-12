@@ -18,9 +18,7 @@ type Props = {
   tabs: Tab[]
 } & ComponentPropsWithoutRef<typeof Tabs.Root>
 
-type PropsRef = ElementRef<typeof Tabs.Root>
-
-export const TabSwitcher = forwardRef<PropsRef, Props>(
+export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Trigger>, Props>(
   ({ className, defaultValue, label, tabs, ...rest }, ref) => {
     const cn = {
       label: clsx(s.label),
@@ -37,6 +35,7 @@ export const TabSwitcher = forwardRef<PropsRef, Props>(
         className={cn.trigger}
         disabled={tab.disabled}
         key={index + tab.value}
+        ref={ref}
         value={tab.value}
       >
         <Typography
@@ -54,7 +53,6 @@ export const TabSwitcher = forwardRef<PropsRef, Props>(
         activationMode={'automatic'}
         className={cn.root}
         defaultValue={defaultValue ?? firstNotDisabledTabValue}
-        ref={ref}
         {...rest}
       >
         {label && (
