@@ -1,0 +1,21 @@
+.item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0;
+
+  &:focus-visible {
+    border-radius: 5px;
+    outline: 1px solid var(--color-info-500);
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    outline: none;
+  }
+}
+
+a {
+  text-decoration: none;
+}
