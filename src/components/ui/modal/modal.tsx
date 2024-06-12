@@ -20,85 +20,61 @@ const Portal = DialogPrimitive.Portal
 const Close = DialogPrimitive.Close
 
 type OverlayProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
-const Overlay = forwardRef<ElementRef<typeof DialogPrimitive.Overlay>, OverlayProps>(
-  ({ className, ...rest }, ref) => {
-    const cn = {
-      overlay: clsx(s.overlay, className),
-    }
+type OverlayRef = ElementRef<typeof DialogPrimitive.Overlay>
+const Overlay = forwardRef<OverlayRef, OverlayProps>(({ className, ...rest }, ref) => {
+  const cn = clsx(s.overlay, className)
 
-    return <DialogPrimitive.Overlay className={cn.overlay} ref={ref} {...rest} />
-  }
-)
+  return <DialogPrimitive.Overlay className={cn} ref={ref} {...rest} data-state={'open'} />
+})
 
 Overlay.displayName = DialogPrimitive.Overlay.displayName
 
 type ContentProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
-const Content = forwardRef<ElementRef<typeof DialogPrimitive.Content>, ContentProps>(
-  ({ children, className, ...rest }, ref) => {
-    const cn = {
-      content: clsx(s.content, className),
-    }
+type ContentRef = ElementRef<typeof DialogPrimitive.Content>
+const Content = forwardRef<ContentRef, ContentProps>(({ className, ...rest }, ref) => {
+  const cn = clsx(s.content, className)
 
-    return (
-      <Portal>
-        <Overlay />
-        <DialogPrimitive.Content className={cn.content} ref={ref} {...rest}>
-          {children}
-        </DialogPrimitive.Content>
-      </Portal>
-    )
-  }
-)
+  return (
+    <Portal>
+      <Overlay />
+      <DialogPrimitive.Content className={cn} ref={ref} {...rest} />
+    </Portal>
+  )
+})
 
 Content.displayName = DialogPrimitive.Content.displayName
 
 type TitleProps<T extends ElementType> = Omit<ComponentProps<typeof DialogPrimitive.Title>, 'ref'> &
   TypographyProps<T>
-const Title = forwardRef<ElementRef<typeof DialogPrimitive.Title>, TitleProps<ElementType>>(
-  ({ children, ...rest }, ref) => {
-    return (
-      <Typography ref={ref} {...rest}>
-        {children}
-      </Typography>
-    )
-  }
-)
+type titleRef = ElementRef<typeof DialogPrimitive.Title>
+const Title = forwardRef<titleRef, TitleProps<ElementType>>(({ ...rest }, ref) => {
+  return <Typography ref={ref} {...rest} />
+})
 
 Title.displayName = DialogPrimitive.Title.displayName
 
 type DescriptionProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
-const Description = forwardRef<ElementRef<typeof DialogPrimitive.Description>, DescriptionProps>(
-  ({ children, className, ...rest }, ref) => {
-    const cn = {
-      description: clsx(s.description, className),
-    }
+type DescriptionRef = ElementRef<typeof DialogPrimitive.Description>
+const Description = forwardRef<DescriptionRef, DescriptionProps>(({ className, ...rest }, ref) => {
+  const cn = clsx(s.description, className)
 
-    return (
-      <DialogPrimitive.Description className={cn.description} ref={ref} {...rest}>
-        {children}
-      </DialogPrimitive.Description>
-    )
-  }
-)
+  return <DialogPrimitive.Description className={cn} ref={ref} {...rest} />
+})
 
 Description.displayName = DialogPrimitive.Description.displayName
 
 type HeaderProps = HTMLAttributes<HTMLDivElement>
 const Header = ({ className, ...rest }: HeaderProps) => {
-  const cn = {
-    header: clsx(s.header, className),
-  }
+  const cn = clsx(s.header, className)
 
-  return <div className={cn.header} {...rest} />
+  return <div className={cn} {...rest} />
 }
 
 type FooterProps = HTMLAttributes<HTMLDivElement>
 const Footer = ({ className, ...rest }: FooterProps) => {
-  const cn = {
-    footer: clsx(s.footer, className),
-  }
+  const cn = clsx(s.footer, className)
 
-  return <div className={cn.footer} {...rest} />
+  return <div className={cn} {...rest} />
 }
 
 export const Modal = {

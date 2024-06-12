@@ -22,7 +22,7 @@ export const ModalDeleteCard = (props: ModalDeleteCardProps) => {
       <Modal.Trigger asChild>
         <Button onClick={open}>Open modal</Button>
       </Modal.Trigger>
-      <Modal.Content className={s.deleteCard}>
+      <Modal.Content className={s.content}>
         <Modal.Header>
           <Modal.Title as={'h3'} variant={'h3'}>
             Delete Card
