@@ -1,6 +1,6 @@
 import { ArrowIosBack } from '@/assets/components/svgIcons'
 import { Button } from '@/components/ui/button'
-import { Select, SelectItem } from '@/components/ui/select'
+import { Select, SelectOption } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
 
@@ -8,7 +8,7 @@ import s from './pagination.module.scss'
 
 import { DOTS, usePagination } from './hooks/usePagination'
 
-const paginationSelectOptions: SelectItem[] = [
+const paginationSelectOptions: SelectOption[] = [
   { title: '10', value: '10' },
   { title: '20', value: '20' },
   { title: '30', value: '30' },
@@ -116,8 +116,8 @@ export const Pagination = (props: Props) => {
       <Select
         className={cn.select}
         defaultValue={'10'}
-        items={paginationSelectOptions}
         onValueChange={changeDisplayPagesHandler}
+        options={paginationSelectOptions}
       />
       <Typography as={'span'} variant={'body2'}>
         на странице
