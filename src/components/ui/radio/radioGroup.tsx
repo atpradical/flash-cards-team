@@ -1,24 +1,18 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { Typography } from '@/components/ui/typography'
+import { Option } from '@/types'
 import * as RadixRadio from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
 
 import s from './radio.module.scss'
 
-export type Option = {
-  defaultValue?: boolean
-  disabled?: boolean
-  id: string
-  label: string
-  value: string
-}
-
 type Props = {
   options: Option[]
 } & ComponentPropsWithoutRef<typeof RadixRadio.Root>
+type PropsRef = ElementRef<typeof RadixRadio.Root>
 
-export const RadioGroup = (props: Props) => {
+export const RadioGroup = forwardRef<PropsRef, Props>((props, ref) => {
   const { className, disabled, options, ...rest } = props
   const cn = {
     disabled: clsx(s.disabled),
@@ -32,7 +26,7 @@ export const RadioGroup = (props: Props) => {
   const defaultOption = options.find(i => i.defaultValue)?.value || options[0].value
 
   return (
-    <RadixRadio.Root className={cn.root} defaultValue={defaultOption} {...rest}>
+    <RadixRadio.Root className={cn.root} defaultValue={defaultOption} ref={ref} {...rest}>
       {options.map(i => (
         <div className={cn.wrapper} key={i.id}>
           <RadixRadio.Item className={cn.item} disabled={i.disabled} id={i.id} value={i.value}>
@@ -50,4 +44,4 @@ export const RadioGroup = (props: Props) => {
       ))}
     </RadixRadio.Root>
   )
-}
+})
