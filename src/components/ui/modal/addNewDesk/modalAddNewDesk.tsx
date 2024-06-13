@@ -1,10 +1,10 @@
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { TextField } from '@/components/ui/text-field'
 
 import s from './modalAddNewDesk.module.scss'
 
-import { Button } from '../../button'
-import { Checkbox } from '../../checkbox'
-import { TextField } from '../../textField'
 import { Modal } from '../modal'
 
 export type ModalAddNewDeskProps = {
@@ -24,7 +24,7 @@ export const ModalAddNewDesk = (props: ModalAddNewDeskProps) => {
       <Modal.Trigger asChild>
         <Button onClick={open}>Open modal</Button>
       </Modal.Trigger>
-      <Modal.Content className={s.addNewTask}>
+      <Modal.Content className={s.addNewDesk}>
         <Modal.Header>
           <Modal.Title as={'h3'} variant={'h3'}>
             Add new Desk

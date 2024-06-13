@@ -1,14 +1,15 @@
 import { CloseOutline } from '@/assets/components/svgIcons'
+import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 
 import s from './deleteCard.module.scss'
 
-import { Button } from '../../button'
-import { Typography } from '../../typography'
 import { Modal } from '../modal'
 
 export type ModalDeleteCardProps = {
   cancel: () => void
   cardName: string
+
   close: () => void
   deleteCard: () => void
   open: () => void

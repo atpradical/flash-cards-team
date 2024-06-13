@@ -40,9 +40,9 @@ const createStory = (Component: ComponentType<any>, extraArgs: Partial<any> = {}
   },
 })
 
-export const ModalExample: Story = createStory(ModalAddNewDesk)
-export const ModalExample2: Story = createStory(ModalAddNewCard)
-export const ModalExample3: Story = createStory(ModalDeleteCard, {
+export const AddNewDesk: Story = createStory(ModalAddNewDesk)
+export const AddNewCard: Story = createStory(ModalAddNewCard)
+export const DeleteCard: Story = createStory(ModalDeleteCard, {
   cardName: 'Card Name',
   deleteCard: action('delete card button was clicked'),
 })

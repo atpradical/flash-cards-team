@@ -1,14 +1,14 @@
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { TextField } from '@/components/ui/text-field'
+import { Typography } from '@/components/ui/typography'
 
-import s from './modalAddNewDesk.module.scss'
+import s from './modalAddNewCard.module.scss'
 
-import { Button } from '../../button'
-import { Card } from '../../card'
-import { TextField } from '../../textField'
-import { Typography } from '../../typography'
 import { Modal } from '../modal'
 
-export type ModalAddNewDeskProps = {
+export type ModalAddNewCardProps = {
   addNewPack: () => void
   cancel: () => void
   close: () => void
@@ -16,7 +16,7 @@ export type ModalAddNewDeskProps = {
   uploadImage: () => void
 }
 
-export const ModalAddNewCard = (props: ModalAddNewDeskProps) => {
+export const ModalAddNewCard = (props: ModalAddNewCardProps) => {
   const { addNewPack, cancel, close, open, uploadImage } = props
 
   return (
