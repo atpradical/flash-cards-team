@@ -12,7 +12,7 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof RadixCheckbox.Root>
 type PropsRef = ElementRef<typeof RadixCheckbox.Root>
 
-export const Checkbox = forwardRef<PropsRef, Props>((props: Props, ref) => {
+export const Checkbox = forwardRef<PropsRef, Props>((props, ref) => {
   const { checked, className, disabled, id, label, onCheckedChange, ...rest } = props
   const cn = {
     container: clsx(s.container),

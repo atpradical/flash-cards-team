@@ -11,7 +11,7 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof RadixDropdown.Root>
 type PropsRef = ElementRef<typeof RadixDropdown.Trigger>
 
-export const Dropdown = forwardRef<PropsRef, Props>((props: Props, ref) => {
+export const Dropdown = forwardRef<PropsRef, Props>((props, ref) => {
   const { children, modal, trigger, ...rest } = props
   const cn = {
     arrow: clsx(s.arrow),
