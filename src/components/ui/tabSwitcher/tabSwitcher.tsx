@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-import * as Tabs from '@radix-ui/react-tabs'
+import * as RadixTabs from '@radix-ui/react-tabs'
 import clsx from 'clsx'
 
 import s from './tabSwitcher.module.scss'
@@ -16,9 +16,9 @@ export type Tab = {
 type Props = {
   label?: string
   tabs: Tab[]
-} & ComponentPropsWithoutRef<typeof Tabs.Root>
+} & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
-export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Trigger>, Props>(
+export const TabSwitcher = forwardRef<ElementRef<typeof RadixTabs.Trigger>, Props>(
   ({ className, defaultValue, label, tabs, ...rest }, ref) => {
     const cn = {
       label: clsx(s.label),
@@ -31,7 +31,7 @@ export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Trigger>, Props>(
     const firstNotDisabledTabValue = tabs.find((tab: Tab) => !tab.disabled)?.value
 
     const TabsTriggers = tabs.map((tab: Tab, index) => (
-      <Tabs.Trigger
+      <RadixTabs.Trigger
         className={cn.trigger}
         disabled={tab.disabled}
         key={index + tab.value}
@@ -45,11 +45,11 @@ export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Trigger>, Props>(
         >
           {tab.title}
         </Typography>
-      </Tabs.Trigger>
+      </RadixTabs.Trigger>
     ))
 
     return (
-      <Tabs.Root
+      <RadixTabs.Root
         activationMode={'automatic'}
         className={cn.root}
         defaultValue={defaultValue ?? firstNotDisabledTabValue}
@@ -60,8 +60,8 @@ export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Trigger>, Props>(
             {label}
           </Typography>
         )}
-        <Tabs.List className={cn.list}>{TabsTriggers}</Tabs.List>
-      </Tabs.Root>
+        <RadixTabs.List className={cn.list}>{TabsTriggers}</RadixTabs.List>
+      </RadixTabs.Root>
     )
   }
 )
