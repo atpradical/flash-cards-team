@@ -13,14 +13,14 @@ import s from './textField.module.scss'
 import { Button } from '../button'
 import { Typography } from '../typography'
 
-type Props = {
+export type TextFieldProps = {
   error?: boolean
   helperText?: string
   label?: string
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField = (props: Props) => {
+export const TextField = (props: TextFieldProps) => {
   const {
     className,
     disabled,
