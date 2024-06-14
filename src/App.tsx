@@ -16,7 +16,7 @@ export function App() {
   const { control, handleSubmit } = useForm<SomeFormValues>()
 
   const foo = handleSubmit(data => {
-    // console.log(data)
+    console.log(data)
   })
 
   return (
