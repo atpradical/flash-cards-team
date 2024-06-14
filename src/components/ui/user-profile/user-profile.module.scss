@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+
+  p {
+    border-bottom: 1px dashed var(--color-light-100);
+  }
+}
+
+.link {
+  padding: 6px 0;
+}
