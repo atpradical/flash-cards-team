@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import {
   CloseOutline,
@@ -20,7 +20,7 @@ type Props = {
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField = (props: Props) => {
+export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const {
     className,
     disabled,
@@ -61,7 +61,7 @@ export const TextField = (props: Props) => {
   }
 
   return (
-    <div className={cn.container}>
+    <div className={cn.container} ref={ref}>
       {label && (
         <Typography as={'label'} className={s.label} variant={'body2'}>
           {label}
@@ -97,4 +97,4 @@ export const TextField = (props: Props) => {
       {helperText && <Typography variant={'error'}>{helperText}</Typography>}
     </div>
   )
-}
+})
