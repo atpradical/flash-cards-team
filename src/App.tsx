@@ -15,8 +15,8 @@ type SomeFormValues = {
 export function App() {
   const { control, handleSubmit } = useForm<SomeFormValues>()
 
-  const foo2 = handleSubmit(data => {
-    console.log(data)
+  const foo = handleSubmit(data => {
+    // console.log(data)
   })
 
   return (
@@ -24,7 +24,7 @@ export function App() {
       <Header />
       <Page>
         <FlexContainer>
-          <form onSubmit={foo2}>
+          <form onSubmit={foo}>
             <div>Hi Team 🤘🤘🤘 Controlled Checkbox example:</div>
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
             <Button>Submit</Button>
