@@ -118,6 +118,7 @@ export const Pagination = (props: Props) => {
         defaultValue={'10'}
         onValueChange={changeDisplayPagesHandler}
         options={paginationSelectOptions}
+        value={`${pageSize}`}
       />
       <Typography as={'span'} variant={'body2'}>
         на странице
