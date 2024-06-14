@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Option, RadioGroup } from '@/components/ui/radio'
+import { RadioGroup } from '@/components/ui/radio'
+import { Option } from '@/types'
 
 const mockRadio: Option[] = [
   { id: '1', label: 'Default', value: '1' },
