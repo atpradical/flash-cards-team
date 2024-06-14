@@ -29,25 +29,24 @@ export const CheckboxWithoutLabel: Story = {
 }
 export const CheckboxChecked: Story = {
   args: {
-    checked: true,
+    defaultChecked: true,
     label: 'Checked checkbox',
   },
 }
 export const CheckboxUnchecked: Story = {
   args: {
-    checked: false,
     label: 'Unchecked checkbox',
   },
 }
 export const CheckboxDisabled: Story = {
   args: {
-    checked: false,
     disabled: true,
     label: 'Disabled checkbox',
   },
 }
 export const CheckboxDisabledChecked: Story = {
   args: {
+    defaultChecked: true,
     disabled: true,
     label: 'Disabled checkbox',
   },
