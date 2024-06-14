@@ -18,7 +18,9 @@ type Props = {
   tabs: Tab[]
 } & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
-export const TabSwitcher = forwardRef<ElementRef<typeof RadixTabs.Trigger>, Props>(
+type TabSwitcherRef = ElementRef<typeof RadixTabs.Trigger>
+
+export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
   ({ className, defaultValue, label, tabs, ...rest }, ref) => {
     const cn = {
       label: clsx(s.label),
