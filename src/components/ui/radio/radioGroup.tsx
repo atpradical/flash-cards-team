@@ -10,9 +10,9 @@ import s from './radio.module.scss'
 type Props = {
   options: Option[]
 } & ComponentPropsWithoutRef<typeof RadixRadio.Root>
-type PropsRef = ElementRef<typeof RadixRadio.Root>
+type RadioGroupRef = ElementRef<typeof RadixRadio.Root>
 
-export const RadioGroup = forwardRef<PropsRef, Props>((props, ref) => {
+export const RadioGroup = forwardRef<RadioGroupRef, Props>((props, ref) => {
   const { className, disabled, options, ...rest } = props
   const cn = {
     disabled: clsx(s.disabled),
