@@ -1,17 +1,18 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as RadixSlider from '@radix-ui/react-slider'
 
-import s from './slider.module.scss'
-
 import { Typography } from '../typography'
+import s from './slider.module.scss'
 
 type Props = {
   onValueChange: (value: number[]) => void
   value: number[]
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
-export const Slider = (props: Props) => {
+type SliderRef = ElementRef<typeof RadixSlider.Root>
+
+export const Slider = forwardRef<SliderRef, Props>((props, ref) => {
   const { defaultValue, minStepsBetweenThumbs = 1, onValueChange, value, ...rest } = props
 
   return (
@@ -24,6 +25,7 @@ export const Slider = (props: Props) => {
         defaultValue={defaultValue}
         minStepsBetweenThumbs={minStepsBetweenThumbs}
         onValueChange={onValueChange}
+        ref={ref}
         step={1}
         value={value}
         {...rest}
@@ -39,4 +41,4 @@ export const Slider = (props: Props) => {
       </Typography>
     </div>
   )
-}
+})

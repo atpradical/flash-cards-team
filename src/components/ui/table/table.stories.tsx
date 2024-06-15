@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Table } from '@/components/ui/table/table'
-import { Typography } from '@/components/ui/typography'
 
 const mockTableData = [
   {
@@ -55,7 +54,6 @@ export const PlainTableExample: Story = {
   render: () => {
     return (
       <Table.Container>
-        <Typography variant={'body2'}>Just plaint table</Typography>
         <Table.Container>
           <Table.Header>
             <Table.Row>
