@@ -39,7 +39,7 @@ const createStory = (Component: ComponentType<any>, extraArgs: Partial<any> = {}
   },
 })
 
-export const AddNewDesk: Story = createStory(AddNewDeckDialog)
+export const AddNewDeck: Story = createStory(AddNewDeckDialog)
 export const AddNewCard: Story = createStory(AddNewCardDialog)
 export const DeleteCard: Story = createStory(DeleteCardDialog, {
   cardName: 'Card Name',

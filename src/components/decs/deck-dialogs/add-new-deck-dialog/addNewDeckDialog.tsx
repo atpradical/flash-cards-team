@@ -28,7 +28,7 @@ export const AddNewDeckDialog = (props: AddNewDeckDialogProps) => {
       <Modal.Content className={s.addNewDesk}>
         <Modal.Header>
           <Typography as={'h3'} variant={'h3'}>
-            Add new Desk
+            Add new Deck
           </Typography>
           <Modal.Close asChild>
             <Button onClick={close} variant={'icon'}>
@@ -37,14 +37,14 @@ export const AddNewDeckDialog = (props: AddNewDeckDialogProps) => {
           </Modal.Close>
         </Modal.Header>
 
-        <Modal.Description>
+        <div className={s.description}>
           <TextField className={s.textField} label={'Label'} />
           <Button fullWidth onClick={uploadImage} variant={'secondary'}>
             <ImageOutline />
             Upload image
           </Button>
           <Checkbox label={'Private pack'} onClick={changeCheckbox} />
-        </Modal.Description>
+        </div>
 
         <Modal.Footer>
           <Modal.Close asChild>

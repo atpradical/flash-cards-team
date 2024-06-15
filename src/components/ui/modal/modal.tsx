@@ -15,7 +15,7 @@ type OverlayRef = ElementRef<typeof DialogPrimitive.Overlay>
 const Overlay = forwardRef<OverlayRef, OverlayProps>(({ className, ...rest }, ref) => {
   const cn = clsx(s.overlay, className)
 
-  return <DialogPrimitive.Overlay className={cn} ref={ref} {...rest} data-state={'open'} />
+  return <DialogPrimitive.Overlay className={cn} ref={ref} {...rest} />
 })
 
 Overlay.displayName = DialogPrimitive.Overlay.displayName

@@ -36,7 +36,7 @@ export const AddNewCardDialog = (props: AddNewCardDialogProps) => {
           </Modal.Close>
         </Modal.Header>
 
-        <Modal.Description>
+        <div className={s.descriptionWrapper}>
           <div className={s.description}>
             <Typography className={s.subtitle2} variant={'subtitle2'}>
               Question:
@@ -61,7 +61,7 @@ export const AddNewCardDialog = (props: AddNewCardDialogProps) => {
               Change image
             </Button>
           </div>
-        </Modal.Description>
+        </div>
 
         <Modal.Footer>
           <Modal.Close asChild>
