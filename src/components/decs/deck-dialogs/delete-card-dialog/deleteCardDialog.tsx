@@ -2,21 +2,20 @@ import { CloseOutline } from '@/assets/components/svgIcons'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 
-import s from './deleteCard.module.scss'
+import s from './deleteCardDialog.module.scss'
 
-import { Modal } from '../modal'
+import { Modal } from '@/components/ui/modal'
 
-export type ModalDeleteCardProps = {
-  cancel: () => void
+export type DeleteCardDialogProps = {
   cardName: string
-
+  cancel: () => void
   close: () => void
   deleteCard: () => void
   open: () => void
 }
 
-export const ModalDeleteCard = (props: ModalDeleteCardProps) => {
-  const { cancel, cardName, close, deleteCard, open } = props
+export const DeleteCardDialog = (props: DeleteCardDialogProps) => {
+  const { cardName, cancel, close, deleteCard, open } = props
 
   return (
     <Modal.Root defaultOpen>
@@ -25,9 +24,9 @@ export const ModalDeleteCard = (props: ModalDeleteCardProps) => {
       </Modal.Trigger>
       <Modal.Content className={s.content}>
         <Modal.Header>
-          <Modal.Title as={'h3'} variant={'h3'}>
+          <Typography as={'h3'} variant={'h3'}>
             Delete Card
-          </Modal.Title>
+          </Typography>
           <Modal.Close asChild>
             <Button onClick={close} variant={'icon'}>
               <CloseOutline />

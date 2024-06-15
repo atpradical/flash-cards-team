@@ -4,11 +4,11 @@ import { Card } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 
-import s from './modalAddNewCard.module.scss'
+import s from './addNewCardDialog.module.scss'
 
-import { Modal } from '../modal'
+import { Modal } from '@/components/ui/modal'
 
-export type ModalAddNewCardProps = {
+export type AddNewCardDialogProps = {
   addNewPack: () => void
   cancel: () => void
   close: () => void
@@ -16,7 +16,7 @@ export type ModalAddNewCardProps = {
   uploadImage: () => void
 }
 
-export const ModalAddNewCard = (props: ModalAddNewCardProps) => {
+export const AddNewCardDialog = (props: AddNewCardDialogProps) => {
   const { addNewPack, cancel, close, open, uploadImage } = props
 
   return (
@@ -26,9 +26,9 @@ export const ModalAddNewCard = (props: ModalAddNewCardProps) => {
       </Modal.Trigger>
       <Modal.Content className={s.addNewCard}>
         <Modal.Header>
-          <Modal.Title as={'h3'} variant={'h3'}>
+          <Typography as={'h3'} variant={'h3'}>
             Add new Card
-          </Modal.Title>
+          </Typography>
           <Modal.Close asChild>
             <Button onClick={close} variant={'icon'}>
               <CloseOutline />

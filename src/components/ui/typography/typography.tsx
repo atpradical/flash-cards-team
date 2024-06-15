@@ -19,7 +19,7 @@ export type TypographyVariant =
   | 'subtitle1'
   | 'subtitle2'
 
-export type TypographyProps<T extends ElementType> = {
+type TypographyProps<T extends ElementType> = {
   as?: T
   variant?: TypographyVariant
 } & ComponentPropsWithoutRef<T>

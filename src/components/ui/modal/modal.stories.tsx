@@ -1,19 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react'
-
 import { ComponentType, useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { action } from '@storybook/addon-actions'
 
-import { ModalAddNewCard } from './addNewCard'
-import { ModalAddNewDesk } from './addNewDesk'
-import { ModalDeleteCard } from './deleteCard'
+import { AddNewCardDialog } from '@/components/decs/deck-dialogs/add-new-card-dialog'
+import { AddNewDeckDialog } from '@/components/decs/deck-dialogs/add-new-deck-dialog'
+import { DeleteCardDialog } from '@/components/decs/deck-dialogs/delete-card-dialog'
 
 const meta = {
   argTypes: {},
-  component: ModalAddNewDesk,
+  component: AddNewDeckDialog,
   tags: ['autodocs'],
   title: 'Components/Modal',
-} satisfies Meta<typeof ModalAddNewDesk>
+} satisfies Meta<typeof AddNewDeckDialog>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -40,9 +39,9 @@ const createStory = (Component: ComponentType<any>, extraArgs: Partial<any> = {}
   },
 })
 
-export const AddNewDesk: Story = createStory(ModalAddNewDesk)
-export const AddNewCard: Story = createStory(ModalAddNewCard)
-export const DeleteCard: Story = createStory(ModalDeleteCard, {
+export const AddNewDesk: Story = createStory(AddNewDeckDialog)
+export const AddNewCard: Story = createStory(AddNewCardDialog)
+export const DeleteCard: Story = createStory(DeleteCardDialog, {
   cardName: 'Card Name',
   deleteCard: action('delete card button was clicked'),
 })

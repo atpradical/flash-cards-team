@@ -1,18 +1,9 @@
-import {
-  ComponentProps,
-  ComponentPropsWithoutRef,
-  ElementRef,
-  ElementType,
-  HTMLAttributes,
-  forwardRef,
-} from 'react'
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react'
 
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 
 import s from './modal.module.scss'
-
-import { Typography, TypographyProps } from '../typography'
 
 const Root = DialogPrimitive.Root
 const Trigger = DialogPrimitive.Trigger
@@ -43,15 +34,6 @@ const Content = forwardRef<ContentRef, ContentProps>(({ className, ...rest }, re
 })
 
 Content.displayName = DialogPrimitive.Content.displayName
-
-type TitleProps<T extends ElementType> = Omit<ComponentProps<typeof DialogPrimitive.Title>, 'ref'> &
-  TypographyProps<T>
-type titleRef = ElementRef<typeof DialogPrimitive.Title>
-const Title = forwardRef<titleRef, TitleProps<ElementType>>(({ ...rest }, ref) => {
-  return <Typography ref={ref} {...rest} />
-})
-
-Title.displayName = DialogPrimitive.Title.displayName
 
 type DescriptionProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 type DescriptionRef = ElementRef<typeof DialogPrimitive.Description>
@@ -86,6 +68,5 @@ export const Modal = {
   Overlay,
   Portal,
   Root,
-  Title,
   Trigger,
 }

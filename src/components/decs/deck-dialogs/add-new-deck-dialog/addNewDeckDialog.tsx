@@ -3,11 +3,12 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { TextField } from '@/components/ui/text-field'
 
-import s from './modalAddNewDesk.module.scss'
+import s from './addNewDeckDialog.module.scss'
 
-import { Modal } from '../modal'
+import { Modal } from '@/components/ui/modal'
+import { Typography } from '@/components/ui/typography'
 
-export type ModalAddNewDeskProps = {
+export type AddNewDeckDialogProps = {
   addNewPack: () => void
   cancel: () => void
   changeCheckbox: () => void
@@ -16,7 +17,7 @@ export type ModalAddNewDeskProps = {
   uploadImage: () => void
 }
 
-export const ModalAddNewDesk = (props: ModalAddNewDeskProps) => {
+export const AddNewDeckDialog = (props: AddNewDeckDialogProps) => {
   const { addNewPack, cancel, changeCheckbox, close, open, uploadImage } = props
 
   return (
@@ -26,9 +27,9 @@ export const ModalAddNewDesk = (props: ModalAddNewDeskProps) => {
       </Modal.Trigger>
       <Modal.Content className={s.addNewDesk}>
         <Modal.Header>
-          <Modal.Title as={'h3'} variant={'h3'}>
+          <Typography as={'h3'} variant={'h3'}>
             Add new Desk
-          </Modal.Title>
+          </Typography>
           <Modal.Close asChild>
             <Button onClick={close} variant={'icon'}>
               <CloseOutline />
