@@ -1,31 +1,52 @@
-import { useController, UseControllerProps } from 'react-hook-form'
+import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
 import { TextField, TextFieldProps } from '@/components/ui/text-field'
 
-export type ControlledTextFieldProps = UseControllerProps<any> & Omit<TextFieldProps, 'variant'>
+export type ControlledTextFieldProps<T extends FieldValues> = Omit<
+  TextFieldProps,
+  | 'control'
+  | 'defaultValue'
+  | 'disabled'
+  | 'name'
+  | 'onBlur'
+  | 'onChange'
+  | 'ref'
+  | 'value'
+  | 'error'
+  | 'helperText'
+> &
+  UseControllerProps<T>
 
-export const ControlledTextField = (props: ControlledTextFieldProps) => {
-  const { name, rules, shouldUnregister, defaultValue, control, ...rest } = props
-
+// дженерик для обеспечения гибкости или протипизировать под input?(ComponentPropsWithoutRef<'input'>)?
+export const ControlledTextField = <T extends FieldValues>({
+  name,
+  rules,
+  shouldUnregister,
+  defaultValue,
+  control,
+  // helperText, ?? надо не надо?
+  ...rest
+}: ControlledTextFieldProps<T>) => {
   const {
-    field: { onChange, onBlur, value },
+    field: { onChange, onBlur, value, ref, ...field },
     fieldState: { error },
   } = useController({
     name,
-    rules,
-    shouldUnregister,
     control,
+    rules,
     defaultValue,
+    shouldUnregister,
   })
 
   return (
     <TextField
+      {...rest}
       onChange={onChange}
       onBlur={onBlur}
       value={value}
-      // ref={ref}
+      ref={ref}
       error={!!error}
-      helperText={error ? error.message : rest.helperText}
-      {...rest}
+      // helperText={error ? error.message : helperText}
+      {...field}
     />
   )
 }
