@@ -10,6 +10,7 @@ import { Page } from '@/shared/ui/page'
 
 type SomeFormValues = {
   rememberMe: boolean
+  someSelect: string
 }
 
 export function App() {
@@ -19,14 +20,21 @@ export function App() {
     console.log(data)
   })
 
+  const mockSelectOptions = [
+    { title: 'option 1', value: 'option-1' },
+    { title: 'option 2', value: 'option-2' },
+    { title: 'option 3', value: 'option-3' },
+  ]
+
   return (
     <Layout>
       <Header />
       <Page>
-        <FlexContainer>
-          <form onSubmit={foo}>
-            <div>Hi Team 🤘🤘🤘 Controlled Checkbox example:</div>
+        <form onSubmit={foo}>
+          <FlexContainer ai={'start'} fd={'column'} gap={'10px'} style={{ maxWidth: '500px' }}>
+            <div>Hi Team 🤘🤘🤘 Controlled components examples:</div>
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
+            <ControlledSelect control={control} name={'someSelect'} options={mockSelectOptions} />
             <Button>Submit</Button>
           </form>
           <SignUpForm />
