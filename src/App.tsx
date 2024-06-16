@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { SignUpForm } from '@/components/ui/forms/sign-up-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
+import { ControlledSelect } from '@/shared/ui/form-components/controlled-select'
 import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
@@ -30,8 +31,8 @@ export function App() {
     <Layout>
       <Header />
       <Page>
-        <form onSubmit={foo}>
-          <FlexContainer ai={'start'} fd={'column'} gap={'10px'} style={{ maxWidth: '500px' }}>
+        <FlexContainer ai={'start'} fd={'column'} gap={'10px'} style={{ maxWidth: '500px' }}>
+          <form onSubmit={foo}>
             <div>Hi Team 🤘🤘🤘 Controlled components examples:</div>
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
             <ControlledSelect control={control} name={'someSelect'} options={mockSelectOptions} />
