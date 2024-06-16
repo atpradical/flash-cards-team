@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button'
+import { SignUpForm } from '@/components/ui/forms/sign-up-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
+import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
-
-import { Header } from './shared/ui/header'
-import { Page } from './shared/ui/page'
+import { Page } from '@/shared/ui/page'
 
 export function App() {
   return (
@@ -19,6 +19,7 @@ export function App() {
               Button as link
             </Button>
           </div>
+          <SignUpForm />
         </FlexContainer>
       </Page>
     </Layout>
