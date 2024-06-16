@@ -34,7 +34,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   const cn = {
     closeOutline: clsx(s.icon, s.close),
-    container: clsx(s.container, disabled && s.disabled),
+    container: clsx(s.container, disabled && s.disabled, className),
     eye: clsx(s.icon, s.eye, disabled && s.disabled),
     input: clsx(className, s.input, error && s.error),
     label: clsx(s.label),
