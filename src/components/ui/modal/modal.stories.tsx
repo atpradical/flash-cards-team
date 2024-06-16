@@ -1,11 +1,11 @@
-import { ComponentType, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { action } from '@storybook/addon-actions'
+import { ComponentType, useState } from 'react'
 
 import { AddNewCardDialog } from '@/components/decs/deck-dialogs/add-new-card-dialog'
 import { AddNewDeckDialog } from '@/components/decs/deck-dialogs/add-new-deck-dialog'
 import { DeleteCardDialog } from '@/components/decs/deck-dialogs/delete-card-dialog'
+import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {},

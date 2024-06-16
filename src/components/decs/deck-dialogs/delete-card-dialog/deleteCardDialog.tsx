@@ -1,21 +1,20 @@
 import { CloseOutline } from '@/assets/components/svgIcons'
 import { Button } from '@/components/ui/button'
+import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 
 import s from './deleteCardDialog.module.scss'
 
-import { Modal } from '@/components/ui/modal'
-
 export type DeleteCardDialogProps = {
-  cardName: string
   cancel: () => void
+  cardName: string
   close: () => void
   deleteCard: () => void
   open: () => void
 }
 
 export const DeleteCardDialog = (props: DeleteCardDialogProps) => {
-  const { cardName, cancel, close, deleteCard, open } = props
+  const { cancel, cardName, close, deleteCard, open } = props
 
   return (
     <Modal.Root defaultOpen>

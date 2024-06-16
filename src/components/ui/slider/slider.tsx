@@ -2,8 +2,9 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as RadixSlider from '@radix-ui/react-slider'
 
-import { Typography } from '../typography'
 import s from './slider.module.scss'
+
+import { Typography } from '../typography'
 
 type Props = {
   onValueChange: (value: number[]) => void

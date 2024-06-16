@@ -1,12 +1,11 @@
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 
 import s from './addNewCardDialog.module.scss'
-
-import { Modal } from '@/components/ui/modal'
 
 export type AddNewCardDialogProps = {
   addNewPack: () => void
