@@ -2,11 +2,11 @@ import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { ControlledCheckbox } from '@/shared/ui/from-components/controlled-checkbox'
-import { ControlledSelect } from '@/shared/ui/from-components/controlled-select'
-import { Header } from '@/shared/ui/header'
+import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
 import { Layout } from '@/shared/ui/layout'
-import { Page } from '@/shared/ui/page'
+
+import { Header } from './shared/ui/header'
+import { Page } from './shared/ui/page'
 
 type SomeFormValues = {
   rememberMe: boolean
