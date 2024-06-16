@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
+import { ControlledSelect } from '@/shared/ui/form-components/controlled-select/controlled-select'
+import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
-
-import { Header } from './shared/ui/header'
-import { Page } from './shared/ui/page'
+import { Page } from '@/shared/ui/page'
 
 type SomeFormValues = {
   rememberMe: boolean
