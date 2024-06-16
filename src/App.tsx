@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { SignUpForm } from '@/components/ui/forms/sign-up-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { Header } from '@/shared/ui/header'
 import { ControlledCheckbox } from '@/shared/ui/from-components/controlled-checkbox'
+import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
 
@@ -29,7 +29,7 @@ export function App() {
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
             <Button>Submit</Button>
           </form>
-            <SignUpForm />
+          <SignUpForm />
         </FlexContainer>
       </Page>
     </Layout>
