@@ -1,25 +1,35 @@
+import { useForm } from 'react-hook-form'
+
 import { Button } from '@/components/ui/button'
 import { SignUpForm } from '@/components/ui/forms/sign-up-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
+import { ControlledCheckbox } from '@/shared/ui/from-components/controlled-checkbox'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
 
+type SomeFormValues = {
+  rememberMe: boolean
+}
+
 export function App() {
+  const { control, handleSubmit } = useForm<SomeFormValues>()
+
+  const foo = handleSubmit(data => {
+    console.log(data)
+  })
+
   return (
     <Layout>
       <Header />
       <Page>
         <FlexContainer>
-          <div>Hi Team 🤘🤘🤘</div>
-          <div>
-            <Button>Primary</Button>
-            <Button variant={'secondary'}>Secondary</Button>
-            <Button as={'a'} variant={'link'}>
-              Button as link
-            </Button>
-          </div>
-          <SignUpForm />
+          <form onSubmit={foo}>
+            <div>Hi Team 🤘🤘🤘 Controlled Checkbox example:</div>
+            <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
+            <Button>Submit</Button>
+          </form>
+            <SignUpForm />
         </FlexContainer>
       </Page>
     </Layout>
