@@ -73,9 +73,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           disabled={disabled}
           onChange={handleChangeInput}
           placeholder={placeholder}
+          ref={ref}
           type={inputType}
           value={inputValue}
-          ref={ref}
           {...rest}
         />
         {isPassword && (

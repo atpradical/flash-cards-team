@@ -1,4 +1,5 @@
-import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
+import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
+
 import { TextField, TextFieldProps } from '@/components/ui/text-field'
 
 export type ControlledTextFieldProps<T extends FieldValues> = Omit<
@@ -6,46 +7,43 @@ export type ControlledTextFieldProps<T extends FieldValues> = Omit<
   | 'control'
   | 'defaultValue'
   | 'disabled'
+  | 'error'
+  | 'helperText'
   | 'name'
   | 'onBlur'
   | 'onChange'
   | 'ref'
   | 'value'
-  | 'error'
-  | 'helperText'
 > &
   UseControllerProps<T>
 
-// дженерик для обеспечения гибкости или протипизировать под input?(ComponentPropsWithoutRef<'input'>)?
 export const ControlledTextField = <T extends FieldValues>({
+  control,
+  defaultValue,
   name,
   rules,
   shouldUnregister,
-  defaultValue,
-  control,
-  // helperText, ?? надо не надо?
   ...rest
 }: ControlledTextFieldProps<T>) => {
   const {
-    field: { onChange, onBlur, value, ref, ...field },
+    field: { onBlur, onChange, ref, value, ...field },
     fieldState: { error },
   } = useController({
-    name,
     control,
-    rules,
     defaultValue,
+    name,
+    rules,
     shouldUnregister,
   })
 
   return (
     <TextField
       {...rest}
-      onChange={onChange}
-      onBlur={onBlur}
-      value={value}
-      ref={ref}
       error={!!error}
-      // helperText={error ? error.message : helperText}
+      onBlur={onBlur}
+      onChange={onChange}
+      ref={ref}
+      value={value}
       {...field}
     />
   )
