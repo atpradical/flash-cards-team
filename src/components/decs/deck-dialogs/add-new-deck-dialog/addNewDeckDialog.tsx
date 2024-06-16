@@ -1,12 +1,11 @@
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/text-field'
+import { Typography } from '@/components/ui/typography'
 
 import s from './addNewDeckDialog.module.scss'
-
-import { Modal } from '@/components/ui/modal'
-import { Typography } from '@/components/ui/typography'
 
 export type AddNewDeckDialogProps = {
   addNewPack: () => void
