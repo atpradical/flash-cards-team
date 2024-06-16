@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
-import { ControlledCheckbox } from '@/components/ui/form-components/controlled-checkbox'
 import { FlexContainer } from '@/shared/ui/flex-container'
+import { ControlledCheckbox } from '@/shared/ui/from-components/controlled-checkbox'
 import { Layout } from '@/shared/ui/layout'
 
 import { Header } from './shared/ui/header'
