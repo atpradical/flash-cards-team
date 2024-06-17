@@ -7,15 +7,14 @@ import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
-type Props = {
+export type CheckboxProps = {
   label?: string
 } & ComponentPropsWithoutRef<typeof RadixCheckbox.Root>
 type CheckboxRef = ElementRef<typeof RadixCheckbox.Root>
 
-export const Checkbox = forwardRef<CheckboxRef, Props>((props, ref) => {
-  const { checked, className, disabled, id, label, onCheckedChange, ...rest } = props
+export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
+  const { className, disabled, id, label, ...rest } = props
   const cn = {
-    container: clsx(s.container),
     icon: clsx(s.icon, disabled && s.disabled),
     indicator: clsx(s.indicator, disabled && s.disabled),
     label: clsx(s.label, disabled && s.disabled),
@@ -23,27 +22,18 @@ export const Checkbox = forwardRef<CheckboxRef, Props>((props, ref) => {
     wrapper: clsx(s.wrapper),
   }
   const generatedId = useId()
-  const finalId = id || generatedId
+  const checkboxId = id || generatedId
 
   return (
-    <div className={cn.container}>
-      <RadixCheckbox.Root
-        className={cn.root}
-        defaultChecked
-        disabled={disabled}
-        id={finalId}
-        ref={ref}
-        {...rest}
-      >
-        <RadixCheckbox.Indicator className={cn.indicator}>
-          <CheckIcon className={cn.icon} />
-        </RadixCheckbox.Indicator>
-        {label && (
-          <Typography as={'label'} className={cn.label} htmlFor={finalId} variant={'body2'}>
-            {label}
-          </Typography>
-        )}
-      </RadixCheckbox.Root>
-    </div>
+    <RadixCheckbox.Root className={cn.root} disabled={disabled} id={checkboxId} ref={ref} {...rest}>
+      <RadixCheckbox.Indicator className={cn.indicator}>
+        <CheckIcon className={cn.icon} />
+      </RadixCheckbox.Indicator>
+      {label && (
+        <Typography as={'label'} className={cn.label} htmlFor={checkboxId} variant={'body2'}>
+          {label}
+        </Typography>
+      )}
+    </RadixCheckbox.Root>
   )
 })
