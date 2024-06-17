@@ -12,10 +12,13 @@ type Props = {
   userName?: string
 }
 export const UserProfile = ({ isAuthorized, src, userName }: Props) => {
-  const cn = { link: clsx(s.link) }
+  const cn = {
+    container: clsx(s.container),
+    link: clsx(s.link),
+  }
 
   return (
-    <FlexContainer gap={'14px'} jc={'end'}>
+    <FlexContainer className={cn.container}>
       {isAuthorized ? (
         <>
           <Button className={cn.link} variant={'link'}>
