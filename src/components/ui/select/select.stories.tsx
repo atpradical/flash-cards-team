@@ -27,8 +27,6 @@ const mockOptions3: SelectOption[] = [
   { disabled: true, title: 'some option 5', value: 'option-5' },
 ]
 
-const mockNoOptions: SelectOption[] = []
-
 const meta = {
   argTypes: {
     disabled: { control: 'boolean' },
@@ -42,42 +40,38 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SelectWithLabel: Story = {
+export const SelectBaseExample: Story = {
   args: {
     label: 'Select Box',
+    onValueChange: action('Mock action invoked'),
     options: mockOptions1,
     placeholder: 'just select some option',
-  },
-}
-
-export const BaseSelectNoPlaceholder: Story = {
-  args: {
-    options: mockOptions1,
+    value: '',
   },
 }
 
 export const SelectWithDefaultValue: Story = {
   args: {
     defaultValue: mockOptions1[1].value,
+    onValueChange: action('Mock action invoked'),
     options: mockOptions1,
+    value: mockOptions1[1].value,
   },
 }
 
 export const SelectWithDisabledOptions: Story = {
   args: {
+    onValueChange: action('Mock action invoked'),
     options: mockOptions2,
+    value: mockOptions2[1].value,
   },
 }
 
 export const SelectDisabled: Story = {
   args: {
     disabled: true,
+    onValueChange: action('Mock action invoked'),
     options: mockOptions3,
-  },
-}
-
-export const SelectEmpty: Story = {
-  args: {
-    options: mockNoOptions,
+    value: '',
   },
 }
