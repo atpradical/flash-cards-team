@@ -2,7 +2,6 @@ import { Meta, StoryObj } from '@storybook/react'
 import { FormValues, SignInForm } from './signInForm'
 
 const meta: Meta<typeof SignInForm> = {
-  argTypes: {},
   title: 'Components/Forms/SignInForm',
   component: SignInForm,
 } satisfies Meta<typeof SignInForm>
@@ -10,17 +9,24 @@ const meta: Meta<typeof SignInForm> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// export const Primary: Story = {}
-
-export const DefaultSignInForm: Story = {
+export const Primary: Story = {
   args: {
     onSubmit: (data: FormValues) => {
       console.log('Form submitted', data)
     },
-    errors: {
-      email: 'Invalid email address',
-      password: 'Min 3 characters',
-      rememberMe: 'Check',
+  },
+  render: args => <SignInForm {...args} />,
+}
+
+export const WithErrors: Story = {
+  args: {
+    onSubmit: (data: FormValues) => {
+      console.log('Form submitted', data)
+    },
+    defaultValues: {
+      email: 'invalid-email',
+      password: '123',
+      rememberMe: true,
     },
   },
   render: args => <SignInForm {...args} />,

@@ -36,7 +36,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
     closeOutline: clsx(s.icon, s.close),
     container: clsx(s.container, disabled && s.disabled, className),
     eye: clsx(s.icon, s.eye, disabled && s.disabled),
-    input: clsx(className, s.input, error && s.error),
+    input: clsx(s.input, error && s.error),
     label: clsx(s.label),
     searchOutline: clsx(s.icon, s.search),
   }
@@ -61,7 +61,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   }
 
   return (
-    <div className={cn.container} ref={ref}>
+    <div className={cn.container}>
       {label && (
         <Typography as={'label'} className={s.label} variant={'body2'}>
           {label}
@@ -75,6 +75,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           placeholder={placeholder}
           type={inputType}
           value={inputValue}
+          ref={ref}
           {...rest}
         />
         {isPassword && (

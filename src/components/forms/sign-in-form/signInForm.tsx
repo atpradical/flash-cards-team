@@ -10,26 +10,22 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import s from './signInForm.module.scss'
 
-export type FormValues = {
-  email: string
-  password: string
-  rememberMe: boolean
-}
-
 type SignInFormProps = {
   onSubmit: (data: FormValues) => void
   defaultValues?: Partial<FormValues>
   errors?: Partial<{ [key in keyof FormValues]: string }>
 }
 
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(4).max(25),
+  rememberMe: z.boolean().default(false).optional(),
+})
+
+export type FormValues = z.infer<typeof loginSchema>
+
 export const SignInForm = (props: SignInFormProps) => {
   const { onSubmit } = props
-
-  const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(3),
-    rememberMe: z.boolean().default(false),
-  })
 
   const {
     control,
@@ -40,9 +36,6 @@ export const SignInForm = (props: SignInFormProps) => {
     resolver: zodResolver(loginSchema),
   })
 
-  console.log('register', register('email'))
-  console.log('register', register('password'))
-  console.log('register', register('rememberMe'))
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <DevTool control={control} />
@@ -58,7 +51,6 @@ export const SignInForm = (props: SignInFormProps) => {
             type={'email'}
             variant={'text'}
             className={s.textField}
-            error={!!errors}
             helperText={errors.email?.message}
           />
           <TextField
@@ -67,7 +59,6 @@ export const SignInForm = (props: SignInFormProps) => {
             placeholder={'Enter your password'}
             type={'password'}
             variant={'password'}
-            error={!!errors}
             helperText={errors.password?.message}
           />
           <FlexContainer jc={'flex-start'}>
