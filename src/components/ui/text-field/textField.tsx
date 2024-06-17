@@ -13,14 +13,14 @@ import s from './textField.module.scss'
 import { Button } from '../button'
 import { Typography } from '../typography'
 
-type Props = {
+export type TextFieldProps = {
   error?: boolean
   helperText?: string
   label?: string
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const {
     className,
     disabled,
@@ -61,7 +61,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   }
 
   return (
-    <div className={cn.container} ref={ref}>
+    <div className={cn.container}>
       {label && (
         <Typography as={'label'} className={s.label} variant={'body2'}>
           {label}
@@ -73,6 +73,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           disabled={disabled}
           onChange={handleChangeInput}
           placeholder={placeholder}
+          ref={ref}
           type={inputType}
           value={inputValue}
           {...rest}
