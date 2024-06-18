@@ -53,6 +53,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   }
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    debugger
     setInputValue(e.target.value)
   }
 
@@ -60,6 +61,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     setInputValue('')
   }
 
+  console.log('inputValue', inputValue.length)
   return (
     <div className={cn.container}>
       {label && (
@@ -76,7 +78,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           ref={ref}
           type={inputType}
           value={inputValue}
-          ref={ref}
           {...rest}
         />
         {isPassword && (
