@@ -58,23 +58,32 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
         </Typography>
         <form className={cn.form} onSubmit={formHandler}>
           <FlexContainer fd={'column'} gap={'24px'}>
-            <ControlledTextField control={control} label={'Email'} name={'email'} />
+            <ControlledTextField
+              control={control}
+              label={'Email'}
+              name={'email'}
+              placeholder={'Enter your email'}
+            />
             <ControlledTextField
               control={control}
               label={'Password'}
               name={'password'}
+              placeholder={'Enter a strong password'}
               variant={'password'}
             />
             <ControlledTextField
               control={control}
               label={'Confirm Password'}
               name={'confirmPassword'}
+              placeholder={'Repeat your strong password'}
               variant={'password'}
             />
             <Button fullWidth>Sign Up</Button>
           </FlexContainer>
         </form>
-        <Typography className={cn.reminder}>Already have an account?</Typography>
+        <Typography className={cn.reminder} variant={'body2'}>
+          Already have an account?
+        </Typography>
         <Button as={'a'} className={cn.button} variant={'link'}>
           Sign In
         </Button>
