@@ -18,6 +18,7 @@ export function App() {
   const foo = handleSubmit(data => {
     console.log(data)
   })
+
   const mockRadioOptions: Option[] = [
     { id: '1', label: 'Default', value: '1' },
     { id: '2', label: 'Comfortable', value: '2' },
