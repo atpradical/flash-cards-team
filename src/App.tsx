@@ -2,15 +2,14 @@ import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
-import { ControlledSelect } from '@/shared/ui/form-components/controlled-select'
+import { ControlledRadio } from '@/shared/ui/form-components/controlled-radio'
 import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
+import { Option } from '@/types'
 
 type SomeFormValues = {
-  rememberMe: boolean
-  someSelect: string
+  someRadio: string
 }
 
 export function App() {
@@ -20,10 +19,11 @@ export function App() {
     console.log(data)
   })
 
-  const mockSelectOptions = [
-    { title: 'option 1', value: 'option-1' },
-    { title: 'option 2', value: 'option-2' },
-    { title: 'option 3', value: 'option-3' },
+  const mockRadioOptions: Option[] = [
+    { id: '1', label: 'Default', value: '1' },
+    { id: '2', label: 'Comfortable', value: '2' },
+    { id: '3', label: 'Luxury', value: '3' },
+    { id: '4', label: 'Ultra wealth', value: '4' },
   ]
 
   return (
@@ -33,8 +33,7 @@ export function App() {
         <form onSubmit={foo}>
           <FlexContainer ai={'start'} fd={'column'} gap={'10px'} style={{ maxWidth: '500px' }}>
             <div>Hi Team 🤘🤘🤘 Controlled components examples:</div>
-            <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-            <ControlledSelect control={control} name={'someSelect'} options={mockSelectOptions} />
+            <ControlledRadio control={control} name={'someRadio'} options={mockRadioOptions} />
             <Button>Submit</Button>
           </FlexContainer>
         </form>
