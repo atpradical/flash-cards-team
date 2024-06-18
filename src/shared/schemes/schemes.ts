@@ -8,3 +8,5 @@ export const passwordSchema = z
   .min(3, 'Password length must be at least 3 characters long')
   .max(30, 'Password length must not exceed 30 characters')
   .regex(/^(?=.*\d)(?=.*[a-zA-Z]).*$/, 'Password must include at least 1 digit and 1 character')
+
+export const nicknameScheme = z.string().trim()
