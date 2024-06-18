@@ -18,7 +18,7 @@ const PersonalInfoFormScheme = z
     nickname: nicknameScheme,
   })
   .refine(val => val.nickname.length, {
-    message: "Your nickname can't consist of only whitespaces",
+    message: "Dude... nickname can't be just spaces",
     path: ['nickname'],
   })
 
@@ -53,7 +53,12 @@ export const PersonalInfoForm = ({ onSubmit, src }: PersonalInfoFormProps) => {
         <Avatar className={s.avatar} size={'l'} src={src} />
         <form className={s.form} onSubmit={formHandler}>
           <FlexContainer fd={'column'} gap={'36px'}>
-            <ControlledTextField control={control} label={'Nickname'} name={'nickname'} />
+            <ControlledTextField
+              control={control}
+              label={'Nickname'}
+              name={'nickname'}
+              placeholder={'what name should we call you by?'}
+            />
             <Button className={s.button} fullWidth>
               Save Changes
             </Button>

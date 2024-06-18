@@ -19,11 +19,11 @@ const SignUpScheme = z
     password: passwordSchema,
   })
   .refine(val => val.password !== val.email, {
-    message: "Password can't be the same as email",
+    message: 'Bro... try to come up with something better than just repeating your email',
     path: ['password'],
   })
   .refine(val => val.password === val.confirmPassword, {
-    message: 'Entered passwords must be equal',
+    message: "Hey buddy, did you forget your password already? They don't match",
     path: ['confirmPassword'],
   })
 
