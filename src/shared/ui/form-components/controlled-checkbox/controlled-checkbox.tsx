@@ -24,7 +24,7 @@ export const ControlledCheckbox = <T extends FieldValues>({
   defaultValue, // not used, as must be transferred into Form directly
   disabled,
   name,
-  rules, // not used because of validation schemas
+  rules, // not used because of validation schemes
   shouldUnregister,
   ...checkboxProps
 }: ControlledCheckboxProps<T>) => {
