@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { passwordSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { ControlledTextField } from '@/shared/ui/form-components'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
@@ -12,6 +12,7 @@ import { z } from 'zod'
 import s from './create-new-password-form.module.scss'
 
 import { Typography } from '../../typography'
+import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 
 type CreateNewPasswordFormProps = {
   onSubmit: (data: FormValues) => void
