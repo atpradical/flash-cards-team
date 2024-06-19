@@ -20,9 +20,9 @@ export type ControlledTextFieldProps<T extends FieldValues> = Omit<
 export const ControlledTextField = <T extends FieldValues>({
   control,
   defaultValue,
-  disabled,
   name,
   rules,
+  disabled,
   shouldUnregister,
   ...rest
 }: ControlledTextFieldProps<T>) => {
@@ -32,21 +32,21 @@ export const ControlledTextField = <T extends FieldValues>({
   } = useController({
     control,
     defaultValue,
-    disabled,
     name,
     rules,
+    disabled,
     shouldUnregister,
   })
 
   return (
     <TextField
       {...rest}
-      error={!!error}
-      helperText={error?.message}
-      onBlur={onBlur}
-      onChange={onChange}
-      ref={ref}
       value={value}
+      onChange={onChange}
+      error={!!error}
+      onBlur={onBlur}
+      helperText={error?.message}
+      ref={ref}
       {...field}
     />
   )

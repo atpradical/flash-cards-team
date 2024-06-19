@@ -17,7 +17,6 @@ export type TextFieldProps = {
   error?: boolean
   helperText?: string
   label?: string
-  value?: string
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
@@ -28,15 +27,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     error,
     helperText,
     label,
-    onChange,
     placeholder,
-    value,
     variant = 'text',
     ...rest
   } = props
 
   const cn = {
-    closeOutline: clsx(s.icon),
+    closeOutline: clsx(s.icon, s.close),
     container: clsx(s.container, disabled && s.disabled, className),
     eye: clsx(s.icon, s.eye, disabled && s.disabled),
     input: clsx(s.input, error && s.error),
@@ -45,7 +42,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   }
 
   const [showPassword, setShowPassword] = useState(false)
-  const [inputValue, setInputValue] = useState(value || '')
+  const [inputValue, setInputValue] = useState('')
 
   const isPassword = variant === 'password'
   const inputType = showPassword && isPassword ? 'text' : variant
@@ -57,9 +54,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
-    if (onChange) {
-      onChange(e)
-    }
   }
 
   const handleClearInput = () => {
@@ -75,25 +69,21 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
       )}
       <div className={s.inputSvgWrapper}>
         <input
-          {...rest}
           className={cn.input}
           disabled={disabled}
-          formNoValidate
           onChange={handleChangeInput}
           placeholder={placeholder}
           ref={ref}
           type={inputType}
           value={inputValue}
+          {...rest}
         />
-        {isPassword && inputValue.length ? (
+        {isPassword && (
           <Button disabled={disabled} onClick={handleShowPassword} variant={'icon'}>
-            {showPassword ? (
-              <EyeOffOutline className={cn.eye} />
-            ) : (
-              <EyeOutline className={cn.eye} />
-            )}
+            {inputValue.length ? <EyeOutline className={cn.eye} /> : null}
+            {showPassword && <EyeOffOutline className={cn.eye} />}
           </Button>
-        ) : null}
+        )}
         {isSearch && (
           <>
             <SearchOutline className={cn.searchOutline} />

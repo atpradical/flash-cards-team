@@ -1,5 +1,6 @@
 .container {
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
 }
 
 .textField {
@@ -8,8 +9,7 @@
 
 .form {
   width: 100%;
-  margin-top: 26px;
-  margin-bottom: 20px;
+  margin: 22px 0 16px;
 }
 
 .checkbox {
@@ -17,7 +17,7 @@
 }
 
 .link {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   color: var(--color-light-100);
 }
 
@@ -26,10 +26,5 @@
 }
 
 .buttonSign {
-  text-decoration: underline 1px solid;
-}
-
-p {
-  margin: 0;
-  padding: 0;
+  text-decoration: underline;
 }
