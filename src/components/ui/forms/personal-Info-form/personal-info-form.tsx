@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
 
-import s from './personalInfoForm.module.scss'
+import s from './personal-info-form.module.scss'
 
 const PersonalInfoFormScheme = z
   .object({
@@ -50,8 +50,8 @@ export const PersonalInfoForm = ({ onSubmit, src }: PersonalInfoFormProps) => {
         <Typography as={'h1'} variant={'h1'}>
           Personal Information
         </Typography>
-        <Avatar className={s.avatar} size={'l'} src={src} />
-        <form className={s.form} onSubmit={formHandler}>
+        <Avatar className={cn.avatar} size={'l'} src={src} />
+        <form className={cn.form} onSubmit={formHandler}>
           <FlexContainer fd={'column'} gap={'36px'}>
             <ControlledTextField
               control={control}
@@ -59,7 +59,7 @@ export const PersonalInfoForm = ({ onSubmit, src }: PersonalInfoFormProps) => {
               name={'nickname'}
               placeholder={'what name should we call you by?'}
             />
-            <Button className={s.button} fullWidth>
+            <Button className={cn.button} fullWidth>
               Save Changes
             </Button>
           </FlexContainer>

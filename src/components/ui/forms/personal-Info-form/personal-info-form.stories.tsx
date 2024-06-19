@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import avatarDefault from '@/assets/webp/avatar-default.webp'
-import { PersonalInfoForm } from '@/components/ui/forms/personal-Info-form/personalInfoForm'
 import { action } from '@storybook/addon-actions'
+
+import { PersonalInfoForm } from './personal-info-form'
 
 const meta = {
   argTypes: {},

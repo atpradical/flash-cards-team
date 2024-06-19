@@ -1,1 +1,1 @@
-export * from './personalInfoForm'
+export * from './personal-info-form'
