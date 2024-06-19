@@ -51,33 +51,29 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
   }
 
   return (
-    <FlexContainer ai={'center'} jc={'center'}>
-      <Card className={cn.container}>
+    <Card className={cn.container}>
+      <FlexContainer fd={'column'}>
         <Typography as={'h1'} variant={'h1'}>
           Sign In
         </Typography>
         <form className={cn.form} onSubmit={formHandler}>
-          <ControlledTextField
-            className={cn.textField}
-            control={control}
-            label={'Email'}
-            name={'email'}
-            placeholder={'Enter your email'}
-          />
-          <ControlledTextField
-            control={control}
-            label={'Password'}
-            name={'password'}
-            placeholder={'Enter your password'}
-            variant={'password'}
-          />
+          <FlexContainer fd={'column'} ai={'left'} gap={'24px'}>
+            <ControlledTextField
+              control={control}
+              label={'Email'}
+              name={'email'}
+              placeholder={'Enter your email'}
+            />
+            <ControlledTextField
+              control={control}
+              label={'Password'}
+              name={'password'}
+              placeholder={'Enter your password'}
+              variant={'password'}
+            />
 
-          <ControlledCheckbox
-            className={cn.checkbox}
-            control={control}
-            label={'Remember me'}
-            name={'rememberMe'}
-          />
+            <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
+          </FlexContainer>
         </form>
         <FlexContainer jc={'flex-end'}>
           <Button className={cn.link} variant={'link'}>
@@ -95,7 +91,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
         <Button className={cn.buttonSign} variant={'link'}>
           Sign Up
         </Button>
-      </Card>
-    </FlexContainer>
+      </FlexContainer>
+    </Card>
   )
 }
