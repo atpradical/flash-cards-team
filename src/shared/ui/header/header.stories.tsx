@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import Logo from '@/assets/components/svgIcons/Logo'
-import avatarDefault from '@/assets/webp/avatar-default.webp'
-import { Avatar } from '@/components/ui/avatar'
-import { FlexContainer } from '@/shared/ui/flex-container'
-
 import { Header } from './header'
 
 const meta = {
@@ -17,17 +12,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const HeaderEmpty: Story = {
+export const HeaderWithDropdownProfile: Story = {
   render: () => <Header />,
-}
-
-export const HeaderWithLogoAndAvatar: Story = {
-  render: () => (
-    <Header>
-      <FlexContainer jc={'space-between'}>
-        <Logo />
-        <Avatar size={'s'} src={avatarDefault} title={'JD'} />
-      </FlexContainer>
-    </Header>
-  ),
 }
