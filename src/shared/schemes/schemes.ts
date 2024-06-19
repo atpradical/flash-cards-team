@@ -12,6 +12,8 @@ export const passwordSchema = z
     'Dude... make sure your password has at least 1 digit and 1 letter, alright?'
   )
 
+export const rememberMeSchema = z.boolean().optional().default(false)
+
 export const nicknameScheme = z
   .string()
   .regex(

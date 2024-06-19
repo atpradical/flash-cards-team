@@ -45,6 +45,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
     container: clsx(s.container),
     form: clsx(s.form),
     link: clsx(s.link),
+    typography: clsx(s.typography),
   }
 
   return (
@@ -69,8 +70,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
               variant={'password'}
             />
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-          </FlexContainer>
-          <FlexContainer ai={'center'} jc={'flex-end'}>
+
             <Typography as={'a'} className={cn.link} variant={'body2'}>
               Forgot Password?
             </Typography>
@@ -79,7 +79,9 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
             Sign In
           </Button>
         </form>
-        <Typography variant={'body2'}>Don&apos;t have an account?</Typography>
+        <Typography className={cn.typography} variant={'body2'}>
+          Don&apos;t have an account?
+        </Typography>
         <Button className={cn.buttonSign} variant={'link'}>
           Sign Up
         </Button>

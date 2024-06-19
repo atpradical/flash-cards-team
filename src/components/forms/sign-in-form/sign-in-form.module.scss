@@ -9,8 +9,12 @@
 }
 
 .link {
-  margin-bottom: 50px;
-  color: var(--color-light-100);
+  align-self: flex-end;
+  margin-bottom: 60px;
+}
+
+.typography {
+  color: var(--color-light-900);
 }
 
 .buttonSign {
