@@ -1,3 +1,4 @@
+import { ForgotPasswordForm } from '@/components/ui/forms/forgot-password-form'
 import { SignUpForm } from '@/components/ui/forms/sign-up-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
@@ -16,6 +17,7 @@ export function App() {
       <Page>
         <FlexContainer jc={'center'}>
           <SignUpForm onSubmit={foo} />
+          <ForgotPasswordForm onSubmit={foo} />
         </FlexContainer>
       </Page>
     </Layout>
