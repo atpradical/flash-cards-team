@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { RadioGroup } from '@/components/ui/radio'
+import { Radio } from '@/components/ui/radio'
 import { Option } from '@/types'
 
 const mockRadio: Option[] = [
@@ -26,10 +26,10 @@ const meta = {
   argTypes: {
     disabled: { control: 'boolean' },
   },
-  component: RadioGroup,
+  component: Radio,
   tags: ['autodocs'],
   title: 'Components/RadioGroup',
-} satisfies Meta<typeof RadioGroup>
+} satisfies Meta<typeof Radio>
 
 export default meta
 type Story = StoryObj<typeof meta>

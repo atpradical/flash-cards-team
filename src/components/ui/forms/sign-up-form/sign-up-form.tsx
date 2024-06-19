@@ -47,7 +47,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
     button: clsx(s.button),
     container: clsx(s.container),
     form: clsx(s.form),
-    link: clsx(s.link),
+    reminder: clsx(s.reminder),
   }
 
   return (
@@ -74,7 +74,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             <Button fullWidth>Sign Up</Button>
           </FlexContainer>
         </form>
-        <Typography>Already have an account?</Typography>
+        <Typography className={cn.reminder}>Already have an account?</Typography>
         <Button as={'a'} className={cn.button} variant={'link'}>
           Sign In
         </Button>
