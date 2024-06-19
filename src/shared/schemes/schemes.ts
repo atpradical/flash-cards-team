@@ -4,9 +4,18 @@ export const emailSchema = z.string().email('Enter a valid email address').toLow
 
 export const passwordSchema = z
   .string()
-  .regex(/^\S*$/, "You can't use the whitespace character")
-  .min(3, 'Password length must be at least 3 characters long')
-  .max(30, 'Password length must not exceed 30 characters')
-  .regex(/^(?=.*\d)(?=.*[a-zA-Z]).*$/, 'Password must include at least 1 digit and 1 character')
+  .regex(/^\S*$/, 'Yo man, no whitespace characters allowed, alright?')
+  .min(3, 'Hey buddy, is it really that hard to hit the keys more than 3 times?')
+  .max(30, 'Bro... no need for an essay, keep your password under 30 characters')
+  .regex(
+    /^(?=.*\d)(?=.*[a-zA-Z]).*$/,
+    'Dude... make sure your password has at least 1 digit and 1 letter, alright?'
+  )
 
-export const rememberMeSchema = z.boolean().optional().default(false)
+export const nicknameScheme = z
+  .string()
+  .regex(
+    /^[^!@#$%^&*(),.?":{}|<>]*$/,
+    'Man... keep it chill! no special characters in the nickname'
+  )
+  .trim()
