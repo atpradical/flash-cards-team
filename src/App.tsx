@@ -15,7 +15,7 @@ export function App() {
     <Layout>
       <Header />
       <Page>
-        <FlexContainer jc={'center'}>
+        <FlexContainer gap={'10px'} jc={'center'}>
           <SignUpForm onSubmit={foo} />
           <ForgotPasswordForm onSubmit={foo} />
         </FlexContainer>
