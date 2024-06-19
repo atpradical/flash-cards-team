@@ -57,7 +57,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
           Sign In
         </Typography>
         <form className={cn.form} onSubmit={formHandler}>
-          <FlexContainer fd={'column'} ai={'left'} gap={'24px'}>
+          <FlexContainer ai={'left'} fd={'column'} gap={'24px'}>
             <ControlledTextField
               control={control}
               label={'Email'}
