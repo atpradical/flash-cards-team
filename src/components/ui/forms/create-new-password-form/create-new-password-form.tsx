@@ -1,14 +1,17 @@
+import { useForm } from 'react-hook-form'
+
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { passwordSchema } from '@/shared/schemes'
+import { FlexContainer } from '@/shared/ui/flex-container'
+import { ControlledTextField } from '@/shared/ui/form-components'
+import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
+import { z } from 'zod'
+
+import s from './create-new-password-form.module.scss'
 
 import { Typography } from '../../typography'
-import { ControlledTextField } from '@/shared/ui/form-components'
-import { useForm } from 'react-hook-form'
-import { passwordSchema } from '@/shared/schemes'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { FlexContainer } from '@/shared/ui/flex-container'
-import { Button } from '@/components/ui/button'
-import s from './create-new-password-form.module.scss'
 
 type CreateNewPasswordFormProps = {
   onSubmit: (data: FormValues) => void
@@ -17,6 +20,7 @@ type CreateNewPasswordFormProps = {
 const CreateNewPasswordSchema = z.object({
   password: passwordSchema,
 })
+
 type FormValues = z.infer<typeof CreateNewPasswordSchema>
 
 export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) => {
@@ -32,13 +36,20 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
     onSubmit(data)
   })
 
+  const cn = {
+    button: clsx(s.button),
+    container: clsx(s.container),
+    form: clsx(s.form),
+    typography: clsx(s.typography),
+  }
+
   return (
-    <Card className={s.container}>
+    <Card className={cn.container}>
       <Typography as={'h1'} variant={'h1'}>
         Create new password
       </Typography>
       <FlexContainer fd={'column'} gap={'26px'}>
-        <form onSubmit={formHandler} className={s.form}>
+        <form className={cn.form} onSubmit={formHandler}>
           <ControlledTextField
             control={control}
             label={'Password'}
@@ -46,10 +57,10 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
             variant={'password'}
           />
         </form>
-        <Typography as={'p'} variant={'body2'} className={s.typography}>
+        <Typography as={'p'} className={cn.typography} variant={'body2'}>
           Create new password and we will send you further instructions to email
         </Typography>
-        <Button fullWidth className={s.button}>
+        <Button className={cn.button} fullWidth>
           Create New Password
         </Button>
       </FlexContainer>
