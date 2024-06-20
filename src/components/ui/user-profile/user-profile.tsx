@@ -1,3 +1,4 @@
+import { DropdownProfile } from '@/components/layout/userDropdown/dropdownProfile'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
@@ -6,12 +7,21 @@ import clsx from 'clsx'
 
 import s from './user-profile.module.scss'
 
+export type User = {
+  email: string
+  name: string
+  photo: {
+    alt: string
+    src: string
+  }
+}
+
 type Props = {
   isAuthorized: boolean
-  src?: string
-  userName?: string
+  userData: User
 }
-export const UserProfile = ({ isAuthorized, src, userName }: Props) => {
+
+export const UserProfile = ({ isAuthorized, userData }: Props) => {
   const cn = {
     container: clsx(s.container),
     link: clsx(s.link),
@@ -20,12 +30,21 @@ export const UserProfile = ({ isAuthorized, src, userName }: Props) => {
   return (
     <FlexContainer className={cn.container}>
       {isAuthorized ? (
-        <>
-          <Button className={cn.link} variant={'link'}>
-            <Typography variant={'subtitle1'}>{userName}</Typography>
-          </Button>
-          <Avatar size={'s'} src={src} title={'Photo'} />
-        </>
+        <DropdownProfile
+          email={userData.email}
+          name={userData.name}
+          photo={userData.photo.src}
+          photoDesc={userData.photo.alt}
+          profilePageHref={'https://google.com'}
+          trigger={
+            <FlexContainer gap={'14px'}>
+              <Typography className={cn.link} variant={'subtitle1'}>
+                {userData.name}
+              </Typography>
+              <Avatar size={'s'} src={userData.photo.src} title={userData.photo.alt} />
+            </FlexContainer>
+          }
+        />
       ) : (
         <Button variant={'secondary'}>Sign In</Button>
       )}
