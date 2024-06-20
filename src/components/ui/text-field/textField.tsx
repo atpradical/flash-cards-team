@@ -36,7 +36,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     closeOutline: clsx(s.icon, s.close),
     container: clsx(s.container, disabled && s.disabled, className),
     eye: clsx(s.icon, s.eye, disabled && s.disabled),
-    input: clsx(className, s.input, error && s.error),
+    input: clsx(s.input, error && s.error),
     label: clsx(s.label),
     searchOutline: clsx(s.icon, s.search),
   }
@@ -44,9 +44,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const [showPassword, setShowPassword] = useState(false)
   const [inputValue, setInputValue] = useState('')
 
-  const inputType = showPassword && variant === 'password' ? 'text' : variant
-  const isSearch = variant === 'search'
   const isPassword = variant === 'password'
+  const inputType = showPassword && isPassword ? 'text' : variant
+  const isSearch = variant === 'search'
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
