@@ -2,17 +2,15 @@ import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Typography } from '@/components/ui/typography'
 import { passwordSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
-
+import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './create-new-password-form.module.scss'
-
-import { Typography } from '../../typography'
-import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 
 type CreateNewPasswordFormProps = {
   onSubmit: (data: FormValues) => void
@@ -38,10 +36,9 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
   })
 
   const cn = {
-    button: clsx(s.button),
     container: clsx(s.container),
     form: clsx(s.form),
-    typography: clsx(s.typography),
+    reminder: clsx(s.reminder),
   }
 
   return (
@@ -49,21 +46,20 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
       <Typography as={'h1'} variant={'h1'}>
         Create new password
       </Typography>
-      <FlexContainer fd={'column'} gap={'26px'}>
+      <FlexContainer fd={'column'}>
         <form className={cn.form} onSubmit={formHandler}>
           <ControlledTextField
             control={control}
             label={'Password'}
             name={'password'}
+            placeholder={'Create new password'}
             variant={'password'}
           />
+          <Typography className={cn.reminder} variant={'body2'}>
+            Create new password and we will send you further instructions to email
+          </Typography>
+          <Button fullWidth>Create New Password</Button>
         </form>
-        <Typography as={'p'} className={cn.typography} variant={'body2'}>
-          Create new password and we will send you further instructions to email
-        </Typography>
-        <Button className={cn.button} fullWidth>
-          Create New Password
-        </Button>
       </FlexContainer>
     </Card>
   )
