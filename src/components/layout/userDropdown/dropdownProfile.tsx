@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { LogOut, PersonOutline } from '@/assets/components/svgIcons'
 import { Avatar } from '@/components/ui/avatar'
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
@@ -14,18 +16,20 @@ type Props = {
   photo?: string
   photoDesc?: string
   profilePageHref: string
+  trigger: ReactNode
 }
 
 export const DropdownProfile = (props: Props) => {
-  const { email, name, photo, photoDesc = 'Avatar', profilePageHref } = props
+  const { email, name, photo, profilePageHref, trigger } = props
   const cn = {
     icon: clsx(s.icon),
     link: clsx(s.link),
     profileArea: clsx(s.profileArea),
   }
 
+  //<Avatar src={photo} title={photoDesc} />
   return (
-    <Dropdown trigger={<Avatar src={photo} title={photoDesc} />}>
+    <Dropdown trigger={trigger}>
       <DropdownItem asChild>
         <Typography as={'a'} className={s.profileArea} href={profilePageHref}>
           <Avatar size={'s'} src={photo} title={'Photo'} />

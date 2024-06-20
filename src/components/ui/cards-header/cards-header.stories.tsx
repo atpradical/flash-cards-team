@@ -12,6 +12,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CardsHeaderBase: Story = {
-  render: () => <CardsHeader />,
+export const CardsHeaderisAuthorizedTrue: Story = {
+  args: {
+    isAuthorized: true,
+  },
+  render: () => <CardsHeader isAuthorized />,
+}
+
+export const CardsHeaderisAuthorizedFalse: Story = {
+  args: {
+    isAuthorized: false,
+  },
+  render: () => <CardsHeader isAuthorized={false} />,
 }
