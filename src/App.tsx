@@ -1,5 +1,4 @@
-import avatarDefault from '@/assets/webp/avatar-default.webp'
-import { PersonalInfoForm } from '@/components/ui/forms/personal-Info-form'
+import { ForgotPasswordForm } from '@/components/ui/forms/forgot-password-form'
 import { SignUpForm } from '@/components/ui/forms/sign-up-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
@@ -18,7 +17,7 @@ export function App() {
       <Page>
         <FlexContainer gap={'10px'} jc={'center'}>
           <SignUpForm onSubmit={foo} />
-          <PersonalInfoForm onSubmit={foo} src={avatarDefault} />
+          <ForgotPasswordForm onSubmit={foo} />
         </FlexContainer>
       </Page>
     </Layout>
