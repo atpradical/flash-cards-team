@@ -1,5 +1,5 @@
+import { ForgotPasswordForm } from '@/components/forms/forgot-password-form'
 import { CheckEmail } from '@/components/ui/check-email'
-import { ForgotPasswordForm } from '@/components/ui/forms/forgot-password-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
