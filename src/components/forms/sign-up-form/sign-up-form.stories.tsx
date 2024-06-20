@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SignUpForm } from '@/components/ui/forms/sign-up-form'
+import { SignUpForm } from '@/components/forms/sign-up-form/index'
 import { action } from '@storybook/addon-actions'
 
 const meta = {
