@@ -5,12 +5,13 @@ import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { emailSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { ControlledTextField } from '@/shared/ui/form-components'
+import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './forgotPasswordForm.module.scss'
+
 const ForgotPasswordScheme = z.object({
   email: emailSchema,
 })
