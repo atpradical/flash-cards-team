@@ -13,13 +13,18 @@ type CheckEmailProps = {
 export const CheckEmail = ({ email }: CheckEmailProps) => {
   return (
     <Card className={s.container}>
-      <FlexContainer fd={'column'} gap={'10px'}>
-        <Typography as={'h1'} variant={'h1'}>
+      <FlexContainer fd={'column'}>
+        <Typography as={'h1'} className={s.title} variant={'h1'}>
           Check Email
         </Typography>
         <CheckEmailIcon />
-        <Typography>`We’ve sent an Email with instructions to ${email}`</Typography>
-        <Button>Back to Sign In</Button>
+        <Typography
+          className={s.reminder}
+          variant={'body2'}
+        >{`We've sent an Email with instructions to \n${email}`}</Typography>
+        <Button as={'a'} className={s.button} fullWidth>
+          Back to Sign In
+        </Button>
       </FlexContainer>
     </Card>
   )

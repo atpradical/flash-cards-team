@@ -2,3 +2,21 @@
   width: 100%;
   max-width: 420px;
 }
+
+.title {
+  margin-bottom: 26px;
+}
+
+.reminder {
+  margin: 20px 0 40px;
+
+  color: var(--color-light-900);
+  text-align: center;
+  white-space: pre-wrap;
+
+  opacity: 0.5;
+}
+
+.button {
+  margin-bottom: 20px;
+}
