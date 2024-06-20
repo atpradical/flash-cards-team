@@ -1,5 +1,5 @@
+import { CheckEmail } from '@/components/ui/check-email'
 import { ForgotPasswordForm } from '@/components/ui/forms/forgot-password-form'
-import { SignUpForm } from '@/components/ui/forms/sign-up-form'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
@@ -16,8 +16,8 @@ export function App() {
       <Header />
       <Page>
         <FlexContainer gap={'10px'} jc={'center'}>
-          <SignUpForm onSubmit={foo} />
           <ForgotPasswordForm onSubmit={foo} />
+          <CheckEmail email={'test@test.com'} />
         </FlexContainer>
       </Page>
     </Layout>
