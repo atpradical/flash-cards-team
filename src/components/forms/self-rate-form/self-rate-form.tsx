@@ -6,19 +6,24 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledRadio } from '@/shared/ui/form-components/controlled-radio'
 import { Option } from '@/types'
 import clsx from 'clsx'
+import { z } from 'zod'
 
 import s from './self-rate-form.module.scss'
 
+const SelfRateScheme = z.object({ radio: z.string() })
+
+type SelfRateFormValues = z.infer<typeof SelfRateScheme>
+
 type SelfRateFormProps = {
-  onSubmit: () => void
+  onSubmit: (value: SelfRateFormValues) => void
 }
 
 export const SelfRateForm = ({ onSubmit }: SelfRateFormProps) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<SelfRateFormValues>({
     mode: 'onSubmit',
   })
-  const formHandler = handleSubmit(() => {
-    onSubmit()
+  const formHandler = handleSubmit(value => {
+    onSubmit(value)
   })
   const SelfRateOptions: Option[] = [
     { id: '1', label: 'Did not know', value: '1' },
