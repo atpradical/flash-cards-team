@@ -1,0 +1,20 @@
+.header {
+  padding: 0 136px;
+}
+
+.name {
+  position: relative;
+  margin-right: 14px;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+
+    border-bottom: 1px dashed var(--color-light-100);
+  }
+}
