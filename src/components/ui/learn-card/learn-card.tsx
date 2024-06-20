@@ -11,53 +11,64 @@ import s from './learn-card.module.scss'
 
 type SelfRateFormProps = {
   answer: string
+  deckName: string
   question: string
   triesCount?: number
 }
 
-export const LearnCard = ({ answer, question, triesCount = 10 }: SelfRateFormProps) => {
-  const [isAnswerShoved, setIsAnswerShoved] = useState<boolean>(false)
+export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfRateFormProps) => {
+  const [isAnswerShowed, setIsAnswerShowed] = useState<boolean>(false)
   const cn = {
     button: clsx(s.button),
     container: clsx(s.container),
-    form: clsx(s.form),
-    hint: clsx(s.hint),
+    incoming: clsx(s.incoming),
+    text: clsx(s.text),
     title: clsx(s.title),
+    triesCount: clsx(s.hint, s.incoming),
+    triesText: clsx(s.hint),
   }
 
   const onSubmitHandler = () => {}
   const showAnswerHandler = () => {
-    setIsAnswerShoved(true)
+    setIsAnswerShowed(true)
   }
 
   return (
     <Card className={cn.container}>
       <FlexContainer ai={'flex-start'} fd={'column'}>
-        <Typography className={cn.title} variant={'h1'}>
-          Learn &quot;Deck Name&quot;
+        <Typography as={'h1'} className={cn.title} variant={'h1'}>
+          Learn &ldquo;{deckName}&rdquo;
         </Typography>
-        <FlexContainer ai={'flex-start'} fd={'row'} gap={'0.15rem'}>
-          <Typography variant={'subtitle1'}>Question:</Typography>
-          <Typography variant={'body1'}>{question}</Typography>
-        </FlexContainer>
-        <FlexContainer fd={'row'} gap={'0.15rem'}>
-          <Typography className={cn.hint} variant={'body2'}>
+        <div>
+          <Typography className={cn.text} variant={'subtitle1'}>
+            Question:
+          </Typography>
+          <Typography className={cn.incoming} variant={'body1'}>
+            {question}
+          </Typography>
+        </div>
+        <div>
+          <Typography className={cn.triesText} variant={'body2'}>
             Количество попыток ответов на вопрос:
           </Typography>
-          <Typography className={cn.hint} variant={'subtitle2'}>
+          <Typography className={cn.triesCount} variant={'subtitle2'}>
             {triesCount}
           </Typography>
-        </FlexContainer>
-        {isAnswerShoved ? (
+        </div>
+        {isAnswerShowed ? (
           <>
-            <FlexContainer ai={'flex-start'} fd={'row'} gap={'0.15rem'}>
-              <Typography variant={'subtitle1'}>Answer:</Typography>
-              <Typography variant={'body1'}>{answer}</Typography>
-            </FlexContainer>
+            <div>
+              <Typography className={cn.text} variant={'subtitle1'}>
+                Answer:
+              </Typography>
+              <Typography className={cn.incoming} variant={'body1'}>
+                {answer}
+              </Typography>
+            </div>
             <SelfRateForm onSubmit={onSubmitHandler} />
           </>
         ) : (
-          <Button fullWidth onClick={showAnswerHandler}>
+          <Button className={cn.button} fullWidth onClick={showAnswerHandler}>
             Show Answer
           </Button>
         )}

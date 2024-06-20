@@ -1,1 +1,1 @@
-export * from './forgotPasswordForm'
+export * from './forgot-password-form'

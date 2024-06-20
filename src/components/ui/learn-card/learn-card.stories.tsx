@@ -16,7 +16,8 @@ type Story = StoryObj<typeof meta>
 
 export const LearnCardBase: Story = {
   args: {
-    answer: 'This is how This works in JavaScript?',
-    question: 'How This works in JavaScript?',
+    answer: 'This is how "This" works in JavaScript',
+    deckName: 'Deck Name',
+    question: 'How "This" works in JavaScript?',
   },
 }
