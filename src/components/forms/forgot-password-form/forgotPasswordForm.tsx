@@ -52,7 +52,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
               name={'email'}
               placeholder={'Enter your email'}
             />
-            <Typography className={cn.hint} variant={'body2'}>
+            <Typography className={cn.hint}>
               Enter your email address and we will send you further instructions
             </Typography>
             <Button className={cn.button} fullWidth>
@@ -60,9 +60,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
             </Button>
           </FlexContainer>
         </form>
-        <Typography className={cn.reminder} variant={'body2'}>
-          Did you remember your password?
-        </Typography>
+        <Typography className={cn.reminder}>Did you remember your password?</Typography>
         <Button className={cn.link} variant={'link'}>
           Try logging in
         </Button>

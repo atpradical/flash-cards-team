@@ -81,9 +81,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             <Button fullWidth>Sign Up</Button>
           </FlexContainer>
         </form>
-        <Typography className={cn.reminder} variant={'body2'}>
-          Already have an account?
-        </Typography>
+        <Typography className={cn.reminder}>Already have an account?</Typography>
         <Button as={'a'} className={cn.button} variant={'link'}>
           Sign In
         </Button>

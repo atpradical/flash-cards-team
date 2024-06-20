@@ -63,7 +63,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   return (
     <div className={cn.container}>
       {label && (
-        <Typography as={'label'} className={s.label} variant={'body2'}>
+        <Typography as={'label'} className={s.label}>
           {label}
         </Typography>
       )}

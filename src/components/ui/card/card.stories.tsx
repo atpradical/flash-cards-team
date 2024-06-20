@@ -50,7 +50,7 @@ export const CardWithQuestion = () => {
       <Typography variant={'subtitle1'}>
         Question: How &quot;This&quot; works in JavaScript?
       </Typography>
-      <Typography variant={'body2'}>Количество попыток ответов на вопрос: 10</Typography>
+      <Typography>Количество попыток ответов на вопрос: 10</Typography>
       <Button fullWidth>Show Answer</Button>
     </Card>
   )

@@ -58,7 +58,7 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
         {...rest}
       >
         {label && (
-          <Typography as={'label'} className={cn.label} variant={'body2'}>
+          <Typography as={'label'} className={cn.label}>
             {label}
           </Typography>
         )}

@@ -34,7 +34,7 @@ export const DeleteCardDialog = (props: DeleteCardDialogProps) => {
         </Modal.Header>
 
         <Modal.Description>
-          <Typography as={'span'} variant={'body2'}>
+          <Typography as={'span'}>
             Do you really want to remove <span className={s.subtitle1}>{cardName}</span> ? All cards
             will be deleted.
           </Typography>

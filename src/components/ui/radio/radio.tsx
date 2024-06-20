@@ -32,7 +32,7 @@ export const Radio = forwardRef<RadioGroupRef, RadioProps>((props, ref) => {
           <RadixRadio.Item className={cn.item} disabled={i.disabled} id={i.id} value={i.value}>
             <RadixRadio.Indicator className={cn.indicator} />
           </RadixRadio.Item>
-          <Typography as={'label'} className={cn.label} htmlFor={i.id} variant={'body2'}>
+          <Typography as={'label'} className={cn.label} htmlFor={i.id}>
             {i.label}
           </Typography>
         </div>

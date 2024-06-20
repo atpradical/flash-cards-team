@@ -71,7 +71,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
             />
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
 
-            <Typography as={'a'} className={cn.link} variant={'body2'}>
+            <Typography as={'a'} className={cn.link}>
               Forgot Password?
             </Typography>
           </FlexContainer>
@@ -79,9 +79,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
             Sign In
           </Button>
         </form>
-        <Typography className={cn.typography} variant={'body2'}>
-          Don&apos;t have an account?
-        </Typography>
+        <Typography className={cn.typography}>Don&apos;t have an account?</Typography>
         <Button className={cn.buttonSign} variant={'link'}>
           Sign Up
         </Button>

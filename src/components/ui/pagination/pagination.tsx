@@ -86,7 +86,7 @@ export const Pagination = (props: Props) => {
     // If the pageItem is a DOT, render the DOTS unicode character
     if (el === DOTS) {
       return (
-        <Typography as={'span'} className={cn.dots} key={key} variant={'body2'}>
+        <Typography as={'span'} className={cn.dots} key={key}>
           &#8230;
         </Typography>
       )
@@ -94,7 +94,7 @@ export const Pagination = (props: Props) => {
 
     return (
       <Button className={isOptionSelected} key={key} onClick={() => onPageChange(+el)}>
-        <Typography as={'span'} className={isOptionSelected} variant={'body2'}>
+        <Typography as={'span'} className={isOptionSelected}>
           {el}
         </Typography>
       </Button>
@@ -110,9 +110,7 @@ export const Pagination = (props: Props) => {
       <Button disabled={isLastPage} onClick={nextPageHandler} variant={'icon'}>
         <ArrowIosBack className={cn.arrowRight} />
       </Button>
-      <Typography as={'span'} variant={'body2'}>
-        Показать
-      </Typography>
+      <Typography as={'span'}>Показать</Typography>
       <Select
         className={cn.select}
         defaultValue={'10'}
@@ -120,9 +118,7 @@ export const Pagination = (props: Props) => {
         options={paginationSelectOptions}
         value={`${pageSize}`}
       />
-      <Typography as={'span'} variant={'body2'}>
-        на странице
-      </Typography>
+      <Typography as={'span'}>на странице</Typography>
     </div>
   )
 }

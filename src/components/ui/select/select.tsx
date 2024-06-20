@@ -58,9 +58,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
         value={option.value}
       >
         <RadixSelect.ItemText>
-          <Typography as={'span'} variant={'body2'}>
-            {option.title}
-          </Typography>
+          <Typography as={'span'}>{option.title}</Typography>
         </RadixSelect.ItemText>
       </RadixSelect.Item>
     ))
@@ -74,7 +72,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
         {...rest}
       >
         {label && (
-          <Typography as={'label'} className={cn.label} variant={'body2'}>
+          <Typography as={'label'} className={cn.label}>
             {label}
           </Typography>
         )}
