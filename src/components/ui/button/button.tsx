@@ -20,6 +20,6 @@ export const Button = forwardRef(
 
     const classNames = clsx(s.button, s[variant], fullWidth && s.fullWidth)
 
-    return <Component {...rest} className={`${classNames} ${className}`} ref={ref} />
+    return <Component className={`${classNames} ${className}`} ref={ref} {...rest} />
   }
 )
