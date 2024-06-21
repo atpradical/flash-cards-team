@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  max-width: 420px;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.text {
+  margin-top: 34px;
+}
+
+.incoming {
+  margin-left: 0.25rem;
+}
+
+.hint {
+  color: var(--color-dark-100);
+}
+
+.text,
+.incoming,
+.hint {
+  display: inline-block;
+}
+
+.button {
+  margin: 40px 0 24px;
+}
