@@ -1,4 +1,4 @@
-import { SignUpForm } from '@/components/ui/forms/sign-up-form'
+import { SignUpForm } from '@/components/forms'
 import { Grade } from '@/components/ui/grade'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
