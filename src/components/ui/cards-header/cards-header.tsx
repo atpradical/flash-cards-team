@@ -1,15 +1,13 @@
+import { ComponentPropsWithoutRef } from 'react'
 import Logo from '@/assets/components/svgIcons/Logo'
-import { User, UserProfile } from '@/components/ui/user-profile'
+import { UserProfile } from '@/components/ui/user-profile'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
-import clsx from 'clsx'
-
-import s from './cards-header.module.scss'
+import { User } from '@/types'
 
 type CardsHeaderProps = {
-  className?: string
   isAuthorized: boolean
-}
+} & ComponentPropsWithoutRef<typeof Header>
 
 const mockUser: User = {
   email: 'j&johnson@gmail.com',
@@ -20,11 +18,9 @@ const mockUser: User = {
   },
 }
 
-export const CardsHeader = ({ className, isAuthorized }: CardsHeaderProps) => {
-  const cn = clsx(s.header, className)
-
+export const CardsHeader = ({ isAuthorized, userData, ...propsHeader }: CardsHeaderProps) => {
   return (
-    <Header className={cn}>
+    <Header {...propsHeader}>
       <FlexContainer jc={'space-between'}>
         <Logo />
         <UserProfile isAuthorized={isAuthorized} userData={mockUser} />

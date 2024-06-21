@@ -4,8 +4,11 @@ import { Card } from '@/components/ui/card'
 import clsx from 'clsx'
 
 import s from './header.module.scss'
+import { User } from '@/types'
 
-type Props = ComponentPropsWithoutRef<typeof Card>
+type Props = {
+  userData?: User
+} & ComponentPropsWithoutRef<typeof Card>
 
 type PropsRef = ElementRef<typeof Card>
 
@@ -15,5 +18,5 @@ export const Header = forwardRef<PropsRef, Props>((props, ref) => {
 
   const cn = clsx(s.header, className)
 
-  return <Card as={'header'} className={cn} {...rest}></Card>
+  return <Card as={'header'} className={cn} {...rest} />
 })
