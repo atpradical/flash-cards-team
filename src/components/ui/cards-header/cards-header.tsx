@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+
 import Logo from '@/assets/components/svgIcons/Logo'
 import { UserProfile } from '@/components/ui/user-profile'
 import { FlexContainer } from '@/shared/ui/flex-container'

@@ -3,10 +3,10 @@ import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
+import { User } from '@/types'
 import clsx from 'clsx'
 
 import s from './user-profile.module.scss'
-import { User } from '@/types'
 
 type Props = {
   isAuthorized: boolean

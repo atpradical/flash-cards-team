@@ -1,9 +1,9 @@
 import { ForgotPasswordForm } from '@/components/forms/forgot-password-form'
+import { CardsHeader } from '@/components/ui/cards-header'
 import { CheckEmail } from '@/components/ui/check-email'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
-import { CardsHeader } from '@/components/ui/cards-header'
 
 export function App() {
   // just mockedFunction, will be deleted later.
@@ -13,7 +13,7 @@ export function App() {
 
   return (
     <Layout>
-      <CardsHeader isAuthorized={true} />
+      <CardsHeader isAuthorized />
       <Page>
         <FlexContainer gap={'10px'} jc={'center'}>
           <ForgotPasswordForm onSubmit={foo} />
