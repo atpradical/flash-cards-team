@@ -11,6 +11,7 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './forgot-password-form.module.scss'
+
 const ForgotPasswordScheme = z.object({
   email: emailSchema,
 })
