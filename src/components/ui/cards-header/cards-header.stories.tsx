@@ -3,7 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { CardsHeader } from './cards-header'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    isAuthorized: {
+      control: { type: 'boolean' },
+    },
+  },
   component: CardsHeader,
   tags: ['autodocs'],
   title: 'Cards/Header',
@@ -16,12 +20,4 @@ export const CardsHeaderisAuthorizedTrue: Story = {
   args: {
     isAuthorized: true,
   },
-  render: () => <CardsHeader isAuthorized />,
-}
-
-export const CardsHeaderisAuthorizedFalse: Story = {
-  args: {
-    isAuthorized: false,
-  },
-  render: () => <CardsHeader isAuthorized={false} />,
 }

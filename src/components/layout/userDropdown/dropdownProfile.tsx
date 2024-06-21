@@ -27,7 +27,6 @@ export const DropdownProfile = (props: Props) => {
     profileArea: clsx(s.profileArea),
   }
 
-  //<Avatar src={photo} title={photoDesc} />
   return (
     <Dropdown trigger={trigger}>
       <DropdownItem asChild>
