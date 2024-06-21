@@ -1,4 +1,4 @@
-import { ForgotPasswordForm } from '@/components/forms/forgot-password-form/forgotPasswordForm'
+import { ForgotPasswordForm } from '@/components/forms/forgot-password-form/forgot-password-form'
 import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
 
