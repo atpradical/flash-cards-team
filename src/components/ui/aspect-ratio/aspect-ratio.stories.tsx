@@ -1,6 +1,9 @@
 import type { Meta } from '@storybook/react'
 
+import { Aspect_Ratio } from '@/common/enums/aspect-ratio'
 import { AspectRatio } from '@/components/ui/aspect-ratio/aspect-ratio'
+
+import s from './aspect-ratio.module.scss'
 
 const meta = {
   component: AspectRatio,
@@ -14,28 +17,32 @@ const image = {
   src: 'src/assets/webp/react-logo.webp',
 }
 
-// export const AspectRatioBase = {
-//   render: () => {
-//     return (
-//       <AspectRatio size={118 / 48}>
-//         <img alt={image.alt} src={image.src} />
-//       </AspectRatio>
-//     )
-//   },
-// }
-export const AspectRatioBase = {
+export const AspectRatioStandard = {
   render: () => {
     return (
-      <div>
-        <AspectRatio ratio={20}>
-          <img
-            alt={image.alt}
-            className={'rounded-md object-cover'}
-            src={image.src}
-            style={{ width: '100px' }}
-          />
-        </AspectRatio>
-      </div>
+      <AspectRatio size={Aspect_Ratio.Standard}>
+        <img alt={image.alt} className={s.image} src={image.src} />
+      </AspectRatio>
+    )
+  },
+}
+
+export const AspectRatioWide = {
+  render: () => {
+    return (
+      <AspectRatio size={Aspect_Ratio.Wide}>
+        <img alt={image.alt} className={s.image} src={image.src} />
+      </AspectRatio>
+    )
+  },
+}
+
+export const AspectRatioUltrawide = {
+  render: () => {
+    return (
+      <AspectRatio size={Aspect_Ratio.UltraWide}>
+        <img alt={image.alt} className={s.image} src={image.src} />
+      </AspectRatio>
     )
   },
 }

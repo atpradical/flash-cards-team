@@ -1,30 +1,24 @@
-// import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-//
-// import * as AspectRatioPrimitive from '@radix-ui/react-aspect-ratio'
-//
-// const RATIO_WIDE = 118 / 48
-// const RATIO_STANDARD = 170 / 107
-//
-// type Wide = typeof RATIO_WIDE
-// type Standard = typeof RATIO_STANDARD
-// type AspectRatioProps = {
-//   size: Standard | Wide
-// } & ComponentPropsWithoutRef<typeof AspectRatioPrimitive.Root>
-// type AspectRadioRef = ElementRef<typeof AspectRatioPrimitive.Root>
-// const AspectRatio = forwardRef<AspectRadioRef, AspectRatioProps>(
-//   ({ children, size, ...rest }, ref) => {
-//     return (
-//       <AspectRatioPrimitive.Root ratio={118 / 48} ref={ref} {...rest}>
-//         {children}
-//       </AspectRatioPrimitive.Root>
-//     )
-//   }
-// )
-//
-// export { AspectRatio }
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
+import { Aspect_Ratio } from '@/common/enums/aspect-ratio'
 import * as AspectRatioPrimitive from '@radix-ui/react-aspect-ratio'
+import clsx from 'clsx'
 
-const AspectRatio = AspectRatioPrimitive.Root
+import s from './aspect-ratio.module.scss'
+type AspectRatioProps = {
+  size: Aspect_Ratio
+} & ComponentPropsWithoutRef<typeof AspectRatioPrimitive.Root>
+type AspectRadioRef = ElementRef<typeof AspectRatioPrimitive.Root>
+export const AspectRatio = forwardRef<AspectRadioRef, AspectRatioProps>(
+  ({ children, size, ...rest }, ref) => {
+    const cn = {
+      container: clsx(s.container),
+    }
 
-export { AspectRatio }
+    return (
+      <AspectRatioPrimitive.Root className={cn.container} ratio={size} ref={ref} {...rest}>
+        {children}
+      </AspectRatioPrimitive.Root>
+    )
+  }
+)
