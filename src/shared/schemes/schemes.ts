@@ -21,3 +21,4 @@ export const nicknameScheme = z
     'Man... keep it chill! no special characters in the nickname'
   )
   .trim()
+export const radioScheme = z.string()
