@@ -1,1 +1,1 @@
-export * from './personal-Info'
+export * from './personal-info'

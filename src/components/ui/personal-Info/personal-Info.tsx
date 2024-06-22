@@ -6,7 +6,7 @@ import { Typography } from '@/components/ui/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
-import s from './personal-Info.module.scss'
+import s from './personal-info.module.scss'
 
 type PersonalInfoProps = {
   name: string
