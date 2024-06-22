@@ -1,0 +1,19 @@
+.container {
+  max-width: 542px;
+}
+
+.form {
+  width: 100%;
+}
+
+.close {
+  &:hover {
+    cursor: pointer;
+
+    color: var(--color-accent-500);
+
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-dark-300);
+    border-radius: var(--border-radius-s);
+  }
+}
