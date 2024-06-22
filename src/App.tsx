@@ -1,4 +1,5 @@
 import { SignUpForm } from '@/components/forms'
+import { CardsHeader } from '@/components/ui/cards-header'
 import { Grade } from '@/components/ui/grade'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Layout } from '@/shared/ui/layout'
