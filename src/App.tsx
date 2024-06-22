@@ -1,5 +1,5 @@
-import { ForgotPasswordForm } from '@/components/forms/forgot-password-form'
-import { SignUpForm } from '@/components/forms/sign-up-form'
+import { SignUpForm } from '@/components/forms'
+import { Grade } from '@/components/ui/grade'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
@@ -17,7 +17,11 @@ export function App() {
       <Page>
         <FlexContainer gap={'10px'} jc={'center'}>
           <SignUpForm onSubmit={foo} />
-          <ForgotPasswordForm onSubmit={foo} />
+          <FlexContainer fd={'column'} gap={'10px'}>
+            <Grade />
+            <Grade stars={3} />
+            <Grade stars={5} />
+          </FlexContainer>
         </FlexContainer>
       </Page>
     </Layout>
