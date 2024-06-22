@@ -1,7 +1,6 @@
 import avatarDefault from '@/assets/webp/avatar-default.webp'
+import { PersonalInfo } from '@/components/ui/personal-info/personal-info'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { PersonalInfo } from './personal-info'
 
 const meta = {
   argTypes: {},
