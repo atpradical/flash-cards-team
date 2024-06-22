@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react'
 
 import { PersonalInfo } from './personal-info'
 
-const meta: Meta<typeof PersonalInfo> = {
+const meta = {
   argTypes: {},
   component: PersonalInfo,
   tags: ['autodocs'],
@@ -19,5 +19,4 @@ export const PersonalInfoBase: Story = {
     photoDesc: 'name',
     src: avatarDefault,
   },
-  render: args => <PersonalInfo {...args} />,
 }
