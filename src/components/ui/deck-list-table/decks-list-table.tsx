@@ -1,7 +1,9 @@
-import { ArrowIosUp, Email } from '@/assets/components/svgIcons'
+import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
+import { Actions } from '@/components/ui/actions'
 import { Button } from '@/components/ui/button'
 import { convertToDDMMYYYY } from '@/components/ui/deck-list-table/utils/utils'
+import { VARIANT } from '@/shared/enums/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Nullable } from '@/types'
 import clsx from 'clsx'
@@ -68,7 +70,8 @@ export const DecksListTable = ({ deckList, onSort }: DecksListTableProps) => {
         <TableCell>{convertToDDMMYYYY(el.updated)}</TableCell>
         <TableCell>{el.author.name}</TableCell>
         <TableCell>
-          <Email />
+          {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
+          <Actions onDelete={() => {}} onEdit={() => {}} onLearn={() => {}} variant={VARIANT.ALL} />
         </TableCell>
       </TableRow>
     )
