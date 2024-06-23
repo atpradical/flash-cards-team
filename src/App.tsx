@@ -1,6 +1,7 @@
 import { ForgotPasswordForm } from '@/components/forms/forgot-password-form'
 import { Actions } from '@/components/ui/actions'
 import { CheckEmail } from '@/components/ui/check-email'
+import { VARIANT } from '@/shared/enums/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
@@ -23,9 +24,21 @@ export function App() {
           <CheckEmail email={'test@test.com'} />
           <div>
             <Actions
-              onDelete={() => console.log('render')}
-              onEdit={() => console.log('render')}
-              onPlay={() => console.log('render')}
+              onDelete={() => console.log('render1')}
+              onEdit={() => console.log('render2')}
+              onLearn={() => console.log('render3')}
+            />
+            <Actions
+              onDelete={() => console.log('render1')}
+              onEdit={() => console.log('render2')}
+              onLearn={() => console.log('render3')}
+              variant={VARIANT.ONLY_EDITS}
+            />
+            <Actions
+              onDelete={() => console.log('render1')}
+              onEdit={() => console.log('render2')}
+              onLearn={() => console.log('render3')}
+              variant={VARIANT.ONLY_LEARN}
             />
           </div>
         </FlexContainer>
