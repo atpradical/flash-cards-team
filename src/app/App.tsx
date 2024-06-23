@@ -1,11 +1,11 @@
 import { Router } from '@/app/router'
-import { Header } from '@/shared/ui/header'
+import { CardsHeader } from '@/components/ui/cards-header'
 import { Layout } from '@/shared/ui/layout'
 
 export function App() {
   return (
     <Layout>
-      <Header />
+      <CardsHeader isAuthorized />
       <Router />
     </Layout>
   )
