@@ -4,7 +4,7 @@ import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
 
-const DeckListExample: DeckDataItem[] = [
+export const DeckListExample: DeckDataItem[] = [
   {
     author: {
       id: '4454eb10-0e63-4b82-8df4-954d284eaf7f',

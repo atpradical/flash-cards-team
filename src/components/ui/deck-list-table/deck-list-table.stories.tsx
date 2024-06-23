@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { DeckListExample } from '@/App'
 import { DecksListTable } from '@/components/ui/deck-list-table/decks-list-table'
+import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {},
@@ -12,5 +14,8 @@ type Story = StoryObj<typeof meta>
 export default meta
 
 export const Example: Story = {
-  args: {},
+  args: {
+    deckList: DeckListExample,
+    onSort: action('onSort action invoked!'),
+  },
 }
