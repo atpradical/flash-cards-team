@@ -1,4 +1,4 @@
-import Edit2Outline from '@/assets/components/svgIcons/Edit2Outline'
+import EditOutline from '@/assets/components/svgIcons/EditOutline'
 import MoreVerticalOutline from '@/assets/components/svgIcons/MoreVerticalOutline'
 import PlayCircleOutline from '@/assets/components/svgIcons/PlayCircleOutline'
 import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
@@ -27,7 +27,7 @@ export const DropdownSettings = () => {
       <DropdownSeparator />
       <DropdownItem asChild>
         <Typography className={cn.settingsItem} variant={'caption'}>
-          <Edit2Outline className={cn.icon} />
+          <EditOutline className={cn.icon} />
           Edit
         </Typography>
       </DropdownItem>
