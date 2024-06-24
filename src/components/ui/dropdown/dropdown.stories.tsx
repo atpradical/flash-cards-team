@@ -1,7 +1,9 @@
 import type { Meta } from '@storybook/react'
 
+import userDefault from '@/assets/webp/avatar-default.webp'
 import { DropdownSettings } from '@/components/layout/deckSettingsDropdown/dropdownSettings'
 import { DropdownProfile } from '@/components/layout/userDropdown/dropdownProfile'
+import { Avatar } from '@/components/ui/avatar'
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
 
 type User = {
@@ -17,7 +19,7 @@ const mockUser: User = {
   name: 'Ivan',
   photo: {
     alt: 'Avatar',
-    src: 'src/assets/webp/avatar-default.webp',
+    src: userDefault,
   },
 }
 
@@ -38,18 +40,7 @@ export const DropdownWithUserAvatar = {
         photo={mockUser.photo.src}
         photoDesc={mockUser.photo.alt}
         profilePageHref={'https://google.com'}
-      />
-    )
-  },
-}
-
-export const DropdownWithoutUserAvatar = {
-  render: () => {
-    return (
-      <DropdownProfile
-        email={mockUser.email}
-        name={mockUser.name}
-        profilePageHref={'https://google.com'}
+        trigger={<Avatar size={'s'} src={userDefault} />}
       />
     )
   },

@@ -11,6 +11,8 @@ import { Button } from './components/ui/button'
 export function App() {
   // just mockedFunction, will be deleted later.
   const foo = (value: any) => {
+    /* eslint-disable no-console */
+    // temp. todo: enable @eslint rule back
     console.log(value)
   }
 
@@ -20,7 +22,7 @@ export function App() {
 
   return (
     <Layout>
-      <Header />
+      <CardsHeader isAuthorized />
       <Page>
         <FlexContainer gap={'10px'} jc={'center'}>
           <Button onClick={() => setOpenDeckDialog(true)}>Add New Deck</Button>
