@@ -22,6 +22,7 @@ export const TableFilterBar = ({ onValueChange, value }: TableFilterBarProps) =>
     { title: 'All Cards', value: 'tab-value-2' },
   ]
   const cn = {
+    button: clsx(s.button),
     input: clsx(s.input),
     slider: clsx(s.slider),
     tabs: clsx(s.tabs),
@@ -50,7 +51,7 @@ export const TableFilterBar = ({ onValueChange, value }: TableFilterBarProps) =>
         <Typography variant={'body2'}>Number of cards</Typography>
         <Slider onValueChange={handleSliderValueChange} value={sliderValue} />
       </div>
-      <Button variant={'secondary'}>
+      <Button className={cn.button} variant={'secondary'}>
         <TrashOutline />
         Clear Filter
       </Button>
