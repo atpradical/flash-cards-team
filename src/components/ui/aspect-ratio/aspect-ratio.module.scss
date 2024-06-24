@@ -3,7 +3,19 @@
 }
 
 .image {
-  object-fit: cover;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+.L {
+  width: 350px;
+}
+
+.M {
+  width: 170px;
+}
+
+.S {
+  width: 118px;
 }

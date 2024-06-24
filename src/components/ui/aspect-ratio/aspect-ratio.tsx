@@ -6,19 +6,20 @@ import clsx from 'clsx'
 
 import s from './aspect-ratio.module.scss'
 type AspectRatioProps = {
-  size: Aspect_Ratio
+  ratio: Aspect_Ratio
+  width: 'L' | 'M' | 'S'
 } & ComponentPropsWithoutRef<typeof AspectRatioPrimitive.Root>
 type AspectRadioRef = ElementRef<typeof AspectRatioPrimitive.Root>
 export const AspectRatio = forwardRef<AspectRadioRef, AspectRatioProps>(
-  ({ children, size, ...rest }, ref) => {
+  ({ ratio, width, ...rest }, ref) => {
     const cn = {
-      container: clsx(s.container),
+      container: clsx(s.container, width && s[width]),
     }
 
     return (
-      <AspectRatioPrimitive.Root className={cn.container} ratio={size} ref={ref} {...rest}>
-        {children}
-      </AspectRatioPrimitive.Root>
+      <div className={cn.container}>
+        <AspectRatioPrimitive.Root ratio={ratio} ref={ref} {...rest} />
+      </div>
     )
   }
 )
