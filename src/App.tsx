@@ -83,10 +83,13 @@ export const DeckListExample: DeckDataItem[] = [
   },
 ]
 
+import { Button } from './components/ui/button'
+import { CardsHeader } from './components/ui/cards-header'
+
 export function App() {
   return (
     <Layout>
-      <Header />
+      <CardsHeader isAuthorized />
       <Page>
         <FlexContainer gap={'10px'} jc={'center'}>
           <DecksListTable
