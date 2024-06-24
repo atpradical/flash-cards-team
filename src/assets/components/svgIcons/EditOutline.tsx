@@ -1,6 +1,6 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const Edit2Outline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+const EditOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
     height={'24'}
@@ -25,7 +25,7 @@ const Edit2Outline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(Edit2Outline)
+const ForwardRef = forwardRef(EditOutline)
 const Memo = memo(ForwardRef)
 
 export default Memo
