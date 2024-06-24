@@ -1,0 +1,26 @@
+.sort {
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    cursor: pointer;
+
+    color: var(--color-accent-500);
+
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-dark-300);
+    border-radius: var(--border-radius-s);
+  }
+}
+
+.cover {
+  overflow: hidden;
+  width: 118px;
+  height: 48px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Изображение сохраняет пропорции и заполняет контейнер */
+  }
+}

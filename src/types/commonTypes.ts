@@ -14,3 +14,5 @@ export type User = {
     src: string
   }
 }
+
+export type Nullable<T> = T | null

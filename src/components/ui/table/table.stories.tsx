@@ -1,6 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Table } from '@/components/ui/table/table'
+import {
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+} from '@/components/ui/table/table'
 
 const mockTableData = [
   {
@@ -42,43 +49,40 @@ const mockTableData = [
 
 const meta = {
   argTypes: {},
-  component: Table.Container,
+  component: TableContainer,
   tags: ['autodocs'],
   title: 'Components/Table',
-} satisfies Meta<typeof Table.Container>
+} satisfies Meta<typeof TableContainer>
 
 type Story = StoryObj<typeof meta>
+export default meta
 
-export const PlainTableExample: Story = {
+export const Example: Story = {
   args: {},
   render: () => {
     return (
-      <Table.Container>
-        <Table.Container>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Cards</Table.HeaderCell>
-              <Table.HeaderCell>Last Updated</Table.HeaderCell>
-              <Table.HeaderCell>Created by</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {mockTableData.map(el => {
-              return (
-                <Table.Row key={el.id}>
-                  <Table.TableCell>{el.name}</Table.TableCell>
-                  <Table.TableCell>{el.cards}</Table.TableCell>
-                  <Table.TableCell>{el.createdBy}</Table.TableCell>
-                  <Table.TableCell>{el.lastUpdated}</Table.TableCell>
-                </Table.Row>
-              )
-            })}
-          </Table.Body>
-        </Table.Container>
-      </Table.Container>
+      <TableContainer>
+        <TableHeader>
+          <TableRow>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Cards</TableHeaderCell>
+            <TableHeaderCell>Last Updated</TableHeaderCell>
+            <TableHeaderCell>Created by</TableHeaderCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {mockTableData.map(el => {
+            return (
+              <TableRow key={el.id}>
+                <TableCell>{el.name}</TableCell>
+                <TableCell>{el.cards}</TableCell>
+                <TableCell>{el.createdBy}</TableCell>
+                <TableCell>{el.lastUpdated}</TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </TableContainer>
     )
   },
 }
-
-export default meta
