@@ -49,6 +49,7 @@ export const AddNewDeckDialogForm = ({
     close: clsx(s.close),
     container: clsx(s.container),
     form: clsx(s.form),
+    icon: clsx(s.icon),
   }
 
   const formHandler = handleSubmit(data => {
@@ -59,7 +60,6 @@ export const AddNewDeckDialogForm = ({
     e.preventDefault()
   }
 
-  // todo: заменить s на cn
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
@@ -81,7 +81,7 @@ export const AddNewDeckDialogForm = ({
                 placeholder={'How should we call your deck?'}
               />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
-                <ImageOutline />
+                <ImageOutline className={cn.icon} />
                 Upload image
               </Button>
               <ControlledCheckbox control={control} label={'Private deck'} name={'privateDeck'} />

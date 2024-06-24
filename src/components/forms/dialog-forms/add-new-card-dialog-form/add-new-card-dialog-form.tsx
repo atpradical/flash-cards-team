@@ -48,6 +48,7 @@ export const AddNewCardDialogForm = ({
     close: clsx(s.close),
     container: clsx(s.container),
     form: clsx(s.form),
+    icon: clsx(s.icon),
   }
 
   const formHandler = handleSubmit(data => {
@@ -81,7 +82,7 @@ export const AddNewCardDialogForm = ({
               {/*todo: replace <img> with AspectRatio once ready*/}
               <img alt={'some question'} src={dummyImage} />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
-                <ImageOutline />
+                <ImageOutline className={cn.icon} />
                 Upload image
               </Button>
               <ControlledTextField
@@ -93,7 +94,7 @@ export const AddNewCardDialogForm = ({
               {/*todo: replace <img> with AspectRatio once ready*/}
               <img alt={'some answer'} src={dummyImage} />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
-                <ImageOutline />
+                <ImageOutline className={cn.icon} />
                 Upload image
               </Button>
             </FlexContainer>

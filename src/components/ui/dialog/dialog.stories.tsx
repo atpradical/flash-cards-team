@@ -51,7 +51,7 @@ export const DialogExample: Story = {
             <Typography variant={'body1'}>{descriptionMockText}</Typography>
             <TextField label={'Label'} placeholder={'Just a placeholder'} />
             <Button fullWidth onClick={action('button clicked!')} variant={'secondary'}>
-              <ImageOutline />
+              <ImageOutline style={{ height: '16px', width: '16px' }} />
               Upload image
             </Button>
             <Checkbox label={'Private pack'} onClick={action('checkbox checked!')} />
