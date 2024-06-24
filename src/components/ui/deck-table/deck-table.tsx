@@ -9,7 +9,7 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { Nullable } from '@/types/commonTypes'
 import clsx from 'clsx'
 
-import s from './../deck-list-table/decks-list-table.module.scss'
+import s from '../deck-list-table/deck-list-table.module.scss'
 
 import { Grade } from '../grade'
 import {

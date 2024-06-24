@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { DeckListExample } from '@/components/ui/deck-list-table/deck-list-table.mock'
-import { DeckListExample } from '@/components/ui/deck-list-table/deck-list-table.mock'
 import { action } from '@storybook/addon-actions'
 
 import { DeckListTable } from './deck-list-table'
