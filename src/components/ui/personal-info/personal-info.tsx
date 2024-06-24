@@ -1,4 +1,4 @@
-import { Edit2Outline, LogOutOutline } from '@/assets/components/svgIcons'
+import { EditOutline, LogOutOutline } from '@/assets/components/svgIcons'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -36,7 +36,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
         <div className={cn.avatarWrapper}>
           <Avatar className={cn.avatar} size={'l'} src={src} title={photoDesc} />
           <Button className={cn.buttonSecondary} variant={'secondary'}>
-            <Edit2Outline className={cn.svg} />
+            <EditOutline className={cn.svg} />
           </Button>
         </div>
 
@@ -45,7 +45,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
             {name}
           </Typography>
           <Button className={cn.buttonEdit2Outline} variant={'icon'}>
-            <Edit2Outline className={cn.svg} />
+            <EditOutline className={cn.svg} />
           </Button>
         </FlexContainer>
 
