@@ -5,12 +5,16 @@ import avatarDefault from '@/assets/webp/avatar-default.webp'
 import { UserProfile } from '@/components/ui/user-profile/user-profile'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
+import { User } from '@/types'
 
 const meta = {
-  args: {
-    isAuthorized: true,
-    src: avatarDefault,
-    userName: 'Ivan',
+  argTypes: {
+    isAuthorized: {
+      control: 'boolean',
+    },
+    userData: {
+      control: 'object',
+    },
   },
   component: UserProfile,
   tags: ['autodocs'],
@@ -20,23 +24,40 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const mockUser: User = {
+  email: 'j&johnson@gmail.com',
+  name: 'Ivan',
+  photo: {
+    alt: 'Avatar',
+    src: avatarDefault,
+  },
+}
+
 export const UserIsLoggedIn: Story = {
-  render: () => (
+  args: {
+    isAuthorized: true,
+    userData: mockUser,
+  },
+  render: args => (
     <Header>
       <FlexContainer jc={'space-between'}>
         <Logo />
-        <UserProfile isAuthorized src={avatarDefault} userName={'Ivan'} />
+        <UserProfile {...args} />
       </FlexContainer>
     </Header>
   ),
 }
 
 export const UserIsLoggedOut: Story = {
-  render: () => (
+  args: {
+    isAuthorized: false,
+    userData: mockUser,
+  },
+  render: args => (
     <Header>
       <FlexContainer jc={'space-between'}>
         <Logo />
-        <UserProfile isAuthorized={false} />
+        <UserProfile {...args} />
       </FlexContainer>
     </Header>
   ),
