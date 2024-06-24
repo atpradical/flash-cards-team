@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react'
 
 import myImage from '@/assets/webp/react-logo.webp'
-import { Aspect_Ratio } from '@/common/enums/aspect-ratio'
+import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
 import { AspectRatio } from '@/components/ui/aspect-ratio/aspect-ratio'
 
 import s from './aspect-ratio.module.scss'
@@ -17,7 +17,7 @@ export default meta
 export const AspectRatioStandard = {
   render: () => {
     return (
-      <AspectRatio ratio={Aspect_Ratio.Standard} width={'M'}>
+      <AspectRatio ratio={ASPECT_RATIO.Standard} variant={'m'}>
         <img alt={'Image'} className={s.image} src={myImage} />
       </AspectRatio>
     )
@@ -27,7 +27,7 @@ export const AspectRatioStandard = {
 export const AspectRatioWide = {
   render: () => {
     return (
-      <AspectRatio ratio={Aspect_Ratio.Wide} width={'S'}>
+      <AspectRatio ratio={ASPECT_RATIO.Wide} variant={'s'}>
         <img alt={'Image'} className={s.image} src={myImage} />
       </AspectRatio>
     )
@@ -37,7 +37,7 @@ export const AspectRatioWide = {
 export const AspectRatioUltrawide = {
   render: () => {
     return (
-      <AspectRatio ratio={Aspect_Ratio.UltraWide} width={'L'}>
+      <AspectRatio ratio={ASPECT_RATIO.UltraWide} variant={'l'}>
         <img alt={'Image'} className={s.image} src={myImage} />
       </AspectRatio>
     )
