@@ -10,7 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
 
-import s from './forgotPasswordForm.module.scss'
+import s from './forgot-password-form.module.scss'
 
 const ForgotPasswordScheme = z.object({
   email: emailSchema,
