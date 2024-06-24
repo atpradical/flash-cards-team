@@ -6,6 +6,8 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
 
+import { CardsHeader } from './components/ui/cards-header'
+
 export function App() {
   // just mockedFunction, will be deleted later.
   const foo = (value: any) => {
