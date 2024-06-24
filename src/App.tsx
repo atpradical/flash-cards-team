@@ -3,7 +3,6 @@ import { Actions } from '@/components/ui/actions'
 import { CheckEmail } from '@/components/ui/check-email'
 import { VARIANT } from '@/shared/enums/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { Header } from '@/shared/ui/header'
 import { Layout } from '@/shared/ui/layout'
 import { Page } from '@/shared/ui/page'
 
@@ -17,7 +16,7 @@ export function App() {
 
   return (
     <Layout>
-      <Header />
+      <CardsHeader isAuthorized />
       <Page>
         <FlexContainer gap={'10px'} jc={'center'}>
           <ForgotPasswordForm onSubmit={foo} />
