@@ -5,3 +5,12 @@ export type Option = {
   label: string
   value: string
 }
+
+export type User = {
+  email: string
+  name: string
+  photo: {
+    alt: string
+    src: string
+  }
+}
