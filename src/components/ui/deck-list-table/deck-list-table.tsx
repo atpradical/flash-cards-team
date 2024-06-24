@@ -8,7 +8,7 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { Nullable } from '@/types'
 import clsx from 'clsx'
 
-import s from './decks-list-table.module.scss'
+import s from './deck-list-table.module.scss'
 
 import {
   TableBody,
@@ -43,7 +43,7 @@ type DecksListTableProps = {
   onSort: () => void
 }
 
-export const DecksListTable = ({ deckList, onSort }: DecksListTableProps) => {
+export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
   const cn = {
     cover: clsx(s.cover),
     sort: clsx(s.sort),

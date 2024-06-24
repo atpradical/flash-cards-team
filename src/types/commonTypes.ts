@@ -6,4 +6,13 @@ export type Option = {
   value: string
 }
 
+export type User = {
+  email: string
+  name: string
+  photo: {
+    alt: string
+    src: string
+  }
+}
+
 export type Nullable<T> = T | null

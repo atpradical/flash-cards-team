@@ -1,14 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { DeckListExample } from '@/components/ui/deck-list-table/deck-list-table.mock'
-import { DecksListTable } from '@/components/ui/deck-list-table/decks-list-table'
+import { DeckListExample } from '@/components/ui/deck-list-table/deck-list-table.mock'
 import { action } from '@storybook/addon-actions'
+
+import { DeckListTable } from './deck-list-table'
 
 const meta = {
   argTypes: {},
-  component: DecksListTable,
-  title: 'Components/DecksListTable',
-} satisfies Meta<typeof DecksListTable>
+  component: DeckListTable,
+  title: 'Components/DeckListTable',
+} satisfies Meta<typeof DeckListTable>
 
 type Story = StoryObj<typeof meta>
 export default meta

@@ -1,4 +1,4 @@
-import { DeckDataItem } from './decks-list-table'
+import { DeckDataItem } from './deck-list-table'
 
 // --------- DeckListData example for story: ---------
 export const DeckListExample: DeckDataItem[] = [
