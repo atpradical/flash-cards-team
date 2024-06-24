@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
 import dummyImage from '@/assets/webp/cover-default.webp'
+import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -13,6 +15,7 @@ import {
   DialogHeader,
 } from '@/components/ui/dialog'
 import { Typography } from '@/components/ui/typography'
+import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,8 +25,8 @@ import { z } from 'zod'
 import s from './../dialog-forms.module.scss'
 
 const AddNewCardDialogFormScheme = z.object({
-  answer: z.string(),
-  question: z.string(),
+  answer: cardAnswerScheme,
+  question: cardQuestionScheme,
 })
 
 type AddNewCardDialogFormValues = z.infer<typeof AddNewCardDialogFormScheme>
@@ -72,27 +75,32 @@ export const AddNewCardDialogForm = ({
         </DialogHeader>
         <DialogBody>
           <form className={cn.form} onSubmit={formHandler}>
-            <FlexContainer ai={'flex-start'} fd={'column'} gap={'24px'}>
+            <FlexContainer ai={'flex-start'} fd={'column'} gap={'14px'}>
+              <Typography variant={'subtitle1'}>Question:</Typography>
               <ControlledTextField
                 control={control}
                 label={'Question?'}
                 name={'question'}
                 placeholder={'Write down the question.'}
               />
-              {/*todo: replace <img> with AspectRatio once ready*/}
-              <img alt={'some question'} src={dummyImage} />
+              <AspectRatio ratio={ASPECT_RATIO.ExtraWide} variant={'xl'}>
+                <img alt={'some question'} src={dummyImage} />
+              </AspectRatio>
+
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
                 <ImageOutline className={cn.icon} />
                 Upload image
               </Button>
+              <Typography variant={'subtitle1'}>Answer:</Typography>
               <ControlledTextField
                 control={control}
                 label={'Answer'}
                 name={'answer'}
                 placeholder={'What is the correct answer to the question?'}
               />
-              {/*todo: replace <img> with AspectRatio once ready*/}
-              <img alt={'some answer'} src={dummyImage} />
+              <AspectRatio ratio={ASPECT_RATIO.ExtraWide} variant={'xl'}>
+                <img alt={'some answer'} src={dummyImage} />
+              </AspectRatio>
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
                 <ImageOutline className={cn.icon} />
                 Upload image

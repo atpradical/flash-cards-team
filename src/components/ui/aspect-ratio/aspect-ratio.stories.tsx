@@ -43,3 +43,13 @@ export const AspectRatioUltrawide = {
     )
   },
 }
+
+export const AspectRatioExtraWide = {
+  render: () => {
+    return (
+      <AspectRatio ratio={ASPECT_RATIO.ExtraWide} variant={'xl'}>
+        <img alt={'Image'} className={s.image} src={myImage} />
+      </AspectRatio>
+    )
+  },
+}
