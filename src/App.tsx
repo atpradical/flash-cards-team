@@ -1,5 +1,6 @@
 import { ForgotPasswordForm } from '@/components/forms/forgot-password-form'
 import { Actions } from '@/components/ui/actions'
+import { CardsHeader } from '@/components/ui/cards-header'
 import { CheckEmail } from '@/components/ui/check-email'
 import { VARIANT } from '@/shared/enums/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
