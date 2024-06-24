@@ -5,9 +5,10 @@ import * as AspectRatioPrimitive from '@radix-ui/react-aspect-ratio'
 import clsx from 'clsx'
 
 import s from './aspect-ratio.module.scss'
+
 type AspectRatioProps = {
   ratio: ASPECT_RATIO
-  variant: 'l' | 'm' | 's'
+  variant: 'l' | 'm' | 's' | 'xl'
   width?: CSSProperties['width']
 } & ComponentPropsWithoutRef<typeof AspectRatioPrimitive.Root>
 type AspectRadioRef = ElementRef<typeof AspectRatioPrimitive.Root>
