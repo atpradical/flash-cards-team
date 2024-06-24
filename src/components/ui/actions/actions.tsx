@@ -54,7 +54,7 @@ export const Actions = ({
   ]
 
   return (
-    <FlexContainer gap={'12px'} {...restFlexContainer}>
+    <FlexContainer gap={'10px'} {...restFlexContainer}>
       {getActionButtons(actionButtons, variant).map(el => (
         <Button className={cn.button} key={el.label} onClick={el.handler} variant={'link'}>
           {el.icon}
