@@ -1,5 +1,6 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 
 const publicRoutes: RouteObject[] = [
@@ -11,8 +12,8 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <div>test temporary page delete</div>,
-    path: '/',
+    element: <ProfilePage />,
+    path: '/profile',
   },
 ]
 
