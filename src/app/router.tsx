@@ -1,11 +1,16 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import { ResetPassword } from '@/pages/password-reset'
 import { SignInPage } from '@/pages/sign-in-page'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
     path: '/sign-in',
+  },
+  {
+    element: <ResetPassword />,
+    path: '/reset-password',
   },
 ]
 
