@@ -29,7 +29,7 @@ export function App() {
           <DeckTable cardList={CardListExample} onSort={() => console.log('onSort invoked!')} />
         </FlexContainer>
 
-        <Toaster onOpenChange={handleOpenChange} open={isOpen} />
+        <Toaster onOpenChange={handleOpenChange} open={isOpen} title={'Title success'} />
       </Page>
     </Layout>
   )

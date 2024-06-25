@@ -28,19 +28,24 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+const storyCreator = (
+  title: string,
+  description: string,
+  variant: 'error' | 'success' | 'warning'
+): Story => ({
   args: {
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid',
+    description,
     onOpenChange: () => {},
     open: false,
-    title: 'Title',
+    title,
+    variant,
   },
-  render: ({ description, onOpenChange, open, title }) => {
+  render: ({ description, onOpenChange, open, title, variant }) => {
     const [isOpen, setIsOpen] = useState(open)
 
-    const handleOpenChange = (open: boolean) => {
-      setIsOpen(open)
-      onOpenChange(open)
+    const handleOpenChange = (newOpen: boolean) => {
+      setIsOpen(newOpen)
+      onOpenChange(newOpen)
     }
 
     return (
@@ -51,9 +56,13 @@ export const Default: Story = {
           onOpenChange={handleOpenChange}
           open={isOpen}
           title={title}
-          variant={'error'}
+          variant={variant}
         />
       </>
     )
   },
-}
+})
+
+export const ToastError = storyCreator('Error', 'An error occurred', 'error')
+export const ToastWarning = storyCreator('Warning', 'A warning occurred', 'warning')
+export const ToastSuccess = storyCreator('Success', 'An action was successful', 'success')
