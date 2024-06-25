@@ -14,7 +14,10 @@
 }
 
 .container {
-  padding: 10px !important; // можна внести класс для card, кот убирает большие падинги
+  padding: 16px;
+  box-shadow:
+    2px 2px 4px rgb(225 225 225 / 20%),
+    2px 2px 8px rgb(255 255 255 / 24%);
 }
 
 .root {
@@ -29,10 +32,26 @@
   animation: hide 100ms ease-in;
 }
 
+.success {
+  color: var(--color-success-300);
+}
+
+.error {
+  color: var(--color-danger-300);
+}
+
+.warning {
+  color: var(--color-warning-300);
+}
+
 .button {
   svg {
     width: 16px;
     height: 16px;
+  }
+
+  &:hover {
+    opacity: 0.5;
   }
 }
 

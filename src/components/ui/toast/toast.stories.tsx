@@ -15,6 +15,10 @@ const meta = {
     open: {
       control: 'boolean',
     },
+    variant: {
+      control: 'select',
+      options: ['error', 'warning', 'success'],
+    },
   },
   component: Toaster,
   tags: ['autodocs'],
@@ -26,10 +30,12 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid',
     onOpenChange: () => {},
     open: false,
+    title: 'Title',
   },
-  render: ({ onOpenChange, open }) => {
+  render: ({ description, onOpenChange, open, title }) => {
     const [isOpen, setIsOpen] = useState(open)
 
     const handleOpenChange = (open: boolean) => {
@@ -40,7 +46,13 @@ export const Default: Story = {
     return (
       <>
         <Button onClick={() => setIsOpen(!isOpen)}>Show Toast</Button>
-        <Toaster onOpenChange={handleOpenChange} open={isOpen} />
+        <Toaster
+          description={description}
+          onOpenChange={handleOpenChange}
+          open={isOpen}
+          title={title}
+          variant={'error'}
+        />
       </>
     )
   },

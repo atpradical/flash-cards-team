@@ -9,15 +9,24 @@ import clsx from 'clsx'
 import s from './toast.module.scss'
 
 type ToasterProps = {
+  description?: string
   onOpenChange: (open: boolean) => void
   open: boolean
+  title: string
+  variant?: 'error' | 'success' | 'warning'
 }
 
-export const Toaster = ({ onOpenChange, open }: ToasterProps) => {
+export const Toaster = ({
+  description,
+  onOpenChange,
+  open,
+  title,
+  variant = 'success',
+}: ToasterProps) => {
   const cn = {
-    button: clsx(s.button),
+    button: clsx(s.button, s[variant]),
     container: clsx(s.container),
-    root: clsx(s.root),
+    root: clsx(s.root, s[variant]),
     viewport: clsx(s.viewport),
   }
 
@@ -28,10 +37,10 @@ export const Toaster = ({ onOpenChange, open }: ToasterProps) => {
           <FlexContainer jc={'space-between'}>
             <div>
               <Toast.Title asChild>
-                <Typography>Title</Typography>
+                <Typography>{title}</Typography>
               </Toast.Title>
               <Toast.Description asChild>
-                <Typography>Some description</Typography>
+                <Typography>{description}</Typography>
               </Toast.Description>
             </div>
             <Toast.Close asChild className={cn.button}>
