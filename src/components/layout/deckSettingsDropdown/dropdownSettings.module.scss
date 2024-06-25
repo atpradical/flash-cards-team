@@ -7,3 +7,9 @@
 .settingsItem {
   margin: var(--margin-12px-0);
 }
+
+.triggerIcon {
+  &:hover {
+    color: var(--color-accent-300);
+  }
+}
