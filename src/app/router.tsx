@@ -1,11 +1,16 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import { CheckEmailPage } from '@/pages/check-email-page'
 import { SignInPage } from '@/pages/sign-in-page'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
     path: '/sign-in',
+  },
+  {
+    element: <CheckEmailPage />,
+    path: '/check-email',
   },
 ]
 
