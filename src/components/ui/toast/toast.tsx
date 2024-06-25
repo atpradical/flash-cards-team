@@ -21,7 +21,7 @@ export const Toaster = ({
   onOpenChange,
   open,
   title,
-  variant = 'success',
+  variant = 'warning',
 }: ToasterProps) => {
   const cn = {
     button: clsx(s.button, s[variant]),
