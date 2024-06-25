@@ -2,6 +2,7 @@ import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-d
 
 import { CheckEmailPage } from '@/pages/check-email-page'
 import { SignInPage } from '@/pages/sign-in-page'
+import { SignUpPage } from '@/pages/sign-up-page'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -11,6 +12,10 @@ const publicRoutes: RouteObject[] = [
   {
     element: <CheckEmailPage />,
     path: '/check-email',
+  },
+  {
+    element: <SignUpPage />,
+    path: '/sign-up',
   },
 ]
 
