@@ -1,5 +1,6 @@
 import { CloseOutline } from '@/assets/components/svgIcons'
 import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import * as Toast from '@radix-ui/react-toast'
@@ -15,30 +16,33 @@ type ToasterProps = {
 export const Toaster = ({ onOpenChange, open }: ToasterProps) => {
   const cn = {
     button: clsx(s.button),
-    description: clsx(s.description),
+    container: clsx(s.container),
     root: clsx(s.root),
-    title: clsx(s.title),
     viewport: clsx(s.viewport),
   }
 
   return (
-    <Toast.Provider swipeDirection={'right'}>
-      <FlexContainer gap={'16px'}>
-        <Toast.Root className={cn.root} duration={10000} onOpenChange={onOpenChange} open={open}>
-          <Toast.Title className={cn.title}>Title</Toast.Title>
-          <Toast.Description asChild className={cn.description}>
-            <Typography variant={'caption'}>Some description</Typography>
-          </Toast.Description>
-          <Toast.Close asChild className={cn.button}>
-            <Button variant={'icon'}>
-              <CloseOutline />
-            </Button>
-          </Toast.Close>
-        </Toast.Root>
-        <FlexContainer fd={'column'} gap={'10px'}>
-          <Toast.Viewport className={cn.viewport} />
-        </FlexContainer>
-      </FlexContainer>
+    <Toast.Provider>
+      <Toast.Root className={cn.root} duration={10000} onOpenChange={onOpenChange} open={open}>
+        <Card className={cn.container}>
+          <FlexContainer jc={'space-between'}>
+            <div>
+              <Toast.Title asChild>
+                <Typography>Title</Typography>
+              </Toast.Title>
+              <Toast.Description asChild>
+                <Typography>Some description</Typography>
+              </Toast.Description>
+            </div>
+            <Toast.Close asChild className={cn.button}>
+              <Button variant={'icon'}>
+                <CloseOutline />
+              </Button>
+            </Toast.Close>
+          </FlexContainer>
+        </Card>
+      </Toast.Root>
+      <Toast.Viewport className={cn.viewport} />
     </Toast.Provider>
   )
 }
