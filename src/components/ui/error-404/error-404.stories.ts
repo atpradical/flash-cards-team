@@ -1,5 +1,6 @@
-import { Error404 } from '@/components/ui/error-404/error-404'
 import type { Meta, StoryObj } from '@storybook/react'
+
+import { Error404 } from '@/components/ui/error-404/error-404'
 
 const meta = {
   argTypes: {},

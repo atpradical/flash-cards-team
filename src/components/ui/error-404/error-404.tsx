@@ -4,8 +4,9 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import s from './error-404.module.scss'
 import clsx from 'clsx'
+
+import s from './error-404.module.scss'
 
 type Error404Props = {
   text?: string
