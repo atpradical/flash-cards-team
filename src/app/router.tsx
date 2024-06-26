@@ -1,6 +1,8 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { Error404Page } from '@/pages/error-404-page'
+import { CheckEmailPage } from '@/pages/check-email-page'
+import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
+import { ResetPassword } from '@/pages/password-reset'
 import { SignInPage } from '@/pages/sign-in-page'
 
 const publicRoutes: RouteObject[] = [
@@ -9,8 +11,16 @@ const publicRoutes: RouteObject[] = [
     path: '/sign-in',
   },
   {
-    element: <Error404Page />,
-    path: '*',
+    element: <PasswordRecoveryPage />,
+    path: '/password-recovery',
+  },
+  {
+    element: <ResetPassword />,
+    path: '/reset-password',
+  },
+  {
+    element: <CheckEmailPage />,
+    path: '/check-email',
   },
 ]
 
