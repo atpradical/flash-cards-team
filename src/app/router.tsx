@@ -1,6 +1,6 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { ProfilePage } from '@/pages/profile-page'
+import { ProfilePage } from '@/pages/profile-page/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 
 const publicRoutes: RouteObject[] = [
@@ -13,7 +13,7 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
   {
     element: <ProfilePage />,
-    path: ' /profile',
+    path: '/profile',
   },
 ]
 const router = createBrowserRouter([...privateRoutes, ...publicRoutes])
