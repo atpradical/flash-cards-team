@@ -1,0 +1,74 @@
+.viewport {
+  position: fixed;
+  z-index: 2147483647;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  max-width: 350px;
+  padding: 0;
+
+  list-style: none;
+}
+
+.container {
+  padding: 16px;
+  box-shadow:
+    2px 2px 4px rgb(225 225 225 / 20%),
+    2px 2px 8px rgb(255 255 255 / 24%);
+}
+
+.root {
+  padding: 15px;
+}
+
+.root[data-state='open'] {
+  animation: slide-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.root[data-state='closed'] {
+  animation: hide 100ms ease-in;
+}
+
+.success {
+  color: var(--color-success-300);
+}
+
+.error {
+  color: var(--color-danger-300);
+}
+
+.warning {
+  color: var(--color-warning-300);
+}
+
+.button {
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(calc(100%));
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
