@@ -30,7 +30,7 @@ export const DeckPage = () => {
           Back to Decks List
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
-          <DeckTitle image={myImage} imgDescription={'some image'} title={"Fried's Deck"} />
+          <DeckTitle image={myImage} title={"Fried's Deck"} />
           <Button as={'a'} className={cn.learnDeck} href={''}>
             Learn Deck
           </Button>

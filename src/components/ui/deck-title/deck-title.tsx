@@ -9,11 +9,15 @@ import s from './deck-title.module.scss'
 
 type DeckTitleProps = {
   image: string
-  imgDescription: string
+  imgDescription?: string
   title: string
 }
 
-export const DeckTitle = ({ image, imgDescription, title }: DeckTitleProps) => {
+export const DeckTitle = ({
+  image,
+  imgDescription = 'Deck cover image',
+  title,
+}: DeckTitleProps) => {
   const cn = {
     container: clsx(s.container),
     image: clsx(s.image),
