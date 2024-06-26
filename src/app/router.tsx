@@ -12,6 +12,10 @@ const publicRoutes: RouteObject[] = [
     path: '/sign-in',
   },
   {
+    element: <SignUpPage />,
+    path: '/sign-up',
+  },
+  {
     element: <PasswordRecoveryPage />,
     path: '/password-recovery',
   },
@@ -22,10 +26,6 @@ const publicRoutes: RouteObject[] = [
   {
     element: <CheckEmailPage />,
     path: '/check-email',
-  },
-  {
-    element: <SignUpPage />,
-    path: '/sign-up',
   },
 ]
 
