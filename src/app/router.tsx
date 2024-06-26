@@ -1,5 +1,4 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
-
 import { DeckListPage } from '@/pages/deck-list-page'
 import { SignInPage } from '@/pages/sign-in-page'
 
