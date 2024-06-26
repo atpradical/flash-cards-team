@@ -1,6 +1,5 @@
 import { ReactNode, useState } from 'react'
 
-import ArrowBackOutline from '@/assets/components/svgIcons/ArrowBackOutline'
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
 import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
@@ -28,8 +27,6 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
   const cn = {
     button: clsx(s.button),
     container: clsx(s.container),
-    goBack: clsx(s.goBack),
-    icon: clsx(s.icon),
     image: clsx(s.image),
     incoming: clsx(s.incoming),
     ratio: clsx(s.ratio),
@@ -47,61 +44,55 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
   const answerCover = CardListExample[0].answerImg ?? dummyAnswerCover
 
   return (
-    <FlexContainer fd={'column'} gap={'36px'} jc={'start'}>
-      <Button as={'a'} className={cn.goBack} href={''} variant={'link'}>
-        <ArrowBackOutline className={cn.icon} />
-        Back to Decks List
-      </Button>
-      <Card className={cn.container}>
-        <FlexContainer ai={'flex-start'} fd={'column'}>
-          <Typography as={'h1'} className={cn.title} variant={'h1'}>
-            Learn &ldquo;{deckName}&rdquo;
+    <Card className={cn.container}>
+      <FlexContainer ai={'flex-start'} fd={'column'}>
+        <Typography as={'h1'} className={cn.title} variant={'h1'}>
+          Learn &ldquo;{deckName}&rdquo;
+        </Typography>
+        <div>
+          <Typography className={cn.text} variant={'subtitle1'}>
+            Question:
           </Typography>
-          <div>
-            <Typography className={cn.text} variant={'subtitle1'}>
-              Question:
-            </Typography>
-            <Typography className={cn.incoming} variant={'body1'}>
-              {question}
-            </Typography>
-          </div>
-          {CardListExample[0] && (
-            <AspectRatio className={cn.ratio} ratio={ASPECT_RATIO.Standard} variant={'l'}>
-              <img alt={'Question image'} className={cn.image} src={questionCover} />
-            </AspectRatio>
-          )}
-          <div>
-            <Typography className={cn.triesText} variant={'body2'}>
-              Количество попыток ответов на вопрос:
-            </Typography>
-            <Typography className={cn.triesCount} variant={'subtitle2'}>
-              {triesCount}
-            </Typography>
-          </div>
-          {isAnswerShowed ? (
-            <>
-              <div>
-                <Typography className={cn.text} variant={'subtitle1'}>
-                  Answer:
-                </Typography>
-                <Typography className={cn.incoming} variant={'body1'}>
-                  {answer}
-                </Typography>
-                {CardListExample[0] && (
-                  <AspectRatio className={cn.ratio} ratio={ASPECT_RATIO.Standard} variant={'l'}>
-                    <img alt={'Question image'} className={cn.image} src={answerCover} />
-                  </AspectRatio>
-                )}
-              </div>
-              <SelfRateForm onSubmit={onSubmitHandler} />
-            </>
-          ) : (
-            <Button className={cn.button} fullWidth onClick={showAnswerHandler}>
-              Show Answer
-            </Button>
-          )}
-        </FlexContainer>
-      </Card>
-    </FlexContainer>
+          <Typography className={cn.incoming} variant={'body1'}>
+            {question}
+          </Typography>
+        </div>
+        {CardListExample[0] && (
+          <AspectRatio className={cn.ratio} ratio={ASPECT_RATIO.Standard} variant={'l'}>
+            <img alt={'Question image'} className={cn.image} src={questionCover} />
+          </AspectRatio>
+        )}
+        <div>
+          <Typography className={cn.triesText} variant={'body2'}>
+            Количество попыток ответов на вопрос:
+          </Typography>
+          <Typography className={cn.triesCount} variant={'subtitle2'}>
+            {triesCount}
+          </Typography>
+        </div>
+        {isAnswerShowed ? (
+          <>
+            <div>
+              <Typography className={cn.text} variant={'subtitle1'}>
+                Answer:
+              </Typography>
+              <Typography className={cn.incoming} variant={'body1'}>
+                {answer}
+              </Typography>
+              {CardListExample[0] && (
+                <AspectRatio className={cn.ratio} ratio={ASPECT_RATIO.Standard} variant={'l'}>
+                  <img alt={'Question image'} className={cn.image} src={answerCover} />
+                </AspectRatio>
+              )}
+            </div>
+            <SelfRateForm onSubmit={onSubmitHandler} />
+          </>
+        ) : (
+          <Button className={cn.button} fullWidth onClick={showAnswerHandler}>
+            Show Answer
+          </Button>
+        )}
+      </FlexContainer>
+    </Card>
   )
 }

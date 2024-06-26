@@ -13,16 +13,16 @@ const publicRoutes: RouteObject[] = [
     element: <ResetPassword />,
     path: '/reset-password',
   },
-  {
-    element: <CardPage />,
-    path: '/card',
-  },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
     element: <div>test temporary page delete</div>,
     path: '/',
+  },
+  {
+    element: <CardPage />,
+    path: '/card',
   },
 ]
 
