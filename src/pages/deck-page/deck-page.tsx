@@ -1,11 +1,11 @@
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
-import { DropdownSettings } from '@/components/layout/deckSettingsDropdown/dropdownSettings'
+import myImage from '@/assets/webp/react-logo.webp'
 import { Button } from '@/components/ui/button'
 import { DeckTable } from '@/components/ui/deck-table'
 import { CardListExample } from '@/components/ui/deck-table/deck-table.mock'
+import { DeckTitle } from '@/components/ui/deck-title/deck-title'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/text-field'
-import { Typography } from '@/components/ui/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 import clsx from 'clsx'
@@ -16,6 +16,7 @@ export const DeckPage = () => {
   const cn = {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
+    image: clsx(s.image),
     learnDeck: clsx(s.learnDeck),
     pagination: clsx(s.pagination),
   }
@@ -28,11 +29,8 @@ export const DeckPage = () => {
           <ArrowBackOutline className={cn.icon} />
           Back to Decks List
         </Button>
-        <FlexContainer jc={'start'}>
-          <Typography as={'h1'} variant={'h1'}>
-            Friend’s Deck
-          </Typography>
-          <DropdownSettings />
+        <FlexContainer ai={'start'} jc={'start'}>
+          <DeckTitle image={myImage} imgDescription={'some image'} title={"Fried's Deck"} />
           <Button as={'a'} className={cn.learnDeck} href={''}>
             Learn Deck
           </Button>
