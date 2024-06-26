@@ -1,6 +1,6 @@
 import { Error404 } from '@/components/ui/error-404'
-import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
+import { FlexContainer } from '@/shared/ui/flex-container'
 
 export const Error404Page = () => {
   return (

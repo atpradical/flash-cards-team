@@ -1,10 +1,9 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
-
+import { SignInPage } from '@/pages/sign-in-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
 import { Error404Page } from '@/pages/error-404-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
 import { ResetPassword } from '@/pages/password-reset'
-import { SignInPage } from '@/pages/sign-in-page'
 
 const publicRoutes: RouteObject[] = [
   {
