@@ -13,10 +13,9 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
   {
     element: <ProfilePage />,
-    path: '/profile',
+    path: ' /profile',
   },
 ]
-
 const router = createBrowserRouter([...privateRoutes, ...publicRoutes])
 
 export function Router() {
