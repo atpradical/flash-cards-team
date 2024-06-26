@@ -4,11 +4,16 @@ import { CheckEmailPage } from '@/pages/check-email-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
 import { ResetPassword } from '@/pages/password-reset'
 import { SignInPage } from '@/pages/sign-in-page'
+import { SignUpPage } from '@/pages/sign-up-page'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
     path: '/sign-in',
+  },
+  {
+    element: <SignUpPage />,
+    path: '/sign-up',
   },
   {
     element: <PasswordRecoveryPage />,
