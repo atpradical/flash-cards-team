@@ -6,7 +6,7 @@ export const Error404Page = () => {
   return (
     <Page mt={'130px'}>
       <FlexContainer jc={'center'}>
-        <Error404 text={'error'} />
+        <Error404 />
       </FlexContainer>
     </Page>
   )
