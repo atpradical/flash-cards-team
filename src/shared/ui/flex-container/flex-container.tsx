@@ -11,7 +11,6 @@ type Props = {
   jc?: CSSProperties['justifyContent']
 } & ComponentPropsWithoutRef<'div'>
 
-// todo: Currently no Ref passed into FlexContainer. Need to figure out if it is required???
 export const FlexContainer = ({
   ai = 'center',
   fd = 'row',
