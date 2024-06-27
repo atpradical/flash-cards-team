@@ -1,6 +1,9 @@
+import { useState } from 'react'
+
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
+import { AddNewCardDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/actions'
 import { Button } from '@/components/ui/button'
 import { convertToDDMMYYYY } from '@/components/ui/deck-list-table/utils/utils'
@@ -44,6 +47,7 @@ type DeckTableProps = {
 }
 
 export const DeckTable = ({ cardList, onSort }: DeckTableProps) => {
+  const [isEditOpenTable, setIsEditOpenTable] = useState(false)
   const cn = {
     cover: clsx(s.cover),
     sort: clsx(s.sort),
@@ -52,6 +56,18 @@ export const DeckTable = ({ cardList, onSort }: DeckTableProps) => {
 
   const sortHandler = () => {
     onSort()
+  }
+
+  const openEditModal = () => {
+    setIsEditOpenTable(true)
+  }
+
+  const closeEditModal = () => {
+    setIsEditOpenTable(false)
+  }
+  const handleFormSubmit = (data: any) => {
+    console.log(data)
+    closeEditModal()
   }
 
   const TableContent = cardList.map(el => {
@@ -80,8 +96,20 @@ export const DeckTable = ({ cardList, onSort }: DeckTableProps) => {
         </TableCell>
         <TableCell>
           {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
-          <Actions onDelete={() => {}} onEdit={() => {}} onLearn={() => {}} variant={VARIANT.ALL} />
+          <Actions
+            onDelete={() => {}}
+            onEdit={openEditModal}
+            onLearn={() => {}}
+            variant={VARIANT.ALL}
+          />
         </TableCell>
+        {isEditOpenTable && (
+          <AddNewCardDialogForm
+            onOpenChange={closeEditModal}
+            onSubmit={handleFormSubmit}
+            open={isEditOpenTable}
+          />
+        )}
       </TableRow>
     )
   })
