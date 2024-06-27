@@ -14,10 +14,11 @@ export const DropdownSettings = () => {
   const cn = {
     icon: clsx(s.icon),
     settingsItem: clsx(s.settingsItem),
+    triggerIcon: clsx(s.triggerIcon),
   }
 
   return (
-    <Dropdown trigger={<MoreVerticalOutline />}>
+    <Dropdown trigger={<MoreVerticalOutline className={cn.triggerIcon} />}>
       <DropdownItem asChild>
         <Typography as={'a'} className={cn.settingsItem} variant={'caption'}>
           <PlayCircleOutline className={cn.icon} />

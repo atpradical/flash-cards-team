@@ -5,10 +5,13 @@ button {
 .arrow {
   position: relative;
   top: -1px;
-  fill: var(--color-dark-700);
-  height: 8px;
+
   width: 16px;
+  height: 8px;
+
   border-top: 1px solid var(--color-dark-700);
+
+  fill: var(--color-dark-700);
 }
 
 .icon {
@@ -18,6 +21,13 @@ button {
 
 .trigger {
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 6px;
+
   &:focus-visible:active {
     border-radius: var(--border-radius-m);
     outline: 1px solid var(--color-info-500);
@@ -26,20 +36,25 @@ button {
 }
 
 .menuContent {
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+
   padding: 0 12px;
+
+  background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
   border-radius: var(--border-radius-s);
-  background-color: var(--color-dark-700);
-  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
-  animation: scaleIn var(--transition-duration-fast) ease-in-out;
+
+  animation: scale-in var(--transition-duration-fast) ease-in-out;
 }
-@keyframes scaleIn {
+
+@keyframes scale-in {
   from {
-    opacity: 0;
     transform: scale(0);
+    opacity: 0;
   }
+
   to {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
 }
