@@ -32,7 +32,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     element: <Error404Page />,
-    path: '*',
+    path: '/404',
   },
 ]
 
