@@ -1,3 +1,6 @@
+import { useState } from 'react'
+
+import { AddNewDeckDialogForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { DeckListTable } from '@/components/ui/deck-list-table'
 import { DeckListExample } from '@/components/ui/deck-list-table/deck-list-table.mock'
@@ -9,16 +12,20 @@ import { Page } from '@/shared/ui/page'
 
 export const DeckListPage = () => {
   const dummyNumberOfCards = [2, 90]
+  const [showDialog, setShowDialog] = useState(false)
 
+  const addNewDeckHandler = () => {
+    setShowDialog(!showDialog)
+  }
+
+  //todo: replace related mock data and functions during RTQuery tasks implementation
   return (
     <Page>
       <FlexContainer jc={'space-between'}>
         <Typography as={'h1'} variant={'h1'}>
           {`Deck's list`}
         </Typography>
-        <Button as={'a'} href={''}>
-          Add New Deck
-        </Button>
+        <Button onClick={addNewDeckHandler}>Add New Deck</Button>
       </FlexContainer>
       <FlexContainer fd={'column'} gap={'24px'}>
         <TableFilterBar
@@ -30,6 +37,11 @@ export const DeckListPage = () => {
           <Pagination currentPage={1} onPageChange={() => {}} totalCount={100} />
         </FlexContainer>
       </FlexContainer>
+      <AddNewDeckDialogForm
+        onOpenChange={addNewDeckHandler}
+        onSubmit={() => console.log('Form submit invoked!')}
+        open={showDialog}
+      />
     </Page>
   )
 }
