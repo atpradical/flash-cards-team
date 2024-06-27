@@ -1,6 +1,7 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { DeckListPage } from '@/pages/deck-list-page'
+
 import { CheckEmailPage } from '@/pages/check-email-page'
+import { DeckListPage } from '@/pages/deck-list-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
 import { ResetPassword } from '@/pages/password-reset'
 import { SignInPage } from '@/pages/sign-in-page'
