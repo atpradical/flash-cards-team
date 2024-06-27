@@ -1,5 +1,8 @@
+import { useState } from 'react'
+
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
 import myImage from '@/assets/webp/react-logo.webp'
+import { AddNewCardDialogForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { DeckTable } from '@/components/ui/deck-table'
 import { CardListExample } from '@/components/ui/deck-table/deck-table.mock'
@@ -13,12 +16,26 @@ import clsx from 'clsx'
 import s from './deck-page.module.scss'
 
 export const DeckPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const cn = {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
     image: clsx(s.image),
     learnDeck: clsx(s.learnDeck),
     pagination: clsx(s.pagination),
+  }
+
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+  const handleFormSubmit = (data: any) => {
+    console.log(data)
+    //todo: logic for FormSubmit
+    closeModal()
   }
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
@@ -31,7 +48,7 @@ export const DeckPage = () => {
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
           <DeckTitle image={myImage} title={"Fried's Deck"} />
-          <Button as={'a'} className={cn.learnDeck} href={''}>
+          <Button as={'a'} className={cn.learnDeck} onClick={openModal}>
             Learn Deck
           </Button>
         </FlexContainer>
@@ -44,6 +61,13 @@ export const DeckPage = () => {
           totalCount={100}
         />
       </FlexContainer>
+      {isModalOpen && (
+        <AddNewCardDialogForm
+          onOpenChange={closeModal}
+          onSubmit={handleFormSubmit}
+          open={isModalOpen}
+        />
+      )}
     </Page>
   )
 }
