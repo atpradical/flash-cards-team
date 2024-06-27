@@ -8,6 +8,11 @@
   margin: var(--margin-12px-0);
 }
 
+.link {
+  display: flex;
+  gap: 6px;
+}
+
 .triggerIcon {
   &:hover {
     color: var(--color-accent-300);

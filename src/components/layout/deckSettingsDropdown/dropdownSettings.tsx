@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import EditOutline from '@/assets/components/svgIcons/EditOutline'
 import MoreVerticalOutline from '@/assets/components/svgIcons/MoreVerticalOutline'
 import PlayCircleOutline from '@/assets/components/svgIcons/PlayCircleOutline'
@@ -13,6 +15,7 @@ import s from './dropdownSettings.module.scss'
 export const DropdownSettings = () => {
   const cn = {
     icon: clsx(s.icon),
+    link: clsx(s.link),
     settingsItem: clsx(s.settingsItem),
     triggerIcon: clsx(s.triggerIcon),
   }
@@ -20,9 +23,11 @@ export const DropdownSettings = () => {
   return (
     <Dropdown trigger={<MoreVerticalOutline className={cn.triggerIcon} />}>
       <DropdownItem asChild>
-        <Typography as={'a'} className={cn.settingsItem} variant={'caption'}>
-          <PlayCircleOutline className={cn.icon} />
-          Learn
+        <Typography className={cn.settingsItem} variant={'caption'}>
+          <Link className={cn.link} to={'/card-page'}>
+            <PlayCircleOutline className={cn.icon} />
+            Learn
+          </Link>
         </Typography>
       </DropdownItem>
       <DropdownSeparator />
