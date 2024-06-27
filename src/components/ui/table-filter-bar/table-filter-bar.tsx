@@ -23,7 +23,6 @@ export const TableFilterBar = ({ onValueChange, value }: TableFilterBarProps) =>
   ]
   const cn = {
     button: clsx(s.button),
-    input: clsx(s.input),
     slider: clsx(s.slider),
     tabs: clsx(s.tabs),
   }
@@ -40,7 +39,6 @@ export const TableFilterBar = ({ onValueChange, value }: TableFilterBarProps) =>
   return (
     <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>
       <ControlledTextField
-        className={cn.input}
         control={control}
         name={'search'}
         placeholder={'Input search'}
