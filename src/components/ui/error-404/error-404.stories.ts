@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Error404 } from '@/components/ui/error-404/error-404'
+import { Error404 } from '@/assets/components/svgIcons'
 
 const meta = {
   argTypes: {},
@@ -12,4 +12,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Error404Example: Story = {}
+export const Error404Example: Story = {
+  args: {
+    style: { height: '192px', width: '452px' },
+  },
+}
