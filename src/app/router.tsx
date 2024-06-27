@@ -1,9 +1,10 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { DeckPage } from '@/pages/deck-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
+import { DeckPage } from '@/pages/deck-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
 import { ResetPassword } from '@/pages/password-reset'
+import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
 
@@ -38,6 +39,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <DeckPage />,
     path: '/deck',
+  },
+  {
+    element: <ProfilePage />,
+    path: '/profile',
   },
 ]
 
