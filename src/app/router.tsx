@@ -1,5 +1,6 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import { DeckPage } from '@/pages/deck-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
 import { ResetPassword } from '@/pages/password-reset'
@@ -33,6 +34,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <div>test temporary page delete</div>,
     path: '/',
+  },
+  {
+    element: <DeckPage />,
+    path: '/deck',
   },
 ]
 

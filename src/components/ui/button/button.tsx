@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import s from './button.module.scss'
 
-// Если Т соответствует типу ElementType тогда мы вернем T, иначе Never (ничего)
+// If T matches ElementType then we return T, otherwise Never (nothing).
 // https://medium.com/@developer.olly/understanding-typescript-infer-ac42bd018f3
 type InferType<T> = T extends ElementType<infer U> ? U : never
 
