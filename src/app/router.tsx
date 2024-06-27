@@ -1,21 +1,50 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { ProfilePage } from '@/pages/profile-page/profile-page'
+import { DeckPage } from '@/pages/deck-page'
+import { CheckEmailPage } from '@/pages/check-email-page'
+import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
+import { ResetPassword } from '@/pages/password-reset'
 import { SignInPage } from '@/pages/sign-in-page'
+import { SignUpPage } from '@/pages/sign-up-page'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
     path: '/sign-in',
   },
+  {
+    element: <SignUpPage />,
+    path: '/sign-up',
+  },
+  {
+    element: <PasswordRecoveryPage />,
+    path: '/password-recovery',
+  },
+  {
+    element: <ResetPassword />,
+    path: '/reset-password',
+  },
+  {
+    element: <CheckEmailPage />,
+    path: '/check-email',
+  },
 ]
 
 const privateRoutes: RouteObject[] = [
+  {
+    element: <div>test temporary page delete</div>,
+    path: '/',
+  },
+  {
+    element: <DeckPage />,
+    path: '/deck',
+  },
   {
     element: <ProfilePage />,
     path: '/profile',
   },
 ]
+
 const router = createBrowserRouter([...privateRoutes, ...publicRoutes])
 
 export function Router() {
