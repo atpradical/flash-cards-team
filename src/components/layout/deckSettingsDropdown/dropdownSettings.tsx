@@ -5,7 +5,7 @@ import EditOutline from '@/assets/components/svgIcons/EditOutline'
 import MoreVerticalOutline from '@/assets/components/svgIcons/MoreVerticalOutline'
 import PlayCircleOutline from '@/assets/components/svgIcons/PlayCircleOutline'
 import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
-import { AddNewDeckDialogForm } from '@/components/forms'
+import { AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
 import { DropdownItem } from '@/components/ui/dropdown/dropdownItem/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/dropdown/dropdownSeparator/dropdownSeparator'
@@ -16,6 +16,9 @@ import s from './dropdownSettings.module.scss'
 
 export const DropdownSettings = () => {
   const [isEditOpen, setIsEditOpen] = useState(false)
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // const idFromSearchParams = searchParams.get('id')
 
   const openEditModal = () => {
     setIsEditOpen(true)
@@ -25,10 +28,26 @@ export const DropdownSettings = () => {
     setIsEditOpen(false)
   }
 
-  const handleFormSubmit = (data: any) => {
+  const handleEditFormSubmit = (data: any) => {
     console.log(data)
     //todo: logic for FormSubmit
     closeEditModal()
+  }
+
+  const openDeleteModal = () => {
+    setIsDeleteOpen(true)
+  }
+
+  const closeDeleteModal = () => {
+    setIsDeleteOpen(false)
+    // setSearchParams()
+    // // idFromSearchParams = null
+  }
+
+  const handleDeleteFormSubmit = (data: any) => {
+    console.log(data)
+    //todo: logic for FormSubmit
+    closeDeleteModal()
   }
 
   const cn = {
@@ -57,16 +76,28 @@ export const DropdownSettings = () => {
       </DropdownItem>
       <DropdownSeparator />
       <DropdownItem asChild>
-        <Typography className={cn.settingsItem} variant={'caption'}>
+        <Typography className={cn.settingsItem} onClick={openDeleteModal} variant={'caption'}>
           <TrashOutline className={cn.icon} />
           Delete
         </Typography>
       </DropdownItem>
+
       {isEditOpen && (
         <AddNewDeckDialogForm
           onOpenChange={closeEditModal}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleEditFormSubmit}
           open={isEditOpen}
+        />
+      )}
+
+      {isDeleteOpen && (
+        <DeleteDialogForm
+          entity={'Deck'}
+          id={'15'}
+          name={'Will be name here'}
+          onOpenChange={closeDeleteModal}
+          onSubmit={handleDeleteFormSubmit}
+          open={isDeleteOpen}
         />
       )}
     </Dropdown>
