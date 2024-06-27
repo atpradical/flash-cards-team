@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import EditOutline from '@/assets/components/svgIcons/EditOutline'
 import MoreVerticalOutline from '@/assets/components/svgIcons/MoreVerticalOutline'
 import PlayCircleOutline from '@/assets/components/svgIcons/PlayCircleOutline'
 import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
+import { AddNewDeckDialogForm } from '@/components/forms'
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
 import { DropdownItem } from '@/components/ui/dropdown/dropdownItem/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/dropdown/dropdownSeparator/dropdownSeparator'
@@ -13,6 +15,22 @@ import clsx from 'clsx'
 import s from './dropdownSettings.module.scss'
 
 export const DropdownSettings = () => {
+  const [isEditOpen, setIsEditOpen] = useState(false)
+
+  const openEditModal = () => {
+    setIsEditOpen(true)
+  }
+
+  const closeEditModal = () => {
+    setIsEditOpen(false)
+  }
+
+  const handleFormSubmit = (data: any) => {
+    console.log(data)
+    //todo: logic for FormSubmit
+    closeEditModal()
+  }
+
   const cn = {
     icon: clsx(s.icon),
     link: clsx(s.link),
@@ -32,7 +50,7 @@ export const DropdownSettings = () => {
       </DropdownItem>
       <DropdownSeparator />
       <DropdownItem asChild>
-        <Typography className={cn.settingsItem} variant={'caption'}>
+        <Typography className={cn.settingsItem} onClick={openEditModal} variant={'caption'}>
           <EditOutline className={cn.icon} />
           Edit
         </Typography>
@@ -44,6 +62,13 @@ export const DropdownSettings = () => {
           Delete
         </Typography>
       </DropdownItem>
+      {isEditOpen && (
+        <AddNewDeckDialogForm
+          onOpenChange={closeEditModal}
+          onSubmit={handleFormSubmit}
+          open={isEditOpen}
+        />
+      )}
     </Dropdown>
   )
 }
