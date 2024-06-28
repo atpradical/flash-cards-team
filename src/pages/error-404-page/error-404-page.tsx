@@ -12,8 +12,8 @@ export const Error404Page = () => {
       <FlexContainer fd={'column'} gap={'32px'} jc={'center'}>
         <Error404 />
         <Typography variant={'body1'}>{'Sorry! Page not found!'}</Typography>
-        <Button>
-          <Link to={'/homePage'}>Back to home page</Link>
+        <Button as={Link} to={'/homePage'}>
+          Back to home page
         </Button>
       </FlexContainer>
     </Page>
