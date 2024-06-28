@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
 import myImage from '@/assets/webp/react-logo.webp'
+import { AddNewCardDialogForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { DeckTable } from '@/components/ui/deck-table'
 import { CardListExample } from '@/components/ui/deck-table/deck-table.mock'
@@ -15,6 +17,7 @@ import clsx from 'clsx'
 import s from './deck-page.module.scss'
 
 export const DeckPage = () => {
+  const [editModeWithId, setEditModeWithId] = useState<null | string>(null)
   const cn = {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
@@ -38,12 +41,21 @@ export const DeckPage = () => {
           </Button>
         </FlexContainer>
         <TextField placeholder={'find card'} variant={'search'} />
-        <DeckTable cardList={CardListExample} onSort={() => console.log('onSort invoked!')} />
+        <DeckTable
+          cardList={CardListExample}
+          editClick={setEditModeWithId}
+          onSort={() => console.log('onSort invoked!')}
+        />
         <Pagination
           className={cn.pagination}
           currentPage={1}
           onPageChange={() => {}}
           totalCount={100}
+        />
+        <AddNewCardDialogForm
+          onOpenChange={() => setEditModeWithId(null)}
+          onSubmit={() => console.log('onSubmit')}
+          open={!!editModeWithId}
         />
       </FlexContainer>
     </Page>
