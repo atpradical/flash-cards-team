@@ -37,7 +37,6 @@ export const DropdownSettings = ({
 
   const handleDeleteClick = () => {
     onOpenChangeDelete(!isDeleteOpen)
-    // Дополнительная логика для открытия модалки удаления
   }
 
   return (

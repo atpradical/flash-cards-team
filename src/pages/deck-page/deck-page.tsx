@@ -64,6 +64,7 @@ export const DeckPage = () => {
         />
 
         <AddNewCardDialogForm
+          id={editModeWithId ?? ''}
           onOpenChange={() => setEditModeWithId(null)}
           onSubmit={() => console.log('onSubmit')}
           open={!!editModeWithId}

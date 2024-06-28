@@ -16,6 +16,7 @@ export default meta
 export const Example: Story = {
   args: {
     cardList: CardListExample,
+    editClick: action('editClick action invoked with id:'),
     onSort: action('onSort action invoked!'),
   },
 }

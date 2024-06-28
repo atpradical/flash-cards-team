@@ -1,5 +1,7 @@
 import type { Meta } from '@storybook/react'
 
+import { useState } from 'react'
+
 import userDefault from '@/assets/webp/avatar-default.webp'
 import { DropdownSettings } from '@/components/layout/deckSettingsDropdown/dropdownSettings'
 import { DropdownProfile } from '@/components/layout/userDropdown/dropdownProfile'
@@ -48,6 +50,16 @@ export const DropdownWithUserAvatar = {
 
 export const DropdownWithSettings = {
   render: () => {
-    return <DropdownSettings />
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+    const [isEditOpen, setIsEditOpen] = useState(false)
+
+    return (
+      <DropdownSettings
+        isDeleteOpen={isDeleteOpen}
+        isEditOpen={isEditOpen}
+        onOpenChangeDelete={setIsDeleteOpen}
+        onOpenChangeEdit={setIsEditOpen}
+      />
+    )
   },
 }
