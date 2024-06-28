@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
 import myImage from '@/assets/webp/react-logo.webp'
-import { AddNewCardDialogForm } from '@/components/forms'
+import { AddNewCardDialogForm, AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { DeckTable } from '@/components/ui/deck-table'
 import { CardListExample } from '@/components/ui/deck-table/deck-table.mock'
@@ -18,6 +18,8 @@ import s from './deck-page.module.scss'
 
 export const DeckPage = () => {
   const [editModeWithId, setEditModeWithId] = useState<null | string>(null)
+  const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState<boolean>(false)
+  const [showDeleteDialogForm, setShowDeleteDialogForm] = useState<boolean>(false)
   const cn = {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
@@ -35,7 +37,14 @@ export const DeckPage = () => {
           Back to Decks List
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
-          <DeckTitle image={myImage} title={"Fried's Deck"} />
+          <DeckTitle
+            image={myImage}
+            isDeleteOpen={showDeleteDialogForm}
+            isEditOpen={showAddNewDeckDialogForm}
+            onOpenChangeDelete={setShowDeleteDialogForm}
+            onOpenChangeEdit={setShowAddNewDeckDialogForm}
+            title={"Fried's Deck"}
+          />
           <Button as={Link} className={cn.learnDeck} to={'/card'}>
             Learn Deck
           </Button>
@@ -46,16 +55,33 @@ export const DeckPage = () => {
           editClick={setEditModeWithId}
           onSort={() => console.log('onSort invoked!')}
         />
+
         <Pagination
           className={cn.pagination}
           currentPage={1}
           onPageChange={() => {}}
           totalCount={100}
         />
+
         <AddNewCardDialogForm
           onOpenChange={() => setEditModeWithId(null)}
           onSubmit={() => console.log('onSubmit')}
           open={!!editModeWithId}
+        />
+
+        <AddNewDeckDialogForm
+          onOpenChange={setShowAddNewDeckDialogForm}
+          onSubmit={() => console.log('onSubmit')}
+          open={showAddNewDeckDialogForm}
+        />
+
+        <DeleteDialogForm
+          entity={'Card'}
+          id={'15'}
+          name={'Some name'}
+          onOpenChange={setShowDeleteDialogForm}
+          onSubmit={() => console.log('onSubmit')}
+          open={showDeleteDialogForm}
         />
       </FlexContainer>
     </Page>
