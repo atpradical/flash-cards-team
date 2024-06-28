@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import CheckEmailIcon from '@/assets/components/svgIcons/CheckEmailIcon'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -30,7 +32,7 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
           className={cn.reminder}
           variant={'body2'}
         >{`We've sent an Email with instructions to \n${email}`}</Typography>
-        <Button as={'a'} className={cn.button} fullWidth>
+        <Button as={Link} className={cn.button} fullWidth to={'/sign-in'}>
           Back to Sign In
         </Button>
       </FlexContainer>

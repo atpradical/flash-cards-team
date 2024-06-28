@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -84,7 +85,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
         <Typography className={cn.reminder} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Button as={'a'} className={cn.button} variant={'link'}>
+        <Button as={Link} className={cn.button} to={'/sign-in'} variant={'link'}>
           Sign In
         </Button>
       </FlexContainer>
