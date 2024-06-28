@@ -4,6 +4,7 @@ import { CardPage } from '@/pages/card-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
 import { DeckListPage } from '@/pages/deck-list-page'
 import { DeckPage } from '@/pages/deck-page'
+import { Error404Page } from '@/pages/error-404-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
 import { ResetPassword } from '@/pages/password-reset'
 import { ProfilePage } from '@/pages/profile-page'
@@ -30,6 +31,10 @@ const publicRoutes: RouteObject[] = [
   {
     element: <CheckEmailPage />,
     path: '/check-email',
+  },
+  {
+    element: <Error404Page />,
+    path: '/404',
   },
 ]
 
