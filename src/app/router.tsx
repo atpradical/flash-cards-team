@@ -1,4 +1,5 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
+
 import { CardPage } from '@/pages/card-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
 import { DeckListPage } from '@/pages/deck-list-page'
