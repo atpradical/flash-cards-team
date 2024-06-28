@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -64,7 +65,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
         <Typography className={cn.reminder} variant={'body2'}>
           Did you remember your password?
         </Typography>
-        <Button className={cn.link} variant={'link'}>
+        <Button as={Link} className={cn.link} to={'/sign-in'} variant={'link'}>
           Try logging in
         </Button>
       </FlexContainer>
