@@ -1,7 +1,9 @@
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
+import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
 import { Actions } from '@/components/ui/actions'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { convertToDDMMYYYY } from '@/components/ui/deck-list-table/utils/utils'
 import { VARIANT } from '@/shared/enums/enums'
@@ -62,15 +64,17 @@ export const DeckTable = ({ cardList, onSort }: DeckTableProps) => {
       <TableRow key={el.id}>
         <TableCell>
           <FlexContainer gap={'10px'}>
-            {/*todo: заменить на AspectRatio по готовности компоненты или при рефакторинге при необходимости удалить класс со стилями*/}
-            <img alt={el.question} className={cn.cover} src={questionCover} />
+            <AspectRatio ratio={ASPECT_RATIO.Wide} variant={'s'}>
+              <img alt={el.question} className={cn.cover} src={questionCover} />
+            </AspectRatio>
             {el.question}
           </FlexContainer>
         </TableCell>
         <TableCell>
           <FlexContainer gap={'10px'}>
-            {/*todo: заменить на AspectRatio по готовности компоненты или при рефакторинге при необходимости удалить класс со стилями*/}
-            <img alt={el.answer} className={cn.cover} src={answerCover} />
+            <AspectRatio ratio={ASPECT_RATIO.Wide} variant={'s'}>
+              <img alt={el.answer} className={cn.cover} src={answerCover} />
+            </AspectRatio>
             {el.answer}
           </FlexContainer>
         </TableCell>

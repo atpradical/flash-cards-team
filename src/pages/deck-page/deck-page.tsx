@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
 import myImage from '@/assets/webp/react-logo.webp'
 import { Button } from '@/components/ui/button'
@@ -25,13 +27,13 @@ export const DeckPage = () => {
   return (
     <Page>
       <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'}>
-        <Button as={'a'} className={cn.goBack} href={''} variant={'link'}>
+        <Button as={Link} className={cn.goBack} to={'/deck-list'} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
           Back to Decks List
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
           <DeckTitle image={myImage} title={"Fried's Deck"} />
-          <Button as={'a'} className={cn.learnDeck} href={''}>
+          <Button as={Link} className={cn.learnDeck} to={'/card'}>
             Learn Deck
           </Button>
         </FlexContainer>
