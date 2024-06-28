@@ -1,5 +1,6 @@
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
+import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
 import { Actions } from '@/components/ui/actions'
 import { Button } from '@/components/ui/button'
 import { convertToDDMMYYYY } from '@/components/ui/deck-list-table/utils/utils'
@@ -10,6 +11,7 @@ import clsx from 'clsx'
 
 import s from './deck-list-table.module.scss'
 
+import { AspectRatio } from '../aspect-ratio'
 import {
   TableBody,
   TableCell,
@@ -40,10 +42,19 @@ export type DeckDataItem = {
 
 type DecksListTableProps = {
   deckList: DeckDataItem[]
+  onDelete: () => void
+  onEdit: () => void
+  onLearn: () => void
   onSort: () => void
 }
 
-export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
+export const DeckListTable = ({
+  deckList,
+  onDelete,
+  onEdit,
+  onLearn,
+  onSort,
+}: DecksListTableProps) => {
   const cn = {
     cover: clsx(s.cover),
     sort: clsx(s.sort),
@@ -61,8 +72,9 @@ export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
       <TableRow key={el.id}>
         <TableCell>
           <FlexContainer gap={'10px'}>
-            {/*todo: заменить на AspectRatio по готовности компоненты или при рефакторинге при необходимсоти удалить класс со стилями*/}
-            <img alt={el.name} className={cn.cover} src={cover} />
+            <AspectRatio ratio={ASPECT_RATIO.Wide} variant={'s'}>
+              <img alt={el.name} className={cn.cover} src={cover} />
+            </AspectRatio>
             {el.name}
           </FlexContainer>
         </TableCell>
@@ -71,7 +83,7 @@ export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
         <TableCell>{el.author.name}</TableCell>
         <TableCell>
           {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
-          <Actions onDelete={() => {}} onEdit={() => {}} onLearn={() => {}} variant={VARIANT.ALL} />
+          <Actions onDelete={onDelete} onEdit={onEdit} onLearn={onLearn} variant={VARIANT.ALL} />
         </TableCell>
       </TableRow>
     )

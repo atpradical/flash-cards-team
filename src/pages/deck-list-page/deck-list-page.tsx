@@ -1,3 +1,7 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { DeckListTable } from '@/components/ui/deck-list-table'
 import { DeckListExample } from '@/components/ui/deck-list-table/deck-list-table.mock'
@@ -9,27 +13,70 @@ import { Page } from '@/shared/ui/page'
 
 export const DeckListPage = () => {
   const dummyNumberOfCards = [2, 90]
+  const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
+  const [showEditDeckDialog, setEditDeckDialog] = useState(false)
+  const [showDeleteDeckDialog, setDeleteDeckDialog] = useState(false)
 
+  const navigate = useNavigate()
+
+  const deleteDeckHandler = () => {
+    setDeleteDeckDialog(!showDeleteDeckDialog)
+  }
+
+  const editDeckHandler = () => {
+    setEditDeckDialog(!showEditDeckDialog)
+  }
+  const addNewDeckHandler = () => {
+    setShowAddDeckDialog(!showAddDeckDialog)
+  }
+
+  const learnDeckHandler = () => {
+    navigate('/deck')
+  }
+
+  //todo: replace related mock data and functions during RTQuery tasks implementation
   return (
     <Page>
       <FlexContainer jc={'space-between'}>
         <Typography as={'h1'} variant={'h1'}>
           {`Deck's list`}
         </Typography>
-        <Button as={'a'} href={''}>
-          Add New Deck
-        </Button>
+        <Button onClick={addNewDeckHandler}>Add New Deck</Button>
       </FlexContainer>
       <FlexContainer fd={'column'} gap={'24px'}>
         <TableFilterBar
           onValueChange={() => console.log('number of cards is changed')}
           value={dummyNumberOfCards}
         />
-        <DeckListTable deckList={DeckListExample} onSort={() => console.log('onSort invoked!')} />
+        <DeckListTable
+          deckList={DeckListExample}
+          onDelete={deleteDeckHandler}
+          onEdit={editDeckHandler}
+          onLearn={learnDeckHandler}
+          onSort={() => console.log('onSort invoked!')}
+        />
         <FlexContainer jc={'left'}>
           <Pagination currentPage={1} onPageChange={() => {}} totalCount={100} />
         </FlexContainer>
       </FlexContainer>
+      <AddNewDeckDialogForm
+        onOpenChange={addNewDeckHandler}
+        onSubmit={() => console.log('Form submit invoked!')}
+        open={showAddDeckDialog}
+      />
+      <DeleteDialogForm
+        entity={'Deck'}
+        id={'12345'}
+        name={"Some Deck's Name"}
+        onOpenChange={deleteDeckHandler}
+        onSubmit={() => console.log('delete dialog form submit invoked!')}
+        open={showDeleteDeckDialog}
+      />
+      <AddNewDeckDialogForm
+        onOpenChange={editDeckHandler}
+        onSubmit={() => console.log('add dialog form submit invoked!')}
+        open={showEditDeckDialog}
+      />
     </Page>
   )
 }
