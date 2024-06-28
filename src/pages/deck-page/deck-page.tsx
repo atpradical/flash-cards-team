@@ -33,7 +33,7 @@ export const DeckPage = () => {
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
           <DeckTitle image={myImage} title={"Fried's Deck"} />
-          <Button as={'a'} className={cn.learnDeck} href={''}>
+          <Button as={Link} className={cn.learnDeck} to={'/card'}>
             Learn Deck
           </Button>
         </FlexContainer>
