@@ -1,10 +1,13 @@
 import type { Meta } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import userDefault from '@/assets/webp/avatar-default.webp'
 import { DropdownSettings } from '@/components/layout/deckSettingsDropdown/dropdownSettings'
 import { DropdownProfile } from '@/components/layout/userDropdown/dropdownProfile'
 import { Avatar } from '@/components/ui/avatar'
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
+import { action } from '@storybook/addon-actions'
 
 type User = {
   email: string
@@ -47,7 +50,16 @@ export const DropdownWithUserAvatar = {
 }
 
 export const DropdownWithSettings = {
-  render: () => {
-    return <DropdownSettings />
+  args: {
+    onDelete: action('onDelete was invoked'),
+    onEdit: action('onEdit was invoked'),
+  },
+
+  render: (args: any) => {
+    return (
+      <MemoryRouter>
+        <DropdownSettings onDelete={args.onDelete} onEdit={args.onEdit} />
+      </MemoryRouter>
+    )
   },
 }

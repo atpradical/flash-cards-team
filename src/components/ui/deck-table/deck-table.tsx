@@ -42,10 +42,12 @@ export type CardData = {
 
 type DeckTableProps = {
   cardList: CardData[]
+  onDelete: () => void
+  onEdit: () => void
   onSort: () => void
 }
 
-export const DeckTable = ({ cardList, onSort }: DeckTableProps) => {
+export const DeckTable = ({ cardList, onDelete, onEdit, onSort }: DeckTableProps) => {
   const cn = {
     cover: clsx(s.cover),
     sort: clsx(s.sort),
@@ -84,7 +86,7 @@ export const DeckTable = ({ cardList, onSort }: DeckTableProps) => {
         </TableCell>
         <TableCell>
           {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
-          <Actions onDelete={() => {}} onEdit={() => {}} onLearn={() => {}} variant={VARIANT.ALL} />
+          <Actions onDelete={onDelete} onEdit={onEdit} onLearn={() => {}} variant={VARIANT.ALL} />
         </TableCell>
       </TableRow>
     )
