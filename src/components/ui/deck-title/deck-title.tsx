@@ -10,20 +10,16 @@ import s from './deck-title.module.scss'
 type DeckTitleProps = {
   image: string
   imgDescription?: string
-  isDeleteOpen: boolean
-  isEditOpen: boolean
-  onOpenChangeDelete: (isOpen: boolean) => void
-  onOpenChangeEdit: (isOpen: boolean) => void
+  onDelete: () => void
+  onEdit: () => void
   title: string
 }
 
 export const DeckTitle = ({
   image,
   imgDescription = 'Deck cover image',
-  isDeleteOpen,
-  isEditOpen,
-  onOpenChangeDelete,
-  onOpenChangeEdit,
+  onDelete,
+  onEdit,
   title,
 }: DeckTitleProps) => {
   const cn = {
@@ -37,12 +33,7 @@ export const DeckTitle = ({
         <Typography as={'h1'} variant={'h1'}>
           {title}
         </Typography>
-        <DropdownSettings
-          isDeleteOpen={isDeleteOpen}
-          isEditOpen={isEditOpen}
-          onOpenChangeDelete={onOpenChangeDelete}
-          onOpenChangeEdit={onOpenChangeEdit}
-        />
+        <DropdownSettings onDelete={onDelete} onEdit={onEdit} />
       </FlexContainer>
       {image && (
         <AspectRatio ratio={ASPECT_RATIO.Standard} variant={'m'}>

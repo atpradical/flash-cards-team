@@ -1,12 +1,13 @@
 import type { Meta } from '@storybook/react'
 
-import { useState } from 'react'
+import { MemoryRouter } from 'react-router-dom'
 
 import userDefault from '@/assets/webp/avatar-default.webp'
 import { DropdownSettings } from '@/components/layout/deckSettingsDropdown/dropdownSettings'
 import { DropdownProfile } from '@/components/layout/userDropdown/dropdownProfile'
 import { Avatar } from '@/components/ui/avatar'
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
+import { action } from '@storybook/addon-actions'
 
 type User = {
   email: string
@@ -49,17 +50,16 @@ export const DropdownWithUserAvatar = {
 }
 
 export const DropdownWithSettings = {
-  render: () => {
-    const [isDeleteOpen, setIsDeleteOpen] = useState(false)
-    const [isEditOpen, setIsEditOpen] = useState(false)
+  args: {
+    onDelete: action('onDelete was invoked'),
+    onEdit: action('onEdit was invoked'),
+  },
 
+  render: (args: any) => {
     return (
-      <DropdownSettings
-        isDeleteOpen={isDeleteOpen}
-        isEditOpen={isEditOpen}
-        onOpenChangeDelete={setIsDeleteOpen}
-        onOpenChangeEdit={setIsEditOpen}
-      />
+      <MemoryRouter>
+        <DropdownSettings onDelete={args.onDelete} onEdit={args.onEdit} />
+      </MemoryRouter>
     )
   },
 }

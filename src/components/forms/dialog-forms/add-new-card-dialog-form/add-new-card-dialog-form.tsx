@@ -32,7 +32,6 @@ const AddNewCardDialogFormScheme = z.object({
 type AddNewCardDialogFormValues = z.infer<typeof AddNewCardDialogFormScheme>
 
 type AddNewCardDialogFormProps = {
-  id?: string
   onOpenChange: (open: boolean) => void
   onSubmit: (data: AddNewCardDialogFormValues) => void
   open: boolean

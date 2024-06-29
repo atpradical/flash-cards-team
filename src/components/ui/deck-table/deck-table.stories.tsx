@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import { DeckTable } from '@/components/ui/deck-table'
 import { CardListExample } from '@/components/ui/deck-table/deck-table.mock'
 import { action } from '@storybook/addon-actions'
@@ -16,7 +18,13 @@ export default meta
 export const Example: Story = {
   args: {
     cardList: CardListExample,
-    editClick: action('editClick action invoked with id:'),
+    onDelete: action('onDelete action invoked!'),
+    onEdit: action('onEdit action invoked!'),
     onSort: action('onSort action invoked!'),
   },
+  render: () => (
+    <MemoryRouter>
+      <DeckTable {...Example.args} />
+    </MemoryRouter>
+  ),
 }

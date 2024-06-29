@@ -10,6 +10,7 @@ type Props = {
   gap?: CSSProperties['gap']
   jc?: CSSProperties['justifyContent']
   mt?: CSSProperties['marginTop']
+  pd?: CSSProperties['padding']
 } & ComponentPropsWithoutRef<'div'>
 
 export const FlexContainer = ({
@@ -20,6 +21,7 @@ export const FlexContainer = ({
   gap,
   jc = 'flex-start',
   mt,
+  pd,
   style,
   ...rest
 }: Props) => {
@@ -31,6 +33,7 @@ export const FlexContainer = ({
     gap: gap,
     justifyContent: jc,
     marginTop: mt,
+    padding: pd,
     ...style,
   }
 

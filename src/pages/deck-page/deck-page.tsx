@@ -17,15 +17,32 @@ import clsx from 'clsx'
 import s from './deck-page.module.scss'
 
 export const DeckPage = () => {
-  const [editModeWithId, setEditModeWithId] = useState<null | string>(null)
-  const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState<boolean>(false)
-  const [showDeleteDialogForm, setShowDeleteDialogForm] = useState<boolean>(false)
+  const [showAddNewCardDialogForm, setShowAddNewCardDialogForm] = useState(false)
+  const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
+  const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState(false)
+  const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
   const cn = {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
     image: clsx(s.image),
     learnDeck: clsx(s.learnDeck),
     pagination: clsx(s.pagination),
+  }
+
+  const editDeckHandler = () => {
+    setShowAddNewDeckDialogForm(!showAddNewDeckDialogForm)
+  }
+
+  const deleteDeckHandler = () => {
+    setShowDeleteDeckDialogForm(!showDeleteDeckDialogForm)
+  }
+
+  const editCardHandler = () => {
+    setShowAddNewCardDialogForm(!showAddNewCardDialogForm)
+  }
+
+  const deleteCardHandler = () => {
+    setShowDeleteCardDialogForm(!showDeleteCardDialogForm)
   }
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
@@ -39,10 +56,8 @@ export const DeckPage = () => {
         <FlexContainer ai={'start'} jc={'start'}>
           <DeckTitle
             image={myImage}
-            isDeleteOpen={showDeleteDialogForm}
-            isEditOpen={showAddNewDeckDialogForm}
-            onOpenChangeDelete={setShowDeleteDialogForm}
-            onOpenChangeEdit={setShowAddNewDeckDialogForm}
+            onDelete={deleteDeckHandler}
+            onEdit={editDeckHandler}
             title={"Fried's Deck"}
           />
           <Button as={Link} className={cn.learnDeck} to={'/card'}>
@@ -52,7 +67,8 @@ export const DeckPage = () => {
         <TextField placeholder={'find card'} variant={'search'} />
         <DeckTable
           cardList={CardListExample}
-          editClick={setEditModeWithId}
+          onDelete={deleteCardHandler}
+          onEdit={editCardHandler}
           onSort={() => console.log('onSort invoked!')}
         />
 
@@ -64,10 +80,9 @@ export const DeckPage = () => {
         />
 
         <AddNewCardDialogForm
-          id={editModeWithId ?? ''}
-          onOpenChange={() => setEditModeWithId(null)}
+          onOpenChange={editCardHandler}
           onSubmit={() => console.log('onSubmit')}
-          open={!!editModeWithId}
+          open={showAddNewCardDialogForm}
         />
 
         <AddNewDeckDialogForm
@@ -80,9 +95,18 @@ export const DeckPage = () => {
           entity={'Card'}
           id={'15'}
           name={'Some name'}
-          onOpenChange={setShowDeleteDialogForm}
+          onOpenChange={deleteCardHandler}
           onSubmit={() => console.log('onSubmit')}
-          open={showDeleteDialogForm}
+          open={showDeleteCardDialogForm}
+        />
+
+        <DeleteDialogForm
+          entity={'Deck'}
+          id={'15'}
+          name={'Some name'}
+          onOpenChange={deleteDeckHandler}
+          onSubmit={() => console.log('onSubmit')}
+          open={showDeleteDeckDialogForm}
         />
       </FlexContainer>
     </Page>

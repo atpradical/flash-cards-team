@@ -13,30 +13,15 @@ import clsx from 'clsx'
 import s from './dropdownSettings.module.scss'
 
 type DropdownSettingsProps = {
-  isDeleteOpen: boolean
-  isEditOpen: boolean
-  onOpenChangeDelete: (isOpen: boolean) => void
-  onOpenChangeEdit: (isOpen: boolean) => void
+  onDelete: () => void
+  onEdit: () => void
 }
 
-export const DropdownSettings = ({
-  isDeleteOpen,
-  isEditOpen,
-  onOpenChangeDelete,
-  onOpenChangeEdit,
-}: DropdownSettingsProps) => {
+export const DropdownSettings = ({ onDelete, onEdit }: DropdownSettingsProps) => {
   const cn = {
     icon: clsx(s.icon),
     settingsItem: clsx(s.settingsItem),
     triggerIcon: clsx(s.triggerIcon),
-  }
-
-  const handleEditClick = () => {
-    onOpenChangeEdit(!isEditOpen)
-  }
-
-  const handleDeleteClick = () => {
-    onOpenChangeDelete(!isDeleteOpen)
   }
 
   return (
@@ -48,14 +33,14 @@ export const DropdownSettings = ({
         </Typography>
       </DropdownItem>
       <DropdownSeparator />
-      <DropdownItem asChild onClick={handleEditClick}>
+      <DropdownItem asChild onClick={onEdit}>
         <Typography className={cn.settingsItem} variant={'caption'}>
           <EditOutline className={cn.icon} />
           Edit
         </Typography>
       </DropdownItem>
       <DropdownSeparator />
-      <DropdownItem asChild onClick={handleDeleteClick}>
+      <DropdownItem asChild onClick={onDelete}>
         <Typography className={cn.settingsItem} variant={'caption'}>
           <TrashOutline className={cn.icon} />
           Delete
