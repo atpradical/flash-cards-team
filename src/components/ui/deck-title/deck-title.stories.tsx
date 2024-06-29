@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import myImage from '@/assets/webp/react-logo.webp'
 import { DeckTitle } from '@/components/ui/deck-title/deck-title'
+import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {},
@@ -16,6 +17,8 @@ export const Example: Story = {
   args: {
     image: myImage,
     imgDescription: 'some image description',
+    onDelete: action('onDelete was action invoked'),
+    onEdit: action('onEdit was action invoked'),
     title: "Fried's Deck",
   },
 }

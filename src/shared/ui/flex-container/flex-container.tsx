@@ -9,6 +9,8 @@ type Props = {
   fw?: CSSProperties['flexWrap']
   gap?: CSSProperties['gap']
   jc?: CSSProperties['justifyContent']
+  mt?: CSSProperties['marginTop']
+  pd?: CSSProperties['padding']
 } & ComponentPropsWithoutRef<'div'>
 
 export const FlexContainer = ({
@@ -18,6 +20,8 @@ export const FlexContainer = ({
   fw = 'nowrap',
   gap,
   jc = 'flex-start',
+  mt,
+  pd,
   style,
   ...rest
 }: Props) => {
@@ -28,6 +32,8 @@ export const FlexContainer = ({
     flexWrap: fw,
     gap: gap,
     justifyContent: jc,
+    marginTop: mt,
+    padding: pd,
     ...style,
   }
 
