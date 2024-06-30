@@ -38,7 +38,7 @@ export const DeckListPage = () => {
       <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>
         <FlexContainer jc={'space-between'}>
           <Typography as={'h1'} variant={'h1'}>
-            {`Deck's list`}
+            {"Deck's list"}
           </Typography>
           <Button onClick={addNewDeckHandler}>Add New Deck</Button>
         </FlexContainer>
@@ -53,9 +53,7 @@ export const DeckListPage = () => {
           onLearn={learnDeckHandler}
           onSort={() => console.log('onSort invoked!')}
         />
-        <FlexContainer jc={'left'}>
-          <Pagination currentPage={1} onPageChange={() => {}} totalCount={100} />
-        </FlexContainer>
+        <Pagination currentPage={1} onPageChange={() => {}} totalCount={100} />
         <AddNewDeckDialogForm
           onOpenChange={addNewDeckHandler}
           onSubmit={() => console.log('Form submit invoked!')}
