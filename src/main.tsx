@@ -1,4 +1,4 @@
-import { App } from '@/app/App'
+import { App } from '@/app'
 import ReactDOM from 'react-dom/client'
 
 import './styles/index.scss'

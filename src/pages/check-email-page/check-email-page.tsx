@@ -1,4 +1,4 @@
-import { CheckEmail } from '@/components/ui/check-email'
+import { CheckEmail } from '@/components/ui/layout-components'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 

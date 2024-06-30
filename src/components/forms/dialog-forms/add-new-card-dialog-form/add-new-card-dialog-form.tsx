@@ -4,17 +4,6 @@ import { useForm } from 'react-hook-form'
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
 import dummyImage from '@/assets/webp/cover-default.webp'
 import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogBody,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-} from '@/components/ui/dialog'
-import { Typography } from '@/components/ui/typography'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
@@ -23,6 +12,18 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './../dialog-forms.module.scss'
+
+import { AspectRatio } from '../../../ui/primitives/aspect-ratio'
+import { Button } from '../../../ui/primitives/button'
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from '../../../ui/primitives/dialog'
+import { Typography } from '../../../ui/primitives/typography'
 
 const AddNewCardDialogFormScheme = z.object({
   answer: cardAnswerScheme,

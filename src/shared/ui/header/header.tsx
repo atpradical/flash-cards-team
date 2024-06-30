@@ -1,9 +1,10 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-import { Card } from '@/components/ui/card'
 import clsx from 'clsx'
 
 import s from './header.module.scss'
+
+import { Card } from '../../../components/ui/primitives/card'
 
 type Props = ComponentPropsWithoutRef<typeof Card>
 

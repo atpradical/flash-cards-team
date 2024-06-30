@@ -1,5 +1,5 @@
 import src from '@/assets/webp/avatar-default.webp'
-import { PersonalInfo } from '@/components/ui/personal-info'
+import { PersonalInfo } from '@/components/ui/layout-components'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 

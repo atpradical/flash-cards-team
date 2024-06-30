@@ -1,15 +1,16 @@
 import { useForm } from 'react-hook-form'
 
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
+import { Option } from '@/common/types'
 import { radioScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledRadio } from '@/shared/ui/form-components/controlled-radio'
-import { Option } from '@/types'
 import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './self-rate-form.module.scss'
+
+import { Button } from '../../ui/primitives/button'
+import { Typography } from '../../ui/primitives/typography'
 
 const SelfRateScheme = z.object({ radio: radioScheme })
 

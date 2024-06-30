@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Error404 } from '@/assets/components/svgIcons'
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
+import { Button, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
