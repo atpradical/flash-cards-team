@@ -17,7 +17,7 @@ export const CardPage = () => {
 
   return (
     <Page>
-      <FlexContainer fd={'column'} gap={'36px'} jc={'left'}>
+      <FlexContainer fd={'column'} gap={'36px'} jc={'left'} pd={'0 20px'}>
         <Button as={Link} className={cn.goBack} to={'/deck'} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
           Back to Deck

@@ -22,7 +22,7 @@ const mockUser: User = {
 export const CardsHeader = ({ isAuthorized, userData, ...propsHeader }: CardsHeaderProps) => {
   return (
     <Header {...propsHeader}>
-      <FlexContainer jc={'space-between'}>
+      <FlexContainer jc={'space-between'} pd={'0 20px'}>
         <Logo />
         <UserProfile isAuthorized={isAuthorized} userData={mockUser} />
       </FlexContainer>

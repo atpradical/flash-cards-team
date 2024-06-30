@@ -35,13 +35,13 @@ export const DeckListPage = () => {
   //todo: replace related mock data and functions during RTQuery tasks implementation
   return (
     <Page>
-      <FlexContainer jc={'space-between'}>
-        <Typography as={'h1'} variant={'h1'}>
-          {`Deck's list`}
-        </Typography>
-        <Button onClick={addNewDeckHandler}>Add New Deck</Button>
-      </FlexContainer>
-      <FlexContainer fd={'column'} gap={'24px'}>
+      <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>
+        <FlexContainer jc={'space-between'}>
+          <Typography as={'h1'} variant={'h1'}>
+            {`Deck's list`}
+          </Typography>
+          <Button onClick={addNewDeckHandler}>Add New Deck</Button>
+        </FlexContainer>
         <TableFilterBar
           onValueChange={() => console.log('number of cards is changed')}
           value={dummyNumberOfCards}
@@ -56,25 +56,25 @@ export const DeckListPage = () => {
         <FlexContainer jc={'left'}>
           <Pagination currentPage={1} onPageChange={() => {}} totalCount={100} />
         </FlexContainer>
+        <AddNewDeckDialogForm
+          onOpenChange={addNewDeckHandler}
+          onSubmit={() => console.log('Form submit invoked!')}
+          open={showAddDeckDialog}
+        />
+        <DeleteDialogForm
+          entity={'Deck'}
+          id={'12345'}
+          name={"Some Deck's Name"}
+          onOpenChange={deleteDeckHandler}
+          onSubmit={() => console.log('delete dialog form submit invoked!')}
+          open={showDeleteDeckDialog}
+        />
+        <AddNewDeckDialogForm
+          onOpenChange={editDeckHandler}
+          onSubmit={() => console.log('add dialog form submit invoked!')}
+          open={showEditDeckDialog}
+        />
       </FlexContainer>
-      <AddNewDeckDialogForm
-        onOpenChange={addNewDeckHandler}
-        onSubmit={() => console.log('Form submit invoked!')}
-        open={showAddDeckDialog}
-      />
-      <DeleteDialogForm
-        entity={'Deck'}
-        id={'12345'}
-        name={"Some Deck's Name"}
-        onOpenChange={deleteDeckHandler}
-        onSubmit={() => console.log('delete dialog form submit invoked!')}
-        open={showDeleteDeckDialog}
-      />
-      <AddNewDeckDialogForm
-        onOpenChange={editDeckHandler}
-        onSubmit={() => console.log('add dialog form submit invoked!')}
-        open={showEditDeckDialog}
-      />
     </Page>
   )
 }
