@@ -1,9 +1,5 @@
 import { useForm } from 'react-hook-form'
 
-import { Avatar } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Typography } from '@/components/ui/typography'
 import { nicknameScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
@@ -12,6 +8,11 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './personal-info-form.module.scss'
+
+import { Avatar } from '../../ui/primitives/avatar'
+import { Button } from '../../ui/primitives/button'
+import { Card } from '../../ui/primitives/card'
+import { Typography } from '../../ui/primitives/typography'
 
 const PersonalInfoFormScheme = z
   .object({

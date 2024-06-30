@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom'
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
 import myImage from '@/assets/webp/react-logo.webp'
 import { AddNewCardDialogForm, AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
-import { Button } from '@/components/ui/button'
-import { DeckTable } from '@/components/ui/deck-table'
-import { CardListExample } from '@/components/ui/deck-table/deck-table.mock'
-import { DeckTitle } from '@/components/ui/deck-title/deck-title'
-import { Pagination } from '@/components/ui/pagination'
-import { TextField } from '@/components/ui/text-field'
+import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
+import { CardListExample } from '@/components/ui/layout-components/deck-table/deck-table.mock'
+import { Button, TextField } from '@/components/ui/primitives'
+import { Pagination } from '@/components/ui/primitives/pagination'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 import clsx from 'clsx'
@@ -71,26 +69,22 @@ export const DeckPage = () => {
           onEdit={editCardHandler}
           onSort={() => console.log('onSort invoked!')}
         />
-
         <Pagination
           className={cn.pagination}
           currentPage={1}
           onPageChange={() => {}}
           totalCount={100}
         />
-
         <AddNewCardDialogForm
           onOpenChange={editCardHandler}
           onSubmit={() => console.log('onSubmit')}
           open={showAddNewCardDialogForm}
         />
-
         <AddNewDeckDialogForm
           onOpenChange={setShowAddNewDeckDialogForm}
           onSubmit={() => console.log('onSubmit')}
           open={showAddNewDeckDialogForm}
         />
-
         <DeleteDialogForm
           entity={'Card'}
           id={'15'}
@@ -99,7 +93,6 @@ export const DeckPage = () => {
           onSubmit={() => console.log('onSubmit')}
           open={showDeleteCardDialogForm}
         />
-
         <DeleteDialogForm
           entity={'Deck'}
           id={'15'}

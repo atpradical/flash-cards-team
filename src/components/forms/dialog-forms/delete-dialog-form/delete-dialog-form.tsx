@@ -1,7 +1,14 @@
 import { useForm } from 'react-hook-form'
 
 import { CloseOutline } from '@/assets/components/svgIcons'
-import { Button } from '@/components/ui/button'
+import { entityIdScheme } from '@/shared/schemes'
+import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
+import { z } from 'zod'
+
+import s from './../dialog-forms.module.scss'
+
+import { Button } from '../../../ui/primitives/button'
 import {
   Dialog,
   DialogClose,
@@ -9,14 +16,8 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-} from '@/components/ui/dialog'
-import { Typography } from '@/components/ui/typography'
-import { entityIdScheme } from '@/shared/schemes'
-import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
-import { z } from 'zod'
-
-import s from './../dialog-forms.module.scss'
+} from '../../../ui/primitives/dialog'
+import { Typography } from '../../../ui/primitives/typography'
 
 const DeleteFormScheme = z.object({
   entityId: entityIdScheme,

@@ -1,6 +1,6 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
-import { Radio, RadioProps } from '@/components/ui/radio'
+import { Radio, RadioProps } from '../../../../components/ui/primitives/radio'
 
 type ControlledRadioProps<T extends FieldValues> = Omit<
   RadioProps,

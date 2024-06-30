@@ -1,6 +1,7 @@
-import { Router } from '@/app/router'
-import { CardsHeader } from '@/components/ui/cards-header'
+import { CardsHeader } from '@/components/ui/layout-components'
 import { Layout } from '@/shared/ui/layout'
+
+import { Router } from './router'
 
 export function App() {
   return (

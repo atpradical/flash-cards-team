@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
 import ArrowBackOutline from '@/assets/components/svgIcons/ArrowBackOutline'
-import { Button } from '@/components/ui/button'
-import { LearnCard } from '@/components/ui/learn-card'
+import { LearnCard } from '@/components/ui/layout-components'
+import { Button } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 import clsx from 'clsx'

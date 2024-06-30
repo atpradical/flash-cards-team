@@ -1,9 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Typography } from '@/components/ui/typography'
 import { emailSchema, passwordSchema, rememberMeSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -13,6 +10,10 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './sign-in-form.module.scss'
+
+import { Button } from '../../ui/primitives/button'
+import { Card } from '../../ui/primitives/card'
+import { Typography } from '../../ui/primitives/typography'
 
 type SignInFormProps = {
   onSubmit: (data: FormValues) => void
