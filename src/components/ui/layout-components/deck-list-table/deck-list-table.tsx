@@ -1,12 +1,12 @@
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
-import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
+import { RATIO } from '@/common/enums/ratio'
 import { Nullable } from '@/common/types'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
-  AspectRatio,
   Button,
+  Image,
   TableBody,
   TableCell,
   TableContainer,
@@ -55,7 +55,6 @@ export const DeckListTable = ({
   onSort,
 }: DecksListTableProps) => {
   const cn = {
-    cover: clsx(s.cover),
     sort: clsx(s.sort),
     sortIcon: clsx(s.sortIcon),
   }
@@ -71,9 +70,7 @@ export const DeckListTable = ({
       <TableRow key={el.id}>
         <TableCell>
           <FlexContainer gap={'10px'}>
-            <AspectRatio ratio={ASPECT_RATIO.Wide} variant={'s'}>
-              <img alt={el.name} className={cn.cover} src={cover} />
-            </AspectRatio>
+            <Image alt={el.name} ratio={RATIO.S} src={cover} variant={'s'} />
             {el.name}
           </FlexContainer>
         </TableCell>

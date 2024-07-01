@@ -2,6 +2,16 @@ import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
+import {
+  Button,
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  Typography,
+} from '@/components/ui/primitives'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -11,17 +21,6 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './../dialog-forms.module.scss'
-
-import { Button } from '../../../ui/primitives/button'
-import {
-  Dialog,
-  DialogBody,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-} from '../../../ui/primitives/dialog'
-import { Typography } from '../../../ui/primitives/typography'
 
 const AddNewDeckDialogFormScheme = z.object({
   deckName: deckNameScheme,

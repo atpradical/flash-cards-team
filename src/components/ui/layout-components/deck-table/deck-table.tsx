@@ -1,14 +1,14 @@
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
-import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
+import { RATIO } from '@/common/enums/ratio'
 import { Nullable } from '@/common/types/commonTypes'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
-  AspectRatio,
   Button,
   Grade,
+  Image,
   TableBody,
   TableCell,
   TableContainer,
@@ -48,7 +48,6 @@ type DeckTableProps = {
 
 export const DeckTable = ({ cardList, onDelete, onEdit, onSort }: DeckTableProps) => {
   const cn = {
-    cover: clsx(s.cover),
     sort: clsx(s.sort),
     sortIcon: clsx(s.sortIcon),
   }
@@ -65,17 +64,13 @@ export const DeckTable = ({ cardList, onDelete, onEdit, onSort }: DeckTableProps
       <TableRow key={el.id}>
         <TableCell>
           <FlexContainer gap={'10px'}>
-            <AspectRatio ratio={ASPECT_RATIO.Wide} variant={'s'}>
-              <img alt={el.question} className={cn.cover} src={questionCover} />
-            </AspectRatio>
+            <Image alt={el.question} ratio={RATIO.S} src={questionCover} variant={'s'} />
             {el.question}
           </FlexContainer>
         </TableCell>
         <TableCell>
           <FlexContainer gap={'10px'}>
-            <AspectRatio ratio={ASPECT_RATIO.Wide} variant={'s'}>
-              <img alt={el.answer} className={cn.cover} src={answerCover} />
-            </AspectRatio>
+            <Image alt={el.answer} ratio={RATIO.S} src={answerCover} variant={'s'} />
             {el.answer}
           </FlexContainer>
         </TableCell>
