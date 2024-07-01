@@ -5,7 +5,6 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: SelfRateForm,
-  tags: ['autodocs'],
   title: 'Forms/SelfRateForm',
 } satisfies Meta<typeof SelfRateForm>
 
