@@ -21,13 +21,14 @@ export type TypographyVariant =
 
 type TypographyProps<T extends ElementType> = {
   as?: T
+  gray?: boolean
   variant?: TypographyVariant
 } & ComponentPropsWithoutRef<T>
 
 export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T>) => {
-  const { as: Component = 'p', className, variant = 'caption', ...rest } = props
+  const { as: Component = 'p', className, gray, variant = 'body2', ...rest } = props
 
-  const classNames = clsx(s.typography, variant && s[`typography-${variant}`], className)
+  const classNames = clsx(s.typography, variant && s[variant], gray && s.gray, className)
 
   return <Component className={classNames} {...rest} />
 }

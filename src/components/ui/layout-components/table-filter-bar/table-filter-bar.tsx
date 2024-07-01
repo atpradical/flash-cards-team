@@ -43,7 +43,7 @@ export const TableFilterBar = ({ onValueChange, value }: TableFilterBarProps) =>
       />
       <TabSwitcher className={cn.tabs} label={'Show decks cards'} tabs={tabs} />
       <div className={cn.slider}>
-        <Typography variant={'body2'}>Number of cards</Typography>
+        <Typography>Number of cards</Typography>
         <Slider onValueChange={handleSliderValueChange} value={sliderValue} />
       </div>
       <Button className={cn.button} variant={'secondary'}>

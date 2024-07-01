@@ -30,7 +30,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         <CheckIcon className={cn.icon} />
       </RadixCheckbox.Indicator>
       {label && (
-        <Typography as={'label'} className={cn.label} htmlFor={checkboxId} variant={'body2'}>
+        <Typography as={'label'} className={cn.label} htmlFor={checkboxId}>
           {label}
         </Typography>
       )}

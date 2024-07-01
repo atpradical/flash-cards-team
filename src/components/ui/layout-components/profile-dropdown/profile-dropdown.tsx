@@ -22,7 +22,6 @@ export const ProfileDropdown = (props: Props) => {
   const { email, name, photo, profilePageHref, trigger } = props
   const cn = {
     icon: clsx(s.icon),
-    link: clsx(s.link),
     profileArea: clsx(s.profileArea),
   }
 
@@ -33,7 +32,7 @@ export const ProfileDropdown = (props: Props) => {
           <Avatar size={'s'} src={photo} title={'Photo'} />
           <div>
             <Typography variant={'subtitle2'}>{name}</Typography>
-            <Typography className={cn.link} variant={'caption'}>
+            <Typography gray variant={'caption'}>
               {email}
             </Typography>
           </div>

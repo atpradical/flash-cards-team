@@ -46,7 +46,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
           </Button>
         </FlexContainer>
 
-        <Typography className={cn.hint} variant={'body2'}>
+        <Typography className={cn.hint} gray>
           j&johnson@gmail.com
         </Typography>
 

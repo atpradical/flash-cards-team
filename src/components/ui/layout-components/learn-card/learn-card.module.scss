@@ -4,9 +4,9 @@
 }
 
 .title {
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -37,6 +37,7 @@
   height: 100%;
   object-fit: cover;
 }
+
 .ratio {
   margin: 18px 0;
 }
