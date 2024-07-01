@@ -77,7 +77,6 @@ export const Pagination = (props: Props) => {
     option: clsx(s.paginationOption),
     select: clsx(s.selectOption),
     selectedOption: clsx(s.paginationOption, s.selected),
-    text: clsx(s.text),
   }
 
   const options = paginationRange.map((el, index) => {
@@ -95,7 +94,7 @@ export const Pagination = (props: Props) => {
 
     return (
       <Button className={isOptionSelected} key={key} onClick={() => onPageChange(+el)}>
-        <Typography as={'span'} className={clsx(s.numberPages, isOptionSelected)}>
+        <Typography as={'span'} className={clsx(s.nowrap, isOptionSelected)}>
           {el}
         </Typography>
       </Button>
@@ -111,7 +110,7 @@ export const Pagination = (props: Props) => {
       <Button disabled={isLastPage} onClick={nextPageHandler} variant={'icon'}>
         <ArrowIosBack className={cn.arrowRight} />
       </Button>
-      <Typography as={'span'} className={cn.text}>
+      <Typography as={'span'} className={cn.nowrap}>
         Показать
       </Typography>
       <Select
