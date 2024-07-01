@@ -7,13 +7,8 @@
 .selectTrigger {
   cursor: pointer;
 
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: space-between;
-
   width: 100%;
-  padding: 0 5px;
+  padding: 2px 6px;
 
   background-color: var(--color-dark-900);
   border: 1px solid var(--color-dark-300);
@@ -58,7 +53,7 @@
 .selectItem {
   cursor: pointer;
   width: 100%;
-  padding: 6px 12px;
+  padding: 2px 6px;
 
   &[data-highlighted] {
     color: var(--color-accent-300);
