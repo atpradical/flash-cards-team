@@ -29,7 +29,7 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
     ratio: clsx(s.ratio),
     text: clsx(s.text),
     title: clsx(s.title),
-    triesCount: clsx(s.hint, s.incoming),
+    triesCount: clsx(s.incoming),
     triesText: clsx(s.hint),
   }
 
@@ -60,10 +60,8 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
           </AspectRatio>
         )}
         <div>
-          <Typography className={cn.triesText} variant={'body2'}>
-            Количество попыток ответов на вопрос:
-          </Typography>
-          <Typography className={cn.triesCount} variant={'subtitle2'}>
+          <Typography className={cn.triesText}>Количество попыток ответов на вопрос:</Typography>
+          <Typography className={cn.triesCount} gray variant={'subtitle2'}>
             {triesCount}
           </Typography>
         </div>

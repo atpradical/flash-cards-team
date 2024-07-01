@@ -39,6 +39,11 @@
   background-color: var(--color-light-100);
 }
 
+.text,
+.numberPages {
+  word-break: normal !important; // знаю что делать так нельзя
+}
+
 .arrow {
   width: 16px;
   height: 16px;
