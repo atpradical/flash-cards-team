@@ -6,7 +6,6 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: CheckEmail,
-  tags: ['autodocs'],
   title: 'Components/CheckEmail',
 } satisfies Meta<typeof CheckEmail>
 
