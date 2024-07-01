@@ -1,3 +1,5 @@
+import { MemoryRouter } from 'react-router-dom'
+
 import { CheckEmail } from '@/components/ui/layout-components/check-email/check-email'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -15,4 +17,9 @@ export const CheckEmailExample: Story = {
   args: {
     email: 'test@email.com',
   },
+  render: () => (
+    <MemoryRouter>
+      <CheckEmail {...CheckEmailExample.args} />
+    </MemoryRouter>
+  ),
 }
