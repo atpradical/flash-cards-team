@@ -10,72 +10,66 @@ import { ResetPassword } from '@/pages/password-reset'
 import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
-import { ROUTES } from '@/shared/enums/routes'
+import { PATH } from '@/shared/enums/path'
 
 import { App } from './App'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
-    path: ROUTES.SIGN_IN,
+    path: PATH.SIGN_IN,
   },
   {
     element: <SignUpPage />,
-    path: ROUTES.SIGN_UP,
+    path: PATH.SIGN_UP,
   },
   {
     element: <PasswordRecoveryPage />,
-    path: ROUTES.PWD_RECOVERY,
+    path: PATH.PWD_RECOVERY,
   },
   {
     element: <ResetPassword />,
-    path: ROUTES.PWD_RESET,
+    path: PATH.PWD_RESET,
   },
   {
     element: <CheckEmailPage />,
-    path: ROUTES.CHECK_EMAIL,
+    path: PATH.CHECK_EMAIL,
   },
   {
     element: <Error404Page />,
-    path: ROUTES.ERROR_404,
+    path: PATH.ERROR_404,
   },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <Navigate to={ROUTES.DECK_LIST} />,
-    path: ROUTES.ROOT,
+    element: <Navigate to={PATH.DECK_LIST} />,
+    path: PATH.ROOT,
   },
   {
     element: <CardPage />,
-    path: ROUTES.CARD,
+    path: PATH.CARD,
   },
   {
     element: <DeckListPage />,
-    path: ROUTES.DECK_LIST,
+    path: PATH.DECK_LIST,
   },
   {
     element: <DeckPage />,
-    path: ROUTES.DECK,
+    path: PATH.DECK,
   },
   {
     element: <ProfilePage />,
-    path: ROUTES.PROFILE,
+    path: PATH.PROFILE,
   },
 ]
 
 export const router = createBrowserRouter([
   {
-    children: [
-      {
-        children: privateRoutes,
-        element: <App />,
-      },
-      ...publicRoutes,
-    ],
+    children: [...privateRoutes, ...publicRoutes],
     element: <App />,
-    errorElement: <Navigate to={ROUTES.ERROR_404} />,
-    path: ROUTES.ROOT,
+    errorElement: <Navigate to={PATH.ERROR_404} />,
+    path: PATH.ROOT,
   },
 ])
 

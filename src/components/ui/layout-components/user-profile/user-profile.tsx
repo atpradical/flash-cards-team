@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { User } from '@/common/types'
 import { ProfileDropdown } from '@/components/ui/layout-components'
 import { Avatar, Button, Typography } from '@/components/ui/primitives'
-import { ROUTES } from '@/shared/enums'
+import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
@@ -19,7 +19,7 @@ export const UserProfile = ({ isAuthorized, userData: { email, name, photo } }: 
 
   if (!isAuthorized) {
     return (
-      <Button as={Link} to={ROUTES.SIGN_IN} variant={'secondary'}>
+      <Button as={Link} to={PATH.SIGN_IN} variant={'secondary'}>
         Sign In
       </Button>
     )

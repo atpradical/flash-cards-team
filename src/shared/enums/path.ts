@@ -1,4 +1,4 @@
-export enum ROUTES {
+export enum PATH {
   CARD = '/card',
   CHECK_EMAIL = '/check-email',
   DECK = '/deck',

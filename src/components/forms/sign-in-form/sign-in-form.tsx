@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components/ui/primitives'
-import { ROUTES } from '@/shared/enums'
+import { PATH } from '@/shared/enums'
 import { emailSchema, passwordSchema, rememberMeSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -70,7 +70,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
               variant={'password'}
             />
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-            <Typography as={Link} className={cn.link} to={ROUTES.PWD_RECOVERY}>
+            <Typography as={Link} className={cn.link} to={PATH.PWD_RECOVERY}>
               Forgot Password?
             </Typography>
           </FlexContainer>
@@ -79,7 +79,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
           </Button>
         </form>
         <Typography className={cn.typography}>Don&apos;t have an account?</Typography>
-        <Button as={Link} className={cn.buttonSign} to={ROUTES.SIGN_UP} variant={'link'}>
+        <Button as={Link} className={cn.buttonSign} to={PATH.SIGN_UP} variant={'link'}>
           Sign Up
         </Button>
       </FlexContainer>

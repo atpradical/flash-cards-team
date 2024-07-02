@@ -6,7 +6,7 @@ import { Avatar, Typography } from '@/components/ui/primitives'
 import { Dropdown } from '@/components/ui/primitives/dropdown/dropdown'
 import { DropdownItem } from '@/components/ui/primitives/dropdown/dropdownItem/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/primitives/dropdown/dropdownSeparator/dropdownSeparator'
-import { ROUTES } from '@/shared/enums'
+import { PATH } from '@/shared/enums'
 import clsx from 'clsx'
 
 import s from './profile-dropdown.module.scss'
@@ -43,14 +43,14 @@ export const ProfileDropdown = (props: Props) => {
       <DropdownSeparator />
       <DropdownItem>
         <PersonOutline className={cn.icon} />
-        <Typography as={Link} to={ROUTES.PROFILE} variant={'caption'}>
+        <Typography as={Link} to={PATH.PROFILE} variant={'caption'}>
           My Profile
         </Typography>
       </DropdownItem>
       <DropdownSeparator />
       <DropdownItem>
         <LogOut className={cn.icon} />
-        <Typography as={Link} to={ROUTES.SIGN_IN} variant={'caption'}>
+        <Typography as={Link} to={PATH.SIGN_IN} variant={'caption'}>
           Sign Out
         </Typography>
       </DropdownItem>

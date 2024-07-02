@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import CheckEmailIcon from '@/assets/components/svgIcons/CheckEmailIcon'
 import { Button, Card, Typography } from '@/components/ui/primitives'
-import { ROUTES } from '@/shared/enums'
+import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
@@ -30,7 +30,7 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
         <Typography
           className={cn.reminder}
         >{`We've sent an Email with instructions to \n${email}`}</Typography>
-        <Button as={Link} className={cn.button} fullWidth to={ROUTES.SIGN_IN}>
+        <Button as={Link} className={cn.button} fullWidth to={PATH.SIGN_IN}>
           Back to Sign In
         </Button>
       </FlexContainer>

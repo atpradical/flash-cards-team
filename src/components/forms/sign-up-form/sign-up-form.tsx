@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components/ui/primitives'
-import { ROUTES } from '@/shared/enums'
+import { PATH } from '@/shared/enums'
 import { emailSchema, passwordSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
@@ -82,7 +82,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
           </FlexContainer>
         </form>
         <Typography className={cn.reminder}>Already have an account?</Typography>
-        <Button as={Link} className={cn.button} to={ROUTES.SIGN_IN} variant={'link'}>
+        <Button as={Link} className={cn.button} to={PATH.SIGN_IN} variant={'link'}>
           Sign In
         </Button>
       </FlexContainer>
