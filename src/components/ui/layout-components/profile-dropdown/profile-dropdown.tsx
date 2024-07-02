@@ -11,17 +11,15 @@ import clsx from 'clsx'
 
 import s from './profile-dropdown.module.scss'
 
-type Props = {
+type ProfileDropdownProps = {
   email: string
   name: string
   photo?: string
   photoDesc?: string
-  profilePageHref: string
   trigger: ReactNode
 }
 
-export const ProfileDropdown = (props: Props) => {
-  const { email, name, photo, profilePageHref, trigger } = props
+export const ProfileDropdown = ({ email, name, photo, trigger }: ProfileDropdownProps) => {
   const cn = {
     icon: clsx(s.icon),
     profileArea: clsx(s.profileArea),
@@ -30,7 +28,7 @@ export const ProfileDropdown = (props: Props) => {
   return (
     <Dropdown trigger={trigger}>
       <DropdownItem asChild>
-        <Typography as={'a'} className={s.profileArea} href={profilePageHref}>
+        <Typography>
           <Avatar size={'s'} src={photo} title={'Photo'} />
           <div>
             <Typography variant={'subtitle2'}>{name}</Typography>

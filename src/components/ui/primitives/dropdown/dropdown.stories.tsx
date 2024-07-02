@@ -37,16 +37,13 @@ export default meta
 export const DropdownWithUserAvatar = {
   render: () => {
     return (
-      <MemoryRouter>
-        <ProfileDropdown
-          email={mockUser.email}
-          name={mockUser.name}
-          photo={mockUser.photo.src}
-          photoDesc={mockUser.photo.alt}
-          profilePageHref={'https://google.com'}
-          trigger={<Avatar size={'s'} src={userDefault} />}
-        />
-      </MemoryRouter>
+      <ProfileDropdown
+        email={mockUser.email}
+        name={mockUser.name}
+        photo={mockUser.photo.src}
+        photoDesc={mockUser.photo.alt}
+        trigger={<Avatar size={'s'} src={userDefault} />}
+      />
     )
   },
 }
