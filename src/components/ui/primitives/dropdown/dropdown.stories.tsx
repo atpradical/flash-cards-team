@@ -26,7 +26,7 @@ export const DropdownWithUserAvatar = {
           email={mockUser.email}
           name={mockUser.name}
           photo={mockUser.photo}
-          trigger={<Avatar size={'s'} src={mockUser.photo.src} />}
+          trigger={<Avatar size={'s'} src={mockUser.photo.src} title={mockUser.photo.alt} />}
         />
       </MemoryRouter>
     )

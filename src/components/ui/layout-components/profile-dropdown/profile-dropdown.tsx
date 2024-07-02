@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
 
 import { LogOut, PersonOutline } from '@/assets/components/svgIcons'
 import { User } from '@/common/types'
@@ -25,7 +24,6 @@ export const ProfileDropdown = (props: Props) => {
   const { email, name, photo, trigger } = props
   const cn = {
     icon: clsx(s.icon),
-    link: clsx(s.link),
     trigger: clsx(s.trigger),
   }
 
@@ -46,7 +44,7 @@ export const ProfileDropdown = (props: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <PersonOutline className={cn.icon} />
-          <Typography as={Link} className={s.link} to={'/profile'} variant={'caption'}>
+          <Typography className={s.link} variant={'caption'}>
             My Profile
           </Typography>
         </DropdownMenuItem>

@@ -82,6 +82,10 @@
     border-radius: var(--border-radius-xs);
     outline: 1px solid var(--color-info-500);
     outline-offset: 2px;
+
+    &:hover {
+      outline: none;
+    }
   }
 }
 
