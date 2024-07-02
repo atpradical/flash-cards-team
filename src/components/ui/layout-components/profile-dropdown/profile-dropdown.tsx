@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 import { LogOut, PersonOutline } from '@/assets/components/svgIcons'
 import { User } from '@/common/types'
@@ -12,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/primitives/dropdown/dropdown'
+import { PATH } from '@/shared/enums'
 import clsx from 'clsx'
 
 import s from './profile-dropdown.module.scss'
@@ -44,14 +46,14 @@ export const ProfileDropdown = (props: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <PersonOutline className={cn.icon} />
-          <Typography className={s.link} variant={'caption'}>
+          <Typography as={Link} className={s.link} to={PATH.PROFILE} variant={'caption'}>
             My Profile
           </Typography>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOut className={cn.icon} />
-          <Typography variant={'caption'}>Sign Out</Typography>
+          <Typography as={Link} className={s.link} to={PATH.SIGN_IN} variant={'caption'}>Sign Out</Typography>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

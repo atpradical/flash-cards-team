@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/primitives/dropdown/dropdown'
+import { PATH } from '@/shared/enums'
 import clsx from 'clsx'
 
 import s from './settings-dropdown.module.scss'
@@ -38,21 +39,21 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
       <DropdownMenuContent>
         <DropdownMenuArrow />
         <DropdownMenuItem>
-          <Typography as={Link} className={s.link} to={'/card'} variant={'caption'}>
+          <Typography as={Link} className={s.link} to={PATH.CARD} variant={'caption'}>
             <PlayCircleOutline className={cn.icon} />
             Learn
           </Typography>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={onEdit}>
-          <Typography as={Link} className={s.link} to={'/'} variant={'caption'}>
+          <Typography className={s.link} variant={'caption'}>
             <EditOutline className={cn.icon} />
             Edit
           </Typography>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={onDelete}>
-          <Typography as={Link} className={s.link} to={'/'} variant={'caption'}>
+          <Typography className={s.link}  variant={'caption'}>
             <TrashOutline className={cn.icon} />
             Delete
           </Typography>

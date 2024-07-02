@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
+import userDefault from '@/assets/webp/avatar-default.webp'
 import { ProfileDropdown, SettingsDropdown } from '@/components/ui/layout-components'
 import { DropdownMenu } from '@/components/ui/primitives/dropdown/dropdown'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'

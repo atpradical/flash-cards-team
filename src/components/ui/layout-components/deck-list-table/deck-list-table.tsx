@@ -1,6 +1,5 @@
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
-import { RATIO } from '@/common/enums/ratio'
 import { Nullable } from '@/common/types'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
@@ -14,7 +13,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from '@/components/ui/primitives'
-import { VARIANT } from '@/shared/enums/enums'
+import { RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 

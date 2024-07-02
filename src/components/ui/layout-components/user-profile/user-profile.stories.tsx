@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import Logo from '@/assets/components/svgIcons/Logo'
 import avatarDefault from '@/assets/webp/avatar-default.webp'
 import { User } from '@/common/types'
@@ -40,12 +42,14 @@ export const UserIsLoggedIn: Story = {
     userData: mockUser,
   },
   render: args => (
-    <Header>
-      <FlexContainer jc={'space-between'}>
-        <Logo />
-        <UserProfile {...args} />
-      </FlexContainer>
-    </Header>
+    <MemoryRouter>
+      <Header>
+        <FlexContainer jc={'space-between'}>
+          <Logo />
+          <UserProfile {...args} />
+        </FlexContainer>
+      </Header>
+    </MemoryRouter>
   ),
 }
 
@@ -55,11 +59,13 @@ export const UserIsLoggedOut: Story = {
     userData: mockUser,
   },
   render: args => (
-    <Header>
-      <FlexContainer jc={'space-between'}>
-        <Logo />
-        <UserProfile {...args} />
-      </FlexContainer>
-    </Header>
+    <MemoryRouter>
+      <Header>
+        <FlexContainer jc={'space-between'}>
+          <Logo />
+          <UserProfile {...args} />
+        </FlexContainer>
+      </Header>
+    </MemoryRouter>
   ),
 }
