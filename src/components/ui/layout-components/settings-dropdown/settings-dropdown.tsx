@@ -5,9 +5,14 @@ import MoreVerticalOutline from '@/assets/components/svgIcons/MoreVerticalOutlin
 import PlayCircleOutline from '@/assets/components/svgIcons/PlayCircleOutline'
 import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
 import { Typography } from '@/components/ui/primitives'
-import { Dropdown } from '@/components/ui/primitives/dropdown/dropdown'
-import { DropdownItem } from '@/components/ui/primitives/dropdown/dropdownItem/dropdownItem'
-import { DropdownSeparator } from '@/components/ui/primitives/dropdown/dropdownSeparator/dropdownSeparator'
+import {
+  DropdownMenu,
+  DropdownMenuArrow,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/primitives/dropdown/dropdown'
 import clsx from 'clsx'
 
 import s from './settings-dropdown.module.scss'
@@ -20,32 +25,39 @@ type DropdownSettingsProps = {
 export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) => {
   const cn = {
     icon: clsx(s.icon),
-    settingsItem: clsx(s.settingsItem),
+    item: clsx(s.item),
+    link: clsx(s.link),
     triggerIcon: clsx(s.triggerIcon),
   }
 
   return (
-    <Dropdown trigger={<MoreVerticalOutline className={cn.triggerIcon} />}>
-      <DropdownItem asChild>
-        <Typography as={Link} className={cn.settingsItem} to={'/card'} variant={'caption'}>
-          <PlayCircleOutline className={cn.icon} />
-          Learn
-        </Typography>
-      </DropdownItem>
-      <DropdownSeparator />
-      <DropdownItem asChild onClick={onEdit}>
-        <Typography className={cn.settingsItem} variant={'caption'}>
-          <EditOutline className={cn.icon} />
-          Edit
-        </Typography>
-      </DropdownItem>
-      <DropdownSeparator />
-      <DropdownItem asChild onClick={onDelete}>
-        <Typography className={cn.settingsItem} variant={'caption'}>
-          <TrashOutline className={cn.icon} />
-          Delete
-        </Typography>
-      </DropdownItem>
-    </Dropdown>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <MoreVerticalOutline className={cn.triggerIcon} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuArrow />
+        <DropdownMenuItem>
+          <Typography as={Link} className={s.link} to={'/card'} variant={'caption'}>
+            <PlayCircleOutline className={cn.icon} />
+            Learn
+          </Typography>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={onEdit}>
+          <Typography as={Link} className={s.link} to={'/'} variant={'caption'}>
+            <EditOutline className={cn.icon} />
+            Edit
+          </Typography>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={onDelete}>
+          <Typography as={Link} className={s.link} to={'/'} variant={'caption'}>
+            <TrashOutline className={cn.icon} />
+            Delete
+          </Typography>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

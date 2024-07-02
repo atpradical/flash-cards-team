@@ -1,9 +1,11 @@
 .icon {
   width: 16px;
   height: 16px;
-  color: var(--color-light-100);
+}
+.menu {
+  min-width: 218px;
 }
 
-.settingsItem {
-  margin: var(--margin-12px-0);
+.link {
+  text-decoration: none;
 }

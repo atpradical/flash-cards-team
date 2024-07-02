@@ -1,15 +1,16 @@
 .icon {
   width: 16px;
   height: 16px;
-  color: var(--color-light-100);
-}
-
-.settingsItem {
-  margin: var(--margin-12px-0);
 }
 
 .triggerIcon {
   &:hover {
     color: var(--color-accent-300);
   }
+}
+
+.link {
+  text-decoration: none;
+  display: flex;
+  gap: 6px;
 }
