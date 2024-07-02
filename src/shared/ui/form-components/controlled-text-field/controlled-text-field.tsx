@@ -1,6 +1,6 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
-import { TextField, TextFieldProps } from '../../../../components/ui/primitives/text-field'
+import { TextField, TextFieldProps } from '@/components/ui/primitives/text-field'
 
 export type ControlledTextFieldProps<T extends FieldValues> = Omit<
   TextFieldProps,
@@ -27,7 +27,7 @@ export const ControlledTextField = <T extends FieldValues>({
   ...rest
 }: ControlledTextFieldProps<T>) => {
   const {
-    field: { onBlur, onChange, ref, value, ...field },
+    field: { onChange, ref, value, ...field },
     fieldState: { error },
   } = useController({
     control,
@@ -43,10 +43,9 @@ export const ControlledTextField = <T extends FieldValues>({
       {...rest}
       error={!!error}
       helperText={error?.message}
-      onBlur={onBlur}
       onChange={onChange}
       ref={ref}
-      value={value}
+      value={value ?? ''}
       {...field}
     />
   )

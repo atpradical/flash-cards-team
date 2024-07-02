@@ -1,15 +1,12 @@
-.label,
-::placeholder {
-  color: var(--color-dark-300); // был фикс типографики, удалить
-}
-
-.inputSvgWrapper {
+.container {
   position: relative;
   width: 100%;
+  color: var(--color-dark-300);
 
   &:focus-within {
-    color: inherit;
+    color: var(--color-light-100);
     border: 1px solid var(--color-info-700);
+    border-radius: var(--border-radius-xs);
   }
 }
 
@@ -20,7 +17,6 @@
 
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
-  color: var(--color-light-100);
 
   background-color: var(--color-dark-900);
   border: 1px solid var(--color-dark-300);
@@ -28,15 +24,11 @@
 
   &::placeholder {
     font-style: italic;
+    color: var(--color-dark-300);
   }
 
   &:hover {
     background-color: var(--color-dark-700);
-  }
-
-  &:active {
-    // color: inherit;
-    border: 1px solid var(--color-light-100);
   }
 
   &.error {
@@ -46,12 +38,6 @@
 
   &:disabled {
     pointer-events: none;
-    color: var(--color-dark-300);
-    border: 1px solid var(--color-dark-300);
-
-    &:hover {
-      background-color: inherit;
-    }
 
     &:focus {
       outline: none;
@@ -81,17 +67,11 @@
 
   &.disabled {
     cursor: default;
-    color: var(--color-dark-300);
   }
 
   &.search {
     left: 0;
     margin: 0 0.5em;
-    color: var(--color-dark-300);
-
-    &:active {
-      color: var(--color-light-100);
-    }
   }
 }
 

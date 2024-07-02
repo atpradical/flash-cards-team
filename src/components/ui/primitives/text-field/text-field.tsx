@@ -16,6 +16,7 @@ export type TextFieldProps = {
   error?: boolean
   helperText?: string
   label?: string
+  onInputChange?: (value: string) => void // only for input value
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
@@ -26,47 +27,51 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     error,
     helperText,
     label,
+    onChange,
+    onInputChange,
     placeholder,
+    value,
     variant = 'text',
     ...rest
   } = props
 
   const cn = {
-    closeOutline: clsx(s.icon),
     container: clsx(s.container, disabled && s.disabled, className),
     eye: clsx(s.icon, s.eye, disabled && s.disabled),
+    icon: clsx(s.icon),
+    iconSearch: clsx(s.icon, s.search),
     input: clsx(s.input, error && s.error),
-    label: clsx(s.label),
-    searchOutline: clsx(s.icon, s.search),
   }
 
   const [showPassword, setShowPassword] = useState(false)
-  const [inputValue, setInputValue] = useState('')
 
   const isPassword = variant === 'password'
   const inputType = showPassword && isPassword ? 'text' : variant
   const isSearch = variant === 'search'
 
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword)
+  const showPasswordHandler = () => {
+    setShowPassword(prev => !prev)
   }
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
+    onChange?.(e)
+    onInputChange?.(e.currentTarget.value)
   }
 
   const handleClearInput = () => {
-    setInputValue('')
+    onInputChange?.('')
   }
+
+  console.log('value', value)
 
   return (
     <FlexContainer ai={'flex-start'} fd={'column'}>
       {label && (
-        <Typography as={'label'} className={s.label}>
+        <Typography as={'label'} gray>
           {label}
         </Typography>
       )}
-      <div className={s.inputSvgWrapper}>
+      <div className={cn.container}>
         <input
           autoFocus
           className={cn.input}
@@ -75,21 +80,21 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           placeholder={placeholder}
           ref={ref}
           type={inputType}
-          value={inputValue}
+          value={value}
           {...rest}
         />
-        {isPassword && (
-          <Button disabled={disabled} onClick={handleShowPassword} variant={'icon'}>
-            {inputValue.length ? <EyeOutline className={cn.eye} /> : null}
+        {isPassword && !!value && (
+          <Button disabled={disabled} onClick={showPasswordHandler} variant={'icon'}>
+            {value && <EyeOutline className={cn.eye} />}
             {showPassword && <EyeOffOutline className={cn.eye} />}
           </Button>
         )}
         {isSearch && (
           <>
-            <SearchOutline className={cn.searchOutline} />
-            {inputValue.length > 0 && (
+            <SearchOutline className={cn.iconSearch} />
+            {!!value && (
               <Button onClick={handleClearInput} variant={'icon'}>
-                <CloseOutline className={cn.closeOutline} />
+                <CloseOutline className={cn.icon} />
               </Button>
             )}
           </>
