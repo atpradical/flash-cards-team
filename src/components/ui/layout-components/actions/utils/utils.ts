@@ -1,4 +1,4 @@
-import { ACTIONS, VARIANT } from '@/shared/enums/actions'
+import { ACTIONS, VARIANT } from '@/shared/enums'
 
 import { ActionButton } from '../actions'
 

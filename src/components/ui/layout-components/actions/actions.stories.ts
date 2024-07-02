@@ -1,5 +1,5 @@
 import { Actions } from '@/components/ui/layout-components/actions/actions'
-import { VARIANT } from '@/shared/enums/actions'
+import { VARIANT } from '@/shared/enums'
 import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
 

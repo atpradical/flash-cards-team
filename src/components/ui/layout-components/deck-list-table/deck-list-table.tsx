@@ -13,8 +13,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from '@/components/ui/primitives'
-import { VARIANT } from '@/shared/enums/actions'
-import { RATIO } from '@/shared/enums/ratio'
+import { RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 

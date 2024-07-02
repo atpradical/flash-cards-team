@@ -14,7 +14,7 @@ import {
   Image,
   Typography,
 } from '@/components/ui/primitives'
-import { RATIO } from '@/shared/enums/ratio'
+import { RATIO } from '@/shared/enums'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
