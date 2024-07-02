@@ -8,6 +8,7 @@ import { Typography } from '@/components/ui/primitives'
 import { Dropdown } from '@/components/ui/primitives/dropdown/dropdown'
 import { DropdownItem } from '@/components/ui/primitives/dropdown/dropdownItem/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/primitives/dropdown/dropdownSeparator/dropdownSeparator'
+import { PATH } from '@/shared/enums'
 import clsx from 'clsx'
 
 import s from './settings-dropdown.module.scss'
@@ -27,7 +28,7 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
   return (
     <Dropdown trigger={<MoreVerticalOutline className={cn.triggerIcon} />}>
       <DropdownItem asChild>
-        <Typography as={Link} className={cn.option} to={'/card'} variant={'caption'}>
+        <Typography as={Link} className={cn.option} to={PATH.CARD} variant={'caption'}>
           <PlayCircleOutline className={cn.icon} />
           Learn
         </Typography>
