@@ -27,7 +27,7 @@ export const ControlledTextField = <T extends FieldValues>({
   ...rest
 }: ControlledTextFieldProps<T>) => {
   const {
-    field: { onChange, ref, value, ...field },
+    field: { onBlur, onChange, ref, value, ...field },
     fieldState: { error },
   } = useController({
     control,
@@ -43,9 +43,10 @@ export const ControlledTextField = <T extends FieldValues>({
       {...rest}
       error={!!error}
       helperText={error?.message}
+      onBlur={onBlur}
       onChange={onChange}
       ref={ref}
-      value={value ?? ''}
+      value={value}
       {...field}
     />
   )
