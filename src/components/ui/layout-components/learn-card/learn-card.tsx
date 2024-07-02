@@ -26,7 +26,7 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
     container: clsx(s.container),
     incoming: clsx(s.incoming),
     title: clsx(s.title),
-    triesCount: clsx(s.hint, s.incoming),
+    triesCount: clsx(s.incoming),
     triesText: clsx(s.hint),
   }
 
@@ -54,10 +54,10 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
             <Image alt={'Question image'} ratio={RATIO.L} src={questionCover} variant={'l'} />
           )}
           <FlexContainer>
-            <Typography className={cn.triesText} variant={'body2'}>
+            <Typography className={cn.triesText} variant={'body2'} gray>
               Количество попыток ответов на вопрос:
             </Typography>
-            <Typography className={cn.triesCount} variant={'subtitle2'}>
+            <Typography className={cn.triesCount} gray variant={'subtitle2'}>
               {triesCount}
             </Typography>
           </FlexContainer>

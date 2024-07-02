@@ -8,11 +8,6 @@ button {
   gap: 12px;
 }
 
-.wrapper {
-  display: flex;
-  align-items: center;
-}
-
 .item {
   cursor: pointer;
 
@@ -90,6 +85,7 @@ button {
 }
 
 .label {
+  cursor: pointer;
   padding-left: 12px;
   color: var(--color-light-100);
 

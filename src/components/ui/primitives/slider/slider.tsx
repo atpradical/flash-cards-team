@@ -1,6 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
+import { FlexContainer } from '@/shared/ui/flex-container'
 import * as RadixSlider from '@radix-ui/react-slider'
+import clsx from 'clsx'
 
 import s from './slider.module.scss'
 
@@ -13,33 +15,41 @@ type Props = {
 
 type SliderRef = ElementRef<typeof RadixSlider.Root>
 
-export const Slider = forwardRef<SliderRef, Props>((props, ref) => {
-  const { defaultValue, minStepsBetweenThumbs = 1, onValueChange, value, ...rest } = props
+export const Slider = forwardRef<SliderRef, Props>(
+  ({ defaultValue, minStepsBetweenThumbs = 1, onValueChange, value, ...rest }, ref) => {
+    const cn = {
+      outputWrap: clsx(s.outputWrap),
+      range: clsx(s.range),
+      root: clsx(s.root),
+      thumb: clsx(s.thumb),
+      track: clsx(s.track),
+    }
 
-  return (
-    <div className={s.container}>
-      <Typography className={s.outputWrap} variant={'body1'}>
-        {value[0]}
-      </Typography>
-      <RadixSlider.Root
-        className={s.root}
-        defaultValue={defaultValue}
-        minStepsBetweenThumbs={minStepsBetweenThumbs}
-        onValueChange={onValueChange}
-        ref={ref}
-        step={1}
-        value={value}
-        {...rest}
-      >
-        <RadixSlider.Track className={s.track}>
-          <RadixSlider.Range className={s.range} />
-        </RadixSlider.Track>
-        <RadixSlider.Thumb aria-label={'Start Thumb'} className={s.thumb} />
-        <RadixSlider.Thumb aria-label={'End Thumb'} className={s.thumb} />
-      </RadixSlider.Root>
-      <Typography className={s.outputWrap} variant={'body1'}>
-        {value[1]}
-      </Typography>
-    </div>
-  )
-})
+    return (
+      <FlexContainer>
+        <Typography className={cn.outputWrap} variant={'body1'}>
+          {value[0]}
+        </Typography>
+        <RadixSlider.Root
+          className={cn.root}
+          defaultValue={defaultValue}
+          minStepsBetweenThumbs={minStepsBetweenThumbs}
+          onValueChange={onValueChange}
+          ref={ref}
+          step={1}
+          value={value}
+          {...rest}
+        >
+          <RadixSlider.Track className={cn.track}>
+            <RadixSlider.Range className={cn.range} />
+          </RadixSlider.Track>
+          <RadixSlider.Thumb aria-label={'Start Thumb'} className={cn.thumb} />
+          <RadixSlider.Thumb aria-label={'End Thumb'} className={cn.thumb} />
+        </RadixSlider.Root>
+        <Typography className={cn.outputWrap} variant={'body1'}>
+          {value[1]}
+        </Typography>
+      </FlexContainer>
+    )
+  }
+)
