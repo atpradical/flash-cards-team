@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
+import { Button, Card, Typography } from '@/components/ui/primitives'
+import { ROUTES } from '@/shared/enums'
 import { emailSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
@@ -9,10 +11,6 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './forgot-password-form.module.scss'
-
-import { Button } from '../../ui/primitives/button'
-import { Card } from '../../ui/primitives/card'
-import { Typography } from '../../ui/primitives/typography'
 
 const ForgotPasswordScheme = z.object({
   email: emailSchema,
@@ -64,7 +62,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
           </FlexContainer>
         </form>
         <Typography className={cn.reminder}>Did you remember your password?</Typography>
-        <Button as={Link} className={cn.link} to={'/sign-in'} variant={'link'}>
+        <Button as={Link} className={cn.link} to={ROUTES.SIGN_IN} variant={'link'}>
           Try logging in
         </Button>
       </FlexContainer>

@@ -1,6 +1,6 @@
 import { CSSProperties, ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-import { RATIO } from '@/common/enums/ratio'
+import { RATIO } from '@/shared/enums/ratio'
 import * as AspectRatio from '@radix-ui/react-aspect-ratio'
 import clsx from 'clsx'
 

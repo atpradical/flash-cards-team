@@ -1,10 +1,12 @@
 import { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 import { LogOut, PersonOutline } from '@/assets/components/svgIcons'
 import { Avatar, Typography } from '@/components/ui/primitives'
 import { Dropdown } from '@/components/ui/primitives/dropdown/dropdown'
 import { DropdownItem } from '@/components/ui/primitives/dropdown/dropdownItem/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/primitives/dropdown/dropdownSeparator/dropdownSeparator'
+import { ROUTES } from '@/shared/enums'
 import clsx from 'clsx'
 
 import s from './profile-dropdown.module.scss'
@@ -41,12 +43,16 @@ export const ProfileDropdown = (props: Props) => {
       <DropdownSeparator />
       <DropdownItem>
         <PersonOutline className={cn.icon} />
-        <Typography variant={'caption'}>My Profile</Typography>
+        <Typography as={Link} to={ROUTES.PROFILE} variant={'caption'}>
+          My Profile
+        </Typography>
       </DropdownItem>
       <DropdownSeparator />
       <DropdownItem>
         <LogOut className={cn.icon} />
-        <Typography variant={'caption'}>Sign Out</Typography>
+        <Typography as={Link} to={ROUTES.SIGN_IN} variant={'caption'}>
+          Sign Out
+        </Typography>
       </DropdownItem>
     </Dropdown>
   )

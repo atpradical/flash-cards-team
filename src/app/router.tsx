@@ -1,4 +1,4 @@
-import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Navigate, RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { CardPage } from '@/pages/card-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
@@ -10,58 +10,74 @@ import { ResetPassword } from '@/pages/password-reset'
 import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
+import { ROUTES } from '@/shared/enums/routes'
+
+import { App } from './App'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
-    path: '/sign-in',
+    path: ROUTES.SIGN_IN,
   },
   {
     element: <SignUpPage />,
-    path: '/sign-up',
+    path: ROUTES.SIGN_UP,
   },
   {
     element: <PasswordRecoveryPage />,
-    path: '/password-recovery',
+    path: ROUTES.PWD_RECOVERY,
   },
   {
     element: <ResetPassword />,
-    path: '/reset-password',
+    path: ROUTES.PWD_RESET,
   },
   {
     element: <CheckEmailPage />,
-    path: '/check-email',
+    path: ROUTES.CHECK_EMAIL,
   },
   {
     element: <Error404Page />,
-    path: '/404',
+    path: ROUTES.ERROR_404,
   },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <div>test temporary page delete</div>,
-    path: '/',
+    element: <Navigate to={ROUTES.DECK_LIST} />,
+    path: ROUTES.ROOT,
   },
   {
     element: <CardPage />,
-    path: '/card',
+    path: ROUTES.CARD,
   },
   {
     element: <DeckListPage />,
-    path: '/deck-list',
+    path: ROUTES.DECK_LIST,
   },
   {
     element: <DeckPage />,
-    path: '/deck',
+    path: ROUTES.DECK,
   },
   {
     element: <ProfilePage />,
-    path: '/profile',
+    path: ROUTES.PROFILE,
   },
 ]
 
-const router = createBrowserRouter([...privateRoutes, ...publicRoutes])
+export const router = createBrowserRouter([
+  {
+    children: [
+      {
+        children: privateRoutes,
+        element: <App />,
+      },
+      ...publicRoutes,
+    ],
+    element: <App />,
+    errorElement: <Navigate to={ROUTES.ERROR_404} />,
+    path: ROUTES.ROOT,
+  },
+])
 
 export function Router() {
   return <RouterProvider router={router} />

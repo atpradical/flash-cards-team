@@ -7,7 +7,7 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
 
 type CardsHeaderProps = {
-  isAuthorized: boolean
+  isAuthorized?: boolean
 } & ComponentPropsWithoutRef<typeof Header>
 
 const mockUser: User = {
@@ -19,7 +19,11 @@ const mockUser: User = {
   },
 }
 
-export const CardsHeader = ({ isAuthorized, userData, ...propsHeader }: CardsHeaderProps) => {
+export const CardsHeader = ({
+  isAuthorized = false,
+  userData,
+  ...propsHeader
+}: CardsHeaderProps) => {
   return (
     <Header {...propsHeader}>
       <FlexContainer jc={'space-between'} pd={'0 20px'}>
