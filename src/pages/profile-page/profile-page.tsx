@@ -6,7 +6,7 @@ import { Page } from '@/shared/ui/page'
 export const ProfilePage = () => {
   return (
     <Page>
-      <FlexContainer jc={'center'}>
+      <FlexContainer jc={'center'} pd={'0 20px'}>
         <PersonalInfo name={'Ivan'} photoDesc={'avatar'} src={src} />
       </FlexContainer>
     </Page>

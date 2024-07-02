@@ -46,7 +46,7 @@ export const DeckPage = () => {
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
   return (
     <Page>
-      <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'}>
+      <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'} pd={'0 20px'}>
         <Button as={Link} className={cn.goBack} to={'/deck-list'} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
           Back to Decks List
