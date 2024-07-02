@@ -54,7 +54,7 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
             <Image alt={'Question image'} ratio={RATIO.L} src={questionCover} variant={'l'} />
           )}
           <FlexContainer>
-            <Typography className={cn.triesText} variant={'body2'} gray>
+            <Typography className={cn.triesText} gray variant={'body2'}>
               Количество попыток ответов на вопрос:
             </Typography>
             <Typography className={cn.triesCount} gray variant={'subtitle2'}>
