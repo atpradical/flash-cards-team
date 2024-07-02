@@ -14,13 +14,12 @@ type PersonalInfoProps = {
 export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
   const cn = {
     avatar: clsx(s.avatar),
-    avatarWrapper: clsx(s.avatarWrapper),
-    buttonEdit2Outline: clsx(s.buttonEdit2Outline),
-    buttonLogOutOutline: clsx(s.buttonLogOutOutline),
-    buttonSecondary: clsx(s.buttonSecondary),
+    bottom: clsx(s.bottom),
     container: clsx(s.container),
+    editAvatar: clsx(s.editAvatar),
     hint: clsx(s.hint),
-    svg: clsx(s.svg),
+    icon: clsx(s.icon),
+    wrapper: clsx(s.wrapper),
   }
 
   return (
@@ -29,29 +28,25 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
         <Typography as={'h1'} variant={'h1'}>
           Personal Information
         </Typography>
-
-        <div className={cn.avatarWrapper}>
+        <FlexContainer className={cn.wrapper}>
           <Avatar className={cn.avatar} size={'l'} src={src} title={photoDesc} />
-          <Button className={cn.buttonSecondary} variant={'secondary'}>
-            <EditOutline className={cn.svg} />
+          <Button className={cn.editAvatar} variant={'secondary'}>
+            <EditOutline className={cn.icon} />
           </Button>
-        </div>
-
-        <FlexContainer jc={'center'}>
+        </FlexContainer>
+        <FlexContainer gap={'12px'} jc={'center'}>
           <Typography as={'h2'} variant={'h2'}>
             {name}
           </Typography>
-          <Button className={cn.buttonEdit2Outline} variant={'icon'}>
-            <EditOutline className={cn.svg} />
+          <Button variant={'icon'}>
+            <EditOutline className={cn.icon} />
           </Button>
         </FlexContainer>
-
         <Typography className={cn.hint} gray>
           j&johnson@gmail.com
         </Typography>
-
-        <Button className={cn.buttonLogOutOutline} variant={'secondary'}>
-          <LogOutOutline className={cn.svg} />
+        <Button className={cn.bottom} variant={'secondary'}>
+          <LogOutOutline className={cn.icon} />
           <Typography variant={'subtitle2'}>Logout</Typography>
         </Button>
       </FlexContainer>
