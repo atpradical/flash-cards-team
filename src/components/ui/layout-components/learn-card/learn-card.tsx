@@ -2,10 +2,10 @@ import { ReactNode, useState } from 'react'
 
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
-import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
+import { RATIO } from '@/common/enums/ratio'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
 import { CardListExample } from '@/components/ui/layout-components/deck-table/deck-table.mock'
-import { AspectRatio, Button, Card, Typography } from '@/components/ui/primitives'
+import { Button, Card, Image, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
@@ -24,10 +24,7 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
   const cn = {
     button: clsx(s.button),
     container: clsx(s.container),
-    image: clsx(s.image),
     incoming: clsx(s.incoming),
-    ratio: clsx(s.ratio),
-    text: clsx(s.text),
     title: clsx(s.title),
     triesCount: clsx(s.incoming),
     triesText: clsx(s.hint),
@@ -42,48 +39,42 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
 
   return (
     <Card className={cn.container}>
-      <FlexContainer ai={'flex-start'} fd={'column'}>
+      <FlexContainer ai={'flex-start'} fd={'column'} gap={'10px'}>
         <Typography as={'h1'} className={cn.title} variant={'h1'}>
           Learn &ldquo;{deckName}&rdquo;
         </Typography>
-        <div>
-          <Typography className={cn.text} variant={'subtitle1'}>
-            Question:
-          </Typography>
-          <Typography className={cn.incoming} variant={'body1'}>
-            {question}
-          </Typography>
-        </div>
-        {CardListExample[0] && (
-          <AspectRatio className={cn.ratio} ratio={ASPECT_RATIO.Standard} variant={'l'}>
-            <img alt={'Question image'} className={cn.image} src={questionCover} />
-          </AspectRatio>
-        )}
-        <div>
-          <Typography className={cn.triesText} gray>
-            Количество попыток ответов на вопрос:
-          </Typography>
-          <Typography className={cn.triesCount} gray variant={'subtitle2'}>
-            {triesCount}
-          </Typography>
-        </div>
+        <FlexContainer fd={'column'} gap={'18px'}>
+          <FlexContainer>
+            <Typography variant={'subtitle1'}>Question:</Typography>
+            <Typography className={cn.incoming} variant={'body1'}>
+              {question}
+            </Typography>
+          </FlexContainer>
+          {questionCover && (
+            <Image alt={'Question image'} ratio={RATIO.L} src={questionCover} variant={'l'} />
+          )}
+          <FlexContainer>
+            <Typography className={cn.triesText} gray variant={'body2'}>
+              Количество попыток ответов на вопрос:
+            </Typography>
+            <Typography className={cn.triesCount} gray variant={'subtitle2'}>
+              {triesCount}
+            </Typography>
+          </FlexContainer>
+        </FlexContainer>
         {isAnswerShowed ? (
-          <>
-            <div>
-              <Typography className={cn.text} variant={'subtitle1'}>
-                Answer:
-              </Typography>
+          <FlexContainer fd={'column'} gap={'18px'}>
+            <FlexContainer>
+              <Typography variant={'subtitle1'}>Answer:</Typography>
               <Typography className={cn.incoming} variant={'body1'}>
                 {answer}
               </Typography>
-              {CardListExample[0] && (
-                <AspectRatio className={cn.ratio} ratio={ASPECT_RATIO.Standard} variant={'l'}>
-                  <img alt={'Question image'} className={cn.image} src={answerCover} />
-                </AspectRatio>
-              )}
-            </div>
+            </FlexContainer>
+            {answerCover && (
+              <Image alt={'Answer image'} ratio={RATIO.L} src={answerCover} variant={'l'} />
+            )}
             <SelfRateForm onSubmit={onSubmitHandler} />
-          </>
+          </FlexContainer>
         ) : (
           <Button className={cn.button} fullWidth onClick={showAnswerHandler}>
             Show Answer
