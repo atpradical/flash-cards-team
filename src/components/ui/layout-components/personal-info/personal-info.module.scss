@@ -11,11 +11,11 @@
   margin-bottom: 5px;
 }
 
-.avatarWrapper {
+.wrapper {
   position: relative;
 }
 
-.buttonSecondary {
+.editAvatar {
   position: absolute;
   top: 90px;
   left: 76px;
@@ -25,21 +25,11 @@
   padding: 0;
 }
 
-.buttonLogOutOutline {
-  margin-bottom: 10px;
-
-  svg {
-    margin-right: 10px;
-  }
+.bottom {
+  margin-bottom: 16px;
 }
 
-.buttonEdit2Outline {
-  svg {
-    margin-left: 12px;
-  }
-}
-
-.svg {
+.icon {
   width: 16px;
   height: 16px;
 }
