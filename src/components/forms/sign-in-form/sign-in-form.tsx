@@ -1,9 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { Button } from '@/components/ui/primitives/button'
-import { Card } from '@/components/ui/primitives/card'
-import { Typography } from '@/components/ui/primitives/typography'
+import { Button, Card, Typography } from '@/components/ui/primitives'
 import { emailSchema, passwordSchema, rememberMeSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -71,7 +69,6 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
               variant={'password'}
             />
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-
             <Typography as={Link} className={cn.link} to={'/password-recovery'}>
               Forgot Password?
             </Typography>
