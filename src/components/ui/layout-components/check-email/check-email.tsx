@@ -28,7 +28,6 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
         <CheckEmailIcon />
         <Typography
           className={cn.reminder}
-          variant={'body2'}
         >{`We've sent an Email with instructions to \n${email}`}</Typography>
         <Button as={Link} className={cn.button} fullWidth to={'/sign-in'}>
           Back to Sign In

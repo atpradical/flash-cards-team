@@ -23,8 +23,7 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
   ({ className, defaultValue, label, tabs, ...rest }, ref) => {
     const cn = {
       label: clsx(s.label),
-      list: clsx(s.tabsList),
-      root: clsx(s.tabsRoot, className),
+      root: clsx(className),
       tabTitle: clsx(s.tabTitle),
       trigger: clsx(s.tabsTrigger),
     }
@@ -57,11 +56,11 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
         {...rest}
       >
         {label && (
-          <Typography as={'label'} className={cn.label} variant={'body2'}>
+          <Typography as={'label'} className={cn.label}>
             {label}
           </Typography>
         )}
-        <RadixTabs.List className={cn.list}>{TabsTriggers}</RadixTabs.List>
+        <RadixTabs.List>{TabsTriggers}</RadixTabs.List>
       </RadixTabs.Root>
     )
   }

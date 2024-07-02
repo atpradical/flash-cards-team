@@ -3,7 +3,18 @@ import { useForm } from 'react-hook-form'
 
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
 import dummyImage from '@/assets/webp/cover-default.webp'
-import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
+import { RATIO } from '@/common/enums/ratio'
+import {
+  Button,
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  Image,
+  Typography,
+} from '@/components/ui/primitives'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
@@ -12,18 +23,6 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './../dialog-forms.module.scss'
-
-import { AspectRatio } from '../../../ui/primitives/aspect-ratio'
-import { Button } from '../../../ui/primitives/button'
-import {
-  Dialog,
-  DialogBody,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-} from '../../../ui/primitives/dialog'
-import { Typography } from '../../../ui/primitives/typography'
 
 const AddNewCardDialogFormScheme = z.object({
   answer: cardAnswerScheme,
@@ -84,10 +83,7 @@ export const AddNewCardDialogForm = ({
                 name={'question'}
                 placeholder={'Write down the question.'}
               />
-              <AspectRatio ratio={ASPECT_RATIO.ExtraWide} variant={'xl'}>
-                <img alt={'some question'} src={dummyImage} />
-              </AspectRatio>
-
+              <Image alt={'some question'} ratio={RATIO.XL} src={dummyImage} variant={'xl'} />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
                 <ImageOutline className={cn.icon} />
                 Upload image
@@ -99,9 +95,7 @@ export const AddNewCardDialogForm = ({
                 name={'answer'}
                 placeholder={'What is the correct answer to the question?'}
               />
-              <AspectRatio ratio={ASPECT_RATIO.ExtraWide} variant={'xl'}>
-                <img alt={'some answer'} src={dummyImage} />
-              </AspectRatio>
+              <Image alt={'some answer'} ratio={RATIO.XL} src={dummyImage} variant={'xl'} />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
                 <ImageOutline className={cn.icon} />
                 Upload image

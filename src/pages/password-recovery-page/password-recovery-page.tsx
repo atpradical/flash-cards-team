@@ -11,7 +11,7 @@ export const PasswordRecoveryPage = () => {
 
   return (
     <Page>
-      <FlexContainer jc={'center'}>
+      <FlexContainer jc={'center'} pd={'0 20px'}>
         <ForgotPasswordForm onSubmit={foo} />
       </FlexContainer>
     </Page>
