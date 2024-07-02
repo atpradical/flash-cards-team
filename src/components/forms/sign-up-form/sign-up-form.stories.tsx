@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import { SignUpForm } from '@/components/forms/sign-up-form/sign-up-form'
 import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {},
   component: SignUpForm,
-  tags: ['autodocs'],
   title: 'Forms/SignUpForm',
 } satisfies Meta<typeof SignUpForm>
 
@@ -17,4 +18,9 @@ export const SignUpFormBase: Story = {
   args: {
     onSubmit: action('onSubmit action invoked!'),
   },
+  render: () => (
+    <MemoryRouter>
+      <SignUpForm {...SignUpFormBase.args} />
+    </MemoryRouter>
+  ),
 }
