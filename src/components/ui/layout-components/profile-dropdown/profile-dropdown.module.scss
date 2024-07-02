@@ -5,3 +5,18 @@
 .menu {
   min-width: 218px;
 }
+
+.option {
+  text-decoration: none;
+  display: flex;
+  gap: 6px;
+  color: var(--color-light-100);
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+}

@@ -26,6 +26,7 @@ export const ProfileDropdown = (props: Props) => {
   const { email, name, photo, trigger } = props
   const cn = {
     icon: clsx(s.icon),
+    option: clsx(s.option),
     trigger: clsx(s.trigger),
   }
 
@@ -45,15 +46,15 @@ export const ProfileDropdown = (props: Props) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <PersonOutline className={cn.icon} />
-          <Typography as={Link} className={s.link} to={PATH.PROFILE} variant={'caption'}>
+          <Typography as={Link} className={cn.option} to={PATH.PROFILE} variant={'caption'}>
+            <PersonOutline className={cn.icon} />
             My Profile
           </Typography>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className={cn.icon} />
-          <Typography as={Link} className={s.link} to={PATH.SIGN_IN} variant={'caption'}>
+          <Typography as={Link} className={cn.option} to={PATH.SIGN_IN} variant={'caption'}>
+            <LogOut className={cn.icon} />
             Sign Out
           </Typography>
         </DropdownMenuItem>

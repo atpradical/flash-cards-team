@@ -27,7 +27,7 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
   const cn = {
     icon: clsx(s.icon),
     item: clsx(s.item),
-    link: clsx(s.link),
+    option: clsx(s.option),
     triggerIcon: clsx(s.triggerIcon),
   }
 
@@ -39,21 +39,21 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
       <DropdownMenuContent>
         <DropdownMenuArrow />
         <DropdownMenuItem>
-          <Typography as={Link} className={s.link} to={PATH.CARD} variant={'caption'}>
+          <Typography as={Link} className={cn.option} to={PATH.CARD} variant={'caption'}>
             <PlayCircleOutline className={cn.icon} />
             Learn
           </Typography>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={onEdit}>
-          <Typography className={s.link} variant={'caption'}>
+          <Typography className={cn.option} variant={'caption'}>
             <EditOutline className={cn.icon} />
             Edit
           </Typography>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={onDelete}>
-          <Typography className={s.link} variant={'caption'}>
+          <Typography className={cn.option} variant={'caption'}>
             <TrashOutline className={cn.icon} />
             Delete
           </Typography>
