@@ -1,9 +1,6 @@
-import { Link } from 'react-router-dom'
-
 import { User } from '@/common/types'
 import { ProfileDropdown } from '@/components/ui/layout-components'
 import { Avatar, Button, Typography } from '@/components/ui/primitives'
-import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
