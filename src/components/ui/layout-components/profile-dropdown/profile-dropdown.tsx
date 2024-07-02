@@ -53,7 +53,9 @@ export const ProfileDropdown = (props: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOut className={cn.icon} />
-          <Typography as={Link} className={s.link} to={PATH.SIGN_IN} variant={'caption'}>Sign Out</Typography>
+          <Typography as={Link} className={s.link} to={PATH.SIGN_IN} variant={'caption'}>
+            Sign Out
+          </Typography>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

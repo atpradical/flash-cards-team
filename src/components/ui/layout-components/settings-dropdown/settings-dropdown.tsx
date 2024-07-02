@@ -53,7 +53,7 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={onDelete}>
-          <Typography className={s.link}  variant={'caption'}>
+          <Typography className={s.link} variant={'caption'}>
             <TrashOutline className={cn.icon} />
             Delete
           </Typography>
