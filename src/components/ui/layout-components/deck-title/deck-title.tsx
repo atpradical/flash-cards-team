@@ -1,6 +1,6 @@
-import { ASPECT_RATIO } from '@/common/enums/aspect-ratio'
+import { RATIO } from '@/common/enums/ratio'
 import { SettingsDropdown } from '@/components/ui/layout-components'
-import { AspectRatio, Typography } from '@/components/ui/primitives'
+import { Image, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
@@ -23,7 +23,6 @@ export const DeckTitle = ({
 }: DeckTitleProps) => {
   const cn = {
     container: clsx(s.container),
-    image: clsx(s.image),
   }
 
   return (
@@ -34,11 +33,7 @@ export const DeckTitle = ({
         </Typography>
         <SettingsDropdown onDelete={onDelete} onEdit={onEdit} />
       </FlexContainer>
-      {image && (
-        <AspectRatio ratio={ASPECT_RATIO.Standard} variant={'m'}>
-          <img alt={imgDescription} className={cn.image} src={image} />
-        </AspectRatio>
-      )}
+      {image && <Image alt={imgDescription} ratio={RATIO.M} src={image} variant={'m'} />}
     </div>
   )
 }

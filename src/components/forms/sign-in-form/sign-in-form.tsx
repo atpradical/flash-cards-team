@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
+import { Button, Card, Typography } from '@/components/ui/primitives'
 import { emailSchema, passwordSchema, rememberMeSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -10,10 +11,6 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './sign-in-form.module.scss'
-
-import { Button } from '../../ui/primitives/button'
-import { Card } from '../../ui/primitives/card'
-import { Typography } from '../../ui/primitives/typography'
 
 type SignInFormProps = {
   onSubmit: (data: FormValues) => void
@@ -72,8 +69,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
               variant={'password'}
             />
             <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-
-            <Typography as={Link} className={cn.link} to={'/password-recovery'} variant={'body2'}>
+            <Typography as={Link} className={cn.link} to={'/password-recovery'}>
               Forgot Password?
             </Typography>
           </FlexContainer>
@@ -81,9 +77,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
             Sign In
           </Button>
         </form>
-        <Typography className={cn.typography} variant={'body2'}>
-          Don&apos;t have an account?
-        </Typography>
+        <Typography className={cn.typography}>Don&apos;t have an account?</Typography>
         <Button as={Link} className={cn.buttonSign} to={'/sign-up'} variant={'link'}>
           Sign Up
         </Button>

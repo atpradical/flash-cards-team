@@ -56,7 +56,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
             placeholder={'Create new password'}
             variant={'password'}
           />
-          <Typography className={cn.reminder} variant={'body2'}>
+          <Typography className={cn.reminder}>
             Create new password and we will send you further instructions to email
           </Typography>
           <Button fullWidth>Create New Password</Button>

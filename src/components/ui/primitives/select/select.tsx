@@ -1,13 +1,12 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { ArrowIosForward } from '@/assets/components/svgIcons'
+import { Typography } from '@/components/ui/primitives/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
 
 import s from './select.module.scss'
-
-import { Typography } from '../typography'
 
 export type SelectOption = {
   disabled?: boolean
@@ -59,9 +58,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
         value={option.value}
       >
         <RadixSelect.ItemText>
-          <Typography as={'span'} variant={'body2'}>
-            {option.title}
-          </Typography>
+          <Typography as={'span'}>{option.title}</Typography>
         </RadixSelect.ItemText>
       </RadixSelect.Item>
     ))
@@ -75,7 +72,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
         {...rest}
       >
         {label && (
-          <Typography as={'label'} className={cn.label} variant={'body2'}>
+          <Typography as={'label'} className={cn.label}>
             {label}
           </Typography>
         )}
