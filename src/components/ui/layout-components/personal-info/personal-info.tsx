@@ -42,7 +42,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
             <EditOutline className={cn.icon} />
           </Button>
         </FlexContainer>
-        <Typography className={cn.hint} variant={'body2'}>
+        <Typography className={cn.hint} gray>
           j&johnson@gmail.com
         </Typography>
         <Button className={cn.bottom} variant={'secondary'}>

@@ -10,7 +10,7 @@ export const SignUpPage = () => {
 
   return (
     <Page>
-      <FlexContainer jc={'center'}>
+      <FlexContainer jc={'center'} pd={'0 20px'}>
         <SignUpForm onSubmit={signUpHandler} />
       </FlexContainer>
     </Page>

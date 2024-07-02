@@ -90,9 +90,7 @@ const TableCell = forwardRef<TableCellRef, TableCellProps>((props, ref) => {
 
   return (
     <td className={cn} ref={ref} {...rest}>
-      <Typography as={'span'} variant={'body2'}>
-        {children}
-      </Typography>
+      <Typography as={'span'}>{children}</Typography>
     </td>
   )
 })

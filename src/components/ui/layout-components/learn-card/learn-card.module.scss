@@ -4,9 +4,9 @@
 }
 
 .title {
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -16,10 +16,6 @@
 
 .incoming {
   margin-left: 0.25rem;
-}
-
-.hint {
-  color: var(--color-dark-100);
 }
 
 .text,
@@ -37,6 +33,7 @@
   height: 100%;
   object-fit: cover;
 }
+
 .ratio {
   margin: 18px 0;
 }
