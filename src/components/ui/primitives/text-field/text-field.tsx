@@ -62,8 +62,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   return (
     <FlexContainer ai={'flex-start'} fd={'column'}>
       {label && (
-        <Typography as={'label'} className={s.label} variant={'body2'}>
-          {/* gray need to add */}
+        <Typography as={'label'} className={s.label}>
           {label}
         </Typography>
       )}

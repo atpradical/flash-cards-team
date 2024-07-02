@@ -10,7 +10,7 @@ export const SignInPage = () => {
 
   return (
     <Page>
-      <FlexContainer jc={'center'}>
+      <FlexContainer jc={'center'} pd={'0 20px'}>
         <SignInForm onSubmit={signInHandler} />
       </FlexContainer>
     </Page>

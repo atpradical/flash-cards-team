@@ -11,7 +11,7 @@ export const CheckEmailPage = () => {
 
   return (
     <Page>
-      <FlexContainer jc={'center'}>
+      <FlexContainer jc={'center'} pd={'0 20px'}>
         <CheckEmail email={foo()} />
       </FlexContainer>
     </Page>
