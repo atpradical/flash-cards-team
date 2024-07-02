@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { Option } from '@/common/types'
-import { FlexContainer } from '@/shared/ui/flex-container'
 import { Typography } from '@/components/ui/primitives/typography'
+import { FlexContainer } from '@/shared/ui/flex-container'
 import * as RadixRadio from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
 

@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { ArrowIosForward } from '@/assets/components/svgIcons'
-import { FlexContainer } from '@/shared/ui/flex-container'
 import { Typography } from '@/components/ui/primitives/typography'
+import { FlexContainer } from '@/shared/ui/flex-container'
 import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
 

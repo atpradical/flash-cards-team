@@ -60,7 +60,9 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
           </AspectRatio>
         )}
         <div>
-          <Typography className={cn.triesText}>Количество попыток ответов на вопрос:</Typography>
+          <Typography className={cn.triesText} gray>
+            Количество попыток ответов на вопрос:
+          </Typography>
           <Typography className={cn.triesCount} gray variant={'subtitle2'}>
             {triesCount}
           </Typography>
