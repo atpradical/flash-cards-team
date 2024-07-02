@@ -33,7 +33,6 @@ export const UserProfile = ({ isAuthorized, userData: { email, name, photo } }: 
       name={name}
       photo={photo.src}
       photoDesc={photo.alt}
-      profilePageHref={'https://google.com'}
       trigger={trigger}
     />
   )
