@@ -7,9 +7,10 @@ import {
   SearchOutline,
 } from '@/assets/components/svgIcons'
 import { Button, Typography } from '@/components/ui/primitives'
+import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
-import s from './textField.module.scss'
+import s from './text-field.module.scss'
 
 export type TextFieldProps = {
   error?: boolean
@@ -31,7 +32,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   } = props
 
   const cn = {
-    closeOutline: clsx(s.icon, s.close),
+    closeOutline: clsx(s.icon),
     container: clsx(s.container, disabled && s.disabled, className),
     eye: clsx(s.icon, s.eye, disabled && s.disabled),
     input: clsx(s.input, error && s.error),
@@ -59,14 +60,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   }
 
   return (
-    <div className={cn.container}>
+    <FlexContainer ai={'flex-start'} fd={'column'}>
       {label && (
         <Typography as={'label'} className={s.label} variant={'body2'}>
+          {/* gray need to add */}
           {label}
         </Typography>
       )}
       <div className={s.inputSvgWrapper}>
         <input
+          autoFocus
           className={cn.input}
           disabled={disabled}
           onChange={handleChangeInput}
@@ -94,6 +97,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         )}
       </div>
       {helperText && <Typography variant={'error'}>{helperText}</Typography>}
-    </div>
+    </FlexContainer>
   )
 })
