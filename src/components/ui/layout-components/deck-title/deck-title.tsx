@@ -1,6 +1,6 @@
-import { RATIO } from '@/common/enums/ratio'
 import { SettingsDropdown } from '@/components/ui/layout-components'
 import { Image, Typography } from '@/components/ui/primitives'
+import { RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 

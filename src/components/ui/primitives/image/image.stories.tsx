@@ -1,8 +1,8 @@
 import type { Meta } from '@storybook/react'
 
 import myImage from '@/assets/webp/react-logo.webp'
-import { RATIO } from '@/common/enums/ratio'
 import { Image } from '@/components/ui/primitives/image/image'
+import { RATIO } from '@/shared/enums'
 
 const meta = {
   component: Image,
