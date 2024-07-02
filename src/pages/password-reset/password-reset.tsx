@@ -10,7 +10,7 @@ export const ResetPassword = () => {
 
   return (
     <Page>
-      <FlexContainer jc={'center'}>
+      <FlexContainer jc={'center'} pd={'0 20px'}>
         <CreateNewPasswordForm onSubmit={resetPasswordHandler} />
       </FlexContainer>
     </Page>
