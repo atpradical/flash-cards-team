@@ -42,7 +42,6 @@ export const DropdownWithUserAvatar = {
         name={mockUser.name}
         photo={mockUser.photo.src}
         photoDesc={mockUser.photo.alt}
-        profilePageHref={'https://google.com'}
         trigger={<Avatar size={'s'} src={userDefault} />}
       />
     )
