@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  max-width: 420px;
+  max-width: var(--max-width-s);
 }
 
 .form {
@@ -12,6 +12,7 @@
   align-self: flex-end;
   margin-bottom: 60px;
   color: var(--color-light-100);
+  text-decoration: none;
 
   &:hover {
     color: var(--color-accent-300);

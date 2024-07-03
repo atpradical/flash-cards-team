@@ -10,7 +10,7 @@ import { ResetPassword } from '@/pages/password-reset'
 import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
-import { PATH } from '@/shared/enums/path'
+import { PATH } from '@/shared/enums'
 
 import { App } from './App'
 

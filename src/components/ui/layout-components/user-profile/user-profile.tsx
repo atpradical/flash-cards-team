@@ -34,13 +34,5 @@ export const UserProfile = ({ isAuthorized, userData: { email, name, photo } }: 
     </FlexContainer>
   )
 
-  return (
-    <ProfileDropdown
-      email={email}
-      name={name}
-      photo={photo.src}
-      photoDesc={photo.alt}
-      trigger={trigger}
-    />
-  )
+  return <ProfileDropdown email={email} name={name} photo={photo} trigger={trigger} />
 }

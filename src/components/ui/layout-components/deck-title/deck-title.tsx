@@ -27,7 +27,7 @@ export const DeckTitle = ({
 
   return (
     <div className={cn.container}>
-      <FlexContainer>
+      <FlexContainer gap={'8px'}>
         <Typography as={'h1'} variant={'h1'}>
           {title}
         </Typography>
