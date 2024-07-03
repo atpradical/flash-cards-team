@@ -10,12 +10,11 @@
   border-left: none;
 
   stroke-width: 2px;
-  z-index: 200;
 }
 
 .menu {
   padding: 12px;
-
+  z-index: 3;
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
   border-radius: var(--border-radius-s);
