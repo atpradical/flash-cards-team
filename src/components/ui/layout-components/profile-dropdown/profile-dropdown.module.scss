@@ -6,6 +6,11 @@
   min-width: 218px;
 }
 
+.trigger {
+  display: flex;
+  cursor: pointer;
+}
+
 .option {
   text-decoration: none;
   display: flex;

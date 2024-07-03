@@ -3,6 +3,11 @@
   height: 16px;
 }
 
+.trigger {
+  display: flex;
+  cursor: pointer;
+}
+
 .settingsItem {
   margin: var(--margin-12px-0);
 }

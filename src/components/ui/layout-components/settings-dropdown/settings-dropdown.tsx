@@ -6,12 +6,12 @@ import PlayCircleOutline from '@/assets/components/svgIcons/PlayCircleOutline'
 import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
 import { Typography } from '@/components/ui/primitives'
 import {
-  DropdownMenu,
-  DropdownMenuArrow,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  Arrow,
+  Content,
+  Item,
+  Root,
+  Separator,
+  Trigger,
 } from '@/components/ui/primitives/dropdown/dropdown'
 import { PATH } from '@/shared/enums'
 import clsx from 'clsx'
@@ -28,37 +28,38 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
     icon: clsx(s.icon),
     item: clsx(s.item),
     option: clsx(s.option),
+    trigger: clsx(s.trigger),
     triggerIcon: clsx(s.triggerIcon),
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
+    <Root>
+      <Trigger asChild className={cn.trigger}>
         <MoreVerticalOutline className={cn.triggerIcon} />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuArrow />
-        <DropdownMenuItem>
+      </Trigger>
+      <Content>
+        <Arrow />
+        <Item>
           <Typography as={Link} className={cn.option} to={PATH.CARD} variant={'caption'}>
             <PlayCircleOutline className={cn.icon} />
             Learn
           </Typography>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onEdit}>
+        </Item>
+        <Separator />
+        <Item onClick={onEdit}>
           <Typography className={cn.option} variant={'caption'}>
             <EditOutline className={cn.icon} />
             Edit
           </Typography>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onDelete}>
+        </Item>
+        <Separator />
+        <Item onClick={onDelete}>
           <Typography className={cn.option} variant={'caption'}>
             <TrashOutline className={cn.icon} />
             Delete
           </Typography>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </Item>
+      </Content>
+    </Root>
   )
 }
