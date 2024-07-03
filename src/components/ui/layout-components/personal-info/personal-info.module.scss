@@ -20,8 +20,8 @@
   top: 90px;
   left: 76px;
 
-  width: var(--icon-xl);
-  height: var(--icon-xl);
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
   padding: 0;
 }
 
@@ -30,6 +30,6 @@
 }
 
 .icon {
-  width: var(--icon-s);
-  height: var(--icon-s);
+  width: var(--icon-size-s);
+  height: var(--icon-size-s);
 }

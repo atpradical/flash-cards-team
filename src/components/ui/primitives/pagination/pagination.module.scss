@@ -9,8 +9,8 @@
   display: flex;
   place-content: center center;
 
-  width: var(--icon-xl);
-  height: var(--icon-xl);
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
   padding: 0 8px;
 
   background-color: transparent;
@@ -41,8 +41,8 @@
 }
 
 .arrow {
-  width: var(--arrow-s);
-  height: var(--arrow-s);
+  width: var(--arrow-size-s);
+  height: var(--arrow-size-s);
 }
 
 .arrowRight {

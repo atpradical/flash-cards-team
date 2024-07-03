@@ -6,8 +6,8 @@ button {
   position: relative;
   top: -1px;
 
-  width: var(--arrow-s);
-  height: var(--arrow-xs);
+  width: var(--arrow-size-s);
+  height: var(--arrow-size-xs);
 
   border-top: var(--border-width-s) solid var(--color-dark-700);
 
@@ -15,8 +15,8 @@ button {
 }
 
 .icon {
-  width: var(--icon-xl);
-  height: var(--icon-xl);
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
 }
 
 .trigger {
