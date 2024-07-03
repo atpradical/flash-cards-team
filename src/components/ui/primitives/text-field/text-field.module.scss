@@ -2,11 +2,11 @@
   position: relative;
   width: 100%;
   color: var(--color-dark-300);
-  border-radius: var(--border-radius-xs);
 
   &:focus-within {
     color: var(--color-light-100);
-    outline: 1px solid var(--color-info-700);
+    border-radius: var(--border-radius-xs);
+    outline: var(--outline-width-s) solid var(--color-info-700);
   }
 
   &:focus-visible {
@@ -17,13 +17,13 @@
 .input {
   width: 100%;
   height: 36px;
-  padding: 0.5em;
 
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
 
   background-color: var(--color-dark-900);
-  border: 1px solid var(--color-dark-300);
+  border: var(--border-width-s) solid var(--color-dark-300);
+  border-radius: var(--border-radius-xs);
 
   &::placeholder {
     font-style: italic;
@@ -36,7 +36,7 @@
 
   &.error {
     color: var(--color-danger-300);
-    border: 1px solid var(--color-danger-300);
+    border: var(--border-width-s) solid var(--color-danger-300);
   }
 
   &:focus-visible {
@@ -50,6 +50,18 @@
       outline: none;
     }
   }
+
+  &.search {
+    padding: var(--padding-xs) var(--padding-xl);
+  }
+
+  &.text {
+    padding: var(--padding-xs) var(--padding-s);
+  }
+
+  &.password {
+    padding: var(--padding-xs) var(--padding-xl) var(--padding-xs) var(--padding-s);
+  }
 }
 
 .input:-webkit-autofill,
@@ -58,6 +70,8 @@
 .input:-webkit-autofill:active {
   background-color: var(--color-dark-900);
   transition: background-color 3000s ease-in-out 0s;
+
+  // тут  --transition-duration- почему то отключает background-color и transition
 
   -webkit-text-fill-color: var(--color-light-100);
 }
@@ -68,24 +82,20 @@
   right: 11px;
   transform: translateY(-50%);
 
-  width: 20px;
-  height: 20px;
-  padding: 1px;
+  width: var(--icon-size-l);
+  height: var(--icon-size-l);
+  padding: var(--padding-xxs);
 
-  // &.disabled { // неу верена что нужен этот стиль
-  //   cursor: default;
-  // }
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  &.error {
+    color: var(--color-danger-300);
+  }
 
   &.search {
     left: 0;
     margin: 0 0.5em;
-  }
-}
-
-input[type='search'] {
-  padding: 7px 30px;
-
-  &::-webkit-search-cancel-button {
-    appearance: none;
   }
 }

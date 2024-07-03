@@ -20,7 +20,7 @@ export const DeckPage = () => {
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
   const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState(false)
   const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
-  // const [inputValue, setInputValue] = useState('')
+
   const cn = {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),

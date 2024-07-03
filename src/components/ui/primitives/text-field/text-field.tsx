@@ -35,29 +35,29 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const cn = {
     container: clsx(s.container, disabled && s.disabled, className),
-    eye: clsx(s.icon, disabled && s.disabled),
-    icon: clsx(s.icon),
+    eye: clsx(s.icon, error && s.error),
+    icon: clsx(s.icon, disabled && s.disabled),
     iconSearch: clsx(s.icon, s.search),
-    input: clsx(s.input, error && s.error),
+    input: clsx(s.input, variant && s[variant], error && s.error),
   }
 
   const [showPassword, setShowPassword] = useState(false)
   const [inputValue, setInputValue] = useState(value)
 
   const isPassword = variant === 'password'
-  const inputType = showPassword && isPassword ? 'text' : variant
+  const inputType = !showPassword && isPassword ? 'password' : 'text'
   const isSearch = variant === 'search'
 
   const showPasswordHandler = () => {
     setShowPassword(prev => !prev)
   }
 
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
     onChange?.(e)
   }
 
-  const handleClearInput = () => {
+  const clearInputHandler = () => {
     setInputValue('')
   }
 
@@ -73,7 +73,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         <input
           className={cn.input}
           disabled={disabled}
-          onChange={handleChangeInput}
+          onChange={changeInputHandler}
           placeholder={placeholder}
           ref={ref}
           type={inputType}
@@ -88,7 +88,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         )}
 
         {isSearch && !!inputValue && (
-          <Button onClick={handleClearInput} variant={'icon'}>
+          <Button onClick={clearInputHandler} variant={'icon'}>
             <CloseOutline className={cn.icon} />
           </Button>
         )}
