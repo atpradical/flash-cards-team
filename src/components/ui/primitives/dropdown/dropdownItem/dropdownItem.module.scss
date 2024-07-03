@@ -6,9 +6,9 @@
   margin: 12px 0;
 
   &:focus-visible {
-    border-radius: 5px;
-    outline: 1px solid var(--color-info-500);
-    outline-offset: 2px;
+    border-radius: var(--5px);
+    outline: var(--1px) solid var(--color-info-500);
+    outline-offset: var(--2px);
   }
 
   &:hover {

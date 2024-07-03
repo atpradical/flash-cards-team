@@ -34,19 +34,19 @@
 }
 
 .s {
-  width: 36px;
-  height: 36px;
+  width: var(--36px);
+  height: var(--36px);
   font-size: var(--font-size-s);
 }
 
 .m {
-  width: 66px;
-  height: 66px;
+  width: var(--66px);
+  height: var(--66px);
   font-size: var(--font-size-m);
 }
 
 .l {
-  width: 96px;
-  height: 96px;
+  width: var(--96px);
+  height: var(--96px);
   font-size: var(--font-size-l);
 }

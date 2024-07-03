@@ -8,14 +8,16 @@
   --border-radius-l: 0.625rem;
 
   /* box-shadow */
-  --box-shadow-offset-x-min: 1px;
-  --box-shadow-offset-y-min: 1px;
-  --box-shadow-blur-min: 2px;
-  --box-shadow-scale-min: 0;
-  --box-shadow-transparency-min: 0.1;
+  --shadow-0: 0px 0px 0px 6px;
+  --shadow-s: 1px 1px 2px 2px;
+  --shadow-m: 2px 2px 4px 2px;
 
-  /* marginForDropdownItem */
+  /* margin */
   --margin-12px-0: 12px 0;
+  --margin-0: 0;
+
+  /* padding */
+  --padding-0: 0;
 
   /* Rotation angle */
   --90-deg: 90deg;
@@ -28,5 +30,34 @@
   --transition-duration-fast: 0.1s;
 
   /* Header */
-  --header-height: 60px;
+  --header-height: var(--60px);
+
+  /* Size */
+  --1280px: 1280px;
+  --542px: 542px;
+  --484px: 484px;
+  --420px: 420px;
+  --350px: 350px;
+  --156px: 156px;
+  --170px: 170px;
+  --118px: 118px;
+  --96px: 96px;
+  --66px: 66px;
+  --60px: 60px;
+  --50px: 50px;
+  --36px: 36px;
+  --24px: 24px;
+  --20px: 20px;
+  --18px: 18px;
+  --16px: 16px;
+  --14px: 14px;
+  --12px: 12px;
+  --8px: 8px;
+  --5px: 5px;
+  --2px: 2px;
+  --1px: 1px;
+
+  /* Animation timing function */
+  --ease-in-out: ease-in-out;
+  --ease: ease;
 }

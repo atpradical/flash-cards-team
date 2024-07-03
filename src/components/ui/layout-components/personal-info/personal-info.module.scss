@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  max-width: 420px;
+  max-width: var(--420px);
 }
 
 .avatar {
@@ -20,9 +20,9 @@
   top: 90px;
   left: 76px;
 
-  width: 24px;
-  height: 24px;
-  padding: 0;
+  width: var(--24px);
+  height: var(--24px);
+  padding: var(--padding-0);
 }
 
 .bottom {
@@ -30,6 +30,6 @@
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: var(--16px);
+  height: var(--16px);
 }

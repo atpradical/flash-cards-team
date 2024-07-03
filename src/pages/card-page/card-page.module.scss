@@ -1,11 +1,11 @@
 .goBack {
   gap: 6px;
   align-self: start;
-  padding: 0;
+  padding: var(--padding-0);
   color: var(--color-light-100);
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: var(--16px);
+  height: var(--16px);
 }

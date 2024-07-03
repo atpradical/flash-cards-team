@@ -5,7 +5,7 @@ button {
 .root {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--12px);
 }
 
 .item {
@@ -13,10 +13,10 @@ button {
 
   position: relative;
 
-  width: 12px;
-  height: 12px;
+  width: var(--12px);
+  height: var(--12px);
 
-  border: 2px solid var(--color-accent-500);
+  border: var(--2px) solid var(--color-accent-500);
   border-radius: var(--border-radius-rounded);
 
   &::after {
@@ -27,13 +27,13 @@ button {
     top: -100%;
     left: -100%;
 
-    width: 36px;
-    height: 36px;
+    width: var(--36px);
+    height: var(--36px);
 
     background-color: transparent;
     border-radius: var(--border-radius-rounded);
 
-    transition: all var(--transition-duration-fast) ease-in-out;
+    transition: all var(--transition-duration-fast) var(--ease-in-out);
   }
 
   &:hover::after {
@@ -72,8 +72,8 @@ button {
 
     display: block;
 
-    width: 8px;
-    height: 8px;
+    width: var(--8px);
+    height: var(--8px);
 
     background-color: var(--color-accent-500);
     border-radius: var(--border-radius-rounded);
@@ -86,7 +86,7 @@ button {
 
 .label {
   cursor: pointer;
-  padding-left: 12px;
+  padding-left: var(--12px);
   color: var(--color-light-100);
 
   &.disabled {

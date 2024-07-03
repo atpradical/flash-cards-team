@@ -11,8 +11,8 @@ button {
   align-items: center;
   justify-content: center;
 
-  width: 16px;
-  height: 16px;
+  width: var(--16px);
+  height: var(--16px);
 
   background-color: transparent;
   border: 2px solid var(--color-light-100);
@@ -26,8 +26,8 @@ button {
   }
 
   &[data-state='checked'] {
-    width: 16px;
-    height: 16px;
+    width: var(--16px);
+    height: var(--16px);
 
     background-color: var(--color-light-100);
     border: 2px solid var(--color-light-100);
@@ -58,8 +58,8 @@ button {
     position: absolute;
     z-index: -1;
 
-    width: 36px;
-    height: 36px;
+    width: var(--36px) px;
+    height: var(--36px) x;
 
     background-color: var(--color-dark-500);
     border-radius: var(--border-radius-rounded);
@@ -82,8 +82,8 @@ button {
 }
 
 .icon {
-  width: 18px;
-  height: 18px;
+  width: var(--18px);
+  height: var(--18px);
 }
 
 .label {

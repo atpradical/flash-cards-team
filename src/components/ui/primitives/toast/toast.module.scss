@@ -5,29 +5,27 @@
   bottom: 0;
 
   width: 100%;
-  max-width: 350px;
-  padding: 0;
+  max-width: var(--350px);
+  padding: var(--padding-0);
 
   list-style: none;
 }
 
 .container {
-  padding: 16px;
-  box-shadow:
-    2px 2px 4px rgb(225 225 225 / 20%),
-    2px 2px 8px rgb(255 255 255 / 24%);
+  padding: var(--16px);
+  box-shadow: var(--shadow-m) rgba(255, 255, 255, 0.2);
 }
 
 .root {
-  padding: 15px;
+  padding: var(--16px);
 }
 
 .root[data-state='open'] {
-  animation: slide-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slide-in var(--transition-duration-fast) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .root[data-state='closed'] {
-  animation: hide 100ms ease-in;
+  animation: hide var(--transition-duration-fast) ease-in;
 }
 
 .success {
@@ -44,8 +42,8 @@
 
 .button {
   svg {
-    width: 16px;
-    height: 16px;
+    width: var(--16px) px;
+    height: var(--16px);
   }
 
   &:hover {

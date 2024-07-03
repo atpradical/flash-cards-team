@@ -5,7 +5,7 @@
 
   border-color: var(--color-dark-500);
   border-style: solid;
-  border-width: 0 1px 1px;
+  border-width: 0 var(--1px) var(--1px);
 }
 
 .headerCell,
@@ -13,7 +13,7 @@
   padding: 6px 24px;
   text-align: left;
   vertical-align: center;
-  border-bottom: 1px solid var(--color-dark-500);
+  border-bottom: var(--1px) solid var(--color-dark-500);
 }
 
 .headerCell {

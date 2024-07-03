@@ -1,5 +1,5 @@
 .container {
-  max-width: 542px;
+  max-width: var(--542px);
 }
 
 .form {
@@ -7,13 +7,13 @@
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: var(--16px);
+  height: var(--16px);
 }
 
 .close {
-  width: 24px;
-  height: 24px;
+  width: var(--24px);
+  height: var(--24px);
 
   &:hover {
     cursor: pointer;
@@ -21,7 +21,7 @@
     color: var(--color-accent-500);
 
     background-color: var(--color-dark-700);
-    border: 1px solid var(--color-dark-300);
+    border: var(--1px) solid var(--color-dark-300);
     border-radius: var(--border-radius-s);
   }
 }
