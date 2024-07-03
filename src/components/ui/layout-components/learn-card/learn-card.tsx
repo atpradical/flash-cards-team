@@ -2,10 +2,10 @@ import { ReactNode, useState } from 'react'
 
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
-import { RATIO } from '@/common/enums/ratio'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
 import { CardListExample } from '@/components/ui/layout-components/deck-table/deck-table.mock'
 import { Button, Card, Image, Typography } from '@/components/ui/primitives'
+import { RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 

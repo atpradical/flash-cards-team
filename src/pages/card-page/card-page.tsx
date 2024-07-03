@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ArrowBackOutline from '@/assets/components/svgIcons/ArrowBackOutline'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button } from '@/components/ui/primitives'
+import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 import clsx from 'clsx'
@@ -18,7 +19,7 @@ export const CardPage = () => {
   return (
     <Page>
       <FlexContainer fd={'column'} gap={'36px'} jc={'left'} pd={'0 20px'}>
-        <Button as={Link} className={cn.goBack} to={'/deck'} variant={'link'}>
+        <Button as={Link} className={cn.goBack} to={PATH.DECK} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
           Back to Deck
         </Button>

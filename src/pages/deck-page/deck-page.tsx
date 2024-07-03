@@ -8,6 +8,7 @@ import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
 import { CardListExample } from '@/components/ui/layout-components/deck-table/deck-table.mock'
 import { Button, TextField } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
+import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 import clsx from 'clsx'
@@ -63,7 +64,7 @@ export const DeckPage = () => {
   return (
     <Page>
       <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'} pd={'0 20px'}>
-        <Button as={Link} className={cn.goBack} to={'/deck-list'} variant={'link'}>
+        <Button as={Link} className={cn.goBack} to={PATH.DECK_LIST} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
           Back to Decks List
         </Button>
@@ -74,7 +75,7 @@ export const DeckPage = () => {
             onEdit={editDeckHandler}
             title={"Fried's Deck"}
           />
-          <Button as={Link} className={cn.learnDeck} to={'/card'}>
+          <Button as={Link} className={cn.learnDeck} to={PATH.CARD}>
             Learn Deck
           </Button>
         </FlexContainer>

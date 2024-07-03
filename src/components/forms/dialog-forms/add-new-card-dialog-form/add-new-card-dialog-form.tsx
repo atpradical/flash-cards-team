@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 
 import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
 import dummyImage from '@/assets/webp/cover-default.webp'
-import { RATIO } from '@/common/enums/ratio'
 import {
   Button,
   Dialog,
@@ -15,6 +14,7 @@ import {
   Image,
   Typography,
 } from '@/components/ui/primitives'
+import { RATIO } from '@/shared/enums'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
