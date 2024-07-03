@@ -5,19 +5,19 @@
   bottom: 0;
 
   width: 100%;
-  max-width: var(--350px);
-  padding: var(--padding-0);
+  max-width: var(--max-width-xs);
+  padding: 0;
 
   list-style: none;
 }
 
 .container {
-  padding: var(--16px);
+  padding: var(--padding-m);
   box-shadow: var(--shadow-m) rgba(255, 255, 255, 0.2);
 }
 
 .root {
-  padding: var(--16px);
+  padding: var(--padding-m);
 }
 
 .root[data-state='open'] {
@@ -42,8 +42,8 @@
 
 .button {
   svg {
-    width: var(--16px) px;
-    height: var(--16px);
+    width: var(--icon-s);
+    height: var(--icon-s);
   }
 
   &:hover {

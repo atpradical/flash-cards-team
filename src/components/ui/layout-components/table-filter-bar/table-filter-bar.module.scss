@@ -1,10 +1,10 @@
 .button {
-  gap: 10px;
+  gap: var(--gap-m);
   padding: 6px 24px;
 
   svg {
-    width: var(--16px);
-    height: var(--16px);
+    width: var(--icon-s);
+    height: var(--icon-s);
   }
 }
 

@@ -1,5 +1,5 @@
 :root {
-  /* border-radius */
+  /* border radius */
   --border-radius-rounded: 50%;
   --border-radius-s: 0.25rem;
   --border-radius-xs: 0.125rem;
@@ -7,17 +7,35 @@
   --border-radius-m: 0.375rem;
   --border-radius-l: 0.625rem;
 
+  /* border width */
+  --border-width-s: 1px;
+  --border-width-m: 2px;
+
+  /* outline width */
+  --outline-width-s: 1px;
+  --outline-width-m: 2px;
+
+  /* gap size */
+  --gap-xs: 6px;
+  --gap-s: 8px;
+  --gap-m: 10px;
+  --gap-l: 12px;
+
   /* box-shadow */
   --shadow-0: 0px 0px 0px 6px;
   --shadow-s: 1px 1px 2px 2px;
   --shadow-m: 2px 2px 4px 2px;
 
-  /* margin */
-  --margin-12px-0: 12px 0;
-  --margin-0: 0;
+  /* max-width */
+  --max-width-xs: 350px;
+  --max-width-s: 420px;
+  --max-width-m: 542px;
+  --max-width-l: 1280px;
 
   /* padding */
-  --padding-0: 0;
+  --padding-s: 12px;
+  --padding-m: 16px;
+  --padding-l: 24px;
 
   /* Rotation angle */
   --90-deg: 90deg;
@@ -30,34 +48,16 @@
   --transition-duration-fast: 0.1s;
 
   /* Header */
-  --header-height: var(--60px);
+  --header-height: 60px;
 
-  /* Size */
-  --1280px: 1280px;
-  --542px: 542px;
-  --484px: 484px;
-  --420px: 420px;
-  --350px: 350px;
-  --156px: 156px;
-  --170px: 170px;
-  --118px: 118px;
-  --96px: 96px;
-  --66px: 66px;
-  --60px: 60px;
-  --50px: 50px;
-  --36px: 36px;
-  --24px: 24px;
-  --20px: 20px;
-  --18px: 18px;
-  --16px: 16px;
-  --14px: 14px;
-  --12px: 12px;
-  --8px: 8px;
-  --5px: 5px;
-  --2px: 2px;
-  --1px: 1px;
+  /* Icon size */
+  --icon-s: 16px;
+  --icon-m: 18px;
+  --icon-l: 20px;
+  --icon-xl: 24px;
 
-  /* Animation timing function */
-  --ease-in-out: ease-in-out;
-  --ease: ease;
+  /* Arrow size */
+  --arrow-xs: 8px;
+  --arrow-s: 16px;
+  --arrow-m: 24px;
 }

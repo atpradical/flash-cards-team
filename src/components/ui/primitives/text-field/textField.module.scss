@@ -9,7 +9,7 @@
   }
 
   .label {
-    margin: var(--margin-0);
+    margin: 0;
   }
 }
 
@@ -19,7 +19,7 @@
 
 .input {
   width: 100%;
-  height: var(--36px);
+  height: 36px;
   padding: 0.5em;
 
   font-size: var(--font-size-m);
@@ -27,7 +27,7 @@
   color: var(--color-light-100);
 
   background-color: var(--color-dark-900);
-  border: var(--1px) solid var(--color-dark-300);
+  border: var(--border-width-s) solid var(--color-dark-300);
   border-radius: var(--border-radius-xxs);
 
   &:hover {
@@ -36,23 +36,23 @@
 
   &:active {
     color: var(--color-light-100);
-    border: var(--1px) solid var(--color-light-100);
+    border: var(--border-width-s) solid var(--color-light-100);
   }
 
   &:focus,
   &:focus-visible {
-    border: var(--2px) solid var(--color-info-700);
+    border: var(--border-width-m) solid var(--color-info-700);
   }
 
   &.error {
     color: var(--color-danger-300);
-    border: var(--1px) solid var(--color-danger-300);
+    border: var(--border-width-s) solid var(--color-danger-300);
   }
 
   &:disabled {
     pointer-events: none;
     color: var(--color-dark-300);
-    border: var(--1px) solid var(--color-dark-300);
+    border: var(--border-width-s) solid var(--color-dark-300);
 
     &:hover {
       background-color: inherit;
@@ -67,12 +67,12 @@
 .icon {
   position: absolute;
   top: 50%;
-  right: var(--12px);
+  right: 12px;
   transform: translateY(-50%);
 
-  width: var(--20px);
-  height: var(--20px);
-  padding: var(--1px);
+  width: var(--icon-l);
+  height: var(--icon-l);
+  padding: 1px;
 
   &.disabled {
     cursor: default;
@@ -81,7 +81,7 @@
 
   &.search {
     left: 0;
-    margin: var(--margin-0) 0.5em;
+    margin: 0 0.5em;
     color: var(--color-dark-300);
 
     &:active {

@@ -28,7 +28,7 @@
   max-height: 85vh;
 
   background-color: var(--color-dark-700);
-  border: var(--1px) solid var(--color-dark-500);
+  border: var(--border-width-s) solid var(--color-dark-500);
   border-radius: var(--border-radius-s);
 
   transition:
@@ -46,7 +46,7 @@
 
 .header {
   padding: 18px 24px;
-  border-bottom: var(--1px) solid var(--color-dark-500);
+  border-bottom: var(--border-width-s) solid var(--color-dark-500);
 }
 
 .description {
@@ -54,7 +54,7 @@
 }
 
 .body {
-  padding: var(--24px);
+  padding: var(--padding-l);
 }
 
 .footer {

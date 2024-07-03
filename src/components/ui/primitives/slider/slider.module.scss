@@ -3,10 +3,10 @@
   align-items: center;
   justify-content: center;
 
-  width: var(--36px);
-  height: var(--36px);
+  width: 36px;
+  height: 36px;
 
-  border: var(--1px) solid var(--color-dark-300);
+  border: var(--border-width-s) solid var(--color-dark-300);
   border-radius: var(--border-radius-xs);
 }
 
@@ -19,9 +19,9 @@
   display: flex;
   align-items: center;
 
-  width: var(--156px);
-  height: var(--20px);
-  margin: var(--margin-0) 15px;
+  width: 156px;
+  height: 20px;
+  margin: 0 15px;
 }
 
 .track {
@@ -29,7 +29,7 @@
 
   flex-grow: 1;
 
-  height: var(--5px);
+  height: 5px;
 
   background-color: var(--color-accent-900);
   border-radius: var(--border-radius-l);
@@ -47,8 +47,8 @@
 
   display: block;
 
-  width: var(--16px);
-  height: var(--16px);
+  width: 16px;
+  height: 16px;
 
   background-color: var(--color-light-100);
   border-radius: var(--border-radius-l);
@@ -60,8 +60,8 @@
 
   &:hover,
   &:focus {
-    width: var(--14px);
-    height: var(--14px);
+    width: 14px;
+    height: 14px;
     box-shadow: var(--shadow-0) var(--color-accent-500);
   }
 

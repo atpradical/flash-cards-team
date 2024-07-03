@@ -6,17 +6,17 @@ button {
   position: relative;
   top: -1px;
 
-  width: var(--16px);
-  height: var(--8px);
+  width: var(--arrow-s);
+  height: var(--arrow-xs);
 
-  border-top: var(--1px) x solid var(--color-dark-700);
+  border-top: var(--border-width-s) solid var(--color-dark-700);
 
   fill: var(--color-dark-700);
 }
 
 .icon {
-  width: var(--24px);
-  height: var(--24px);
+  width: var(--icon-xl);
+  height: var(--icon-xl);
 }
 
 .trigger {
@@ -30,8 +30,8 @@ button {
 
   &:focus-visible:active {
     border-radius: var(--border-radius-m);
-    outline: var(--1px) solid var(--color-info-500);
-    outline-offset: var(--2px);
+    outline: var(--outline-width-m) solid var(--color-info-500);
+    outline-offset: 2px;
   }
 }
 
@@ -41,10 +41,10 @@ button {
   padding: 0 12px;
 
   background-color: var(--color-dark-700);
-  border: var(--1px) solid var(--color-dark-500);
+  border: var(--border-width-s) solid var(--color-dark-500);
   border-radius: var(--border-radius-s);
 
-  animation: scale-in var(--transition-duration-fast) var(--ease-in-out);
+  animation: scale-in var(--transition-duration-fast) ease-in-out;
 }
 
 @keyframes scale-in {
