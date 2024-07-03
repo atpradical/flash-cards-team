@@ -3,6 +3,11 @@
   height: var(--icon-size-s);
 }
 
+.trigger {
+  display: flex;
+  cursor: pointer;
+}
+
 .option {
   margin: 12px 0;
 }
@@ -18,4 +23,10 @@
   &:active {
     color: var(--color-accent-700);
   }
+}
+
+.option {
+  text-decoration: none;
+  display: flex;
+  gap: 6px;
 }
