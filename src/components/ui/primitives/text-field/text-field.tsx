@@ -42,7 +42,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   }
 
   const [showPassword, setShowPassword] = useState(false)
-  const [inputValue, setInputValue] = useState(value || '')
+  const [inputValue, setInputValue] = useState(value)
 
   const isPassword = variant === 'password'
   const inputType = showPassword && isPassword ? 'text' : variant
