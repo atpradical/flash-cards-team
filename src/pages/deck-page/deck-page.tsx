@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
@@ -20,7 +20,7 @@ export const DeckPage = () => {
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
   const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState(false)
   const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
-  const [searchValue, setSearchValue] = useState('')
+  // const [inputValue, setInputValue] = useState('')
   const cn = {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
@@ -28,21 +28,6 @@ export const DeckPage = () => {
     learnDeck: clsx(s.learnDeck),
     pagination: clsx(s.pagination),
   }
-  // мона вынести в хучок
-  const updateSearchValue = () => {
-    console.log('Sending request with search query:', searchValue)
-  }
-
-  useEffect(() => {
-    if (searchValue.length > 2) {
-      const interval = setTimeout(() => {
-        updateSearchValue()
-      }, 2000)
-
-      return () => clearTimeout(interval)
-    }
-  }, [searchValue])
-  //
 
   const editDeckHandler = () => {
     setShowAddNewDeckDialogForm(!showAddNewDeckDialogForm)
@@ -79,13 +64,7 @@ export const DeckPage = () => {
             Learn Deck
           </Button>
         </FlexContainer>
-        <TextField
-          onChange={e => setSearchValue(e.target.value)}
-          onInputChange={setSearchValue}
-          placeholder={'find card'}
-          value={searchValue}
-          variant={'search'}
-        />
+        <TextField placeholder={'find card'} variant={'search'} />
         <DeckTable
           cardList={CardListExample}
           onDelete={deleteCardHandler}

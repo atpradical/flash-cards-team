@@ -16,7 +16,6 @@ export type TextFieldProps = {
   error?: boolean
   helperText?: string
   label?: string
-  onInputChange?: (value: string) => void // only for input value
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
@@ -28,7 +27,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     helperText,
     label,
     onChange,
-    onInputChange,
     placeholder,
     value,
     variant = 'text',
@@ -37,13 +35,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const cn = {
     container: clsx(s.container, disabled && s.disabled, className),
-    eye: clsx(s.icon, s.eye, disabled && s.disabled),
+    eye: clsx(s.icon, disabled && s.disabled),
     icon: clsx(s.icon),
     iconSearch: clsx(s.icon, s.search),
     input: clsx(s.input, error && s.error),
   }
 
   const [showPassword, setShowPassword] = useState(false)
+  const [inputValue, setInputValue] = useState(value || '')
 
   const isPassword = variant === 'password'
   const inputType = showPassword && isPassword ? 'text' : variant
@@ -54,15 +53,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   }
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value)
     onChange?.(e)
-    onInputChange?.(e.currentTarget.value)
   }
 
   const handleClearInput = () => {
-    onInputChange?.('')
+    setInputValue('')
   }
-
-  console.log('value', value)
 
   return (
     <FlexContainer ai={'flex-start'} fd={'column'}>
@@ -72,32 +69,28 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         </Typography>
       )}
       <div className={cn.container}>
+        {isSearch && <SearchOutline className={cn.iconSearch} />}
         <input
-          autoFocus
           className={cn.input}
           disabled={disabled}
           onChange={handleChangeInput}
           placeholder={placeholder}
           ref={ref}
           type={inputType}
-          value={value}
+          value={inputValue}
           {...rest}
         />
-        {isPassword && !!value && (
+        {isPassword && !!inputValue && (
           <Button disabled={disabled} onClick={showPasswordHandler} variant={'icon'}>
-            {value && <EyeOutline className={cn.eye} />}
+            {inputValue && <EyeOutline className={cn.eye} />}
             {showPassword && <EyeOffOutline className={cn.eye} />}
           </Button>
         )}
-        {isSearch && (
-          <>
-            <SearchOutline className={cn.iconSearch} />
-            {!!value && (
-              <Button onClick={handleClearInput} variant={'icon'}>
-                <CloseOutline className={cn.icon} />
-              </Button>
-            )}
-          </>
+
+        {isSearch && !!inputValue && (
+          <Button onClick={handleClearInput} variant={'icon'}>
+            <CloseOutline className={cn.icon} />
+          </Button>
         )}
       </div>
       {helperText && <Typography variant={'error'}>{helperText}</Typography>}
