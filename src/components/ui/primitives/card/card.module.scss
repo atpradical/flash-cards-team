@@ -8,9 +8,7 @@
   padding: 34px 36px 24px;
 
   background-color: var(--color-dark-700);
-  border: 1px solid var(--color-dark-500);
+  border: var(--border-width-s) solid var(--color-dark-500);
   border-radius: var(--border-radius-xs);
-  box-shadow: var(--box-shadow-offset-x-min) var(--box-shadow-offset-y-min)
-    var(--box-shadow-blur-min) var(--box-shadow-scale-min)
-    rgb(var(--shadow-color-dark-900) var(--box-shadow-transparency-min));
+  box-shadow: var(--shadow-s) rgba(0, 0, 0, 0.1);
 }

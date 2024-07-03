@@ -1,6 +1,6 @@
 .paginationContainer {
   display: flex;
-  gap: 12px;
+  gap: var(--gap-l);
   align-items: center;
   align-self: start;
 }
@@ -9,8 +9,8 @@
   display: flex;
   place-content: center center;
 
-  width: 24px;
-  height: 24px;
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
   padding: 0 8px;
 
   background-color: transparent;
@@ -41,8 +41,8 @@
 }
 
 .arrow {
-  width: 16px;
-  height: 16px;
+  width: var(--arrow-size-s);
+  height: var(--arrow-size-s);
 }
 
 .arrowRight {
