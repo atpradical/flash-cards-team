@@ -5,7 +5,7 @@
 
   display: inline-flex;
   flex-direction: row;
-  gap: 8px;
+  gap: var(--gap-s);
   align-items: center;
   justify-content: center;
 
@@ -21,7 +21,7 @@
   border-radius: var(--border-radius-s);
 
   &:focus-visible {
-    outline: 2px solid var(--color-info-500);
+    outline: var(--outline-width-m) solid var(--color-info-500);
   }
 }
 
@@ -76,7 +76,7 @@
 
   &:focus-visible {
     color: var(--color-accent-500);
-    outline: 2px solid var(--color-info-700);
+    outline: var(--outline-width-m) solid var(--color-info-700);
   }
 
   &:disabled {

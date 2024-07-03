@@ -1,10 +1,10 @@
 .icon {
-  width: 16px;
-  height: 16px;
+  width: var(--icon-size-s);
+  height: var(--icon-size-s);
 }
 
 .option {
-  margin: var(--margin-12px-0);
+  margin: 12px 0;
 }
 
 .option,
