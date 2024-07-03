@@ -1,27 +1,9 @@
 .icon {
-  width: 16px;
-  height: 16px;
-}
-.menu {
-  min-width: 218px;
-}
-
-.trigger {
-  display: flex;
-  cursor: pointer;
-}
-
-.option {
-  text-decoration: none;
-  display: flex;
-  gap: 6px;
+  width: var(--icon-size-s);
+  height: var(--icon-size-s);
   color: var(--color-light-100);
+}
 
-  &:hover {
-    color: var(--color-accent-300);
-  }
-
-  &:active {
-    color: var(--color-accent-700);
-  }
+.settingsItem {
+  margin: 12px 0;
 }

@@ -1,102 +1,60 @@
-.arrow {
-  transform: rotate(45deg);
-
-  width: 9px;
-  height: 9px;
-
-  background-color: var(--color-dark-700);
-  border: 1px solid var(--color-dark-500);
-  border-top: none;
-  border-left: none;
-
-  stroke-width: 2px;
+button {
+  all: unset;
 }
 
-.menu {
-  padding: 12px;
-  z-index: 3;
+.arrow {
+  position: relative;
+  top: -1px;
+
+  width: var(--arrow-size-s);
+  height: var(--arrow-size-xs);
+
+  border-top: var(--border-width-s) solid var(--color-dark-700);
+
+  fill: var(--color-dark-700);
+}
+
+.icon {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+}
+
+.trigger {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 6px;
+
+  &:focus-visible:active {
+    border-radius: var(--border-radius-m);
+    outline: var(--outline-width-m) solid var(--color-info-500);
+    outline-offset: 2px;
+  }
+}
+
+.menuContent {
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+
+  padding: 0 12px;
+
   background-color: var(--color-dark-700);
-  border: 1px solid var(--color-dark-500);
+  border: var(--border-width-s) solid var(--color-dark-500);
   border-radius: var(--border-radius-s);
 
-  &[data-state='open'] {
-    animation: fade-in var(--transition-duration-fast) linear;
-  }
-
-  &[data-state='closed'] {
-    animation: fade-out var(--transition-duration-fast) linear;
-  }
-
-  &[data-side='bottom'] {
-    margin-top: 12px;
-
-    .arrow {
-      position: absolute;
-      top: -16.75px;
-      right: -4px;
-    }
-  }
-
-  &[data-side='top'] {
-    margin-bottom: 12px;
-
-    .arrow {
-      position: absolute;
-      bottom: 7.75px;
-      right: -4px;
-    }
-  }
+  animation: scale-in var(--transition-duration-fast) ease-in-out;
 }
 
-@keyframes fade-in {
+@keyframes scale-in {
   from {
+    transform: scale(0);
     opacity: 0;
   }
 
   to {
+    transform: scale(1);
     opacity: 1;
   }
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-.item {
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:focus-visible {
-    border-radius: var(--border-radius-xs);
-    outline: 1px solid var(--color-info-500);
-    outline-offset: 2px;
-
-    &:hover {
-      outline: none;
-    }
-  }
-}
-
-.separator {
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-dark-500);
-  margin: 12px 0;
-}
-
-.label {
-  cursor: default;
-}
-
-.item,
-.label {
-  display: flex;
-  gap: 6px;
 }

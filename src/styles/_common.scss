@@ -1,5 +1,5 @@
 :root {
-  /* border-radius */
+  /* border radius */
   --border-radius-rounded: 50%;
   --border-radius-s: 0.25rem;
   --border-radius-xs: 0.125rem;
@@ -7,12 +7,35 @@
   --border-radius-m: 0.375rem;
   --border-radius-l: 0.625rem;
 
+  /* border width */
+  --border-width-s: 1px;
+  --border-width-m: 2px;
+
+  /* outline width */
+  --outline-width-s: 1px;
+  --outline-width-m: 2px;
+
+  /* gap size */
+  --gap-xs: 6px;
+  --gap-s: 8px;
+  --gap-m: 10px;
+  --gap-l: 12px;
+
   /* box-shadow */
-  --box-shadow-offset-x-min: 1px;
-  --box-shadow-offset-y-min: 1px;
-  --box-shadow-blur-min: 2px;
-  --box-shadow-scale-min: 0;
-  --box-shadow-transparency-min: 0.1;
+  --shadow-0: 0px 0px 0px 6px;
+  --shadow-s: 1px 1px 2px 2px;
+  --shadow-m: 2px 2px 4px 2px;
+
+  /* max-width */
+  --max-width-xs: 350px;
+  --max-width-s: 420px;
+  --max-width-m: 542px;
+  --max-width-l: 1280px;
+
+  /* padding */
+  --padding-s: 12px;
+  --padding-m: 16px;
+  --padding-l: 24px;
 
   /* Rotation angle */
   --90-deg: 90deg;
@@ -26,4 +49,15 @@
 
   /* Header */
   --header-height: 60px;
+
+  /* Icon size */
+  --icon-size-s: 16px;
+  --icon-size-m: 18px;
+  --icon-size-l: 20px;
+  --icon-size-xl: 24px;
+
+  /* Arrow size */
+  --arrow-size-xs: 8px;
+  --arrow-size-s: 16px;
+  --arrow-size-m: 24px;
 }

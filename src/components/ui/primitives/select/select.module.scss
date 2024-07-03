@@ -1,7 +1,7 @@
 .dropdownArrow {
   transform: rotate(var(--90-deg));
-  width: 16px;
-  height: 16px;
+  width: var(--arrow-size-s);
+  height: var(--arrow-size-s);
 }
 
 .selectTrigger {
@@ -11,7 +11,7 @@
   padding: 2px 6px;
 
   background-color: var(--color-dark-900);
-  border: 1px solid var(--color-dark-300);
+  border: var(--border-width-s) solid var(--color-dark-300);
   border-top-left-radius: var(--border-radius-s);
   border-top-right-radius: var(--border-radius-s);
   outline: none;
@@ -22,7 +22,7 @@
   }
 
   &:focus {
-    outline: 2px solid var(--color-info-300);
+    outline: var(--outline-width-m) solid var(--color-info-300);
   }
 
   &[data-state='open'] .dropdownArrow {
@@ -45,7 +45,7 @@
   width: var(--radix-select-trigger-width);
 
   background-color: var(--color-dark-900);
-  border: 1px solid var(--color-dark-300);
+  border: var(--border-width-s) solid var(--color-dark-300);
   border-bottom-right-radius: var(--border-radius-s);
   border-bottom-left-radius: var(--border-radius-s);
 }
@@ -61,7 +61,7 @@
   }
 
   &:focus {
-    outline: 2px solid var(--color-info-300);
+    outline: var(--outline-width-m) solid var(--color-info-300);
   }
 
   &:hover {
