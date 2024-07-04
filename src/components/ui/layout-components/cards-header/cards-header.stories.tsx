@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import { CardsHeader } from './cards-header'
 
 const meta = {
@@ -19,5 +21,12 @@ type Story = StoryObj<typeof meta>
 export const CardsHeaderisAuthorizedTrue: Story = {
   args: {
     isAuthorized: true,
+  },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <CardsHeader isAuthorized={args.isAuthorized} />
+      </MemoryRouter>
+    )
   },
 }
