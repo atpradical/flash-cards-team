@@ -1,0 +1,109 @@
+.container {
+  position: relative;
+  width: 100%;
+  color: var(--color-dark-300);
+
+  &:focus-within {
+    color: var(--color-light-100);
+    border-radius: var(--border-radius-xs);
+    outline: var(--outline-width-s) solid var(--color-info-700);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.input {
+  width: 100%;
+  height: 36px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+
+  background-color: var(--color-dark-900);
+  border: var(--border-width-s) solid var(--color-dark-300);
+  border-radius: var(--border-radius-xs);
+
+  &::placeholder {
+    font-style: italic;
+    color: var(--color-dark-300);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-700);
+  }
+
+  &.error {
+    color: var(--color-danger-300);
+    border: var(--border-width-s) solid var(--color-danger-300);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:disabled {
+    pointer-events: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &.search {
+    padding: var(--padding-xs) var(--padding-xl);
+  }
+
+  &.text {
+    padding: var(--padding-xs) var(--padding-s);
+  }
+
+  &.password {
+    padding: var(--padding-xs) var(--padding-xl) var(--padding-xs) var(--padding-s);
+  }
+}
+
+/* Internet Explorer и Microsoft Edge Firefox  */
+/* stylelint-disable-next-line selector-no-vendor-prefix */
+.input:-moz-placeholder-shown,
+.input:-ms-input-placeholder {
+  color: var(--color-light-100);
+  background-color: var(--color-dark-900);
+  transition: background-color 3000s ease-in-out 0s;
+}
+
+/* Chrome, Edge и Safari */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  background-color: var(--color-dark-900);
+  transition: background-color 3000s ease-in-out 0s;
+
+  -webkit-text-fill-color: var(--color-light-100);
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+
+  width: var(--icon-size-l);
+  height: var(--icon-size-l);
+  padding: var(--padding-xxs);
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  &.error {
+    color: var(--color-danger-300);
+  }
+
+  &.search {
+    left: 0;
+    margin: 0 0.5em;
+  }
+}
