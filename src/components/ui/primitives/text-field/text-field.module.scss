@@ -40,7 +40,7 @@
   }
 
   &:focus-visible {
-    outline: none; // потому что был белый браузерный бордер
+    outline: none;
   }
 
   &:disabled {
@@ -64,6 +64,16 @@
   }
 }
 
+/* Internet Explorer и Microsoft Edge Firefox  */
+/* stylelint-disable-next-line selector-no-vendor-prefix */
+.input:-moz-placeholder-shown,
+.input:-ms-input-placeholder {
+  color: var(--color-light-100);
+  background-color: var(--color-dark-900);
+  transition: background-color 3000s ease-in-out 0s;
+}
+
+/* Chrome, Edge и Safari */
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus,
@@ -71,15 +81,13 @@
   background-color: var(--color-dark-900);
   transition: background-color 3000s ease-in-out 0s;
 
-  // тут  --transition-duration- почему то отключает background-color и transition
-
   -webkit-text-fill-color: var(--color-light-100);
 }
 
 .icon {
   position: absolute;
   top: 50%;
-  right: 11px;
+  right: 12px;
   transform: translateY(-50%);
 
   width: var(--icon-size-l);
