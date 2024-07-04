@@ -34,11 +34,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   } = props
 
   const cn = {
-    container: clsx(s.container, disabled && s.disabled, className),
+    container: clsx(s.container, disabled && s.disabled),
     eye: clsx(s.icon, error && s.error),
     icon: clsx(s.icon, disabled && s.disabled),
     iconSearch: clsx(s.icon, s.search),
-    input: clsx(s.input, variant && s[variant], error && s.error),
+    input: clsx(s.input, variant && s[variant], error && s.error, className),
   }
 
   const [showPassword, setShowPassword] = useState(false)
