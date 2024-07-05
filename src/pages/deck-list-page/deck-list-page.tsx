@@ -53,7 +53,12 @@ export const DeckListPage = () => {
           onLearn={learnDeckHandler}
           onSort={() => console.log('onSort invoked!')}
         />
-        <Pagination currentPage={1} onPageChange={() => {}} totalCount={100} />
+        <Pagination
+          currentPage={1}
+          onPageChange={() => {}}
+          onPageSizeChange={() => {}}
+          totalCount={100}
+        />
         <AddNewDeckDialogForm
           onOpenChange={addNewDeckHandler}
           onSubmit={() => console.log('Form submit invoked!')}
