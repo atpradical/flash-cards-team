@@ -18,6 +18,7 @@ export const CardPage = () => {
   }
   const { cardId } = useParams()
   const { data, error, isLoading } = useGetCardQuery({ id: cardId ?? '' })
+  const { answer = '', question = '' } = data ?? {}
   // todo: replace deck name depending on "name" property in RTK request for deck
   const deckName = 'Coins'
 
@@ -35,11 +36,7 @@ export const CardPage = () => {
           Back to Deck
         </Button>
         <FlexContainer jc={'center'}>
-          <LearnCard
-            answer={data?.answer ?? ''}
-            deckName={deckName}
-            question={data?.question ?? ''}
-          />
+          <LearnCard answer={answer} deckName={deckName} question={question} />
         </FlexContainer>
       </FlexContainer>
     </Page>

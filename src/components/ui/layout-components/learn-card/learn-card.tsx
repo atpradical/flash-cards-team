@@ -23,6 +23,7 @@ type SelfRateFormProps = {
 export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfRateFormProps) => {
   const { cardId } = useParams()
   const { data } = useGetCardQuery({ id: cardId ?? '' })
+  const { answerImg, questionImg } = data ?? {}
   const [isAnswerShowed, setIsAnswerShowed] = useState<boolean>(false)
   const cn = {
     button: clsx(s.button),
@@ -37,8 +38,8 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
   const showAnswerHandler = () => {
     setIsAnswerShowed(true)
   }
-  const questionCover = data?.questionImg ?? dummyQuestionCover
-  const answerCover = data?.answerImg ?? dummyAnswerCover
+  const questionCover = questionImg ?? dummyQuestionCover
+  const answerCover = answerImg ?? dummyAnswerCover
 
   return (
     <Card className={cn.container}>
