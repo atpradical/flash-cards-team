@@ -1,13 +1,17 @@
 import { Outlet } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
 import { CardsHeader } from '@/components/ui/layout-components'
 import { Layout } from '@/shared/ui/layout'
+import { store } from '@/services/store'
 
 export function App() {
   return (
-    <Layout>
-      <CardsHeader isAuthorized />
-      <Outlet />
-    </Layout>
+    <Provider store={store}>
+      <Layout>
+        <CardsHeader isAuthorized />
+        <Outlet />
+      </Layout>
+    </Provider>
   )
 }

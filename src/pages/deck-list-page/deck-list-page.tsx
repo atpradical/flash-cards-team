@@ -3,17 +3,29 @@ import { useNavigate } from 'react-router-dom'
 
 import { AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
-import { DeckListExample } from '@/components/ui/layout-components/deck-list-table/deck-list-table.mock'
-import { Button, Typography } from '@/components/ui/primitives'
+import { Button, Progress, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
+import { useGetDecksQuery } from '@/services/flashcards-api'
+import { PaginationModel } from '@/services/decks/deck.types'
 
 export const DeckListPage = () => {
-  const dummyNumberOfCards = [2, 90]
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
   const [showEditDeckDialog, setEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setDeleteDeckDialog] = useState(false)
+
+  const [currentPage, setCurrentPage] = useState(1)
+  // const [itemsPerPage, setItemsPerPage] = useState('10')
+  // const [search, setSearch] = useState('')
+
+  const { data, isLoading } = useGetDecksQuery({
+    currentPage,
+    // itemsPerPage: Number(itemsPerPage),
+    // name: search,
+  })
+
+  const { items = [], pagination = {} as PaginationModel } = data ?? {}
 
   const navigate = useNavigate()
 
@@ -32,6 +44,24 @@ export const DeckListPage = () => {
     navigate('/deck')
   }
 
+  const onPageChangeHandler = (page: number) => {
+    setCurrentPage(page)
+  }
+
+  // const onPageSizeChangeHandler = (value: string) => {
+  //   // setItemsPerPage(value)
+  // }
+
+  // const searchDeckHandler = (value: string) => {
+  //   // setSearch(value)
+  // }
+
+  console.log('data', data)
+  console.log('isLoading', isLoading)
+
+  if (isLoading) {
+    return <Progress />
+  }
   //todo: replace related mock data and functions during RTQuery tasks implementation
   return (
     <Page>
@@ -44,16 +74,22 @@ export const DeckListPage = () => {
         </FlexContainer>
         <TableFilterBar
           onValueChange={() => console.log('number of cards is changed')}
-          value={dummyNumberOfCards}
+          value={[1, 100]}
         />
         <DeckListTable
-          deckList={DeckListExample}
+          deckList={items}
           onDelete={deleteDeckHandler}
           onEdit={editDeckHandler}
           onLearn={learnDeckHandler}
           onSort={() => console.log('onSort invoked!')}
         />
-        <Pagination currentPage={1} onPageChange={() => {}} totalCount={100} />
+        <Pagination
+          currentPage={pagination.currentPage}
+          onPageChange={onPageChangeHandler}
+          // onPageSizeChange={onPageSizeChangeHandler}
+          totalCount={pagination.totalItems}
+          // pageSize={Number(itemsPerPage)}
+        />
         <AddNewDeckDialogForm
           onOpenChange={addNewDeckHandler}
           onSubmit={() => console.log('Form submit invoked!')}

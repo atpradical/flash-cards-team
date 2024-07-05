@@ -1,6 +1,5 @@
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
-import { Nullable } from '@/common/types'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
@@ -18,28 +17,10 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
 import s from './deck-list-table.module.scss'
-
-// todo: move types: DeckAuthor & DeckDataItem to correct service folder after RTKQuery integration
-export type DeckAuthor = {
-  id: string
-  name: string
-}
-
-export type DeckDataItem = {
-  author: DeckAuthor
-  cardsCount: number
-  cover: Nullable<string>
-  created: string
-  id: string
-  isFavorite: boolean
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
+import { DeckItem } from '@/services/decks/deck.types'
 
 type DecksListTableProps = {
-  deckList: DeckDataItem[]
+  deckList: DeckItem[]
   onDelete: () => void
   onEdit: () => void
   onLearn: () => void

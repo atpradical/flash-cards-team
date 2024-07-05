@@ -1,6 +1,6 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
-import { TextField, TextFieldProps } from '../../../../components/ui/primitives/text-field'
+import { TextField, TextFieldProps } from '@/components/ui/primitives/text-field'
 
 export type ControlledTextFieldProps<T extends FieldValues> = Omit<
   TextFieldProps,

@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
-import { Button, Slider, Tab, TabSwitcher, Typography } from '@/components/ui/primitives'
+import { Button, Slider, Tab, TabSwitcher, TextField, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
+
 import clsx from 'clsx'
 
 import s from './table-filter-bar.module.scss'
@@ -13,7 +12,11 @@ type TableFilterBarProps = {
   onValueChange: (value: number[]) => void
   value: number[]
 }
-export const TableFilterBar = ({ onValueChange, value }: TableFilterBarProps) => {
+export const TableFilterBar = ({
+  onValueChange,
+
+  value,
+}: TableFilterBarProps) => {
   const tabs: Tab[] = [
     { title: 'My Cards', value: 'tab-value-1' },
     { title: 'All Cards', value: 'tab-value-2' },
@@ -29,18 +32,10 @@ export const TableFilterBar = ({ onValueChange, value }: TableFilterBarProps) =>
     setSliderValue(newValue)
     onValueChange(newValue)
   }
-  const { control } = useForm({
-    mode: 'onSubmit',
-  })
 
   return (
     <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>
-      <ControlledTextField
-        control={control}
-        name={'search'}
-        placeholder={'Input search'}
-        variant={'search'}
-      />
+      <TextField name="search" placeholder="Search decks" variant="search" onChange={() => {}} />
       <TabSwitcher className={cn.tabs} label={'Show decks cards'} tabs={tabs} />
       <div className={cn.slider}>
         <Typography>Number of cards</Typography>
