@@ -11,8 +11,11 @@
 .headerCell,
 .tableCell {
   padding: 6px 24px;
+
   text-align: left;
+  text-wrap: auto;
   vertical-align: center;
+
   border-bottom: var(--border-width-s) solid var(--color-dark-500);
 }
 

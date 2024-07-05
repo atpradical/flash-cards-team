@@ -9,7 +9,7 @@ import s from './grade.module.scss'
 const STARS_MAX = 5
 
 type Props = {
-  stars?: 0 | 1 | 2 | 3 | 4 | 5
+  stars?: number
 } & ComponentPropsWithoutRef<typeof FlexContainer>
 
 export const Grade = ({ stars = 0, ...rest }: Props) => {

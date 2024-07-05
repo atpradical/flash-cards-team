@@ -1,7 +1,7 @@
 export enum PATH {
   CARD = '/card/:cardId',
   CHECK_EMAIL = '/check-email',
-  DECK = '/deck',
+  DECK = '/deck/:deckId',
   DECK_LIST = '/deck-list',
   ERROR_404 = '/404',
   PROFILE = '/profile',
