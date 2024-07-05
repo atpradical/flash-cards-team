@@ -38,5 +38,5 @@ export type GetCardsArgs = {
 }
 
 export type GetCardArgs = {
-    id: string
+  id: string
 }
