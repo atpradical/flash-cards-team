@@ -84,11 +84,10 @@ export const DeckListPage = () => {
           onSort={() => console.log('onSort invoked!')}
         />
         <Pagination
-          currentPage={pagination.currentPage}
-          onPageChange={onPageChangeHandler}
-          // onPageSizeChange={onPageSizeChangeHandler}
-          totalCount={pagination.totalItems}
-          // pageSize={Number(itemsPerPage)}
+          currentPage={1}
+          onPageChange={() => {}}
+          onPageSizeChange={() => {}}
+          totalCount={100}
         />
         <AddNewDeckDialogForm
           onOpenChange={addNewDeckHandler}

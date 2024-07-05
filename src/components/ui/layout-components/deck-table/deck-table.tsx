@@ -1,7 +1,6 @@
 import { ArrowIosUp } from '@/assets/components/svgIcons'
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
-import { Nullable } from '@/common/types/commonTypes'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
@@ -15,37 +14,21 @@ import {
   TableHeaderCell,
   TableRow,
 } from '@/components/ui/primitives'
+import { Card } from '@/services/cards/cards.types'
 import { RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
 import s from '../deck-list-table/deck-list-table.module.scss'
 
-// todo: move type CardData to correct service folder after RTKQuery integration
-export type CardData = {
-  answer: string
-  answerImg: Nullable<string>
-  answerVideo?: Nullable<string>
-  created: string
-  deckId: string
-  grade: number
-  id: string
-  question: string
-  questionImg?: Nullable<string>
-  questionVideo?: Nullable<string>
-  shots: number
-  updated: string
-  userId: string
-}
-
 type DeckTableProps = {
-  cardList: CardData[]
+  cards: Card[]
   onDelete: () => void
   onEdit: () => void
   onSort: () => void
 }
 
-export const DeckTable = ({ cardList, onDelete, onEdit, onSort }: DeckTableProps) => {
+export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) => {
   const cn = {
     sort: clsx(s.sort),
     sortIcon: clsx(s.sortIcon),
@@ -55,7 +38,7 @@ export const DeckTable = ({ cardList, onDelete, onEdit, onSort }: DeckTableProps
     onSort()
   }
 
-  const TableContent = cardList.map(el => {
+  const TableContent = cards.map(el => {
     const questionCover = el.questionImg ?? dummyQuestionCover
     const answerCover = el.answerImg ?? dummyAnswerCover
 
@@ -75,7 +58,7 @@ export const DeckTable = ({ cardList, onDelete, onEdit, onSort }: DeckTableProps
         </TableCell>
         <TableCell>{convertToDDMMYYYY(el.updated)}</TableCell>
         <TableCell>
-          <Grade stars={3} />
+          <Grade stars={el.grade} />
         </TableCell>
         <TableCell>
           {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
