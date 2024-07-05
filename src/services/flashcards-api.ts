@@ -1,4 +1,4 @@
-import { Card } from '@/services/cards/cards.types'
+import { Card, GetCardArgs } from '@/services/cards/cards.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const flashcardsApi = createApi({
@@ -11,8 +11,8 @@ export const flashcardsApi = createApi({
   }),
   endpoints: builder => {
     return {
-      getCard: builder.query<Card, { id: string }>({
-        query: () => `v1/cards/{id}`,
+      getCard: builder.query<Card, GetCardArgs>({
+        query: ({ id }) => `v1/cards/${id}`,
       }),
     }
   },
