@@ -6,7 +6,7 @@
   &:focus-within {
     color: var(--color-light-100);
     border-radius: var(--border-radius-xs);
-    outline: var(--outline-width-s) solid var(--color-info-700);
+    outline: var(--outline-width-m) solid var(--color-info-700);
   }
 
   &:focus-visible {

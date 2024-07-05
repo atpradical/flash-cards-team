@@ -19,7 +19,7 @@ type Props = {
   className?: string
   currentPage: number
   onPageChange: (page: number) => void
-  onPageSizeChange?: (value: string) => void
+  onPageSizeChange: (pageSize: string) => void
   pageSize?: number
   siblingCount?: number
   totalCount: number
@@ -46,11 +46,6 @@ export const Pagination = (props: Props) => {
     totalPageCount,
   })
 
-  // If there are less than 2 times in pagination range we shall not render the component
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null
-  }
-
   const nextPageHandler = () => {
     onPageChange(currentPage + 1)
   }
@@ -59,10 +54,8 @@ export const Pagination = (props: Props) => {
     onPageChange(currentPage - 1)
   }
 
-  const changeDisplayPagesHandler = (value: string) => {
-    if (onPageSizeChange) {
-      onPageSizeChange(value)
-    }
+  const changeDisplayPagesHandler = (pageSize: string) => {
+    onPageSizeChange(pageSize)
   }
 
   const isFirstPage = currentPage === 1
