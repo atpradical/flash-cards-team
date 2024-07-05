@@ -25,13 +25,12 @@ export const DeckPage = () => {
     pagination: clsx(s.pagination),
   }
 
-  const { deckId } = useParams()
-
   const [showAddNewCardDialogForm, setShowAddNewCardDialogForm] = useState(false)
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
   const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState(false)
   const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
 
+  const { deckId } = useParams()
   const [search, setSearch] = useState('')
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
