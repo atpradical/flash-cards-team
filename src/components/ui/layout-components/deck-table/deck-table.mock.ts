@@ -1,7 +1,8 @@
 // --------- CardData example for story: ---------
-import { CardData } from '@/components/ui/layout-components'
 
-export const CardListExample: CardData[] = [
+import { Card } from '@/services/cards/cards.types'
+
+export const CardListExample: Card[] = [
   {
     answer: 'Венера',
     answerImg:
