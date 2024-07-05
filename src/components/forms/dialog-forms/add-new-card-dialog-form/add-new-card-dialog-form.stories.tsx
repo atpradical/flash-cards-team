@@ -16,6 +16,8 @@ type Story = StoryObj<typeof meta>
 
 export const AddNewCardFormExample: Story = {
   args: {
+    action: 'CREATE',
+    deckId: 'cly7c2vqa0drxpb015rp9sbi7',
     onOpenChange: action('onOpenChange action invoked!'),
     onSubmit: action('onSubmit action invoked!'),
     open: true,
