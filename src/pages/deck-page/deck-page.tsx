@@ -40,7 +40,7 @@ export const DeckPage = () => {
     currentPage,
     id: deckId ?? '',
     itemsPerPage,
-    question: search,
+    question: search || undefined,
   })
   const { items: cards = [], pagination = {} as PaginationModel } = data ?? {}
 
