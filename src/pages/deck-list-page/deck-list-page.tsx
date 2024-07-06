@@ -18,11 +18,15 @@ export const DeckListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [search, setSearch] = useState('')
+  const [minCardsCount, setMinCardsCount] = useState(0)
+  const [maxCardsCount, setMxaxCardsCount] = useState(100)
 
   const { data, isLoading } = useGetDecksQuery(
     {
       currentPage,
       itemsPerPage: itemsPerPage,
+      maxCardsCount,
+      minCardsCount,
       name: search,
     },
     { skip: search.trim() === '' && search !== '' }
@@ -59,6 +63,11 @@ export const DeckListPage = () => {
     setSearch(e.currentTarget.value)
   }
 
+  const onSliderChangeHandler = (value: number[]) => {
+    setMinCardsCount(value[0])
+    setMxaxCardsCount(value[1])
+  }
+
   if (isLoading) {
     return <Progress />
   }
@@ -74,10 +83,10 @@ export const DeckListPage = () => {
           <Button onClick={addNewDeckHandler}>Add New Deck</Button>
         </FlexContainer>
         <TableFilterBar
-          onValueChange={() => console.log('number of cards is changed')}
+          onValueChange={onSliderChangeHandler}
           searchChangeValue={searchDeckHandler}
           searchValue={search}
-          value={[1, 100]}
+          value={[minCardsCount, maxCardsCount]}
         />
         <DeckListTable
           deckList={items}
