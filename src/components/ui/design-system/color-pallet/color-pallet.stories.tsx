@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ColorPalette } from '@/components/ui/primitives'
-import { colors } from '@/components/ui/primitives/color-pallet/color-pallet.mock'
+import { ColorPalette } from '@/components/ui/design-system'
+import { colors } from '@/components/ui/design-system/color-pallet/color-pallet.mock'
 
 const meta = {
   argTypes: {},

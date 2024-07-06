@@ -4,13 +4,10 @@ import {
   ColorPallet,
   PalletCategory,
   PalletItem,
-} from '@/components/ui/primitives/color-pallet/color-pallet.mock'
+} from '@/components/ui/design-system/color-pallet/color-pallet.mock'
+import { cn } from '@/components/ui/design-system/color-pallet/color-pallet.styles'
+import { Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
-
-import s from './color-pallet.module.scss'
-
-import { Typography } from '../typography'
 
 type ColorPalletProps = {
   colors: ColorPallet
@@ -20,7 +17,7 @@ export const ColorPalette = ({ colors }: ColorPalletProps) => {
   const category = Object.keys(colors)
 
   return (
-    <div className={s.container}>
+    <div className={cn.container}>
       {category.map((el, index) => {
         const key = el + index
         const category = el as PalletCategory
@@ -42,18 +39,20 @@ type PalletProps = {
 }
 
 const Pallet = ({ category, categoryColors }: PalletProps) => {
+  const title = category.charAt(0).toUpperCase() + category.slice(1)
+
   return (
     <FlexContainer>
-      <Typography as={'h2'} className={s.title} variant={'h2'}>
-        {category.charAt(0).toUpperCase() + category.slice(1)}
+      <Typography as={'h2'} className={cn.title} variant={'h2'}>
+        {title}
       </Typography>
       {categoryColors.map(el => (
         <FlexContainer fd={'column'} gap={'4px'} key={el.id}>
           <Box color={el.color} id={el.id} />
-          <Typography className={s.text} style={{ color: el.color }} variant={'caption'}>
+          <Typography className={cn.text} style={{ color: el.color }} variant={'caption'}>
             {el.color}
           </Typography>
-          <Typography className={s.text} variant={'caption'}>
+          <Typography className={cn.text} variant={'caption'}>
             {el.id}
           </Typography>
         </FlexContainer>
@@ -65,5 +64,5 @@ const Pallet = ({ category, categoryColors }: PalletProps) => {
 type BoxProps = ComponentPropsWithoutRef<'div'> & PalletItem
 
 const Box = ({ color, ...rest }: BoxProps) => {
-  return <div className={clsx(s.box)} style={{ backgroundColor: color }} {...rest} />
+  return <div className={cn.box} style={{ backgroundColor: color }} {...rest} />
 }
