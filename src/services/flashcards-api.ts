@@ -11,6 +11,7 @@ export const flashcardsApi = createApi({
       headers.append('x-auth-skip', 'true')
     },
   }),
+  refetchOnReconnect: false,
   endpoints: builder => {
     return {
       getDecks: builder.query<ResponseDecksList, GetDecksArgs | void>({

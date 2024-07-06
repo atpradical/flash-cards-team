@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
 import { Button, Slider, Tab, TabSwitcher, TextField, Typography } from '@/components/ui/primitives'
@@ -11,11 +11,14 @@ import s from './table-filter-bar.module.scss'
 type TableFilterBarProps = {
   onValueChange: (value: number[]) => void
   value: number[]
+  searchChangeValue: (e: ChangeEvent<HTMLInputElement>) => void
+  searchValue: string
 }
 export const TableFilterBar = ({
   onValueChange,
-
   value,
+  searchValue,
+  searchChangeValue,
 }: TableFilterBarProps) => {
   const tabs: Tab[] = [
     { title: 'My Cards', value: 'tab-value-1' },
@@ -35,7 +38,12 @@ export const TableFilterBar = ({
 
   return (
     <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>
-      <TextField name="search" placeholder="Search decks" variant="search" onChange={() => {}} />
+      <TextField
+        placeholder="Search decks"
+        variant="search"
+        onChange={searchChangeValue}
+        value={searchValue}
+      />
       <TabSwitcher className={cn.tabs} label={'Show decks cards'} tabs={tabs} />
       <div className={cn.slider}>
         <Typography>Number of cards</Typography>

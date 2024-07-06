@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
@@ -16,14 +16,17 @@ export const DeckListPage = () => {
   const [showDeleteDeckDialog, setDeleteDeckDialog] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1)
-  // const [itemsPerPage, setItemsPerPage] = useState('10')
-  // const [search, setSearch] = useState('')
+  const [itemsPerPage, setItemsPerPage] = useState(10)
+  const [search, setSearch] = useState('')
 
-  const { data, isLoading } = useGetDecksQuery({
-    currentPage,
-    // itemsPerPage: Number(itemsPerPage),
-    // name: search,
-  })
+  const { data, isLoading } = useGetDecksQuery(
+    {
+      currentPage,
+      itemsPerPage: itemsPerPage,
+      name: search,
+    },
+    { skip: search.trim() === '' && search !== '' }
+  )
 
   const { items = [], pagination = {} as PaginationModel } = data ?? {}
 
@@ -48,16 +51,13 @@ export const DeckListPage = () => {
     setCurrentPage(page)
   }
 
-  // const onPageSizeChangeHandler = (value: string) => {
-  //   // setItemsPerPage(value)
-  // }
+  const onPageSizeChangeHandler = (value: string) => {
+    setItemsPerPage(Number(value))
+  }
 
-  // const searchDeckHandler = (value: string) => {
-  //   // setSearch(value)
-  // }
-
-  console.log('data', data)
-  console.log('isLoading', isLoading)
+  const searchDeckHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget.value)
+  }
 
   if (isLoading) {
     return <Progress />
@@ -74,7 +74,9 @@ export const DeckListPage = () => {
         </FlexContainer>
         <TableFilterBar
           onValueChange={() => console.log('number of cards is changed')}
+          searchValue={search}
           value={[1, 100]}
+          searchChangeValue={searchDeckHandler}
         />
         <DeckListTable
           deckList={items}
@@ -84,10 +86,11 @@ export const DeckListPage = () => {
           onSort={() => console.log('onSort invoked!')}
         />
         <Pagination
-          currentPage={1}
-          onPageChange={() => {}}
-          onPageSizeChange={() => {}}
-          totalCount={100}
+          currentPage={currentPage}
+          onPageChange={onPageChangeHandler}
+          onPageSizeChange={onPageSizeChangeHandler}
+          totalCount={pagination.totalItems}
+          pageSize={itemsPerPage}
         />
         <AddNewDeckDialogForm
           onOpenChange={addNewDeckHandler}
@@ -111,3 +114,6 @@ export const DeckListPage = () => {
     </Page>
   )
 }
+
+//типы сравнить в карточками
+//белый active
