@@ -1,7 +1,8 @@
 // --------- DeckListData example for story: ---------
-import { DeckDataItem } from '@/components/ui/layout-components'
 
-export const DeckListExample: DeckDataItem[] = [
+import { Deck } from '@/services/decks/deck.types'
+
+export const DeckListExample: Deck[] = [
   {
     author: {
       id: '4454eb10-0e63-4b82-8df4-954d284eaf7f',
@@ -24,7 +25,7 @@ export const DeckListExample: DeckDataItem[] = [
       name: 'sem',
     },
     cardsCount: 1,
-    cover: null,
+    cover: undefined,
     created: '2024-06-23T09:31:41.409Z',
     id: 'clxrcnhsx08ldpb01y5368v1fsdfsd',
     isFavorite: false,
@@ -39,7 +40,7 @@ export const DeckListExample: DeckDataItem[] = [
       name: 'sem',
     },
     cardsCount: 1,
-    cover: null,
+    cover: undefined,
     created: '2024-06-23T09:31:41.409Z',
     id: 'clxrcnhsx08ldpb01y5368v1fvxc',
     isFavorite: false,
@@ -54,7 +55,7 @@ export const DeckListExample: DeckDataItem[] = [
       name: 'sem',
     },
     cardsCount: 1,
-    cover: null,
+    cover: undefined,
     created: '2024-06-23T09:31:41.409Z',
     id: 'clxrcnhsx08ldpb01y5368v1fkmk',
     isFavorite: false,
@@ -69,7 +70,7 @@ export const DeckListExample: DeckDataItem[] = [
       name: 'sem',
     },
     cardsCount: 1,
-    cover: null,
+    cover: undefined,
     created: '2024-06-23T09:31:41.409Z',
     id: 'clxrcnhsx08ldpb01y5368v1fpoipoi',
     isFavorite: false,
