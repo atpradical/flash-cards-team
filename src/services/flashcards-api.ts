@@ -1,9 +1,9 @@
+import { DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { GetDecksArgs, ResponseDecksList } from '@/services/decks/deck.types'
+
 import { CardsListResponse, GetCardsArgs } from './cards/cards.types'
 
 export const flashcardsApi = createApi({
-  reducerPath: 'flashcardsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.flashcards.andrii.es',
     credentials: 'include',
@@ -11,18 +11,8 @@ export const flashcardsApi = createApi({
       headers.append('x-auth-skip', 'true')
     },
   }),
-  refetchOnReconnect: false,
   endpoints: builder => {
     return {
-      getDecks: builder.query<ResponseDecksList, GetDecksArgs | void>({
-        query: args => {
-          return {
-            method: 'GET',
-            url: `v2/decks`,
-            params: args ?? undefined,
-          }
-        },
-      }),
       getCards: builder.query<CardsListResponse, GetCardsArgs>({
         query: ({ id, ...args }) => ({
           method: 'GET',
@@ -30,8 +20,18 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${id}/cards`,
         }),
       }),
+      getDecks: builder.query<DecksListResponse, GetDecksArgs | void>({
+        query: args => {
+          return {
+            method: 'GET',
+            params: args ?? undefined,
+            url: `v2/decks`,
+          }
+        },
+      }),
     }
   },
+  reducerPath: 'flashcardsApi',
 })
 
-export const { useGetDecksQuery, useGetCardsQuery } = flashcardsApi
+export const { useGetCardsQuery, useGetDecksQuery } = flashcardsApi

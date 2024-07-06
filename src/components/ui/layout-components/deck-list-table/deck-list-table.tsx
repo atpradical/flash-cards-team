@@ -12,15 +12,15 @@ import {
   TableHeaderCell,
   TableRow,
 } from '@/components/ui/primitives'
+import { Deck } from '@/services/decks/deck.types'
 import { RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
 import s from './deck-list-table.module.scss'
-import { DeckItem } from '@/services/decks/deck.types'
 
 type DecksListTableProps = {
-  deckList: DeckItem[]
+  deckList: Deck[]
   onDelete: () => void
   onEdit: () => void
   onLearn: () => void

@@ -1,8 +1,8 @@
 export type PaginationModel = {
   currentPage: number
   itemsPerPage: number
-  totalPages: number
   totalItems: number
+  totalPages: number
 }
 
 export type DeckAuthor = {
@@ -10,30 +10,30 @@ export type DeckAuthor = {
   name: string
 }
 
-export type DeckItem = {
-  isFavorite: boolean
+export type Deck = {
   author: DeckAuthor
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
+  cardsCount: number
   cover?: string
   created: string
+  id: string
+  isFavorite: boolean
+  isPrivate: boolean
+  name: string
   updated: string
-  cardsCount: number
+  userId: string
 }
 
-export type ResponseDecksList = {
-  items: DeckItem[]
+export type DecksListResponse = {
+  items: Deck[]
   pagination: PaginationModel
 }
 
 export type GetDecksArgs = {
-  minCardsCount?: number
-  maxCardsCount?: number
-  name?: string
   authorId?: string
   currentPage?: number
   itemsPerPage?: number
-  orderBy?: string // favoritedBy ?
+  maxCardsCount?: number
+  minCardsCount?: number
+  name?: string
+  orderBy?: string
 }

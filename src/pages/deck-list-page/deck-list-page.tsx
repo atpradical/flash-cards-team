@@ -5,10 +5,10 @@ import { AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Progress, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
+import { PaginationModel } from '@/services/decks/deck.types'
+import { useGetDecksQuery } from '@/services/flashcards-api'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
-import { useGetDecksQuery } from '@/services/flashcards-api'
-import { PaginationModel } from '@/services/decks/deck.types'
 
 export const DeckListPage = () => {
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
@@ -62,6 +62,7 @@ export const DeckListPage = () => {
   if (isLoading) {
     return <Progress />
   }
+
   //todo: replace related mock data and functions during RTQuery tasks implementation
   return (
     <Page>
@@ -74,9 +75,9 @@ export const DeckListPage = () => {
         </FlexContainer>
         <TableFilterBar
           onValueChange={() => console.log('number of cards is changed')}
+          searchChangeValue={searchDeckHandler}
           searchValue={search}
           value={[1, 100]}
-          searchChangeValue={searchDeckHandler}
         />
         <DeckListTable
           deckList={items}
@@ -89,8 +90,8 @@ export const DeckListPage = () => {
           currentPage={currentPage}
           onPageChange={onPageChangeHandler}
           onPageSizeChange={onPageSizeChangeHandler}
-          totalCount={pagination.totalItems}
           pageSize={itemsPerPage}
+          totalCount={pagination.totalItems}
         />
         <AddNewDeckDialogForm
           onOpenChange={addNewDeckHandler}
@@ -114,6 +115,3 @@ export const DeckListPage = () => {
     </Page>
   )
 }
-
-//типы сравнить в карточками
-//белый active

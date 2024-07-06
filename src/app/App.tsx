@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { Outlet } from 'react-router-dom'
 
 import { CardsHeader } from '@/components/ui/layout-components'
 import { store } from '@/services/store'
