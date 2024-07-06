@@ -6,7 +6,6 @@ import { colors } from '@/components/ui/design-system/color-pallet/color-pallet.
 const meta = {
   argTypes: {},
   component: ColorPalette,
-  tags: ['autodocs'],
   title: 'Design System/Color Pallet',
 } satisfies Meta<typeof ColorPalette>
 
