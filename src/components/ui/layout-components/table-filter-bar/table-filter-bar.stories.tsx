@@ -23,11 +23,10 @@ export const TableFilterBarBase: Story = {
     sliderRange: [0, 100],
   },
   render: args => {
-    const [sliderRange, setSliderRange] = useState(args.sliderRange)
+    const [sliderRange, setSliderRange] = useState([...args.sliderRange])
 
     const sliderRangeHandler = (newRange: number[]) => {
       setSliderRange([...newRange])
-      args.onSliderChange(newRange)
     }
 
     return (

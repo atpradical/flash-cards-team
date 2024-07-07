@@ -10,7 +10,7 @@ export type Author = {
 export type Deck = {
   author: Author
   cardsCount: number
-  cover?: Nullable<string>
+  cover: Nullable<string>
   created: string
   id: string
   isFavorite: boolean

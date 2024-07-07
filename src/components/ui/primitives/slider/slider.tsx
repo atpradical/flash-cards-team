@@ -15,7 +15,7 @@ type Props = {
 type SliderRef = ElementRef<typeof RadixSlider.Root>
 
 export const Slider = forwardRef<SliderRef, Props>(
-  ({ defaultValue, minStepsBetweenThumbs = 1, onRangeChange, range, ...rest }, ref) => {
+  ({ minStepsBetweenThumbs = 1, onRangeChange, range, ...rest }, ref) => {
     const cn = {
       outputWrap: clsx(s.outputWrap),
       range: clsx(s.range),
@@ -31,7 +31,6 @@ export const Slider = forwardRef<SliderRef, Props>(
         </Typography>
         <RadixSlider.Root
           className={cn.root}
-          defaultValue={defaultValue}
           minStepsBetweenThumbs={minStepsBetweenThumbs}
           onValueChange={onRangeChange}
           ref={ref}

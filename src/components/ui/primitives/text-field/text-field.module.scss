@@ -66,7 +66,7 @@
 }
 
 /* Chrome, Edge и Safari,
-hover, focus,active for compatibility and predictability across browsers */
+Ensure consistent autofill styling in all states (hover, focus, active) */
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus,

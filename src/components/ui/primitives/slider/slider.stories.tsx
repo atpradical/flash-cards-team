@@ -29,7 +29,6 @@ export const SliderExample: Story = {
 
     const sliderHandler = (newRange: number[]) => {
       setSliderRange([...newRange])
-      args.onRangeChange(newRange)
     }
 
     return <Slider onRangeChange={sliderHandler} range={sliderRange} />
