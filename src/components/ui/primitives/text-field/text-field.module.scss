@@ -65,7 +65,8 @@
   }
 }
 
-/* Chrome, Edge и Safari */
+/* Chrome, Edge и Safari,
+hover, focus,active for compatibility and predictability across browsers */
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus,
