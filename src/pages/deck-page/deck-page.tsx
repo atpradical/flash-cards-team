@@ -2,13 +2,13 @@ import { ChangeEvent, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components/svgIcons'
-import myImage from '@/assets/webp/react-logo.webp'
 import { AddNewCardDialogForm, AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Progress, TextField } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
 import { PaginationModel } from '@/services/cards/cards.types'
-import { useGetCardsQuery } from '@/services/flashcards-api'
+import { Deck } from '@/services/decks/deck.types'
+import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashcards-api'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -35,16 +35,28 @@ export const DeckPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const { data, error, isLoading } = useGetCardsQuery({
+  const {
+    data: deck = {} as Deck,
+    error: deckError,
+    isLoading: isLoadingDeck,
+  } = useGetDeckQuery({ id: deckId ?? '' })
+
+  const {
+    data: cardsData,
+    error: cardsError,
+    isLoading: isLoadingCards,
+  } = useGetCardsQuery({
     currentPage,
     id: deckId ?? '',
     itemsPerPage,
     question: search || undefined,
   })
-  const { items: cards = [], pagination = {} as PaginationModel } = data ?? {}
+
+  const { items: cards = [], pagination = {} as PaginationModel } = cardsData ?? {}
 
   // todo: delete console.log with error during err handling task completion
-  console.log(error)
+  console.log(cardsError)
+  console.log(deckError)
 
   const editDeckHandler = () => {
     setShowAddNewDeckDialogForm(!showAddNewDeckDialogForm)
@@ -75,7 +87,7 @@ export const DeckPage = () => {
     setCurrentPage(currentPage)
   }
 
-  if (isLoading) {
+  if (isLoadingCards || isLoadingDeck) {
     return <Progress />
   }
 
@@ -89,10 +101,10 @@ export const DeckPage = () => {
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
           <DeckTitle
-            image={myImage}
+            cover={deck.cover}
             onDelete={deleteDeckHandler}
             onEdit={editDeckHandler}
-            title={"Fried's Deck"}
+            title={deck.name}
           />
           <Button as={Link} className={cn.learnDeck} to={PATH.CARD}>
             Learn Deck
