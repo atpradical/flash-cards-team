@@ -1,7 +1,8 @@
 // --------- DeckListData example for story: ---------
-import { DeckDataItem } from '@/components/ui/layout-components'
 
-export const DeckListExample: DeckDataItem[] = [
+import { Deck } from '@/services/decks/deck.types'
+
+export const DeckListExample: Deck[] = [
   {
     author: {
       id: '4454eb10-0e63-4b82-8df4-954d284eaf7f',

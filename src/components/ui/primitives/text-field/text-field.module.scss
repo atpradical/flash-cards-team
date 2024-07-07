@@ -20,6 +20,7 @@
 
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
+  color: var(--color-light-100);
 
   background-color: var(--color-dark-900);
   border: var(--border-width-s) solid var(--color-dark-300);
@@ -64,16 +65,8 @@
   }
 }
 
-/* Internet Explorer и Microsoft Edge Firefox  */
-/* stylelint-disable-next-line selector-no-vendor-prefix */
-.input:-moz-placeholder-shown,
-.input:-ms-input-placeholder {
-  color: var(--color-light-100);
-  background-color: var(--color-dark-900);
-  transition: background-color 3000s ease-in-out 0s;
-}
-
-/* Chrome, Edge и Safari */
+/* Chrome, Edge и Safari,
+Ensure consistent autofill styling in all states (hover, focus, active) */
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus,

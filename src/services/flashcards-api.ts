@@ -1,3 +1,4 @@
+import { DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
 import { CardsListResponse, CardsMinMaxResponse, GetCardsArgs } from '@/services/cards/cards.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -5,7 +6,6 @@ export const flashcardsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.flashcards.andrii.es',
     credentials: 'include',
-    // todo: delete after authorization implementation
     prepareHeaders: headers => {
       headers.append('x-auth-skip', 'true')
     },
@@ -19,6 +19,15 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${id}/cards`,
         }),
       }),
+      getDecks: builder.query<DecksListResponse, GetDecksArgs | void>({
+        query: args => {
+          return {
+            method: 'GET',
+            params: args ?? undefined,
+            url: `v2/decks`,
+          }
+        },
+      }),
       getMinMaxCards: builder.query<CardsMinMaxResponse, void>({
         query: () => ({
           method: 'GET',
@@ -30,4 +39,4 @@ export const flashcardsApi = createApi({
   reducerPath: 'flashcardsApi',
 })
 
-export const { useGetCardsQuery, useGetMinMaxCardsQuery } = flashcardsApi
+export const { useGetCardsQuery, useGetMinMaxCardsQuery, useGetDecksQuery } = flashcardsApi
