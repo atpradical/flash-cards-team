@@ -1,6 +1,6 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const Funnel = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+const FunnelOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
     height={'24'}
@@ -26,7 +26,7 @@ const Funnel = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(Funnel)
+const ForwardRef = forwardRef(FunnelOutline)
 const Memo = memo(ForwardRef)
 
 export default Memo

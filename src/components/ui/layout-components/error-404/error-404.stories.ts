@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Error404 } from '@/assets/components/svgIcons'
+import { Error404 } from '@/assets/icons'
 
 const meta = {
   argTypes: {},

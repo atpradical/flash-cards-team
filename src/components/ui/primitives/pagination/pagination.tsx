@@ -1,4 +1,4 @@
-import { ArrowBack } from '@/assets/components/svgIcons'
+import { ArrowBack } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
 import { DOTS, usePagination } from '@/components/ui/primitives/pagination/hooks/usePagination'
 import clsx from 'clsx'

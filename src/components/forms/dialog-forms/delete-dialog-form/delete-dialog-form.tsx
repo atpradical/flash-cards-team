@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { CloseOutline } from '@/assets/components/svgIcons'
+import { CloseOutline } from '@/assets/icons'
 import {
   Button,
   Dialog,

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { CheckEmailIcon } from '@/assets/components/svgIcons'
+import { CheckEmailIcon } from '@/assets/icons'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'

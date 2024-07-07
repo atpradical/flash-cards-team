@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { ArrowBackOutline } from '@/assets/components/svgIcons'
+import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'

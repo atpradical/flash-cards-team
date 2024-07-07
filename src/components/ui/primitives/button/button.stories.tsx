@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ArrowBackOutline, ColorPaletteOutline } from '@/assets/components/svgIcons'
+import { ArrowBackOutline, Heart } from '@/assets/icons'
 import { Button } from '@/components/ui/primitives'
 import { action } from '@storybook/addon-actions'
 
@@ -41,7 +41,7 @@ export const ButtonWithIcon: Story = {
   args: {
     children: (
       <>
-        <ColorPaletteOutline />
+        <Heart />
         Button with Icon
       </>
     ),
@@ -53,7 +53,7 @@ export const ButtonWithIcon: Story = {
 
 export const Icon: Story = {
   args: {
-    children: <ColorPaletteOutline />,
+    children: <Heart />,
     disabled: false,
     onClick: action('action on button click invoked'),
     variant: 'icon',

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-import { LogOut, PersonOutline } from '@/assets/components/svgIcons'
+import { LogOut, PersonOutline } from '@/assets/icons'
 import { User } from '@/common/types'
 import { Avatar, Typography } from '@/components/ui/primitives'
 import {

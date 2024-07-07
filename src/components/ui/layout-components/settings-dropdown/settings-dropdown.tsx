@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import {
-  EditOutline,
-  MoreVerticalOutline,
-  PlayCircleOutline,
-  TrashOutline,
-} from '@/assets/components/svgIcons'
+import { EditOutline, MoreVerticalOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
 import { Typography } from '@/components/ui/primitives'
 import {
   Arrow,

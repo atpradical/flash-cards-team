@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
+import { CloseOutline, ImageOutline } from '@/assets/icons'
 import dummyImage from '@/assets/webp/cover-default.webp'
 import {
   Button,

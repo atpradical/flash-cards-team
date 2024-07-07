@@ -1,11 +1,6 @@
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
-import {
-  CloseOutline,
-  EyeOffOutline,
-  EyeOutline,
-  SearchOutline,
-} from '@/assets/components/svgIcons'
+import { CloseOutline, EyeOffOutline, EyeOutline, SearchOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'

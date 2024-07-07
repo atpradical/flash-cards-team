@@ -1,4 +1,4 @@
-import { ArrowUp } from '@/assets/components/svgIcons'
+import { ArrowUp } from '@/assets/icons'
 import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
 import { Nullable } from '@/common/types'
 import { Actions } from '@/components/ui/layout-components/actions'
