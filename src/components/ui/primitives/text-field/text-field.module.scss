@@ -20,6 +20,7 @@
 
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
+  color: var(--color-light-100);
 
   background-color: var(--color-dark-900);
   border: var(--border-width-s) solid var(--color-dark-300);
@@ -62,18 +63,6 @@
   &.password {
     padding: var(--padding-xs) var(--padding-xl) var(--padding-xs) var(--padding-s);
   }
-}
-
-.input:not(:placeholder-shown) {
-  color: var(--color-light-100);
-}
-
-/* Internet Explorer и Microsoft Edge Firefox  */
-
-.input::-moz-placeholder-shown {
-  color: var(--color-light-100);
-  background-color: var(--color-dark-900);
-  transition: background-color 3000s ease-in-out 0s;
 }
 
 /* Chrome, Edge и Safari */
