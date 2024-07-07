@@ -48,7 +48,7 @@ const Pallet = ({ category, categoryColors }: PalletProps) => {
       </Typography>
       {categoryColors.map(el => (
         <FlexContainer fd={'column'} gap={'4px'} key={el.id}>
-          <Box color={el.color} />
+          <ColorBox color={el.color} />
           <Typography className={cn.text} style={{ color: el.color }} variant={'caption'}>
             {el.color}
           </Typography>
@@ -61,8 +61,8 @@ const Pallet = ({ category, categoryColors }: PalletProps) => {
   )
 }
 
-type BoxProps = ComponentPropsWithoutRef<'div'> & Omit<PalletItem, 'id'>
+type ColorBoxProps = ComponentPropsWithoutRef<'div'> & Omit<PalletItem, 'id'>
 
-const Box = ({ color, ...rest }: BoxProps) => {
+const ColorBox = ({ color, ...rest }: ColorBoxProps) => {
   return <div className={cn.box} style={{ backgroundColor: color }} {...rest} />
 }

@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-import { ArrowIosForward } from '@/assets/components/svgIcons'
+import { ArrowForward } from '@/assets/components/svgIcons'
 import { Typography } from '@/components/ui/primitives/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import * as RadixSelect from '@radix-ui/react-select'
@@ -80,7 +80,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
           <FlexContainer gap={'5px'} jc={'space-between'}>
             <RadixSelect.Value placeholder={placeholder ?? '...'} />
             <RadixSelect.Icon asChild className={cn.dropdownArrow}>
-              <ArrowIosForward />
+              <ArrowForward />
             </RadixSelect.Icon>
           </FlexContainer>
         </RadixSelect.Trigger>

@@ -1,6 +1,6 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-const ArrowIosForward = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+const ArrowForward = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
     height={'24'}
@@ -26,7 +26,7 @@ const ArrowIosForward = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>
     </g>
   </svg>
 )
-const ForwardRef = forwardRef(ArrowIosForward)
+const ForwardRef = forwardRef(ArrowForward)
 const Memo = memo(ForwardRef)
 
 export default Memo

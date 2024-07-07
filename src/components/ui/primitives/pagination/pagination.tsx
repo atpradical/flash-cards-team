@@ -1,4 +1,4 @@
-import { ArrowIosBack } from '@/assets/components/svgIcons'
+import { ArrowBack } from '@/assets/components/svgIcons'
 import { Button, Typography } from '@/components/ui/primitives'
 import { DOTS, usePagination } from '@/components/ui/primitives/pagination/hooks/usePagination'
 import clsx from 'clsx'
@@ -97,11 +97,11 @@ export const Pagination = (props: Props) => {
   return (
     <div className={cn.container}>
       <Button disabled={isFirstPage} onClick={previousPageHandler} variant={'icon'}>
-        <ArrowIosBack className={cn.arrow} />
+        <ArrowBack className={cn.arrow} />
       </Button>
       {options}
       <Button disabled={isLastPage} onClick={nextPageHandler} variant={'icon'}>
-        <ArrowIosBack className={cn.arrowRight} />
+        <ArrowBack className={cn.arrowRight} />
       </Button>
       <Typography as={'span'} className={cn.nowrap}>
         Показать

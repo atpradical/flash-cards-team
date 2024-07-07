@@ -1,0 +1,66 @@
+import { ReactNode } from 'react'
+
+import {
+  ArrowBack,
+  ArrowBackOutline,
+  ArrowForward,
+  ArrowUp,
+  CloseOutline,
+  ColorPaletteOutline,
+  EditOutline,
+  Email,
+  EyeOffOutline,
+  EyeOutline,
+  Funnel,
+  Heart,
+  HeartOutline,
+  Image,
+  ImageOutline,
+  LogOut,
+  LogOutOutline,
+  MenuOutline,
+  MoreVerticalOutline,
+  PersonOutline,
+  PlayCircle,
+  PlayCircleOutline,
+  SearchOutline,
+  SettingsOutline,
+  Star,
+  StarOutline,
+  TrashOutline,
+} from '@/assets/components/svgIcons'
+
+type IconPallet = {
+  component: ReactNode
+  name: string
+}
+
+export const iconsList: IconPallet[] = [
+  { component: <ArrowBack />, name: 'arrow-back' },
+  { component: <ArrowBackOutline />, name: 'arrow-back-outline' },
+  { component: <ArrowForward />, name: 'arrow-forward' },
+  { component: <ArrowUp />, name: 'arrow-up' },
+  { component: <CloseOutline />, name: 'close-outline' },
+  { component: <ColorPaletteOutline />, name: 'color-palette-outline' },
+  { component: <EditOutline />, name: 'edit-outline' },
+  { component: <Email />, name: 'email' },
+  { component: <EyeOffOutline />, name: 'eye-off-outline' },
+  { component: <EyeOutline />, name: 'eye-outline' },
+  { component: <Funnel />, name: 'funnel' },
+  { component: <Heart />, name: 'heart' },
+  { component: <HeartOutline />, name: 'heart-outline' },
+  { component: <Image />, name: 'Image' },
+  { component: <ImageOutline />, name: 'image-outline' },
+  { component: <LogOut />, name: 'log-out' },
+  { component: <LogOutOutline />, name: 'log-out-outline' },
+  { component: <MenuOutline />, name: 'menu-outline' },
+  { component: <MoreVerticalOutline />, name: 'more-vertical-outline' },
+  { component: <PersonOutline />, name: 'person-outline' },
+  { component: <PlayCircle />, name: 'play-circle' },
+  { component: <PlayCircleOutline />, name: 'play-circle-outline' },
+  { component: <SearchOutline />, name: 'search-outline' },
+  { component: <SettingsOutline />, name: 'settings-outline' },
+  { component: <Star />, name: 'star' },
+  { component: <StarOutline />, name: 'star-outline' },
+  { component: <TrashOutline />, name: 'trash-outline' },
+]

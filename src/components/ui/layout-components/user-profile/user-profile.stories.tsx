@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import Logo from '@/assets/components/svgIcons/Logo'
+import Logo from '@/assets/components/svgIcons/IncubatorLogo'
 import avatarDefault from '@/assets/webp/avatar-default.webp'
 import { User } from '@/common/types'
 import { FlexContainer } from '@/shared/ui/flex-container'
