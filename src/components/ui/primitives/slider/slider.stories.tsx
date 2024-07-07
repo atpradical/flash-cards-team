@@ -19,27 +19,19 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const SliderWithHooks = ({
-  onValueChange,
-  value: initialValue,
-}: {
-  onValueChange: (value: number[]) => void
-  value: number[]
-}) => {
-  const [value, setValue] = useState<number[]>(initialValue)
-
-  const handleSliderValueChange = (newValue: number[]) => {
-    setValue(newValue)
-    onValueChange(newValue)
-  }
-
-  return <Slider onValueChange={handleSliderValueChange} value={value} />
-}
-
-export const SliderInteractive: Story = {
+export const SliderExample: Story = {
   args: {
-    onValueChange: action('slider onValueChange callback invoked'),
-    value: [0, 100],
+    onRangeChange: action('slider onValueChange callback invoked'),
+    range: [0, 100],
   },
-  render: args => <SliderWithHooks {...args} />,
+  render: args => {
+    const [sliderRange, setSliderRange] = useState([...args.range])
+
+    const sliderHandler = (newRange: number[]) => {
+      setSliderRange([...newRange])
+      args.onRangeChange(newRange)
+    }
+
+    return <Slider onRangeChange={sliderHandler} range={sliderRange} />
+  },
 }

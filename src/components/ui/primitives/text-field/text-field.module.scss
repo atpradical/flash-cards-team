@@ -69,9 +69,8 @@
 }
 
 /* Internet Explorer и Microsoft Edge Firefox  */
-/* stylelint-disable-next-line selector-no-vendor-prefix */
-.input:-moz-placeholder-shown,
-.input:-ms-input-placeholder {
+
+.input::-moz-placeholder-shown {
   color: var(--color-light-100);
   background-color: var(--color-dark-900);
   transition: background-color 3000s ease-in-out 0s;

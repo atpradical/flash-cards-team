@@ -1,19 +1,16 @@
-export type PaginationModel = {
-  currentPage: number
-  itemsPerPage: number
-  totalItems: number
-  totalPages: number
-}
+import { Nullable } from '@/common/types'
 
-export type DeckAuthor = {
+import { PaginationModel } from '../cards/cards.types'
+
+export type Author = {
   id: string
   name: string
 }
 
 export type Deck = {
-  author: DeckAuthor
+  author: Author
   cardsCount: number
-  cover?: string
+  cover?: Nullable<string>
   created: string
   id: string
   isFavorite: boolean
@@ -35,5 +32,5 @@ export type GetDecksArgs = {
   maxCardsCount?: number
   minCardsCount?: number
   name?: string
-  orderBy?: string
+  orderBy?: string // todo: recheck type for 'orderBy?: string' property during sort table task
 }
