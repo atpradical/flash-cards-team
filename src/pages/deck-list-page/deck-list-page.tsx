@@ -6,7 +6,7 @@ import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components
 import { Button, Progress, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
 import { PaginationModel } from '@/services/cards/cards.types'
-import { useGetDecksQuery } from '@/services/flashcards-api'
+import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashcards-api'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -18,9 +18,12 @@ export const DeckListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [search, setSearch] = useState('')
-  const [sliderRange, setSliderRange] = useState<number[]>([0, 100])
 
-  const { data, isLoading } = useGetDecksQuery({
+  const { data: minMaxCardsData } = useGetMinMaxCardsQuery()
+  const { max, min } = minMaxCardsData ?? { max: 100, min: 0 }
+  const [sliderRange, setSliderRange] = useState<number[]>([min, max])
+
+  const { data: decksData, isLoading } = useGetDecksQuery({
     currentPage,
     itemsPerPage: itemsPerPage,
     maxCardsCount: sliderRange[1],
@@ -28,11 +31,7 @@ export const DeckListPage = () => {
     name: search || undefined,
   })
 
-  const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
-
-  // const { data } = useGetMinMaxCardsQuery()
-
-  // const { max, min } = data ?? { max: 100, min: 0 }
+  const { items: decks = [], pagination = {} as PaginationModel } = decksData ?? {}
 
   const navigate = useNavigate()
 
