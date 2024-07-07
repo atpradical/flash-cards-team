@@ -6,14 +6,21 @@ import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components
 import { DeckListExample } from '@/components/ui/layout-components/deck-list-table/deck-list-table.mock'
 import { Button, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
+import { useGetMinMaxCardsQuery } from '@/services/flashcards-api'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const DeckListPage = () => {
-  const dummyNumberOfCards = [2, 90]
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
   const [showEditDeckDialog, setEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setDeleteDeckDialog] = useState(false)
+
+  const { data } = useGetMinMaxCardsQuery()
+
+  const { max, min } = data ?? { max: 100, min: 0 }
+
+  console.log('min', min)
+  console.log('max', max)
 
   const navigate = useNavigate()
 
@@ -44,7 +51,7 @@ export const DeckListPage = () => {
         </FlexContainer>
         <TableFilterBar
           onValueChange={() => console.log('number of cards is changed')}
-          value={dummyNumberOfCards}
+          value={[min, max]}
         />
         <DeckListTable
           deckList={DeckListExample}

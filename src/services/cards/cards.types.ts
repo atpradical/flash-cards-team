@@ -36,3 +36,8 @@ export type GetCardsArgs = {
   orderBy?: string
   question?: string
 }
+
+export type CardsMinMaxResponse = {
+  max: number
+  min: number
+}
