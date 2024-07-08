@@ -15,8 +15,7 @@ export default meta
 
 export const Example: Story = {
   args: {
-    image: myImage,
-    imgDescription: 'some image description',
+    cover: myImage,
     onDelete: action('onDelete was action invoked'),
     onEdit: action('onEdit was action invoked'),
     title: "Fried's Deck",
