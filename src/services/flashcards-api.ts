@@ -1,7 +1,9 @@
 import {
+  Card,
   CardsListResponse,
   CreateCardArgs,
   CreateCardResponse,
+  GetCardArgs,
   GetCardsArgs,
 } from '@/services/cards/cards.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
@@ -45,4 +47,4 @@ export const flashcardsApi = createApi({
   tagTypes: ['Cards'],
 })
 
-export const { useCreateCardMutation, useGetCardsQuery, useGetCardQuery } = flashcardsApi
+export const { useCreateCardMutation, useGetCardQuery, useGetCardsQuery } = flashcardsApi

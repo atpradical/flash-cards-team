@@ -37,6 +37,10 @@ export type GetCardsArgs = {
   question?: string
 }
 
+export type GetCardArgs = {
+  id: string
+}
+
 export type CreateCardResponse = Card
 
 export type CreateCardArgs = {
