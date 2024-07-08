@@ -1,6 +1,6 @@
 import {
-  CardsListResponse,
   Card,
+  CardsListResponse,
   CardsMinMaxResponse,
   GetCardArgs,
   GetCardsArgs,
@@ -51,4 +51,5 @@ export const flashcardsApi = createApi({
   reducerPath: 'flashcardsApi',
 })
 
-export const { useGetCardsQuery, useGetDecksQuery, useGetMinMaxCardsQuery } = flashcardsApi
+export const { useGetCardQuery, useGetCardsQuery, useGetDecksQuery, useGetMinMaxCardsQuery } =
+  flashcardsApi
