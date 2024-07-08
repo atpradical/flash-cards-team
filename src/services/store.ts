@@ -1,6 +1,6 @@
 import { flashcardsApi } from '@/services/flashcards-api'
 import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query'
+import { setupListeners } from '@reduxjs/toolkit/query/react'
 
 export const store = configureStore({
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(flashcardsApi.middleware),

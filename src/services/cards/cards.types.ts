@@ -37,6 +37,10 @@ export type GetCardsArgs = {
   question?: string
 }
 
+export type GetCardArgs = {
+  id: string
+}
+
 export type CardsMinMaxResponse = {
   max: number
   min: number
