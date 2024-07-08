@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Star, StarOutline } from '@/assets/components/svgIcons'
+import { Star, StarOutline } from '@/assets/icons'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 

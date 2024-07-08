@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { EditOutline, PlayCircleOutline, TrashOutline } from '@/assets/components/svgIcons'
+import { EditOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
 import { getActionButtons } from '@/components/ui/layout-components/actions/utils/utils'
 import { Button } from '@/components/ui/primitives'
 import { ACTIONS, VARIANT } from '@/shared/enums'

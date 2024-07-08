@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Error404 } from '@/assets/components/svgIcons'
+import { Error404 } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'

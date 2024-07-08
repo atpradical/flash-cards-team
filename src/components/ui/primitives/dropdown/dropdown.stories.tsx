@@ -2,11 +2,14 @@ import type { Meta } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import { LogOut, PersonOutline } from '@/assets/components/svgIcons'
-import EditOutline from '@/assets/components/svgIcons/EditOutline'
-import MoreVerticalOutline from '@/assets/components/svgIcons/MoreVerticalOutline'
-import PlayCircleOutline from '@/assets/components/svgIcons/PlayCircleOutline'
-import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
+import {
+  EditOutline,
+  LogOut,
+  MoreVerticalOutline,
+  PersonOutline,
+  PlayCircleOutline,
+  TrashOutline,
+} from '@/assets/icons'
 import { Avatar, Label, Typography } from '@/components/ui/primitives'
 import {
   Arrow,

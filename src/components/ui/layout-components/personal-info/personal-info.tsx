@@ -1,4 +1,4 @@
-import { EditOutline, LogOutOutline } from '@/assets/components/svgIcons'
+import { EditOutline, LogOut } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
@@ -46,7 +46,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
           j&johnson@gmail.com
         </Typography>
         <Button className={cn.bottom} variant={'secondary'}>
-          <LogOutOutline className={cn.icon} />
+          <LogOut className={cn.icon} />
           <Typography variant={'subtitle2'}>Logout</Typography>
         </Button>
       </FlexContainer>

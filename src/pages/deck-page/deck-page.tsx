@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { ArrowBackOutline } from '@/assets/components/svgIcons'
+import { ArrowBackOutline } from '@/assets/icons'
 import myImage from '@/assets/webp/react-logo.webp'
 import { AddNewCardDialogForm, AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
