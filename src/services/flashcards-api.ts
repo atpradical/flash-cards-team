@@ -6,12 +6,8 @@ import {
   GetCardArgs,
   GetCardsArgs,
 } from '@/services/cards/cards.types'
-
-import { DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
 import { DeckResponse, DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-import { CardsListResponse, GetCardsArgs } from './cards/cards.types'
 
 export const flashcardsApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -23,7 +19,20 @@ export const flashcardsApi = createApi({
   }),
   endpoints: builder => {
     return {
-      /* todo: change endpoint name and types to getCardsList*/
+      createCard: builder.mutation<CreateCardResponse, CreateCardArgs>({
+        invalidatesTags: ['Cards'],
+        query: ({ deckId, ...args }) => ({
+          body: args,
+          method: 'POST',
+          url: `v1/decks/${deckId}/cards`,
+        }),
+      }),
+      getCard: builder.query<Card, GetCardArgs>({
+        query: ({ id }) => ({
+          method: 'GET',
+          url: `v1/cards/${id}`,
+        }),
+      }),
       getCards: builder.query<CardsListResponse, GetCardsArgs>({
         providesTags: ['Cards'],
         query: ({ deckId, ...args }) => ({
@@ -40,7 +49,6 @@ export const flashcardsApi = createApi({
           }
         },
       }),
-      /* todo: change endpoint name and types to getDecksList*/
       getDecks: builder.query<DecksListResponse, GetDecksArgs | void>({
         query: args => {
           return {
@@ -56,6 +64,10 @@ export const flashcardsApi = createApi({
   tagTypes: ['Cards'],
 })
 
-export const { useCreateCardMutation, useGetCardQuery, useGetCardsQuery, useGetDecksQuery } =
-  flashcardsApi
-export const { useGetCardsQuery, useGetDeckQuery, useGetDecksQuery } = flashcardsApi
+export const {
+  useCreateCardMutation,
+  useGetCardQuery,
+  useGetCardsQuery,
+  useGetDeckQuery,
+  useGetDecksQuery,
+} = flashcardsApi
