@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import ArrowBackOutline from '@/assets/components/svgIcons/ArrowBackOutline'
 import { LearnCard } from '@/components/ui/layout-components'
-import { Button } from '@/components/ui/primitives'
+import { Button, Progress } from '@/components/ui/primitives'
+import { useGetCardQuery } from '@/services/flashcards-api'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -15,6 +16,17 @@ export const CardPage = () => {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
   }
+  const { cardId } = useParams()
+  const { data, error, isLoading } = useGetCardQuery({ id: cardId ?? '' })
+  const { answer = '', question = '' } = data ?? {}
+  // todo: replace deck name depending on "name" property in RTK request for deck
+  const deckName = 'Coins'
+
+  console.log(error)
+
+  if (isLoading) {
+    return <Progress />
+  }
 
   return (
     <Page>
@@ -24,11 +36,7 @@ export const CardPage = () => {
           Back to Deck
         </Button>
         <FlexContainer jc={'center'}>
-          <LearnCard
-            answer={'Венера'}
-            deckName={'Солнечная система'}
-            question={'Самая горячая планета?'}
-          />
+          <LearnCard answer={answer} deckName={deckName} question={question} />
         </FlexContainer>
       </FlexContainer>
     </Page>

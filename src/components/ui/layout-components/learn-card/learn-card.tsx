@@ -1,10 +1,11 @@
 import { ReactNode, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
-import { CardListExample } from '@/components/ui/layout-components/deck-table/deck-table.mock'
 import { Button, Card, Image, Typography } from '@/components/ui/primitives'
+import { useGetCardQuery } from '@/services/flashcards-api'
 import { RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
@@ -20,6 +21,9 @@ type SelfRateFormProps = {
 }
 
 export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfRateFormProps) => {
+  const { cardId } = useParams()
+  const { data } = useGetCardQuery({ id: cardId ?? '' })
+  const { answerImg, questionImg } = data ?? {}
   const [isAnswerShowed, setIsAnswerShowed] = useState<boolean>(false)
   const cn = {
     button: clsx(s.button),
@@ -34,8 +38,8 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
   const showAnswerHandler = () => {
     setIsAnswerShowed(true)
   }
-  const questionCover = CardListExample[0].questionImg ?? dummyQuestionCover
-  const answerCover = CardListExample[0].answerImg ?? dummyAnswerCover
+  const questionCover = questionImg ?? dummyQuestionCover
+  const answerCover = answerImg ?? dummyAnswerCover
 
   return (
     <Card className={cn.container}>

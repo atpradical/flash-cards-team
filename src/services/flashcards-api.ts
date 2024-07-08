@@ -25,6 +25,12 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${deckId}/cards`,
         }),
       }),
+      getCard: builder.query<Card, GetCardArgs>({
+        query: ({ id }) => ({
+          method: 'GET',
+          url: `v1/cards/${id}`,
+        }),
+      }),
       getCards: builder.query<CardsListResponse, GetCardsArgs>({
         providesTags: ['Cards'],
         query: ({ deckId, ...args }) => ({
@@ -39,4 +45,4 @@ export const flashcardsApi = createApi({
   tagTypes: ['Cards'],
 })
 
-export const { useCreateCardMutation, useGetCardsQuery } = flashcardsApi
+export const { useCreateCardMutation, useGetCardsQuery, useGetCardQuery } = flashcardsApi
