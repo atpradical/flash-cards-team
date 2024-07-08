@@ -1,8 +1,7 @@
 import { ReactNode, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
-import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
 import { Button, Card, Image, Typography } from '@/components/ui/primitives'
 import { useGetCardQuery } from '@/services/flashcards-api'
@@ -38,8 +37,8 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
   const showAnswerHandler = () => {
     setIsAnswerShowed(true)
   }
-  const questionCover = questionImg ?? dummyQuestionCover
-  const answerCover = answerImg ?? dummyAnswerCover
+  const questionCover = questionImg ?? dummyCover
+  const answerCover = answerImg ?? dummyCover
 
   return (
     <Card className={cn.container}>

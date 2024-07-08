@@ -1,5 +1,5 @@
 import { ArrowUp } from '@/assets/icons'
-import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
