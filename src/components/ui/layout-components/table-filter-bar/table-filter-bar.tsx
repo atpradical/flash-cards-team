@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 
-import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
+import { TrashOutline } from '@/assets/icons'
 import { Button, Slider, Tab, TabSwitcher, TextField, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'

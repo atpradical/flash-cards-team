@@ -1,4 +1,4 @@
-import { ArrowIosUp } from '@/assets/components/svgIcons'
+import { ArrowUp } from '@/assets/icons'
 import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
 import { Actions } from '@/components/ui/layout-components/actions'
@@ -78,7 +78,7 @@ export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) =
             <FlexContainer gap={'6px'}>
               Last Updated
               <Button className={cn.sort} onClick={sortHandler} variant={'icon'}>
-                <ArrowIosUp className={cn.sortIcon} />
+                <ArrowUp className={cn.sortIcon} />
               </Button>
             </FlexContainer>
           </TableHeaderCell>
