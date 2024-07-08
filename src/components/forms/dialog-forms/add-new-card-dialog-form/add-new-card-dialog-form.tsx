@@ -130,7 +130,7 @@ export const AddNewCardDialogForm = ({
           <Button onClick={cancelFormHandler} variant={'secondary'}>
             Cancel
           </Button>
-          <Button onClick={formHandler}>Add New Card</Button>
+          <Button onClick={formHandler}>{dialogTitle}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
