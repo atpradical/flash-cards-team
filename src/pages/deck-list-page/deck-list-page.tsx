@@ -6,11 +6,13 @@ import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components
 import { Button, Progress, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
 import { PaginationModel } from '@/services/cards/cards.types'
-import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashcards-api'
+import { useGetMinMaxCardsQuery, useLazyGetDecksQuery } from '@/services/flashcards-api'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const DeckListPage = () => {
+  const [sliderRange, setSliderRange] = useState<number[]>([])
+  const [skip, setSkip] = useState(false)
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
   const [showEditDeckDialog, setEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setDeleteDeckDialog] = useState(false)
@@ -18,18 +20,25 @@ export const DeckListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [search, setSearch] = useState('')
+  const [getDecks, { data: decksData, isLoading }] = useLazyGetDecksQuery()
 
-  const { data: minMaxCardsData } = useGetMinMaxCardsQuery()
-  const { max, min } = minMaxCardsData ?? { max: 100, min: 0 }
-  const [sliderRange, setSliderRange] = useState<number[]>([min, max])
+  const {
+    data: { max = 100, min = 0 } = {},
+    isLoading: isMinMaxLoading,
+    isSuccess: isMinMaxSuccess,
+  } = useGetMinMaxCardsQuery({}, { skip })
 
-  const { data: decksData, isLoading } = useGetDecksQuery({
-    currentPage,
-    itemsPerPage: itemsPerPage,
-    maxCardsCount: sliderRange[1],
-    minCardsCount: sliderRange[0],
-    name: search || undefined,
-  })
+  if (isMinMaxSuccess) {
+    getDecks({
+      currentPage,
+      itemsPerPage: itemsPerPage,
+      maxCardsCount: max,
+      minCardsCount: min,
+      name: search || undefined,
+    })
+    setSkip(true)
+    setSliderRange([min, max]) // ??
+  }
 
   const { items: decks = [], pagination = {} as PaginationModel } = decksData ?? {}
 
@@ -64,10 +73,17 @@ export const DeckListPage = () => {
   }
 
   const sliderRangeHandler = (sliderRange: number[]) => {
+    getDecks({
+      currentPage,
+      itemsPerPage: itemsPerPage,
+      maxCardsCount: max,
+      minCardsCount: min,
+      name: search || undefined,
+    })
     setSliderRange([...sliderRange])
   }
 
-  if (isLoading) {
+  if (isLoading || isMinMaxLoading) {
     return <Progress />
   }
 

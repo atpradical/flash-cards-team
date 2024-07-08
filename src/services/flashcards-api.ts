@@ -8,7 +8,6 @@ import {
   GetCardsArgs,
 } from '@/services/cards/cards.types'
 import { DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const flashcardsApi = createApi({
@@ -52,7 +51,7 @@ export const flashcardsApi = createApi({
           }
         },
       }),
-      getMinMaxCards: builder.query<CardsMinMaxResponse, void>({
+      getMinMaxCards: builder.query<CardsMinMaxResponse, {} | void>({
         query: () => ({
           method: 'GET',
           url: `v2/decks/min-max-cards`,
@@ -65,9 +64,9 @@ export const flashcardsApi = createApi({
 })
 
 export const {
+  useCreateCardMutation,
   useGetCardQuery,
   useGetCardsQuery,
-  useGetDecksQuery,
   useGetMinMaxCardsQuery,
-  useCreateCardMutation,
+  useLazyGetDecksQuery,
 } = flashcardsApi
