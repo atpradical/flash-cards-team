@@ -1,3 +1,5 @@
+import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
+import { Nullable } from '@/common/types'
 import { SettingsDropdown } from '@/components/ui/layout-components'
 import { Image, Typography } from '@/components/ui/primitives'
 import { RATIO } from '@/shared/enums'
@@ -7,23 +9,18 @@ import clsx from 'clsx'
 import s from './deck-title.module.scss'
 
 type DeckTitleProps = {
-  image: string
-  imgDescription?: string
+  cover: Nullable<string>
   onDelete: () => void
   onEdit: () => void
   title: string
 }
 
-export const DeckTitle = ({
-  image,
-  imgDescription = 'Deck cover image',
-  onDelete,
-  onEdit,
-  title,
-}: DeckTitleProps) => {
+export const DeckTitle = ({ cover, onDelete, onEdit, title }: DeckTitleProps) => {
   const cn = {
     container: clsx(s.container),
   }
+
+  cover ??= dummyCover
 
   return (
     <div className={cn.container}>
@@ -33,7 +30,7 @@ export const DeckTitle = ({
         </Typography>
         <SettingsDropdown onDelete={onDelete} onEdit={onEdit} />
       </FlexContainer>
-      {image && <Image alt={imgDescription} ratio={RATIO.M} src={image} variant={'m'} />}
+      <Image alt={'Deck cover image'} ratio={RATIO.M} src={cover} variant={'m'} />
     </div>
   )
 }

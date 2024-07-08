@@ -6,8 +6,7 @@ import {
   GetCardArgs,
   GetCardsArgs,
 } from '@/services/cards/cards.types'
-
-import { DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
+import { DeckResponse, DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const flashcardsApi = createApi({
@@ -42,6 +41,14 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${deckId}/cards`,
         }),
       }),
+      getDeck: builder.query<DeckResponse, { id: string }>({
+        query: ({ id }) => {
+          return {
+            method: 'GET',
+            url: `v1/decks/${id}`,
+          }
+        },
+      }),
       getDecks: builder.query<DecksListResponse, GetDecksArgs | void>({
         query: args => {
           return {
@@ -57,5 +64,10 @@ export const flashcardsApi = createApi({
   tagTypes: ['Cards'],
 })
 
-export const { useCreateCardMutation, useGetCardQuery, useGetCardsQuery, useGetDecksQuery } =
-  flashcardsApi
+export const {
+  useCreateCardMutation,
+  useGetCardQuery,
+  useGetCardsQuery,
+  useGetDeckQuery,
+  useGetDecksQuery,
+} = flashcardsApi
