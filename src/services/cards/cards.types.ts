@@ -36,3 +36,7 @@ export type GetCardsArgs = {
   orderBy?: string
   question?: string
 }
+
+export type GetCardArgs = {
+  id: string
+}

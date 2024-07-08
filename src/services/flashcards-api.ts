@@ -1,7 +1,6 @@
+import { Card, CardsListResponse, GetCardArgs, GetCardsArgs } from '@/services/cards/cards.types'
 import { DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-import { CardsListResponse, GetCardsArgs } from './cards/cards.types'
 
 export const flashcardsApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -13,6 +12,12 @@ export const flashcardsApi = createApi({
   }),
   endpoints: builder => {
     return {
+      getCard: builder.query<Card, GetCardArgs>({
+        query: ({ id }) => ({
+          method: 'GET',
+          url: `v1/cards/${id}`,
+        }),
+      }),
       getCards: builder.query<CardsListResponse, GetCardsArgs>({
         query: ({ id, ...args }) => ({
           method: 'GET',
@@ -34,4 +39,4 @@ export const flashcardsApi = createApi({
   reducerPath: 'flashcardsApi',
 })
 
-export const { useGetCardsQuery, useGetDecksQuery } = flashcardsApi
+export const { useGetCardQuery, useGetCardsQuery, useGetDecksQuery } = flashcardsApi
