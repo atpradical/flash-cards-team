@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
+import { CloseOutline, ImageOutline } from '@/assets/icons'
 import dummyImage from '@/assets/webp/cover-default.webp'
 import {
   Button,
@@ -12,8 +12,10 @@ import {
   DialogFooter,
   DialogHeader,
   Image,
+  Progress,
   Typography,
 } from '@/components/ui/primitives'
+import { useCreateCardMutation } from '@/services/flashcards-api'
 import { RATIO } from '@/shared/enums'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -32,17 +34,23 @@ const AddNewCardDialogFormScheme = z.object({
 type AddNewCardDialogFormValues = z.infer<typeof AddNewCardDialogFormScheme>
 
 type AddNewCardDialogFormProps = {
+  action?: 'CREATE' | 'UPDATE'
+  deckId: string
   onOpenChange: (open: boolean) => void
-  onSubmit: (data: AddNewCardDialogFormValues) => void
+  onSubmit: () => void
   open: boolean
 }
 
 export const AddNewCardDialogForm = ({
+  action = 'CREATE',
+  deckId,
   onOpenChange,
   onSubmit,
   open,
 }: AddNewCardDialogFormProps) => {
-  const { control, handleSubmit } = useForm<AddNewCardDialogFormValues>({
+  const [createCard, { isLoading }] = useCreateCardMutation()
+
+  const { control, handleSubmit, reset } = useForm<AddNewCardDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(AddNewCardDialogFormScheme),
   })
@@ -54,12 +62,27 @@ export const AddNewCardDialogForm = ({
     icon: clsx(s.icon),
   }
 
-  const formHandler = handleSubmit(data => {
-    onSubmit(data)
+  const dialogTitle = action === 'CREATE' ? 'Add New Card' : 'Change Card'
+
+  const formHandler = handleSubmit(formData => {
+    if (action === 'CREATE') {
+      createCard({ ...formData, deckId })
+    }
+    reset()
+    onSubmit()
   })
+
+  const cancelFormHandler = () => {
+    reset()
+    onOpenChange(open)
+  }
 
   const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {
     e.preventDefault()
+  }
+
+  if (isLoading) {
+    return <Progress />
   }
 
   return (
@@ -67,7 +90,7 @@ export const AddNewCardDialogForm = ({
       <DialogContent className={cn.container}>
         <DialogHeader>
           <Typography as={'h3'} variant={'h3'}>
-            Add New Deck
+            {dialogTitle}
           </Typography>
           <DialogClose asChild className={cn.close}>
             <CloseOutline />
@@ -104,10 +127,10 @@ export const AddNewCardDialogForm = ({
           </form>
         </DialogBody>
         <DialogFooter flexContainerProps={{ jc: 'space-between' }}>
-          <Button onClick={onOpenChange} variant={'secondary'}>
+          <Button onClick={cancelFormHandler} variant={'secondary'}>
             Cancel
           </Button>
-          <Button onClick={formHandler}>Add New Card</Button>
+          <Button onClick={formHandler}>{dialogTitle}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

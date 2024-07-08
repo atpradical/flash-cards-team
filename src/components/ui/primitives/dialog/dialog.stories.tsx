@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CloseOutline, ImageOutline } from '@/assets/components/svgIcons'
+import { CloseOutline, ImageOutline } from '@/assets/icons'
 import {
   Dialog,
   DialogBody,

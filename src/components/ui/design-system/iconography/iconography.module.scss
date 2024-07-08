@@ -1,0 +1,47 @@
+.container {
+  width: 100%;
+  max-width: 710px;
+  padding: 20px;
+
+  background-color: rgb(44 43 43 / 86%);
+  border-radius: var(--border-radius-m);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 50px;
+
+  text-align: center;
+}
+
+.title {
+  word-break: break-word;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  border: 1px solid var(--color-dark-300);
+  border-radius: var(--border-radius-m);
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+}
+
+.heart {
+  color: var(--color-danger-500);
+}
+
+.star {
+  color: var(--color-warning-500);
+}

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import Logo from '@/assets/components/svgIcons/Logo'
+import { IncubatorLogo } from '@/assets/icons'
 import avatarDefault from '@/assets/webp/avatar-default.webp'
 import { User } from '@/common/types'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -45,7 +45,7 @@ export const UserIsLoggedIn: Story = {
     <MemoryRouter>
       <Header>
         <FlexContainer jc={'space-between'}>
-          <Logo />
+          <IncubatorLogo />
           <UserProfile {...args} />
         </FlexContainer>
       </Header>
@@ -62,7 +62,7 @@ export const UserIsLoggedOut: Story = {
     <MemoryRouter>
       <Header>
         <FlexContainer jc={'space-between'}>
-          <Logo />
+          <IncubatorLogo />
           <UserProfile {...args} />
         </FlexContainer>
       </Header>

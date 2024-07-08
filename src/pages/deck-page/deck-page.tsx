@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { ArrowBackOutline } from '@/assets/components/svgIcons'
+import { ArrowBackOutline } from '@/assets/icons'
+import myImage from '@/assets/webp/react-logo.webp'
 import { AddNewCardDialogForm, AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Progress, TextField } from '@/components/ui/primitives'
@@ -18,14 +19,15 @@ import s from './deck-page.module.scss'
 
 export const DeckPage = () => {
   const cn = {
+    cardControl: clsx(s.cardControl),
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
     image: clsx(s.image),
-    learnDeck: clsx(s.learnDeck),
     pagination: clsx(s.pagination),
   }
 
-  const [showAddNewCardDialogForm, setShowAddNewCardDialogForm] = useState(false)
+  const [showCreateNewCardDialogForm, setShowCreateNewCardDialogForm] = useState(false)
+  const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
   const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState(false)
   const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
@@ -47,7 +49,7 @@ export const DeckPage = () => {
     isLoading: isLoadingCards,
   } = useGetCardsQuery({
     currentPage,
-    id: deckId ?? '',
+    deckId: deckId ?? '',
     itemsPerPage,
     question: search || undefined,
   })
@@ -66,8 +68,12 @@ export const DeckPage = () => {
     setShowDeleteDeckDialogForm(!showDeleteDeckDialogForm)
   }
 
-  const editCardHandler = () => {
-    setShowAddNewCardDialogForm(!showAddNewCardDialogForm)
+  const createCardHandler = () => {
+    setShowCreateNewCardDialogForm(!showCreateNewCardDialogForm)
+  }
+
+  const updateCardHandler = () => {
+    setShowUpdateCardDialogForm(!showUpdateCardDialogForm)
   }
 
   const deleteCardHandler = () => {
@@ -106,9 +112,15 @@ export const DeckPage = () => {
             onEdit={editDeckHandler}
             title={deck.name}
           />
-          <Button as={Link} className={cn.learnDeck} to={PATH.CARD}>
-            Learn Deck
-          </Button>
+          <FlexContainer fd={'column'} gap={'20px'}>
+            <Button as={Link} className={cn.cardControl} to={PATH.CARD}>
+              Learn Deck
+            </Button>
+            {/* todo: add check if current Deck Author is me then show Button*/}
+            <Button className={cn.cardControl} onClick={createCardHandler}>
+              Add New Card
+            </Button>
+          </FlexContainer>
         </FlexContainer>
         <TextField
           label={'Find question'}
@@ -120,7 +132,7 @@ export const DeckPage = () => {
         <DeckTable
           cards={cards}
           onDelete={deleteCardHandler}
-          onEdit={editCardHandler}
+          onEdit={updateCardHandler}
           onSort={() => console.log('onSort invoked!')}
         />
         <Pagination
@@ -131,10 +143,19 @@ export const DeckPage = () => {
           pageSize={itemsPerPage}
           totalCount={pagination.totalItems}
         />
+        {/* todo: change mock deckId later*/}
         <AddNewCardDialogForm
-          onOpenChange={editCardHandler}
+          deckId={'cly7c2vqa0drxpb015rp9sbi7'}
+          onOpenChange={createCardHandler}
+          onSubmit={createCardHandler}
+          open={showCreateNewCardDialogForm}
+        />
+        <AddNewCardDialogForm
+          action={'UPDATE'}
+          deckId={'cly7c2vqa0drxpb015rp9sbi7'}
+          onOpenChange={updateCardHandler}
           onSubmit={() => console.log('onSubmit')}
-          open={showAddNewCardDialogForm}
+          open={showUpdateCardDialogForm}
         />
         <AddNewDeckDialogForm
           onOpenChange={setShowAddNewDeckDialogForm}

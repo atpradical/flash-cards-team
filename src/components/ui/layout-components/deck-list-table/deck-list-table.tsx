@@ -1,4 +1,4 @@
-import { ArrowIosUp } from '@/assets/components/svgIcons'
+import { ArrowUp } from '@/assets/icons'
 import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
@@ -75,7 +75,7 @@ export const DeckListTable = ({
             <FlexContainer gap={'6px'}>
               Last Updated
               <Button className={cn.sort} onClick={sortHandler} variant={'icon'}>
-                <ArrowIosUp className={cn.sortIcon} />
+                <ArrowUp className={cn.sortIcon} />
               </Button>
             </FlexContainer>
           </TableHeaderCell>

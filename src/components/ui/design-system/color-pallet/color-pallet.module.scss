@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: fit-content;
+  padding: 20px;
+
+  background-color: rgb(44 43 43 / 86%);
+  border-radius: var(--border-radius-m);
+}
+
+.text,
+.title {
+  flex-shrink: 0;
+}
+
+.title {
+  align-self: start;
+  width: 100px;
+}
+
+.box {
+  width: 70px;
+  height: 70px;
+  border-radius: var(--border-radius-s);
+}

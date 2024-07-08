@@ -1,4 +1,4 @@
-import { CloseOutline } from '@/assets/components/svgIcons'
+import { CloseOutline } from '@/assets/icons'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import * as Toast from '@radix-ui/react-toast'
 import clsx from 'clsx'
