@@ -31,7 +31,7 @@ export type CardsListResponse = {
 export type GetCardsArgs = {
   answer?: string
   currentPage?: number
-  id: string
+  deckId: string
   itemsPerPage?: number
   orderBy?: string
   question?: string
@@ -39,4 +39,16 @@ export type GetCardsArgs = {
 
 export type GetCardArgs = {
   id: string
+}
+
+export type CreateCardResponse = Card
+
+export type CreateCardArgs = {
+  answer?: string
+  answerImg?: string
+  answerVideo?: string
+  deckId: string
+  question?: string
+  questionImg?: string
+  questionVideo?: string
 }
