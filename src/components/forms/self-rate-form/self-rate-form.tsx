@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 import { Option } from '@/common/types'
+import { Button, Typography } from '@/components/ui/primitives'
 import { radioScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledRadio } from '@/shared/ui/form-components/controlled-radio'
@@ -8,9 +9,6 @@ import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './self-rate-form.module.scss'
-
-import { Button } from '../../ui/primitives/button'
-import { Typography } from '../../ui/primitives/typography'
 
 const SelfRateScheme = z.object({ radio: radioScheme })
 
@@ -30,7 +28,7 @@ export const SelfRateForm = ({ onSubmit }: SelfRateFormProps) => {
     { id: '1', label: 'Did not know', value: '1' },
     { id: '2', label: 'Forgot', value: '2' },
     { id: '3', label: 'A lot of thought', value: '3' },
-    { id: '4', label: 'Сonfused', value: '4' },
+    { id: '4', label: 'Confused', value: '4' },
     { id: '5', label: 'Knew the answer', value: '5' },
   ]
   const cn = {

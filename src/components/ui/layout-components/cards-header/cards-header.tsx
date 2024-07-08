@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import Logo from '@/assets/components/svgIcons/Logo'
+import { IncubatorLogo } from '@/assets/icons'
 import { User } from '@/common/types'
 import { UserProfile } from '@/components/ui/layout-components'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -27,7 +27,7 @@ export const CardsHeader = ({
   return (
     <Header {...propsHeader}>
       <FlexContainer jc={'space-between'} pd={'0 20px'}>
-        <Logo />
+        <IncubatorLogo />
         <UserProfile isAuthorized={isAuthorized} userData={mockUser} />
       </FlexContainer>
     </Header>

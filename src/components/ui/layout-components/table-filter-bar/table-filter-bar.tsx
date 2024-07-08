@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import TrashOutline from '@/assets/components/svgIcons/TrashOutline'
+import { TrashOutline } from '@/assets/icons'
 import { Button, Slider, Tab, TabSwitcher, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'

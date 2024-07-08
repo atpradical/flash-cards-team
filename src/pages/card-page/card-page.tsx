@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 
-import ArrowBackOutline from '@/assets/components/svgIcons/ArrowBackOutline'
+import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button, Progress } from '@/components/ui/primitives'
 import { useGetCardQuery } from '@/services/flashcards-api'
