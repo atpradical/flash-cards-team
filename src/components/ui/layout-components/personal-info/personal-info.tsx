@@ -1,9 +1,8 @@
 import { EditOutline, LogOut } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from './personal-info.module.scss'
+import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
   name: string
@@ -12,16 +11,6 @@ type PersonalInfoProps = {
 }
 
 export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
-  const cn = {
-    avatar: clsx(s.avatar),
-    bottom: clsx(s.bottom),
-    container: clsx(s.container),
-    editAvatar: clsx(s.editAvatar),
-    hint: clsx(s.hint),
-    icon: clsx(s.icon),
-    wrapper: clsx(s.wrapper),
-  }
-
   return (
     <Card className={cn.container}>
       <FlexContainer fd={'column'} gap={'6px'}>

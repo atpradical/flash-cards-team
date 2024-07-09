@@ -5,9 +5,8 @@ import { getActionButtons } from '@/components/ui/layout-components/actions/util
 import { Button } from '@/components/ui/primitives'
 import { ACTIONS, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from './actions.module.scss'
+import { cn } from './actions.styles'
 
 export type ActionButton = {
   handler?: () => void
@@ -29,10 +28,6 @@ export const Actions = ({
   variant = VARIANT.ALL,
   ...restFlexContainer
 }: ActionsProps) => {
-  const cn = {
-    action: clsx(s.action),
-    button: clsx(s.button),
-  }
   const learnHandler = () => {
     onLearn()
   }
