@@ -4,12 +4,8 @@
 }
 
 .trigger {
-  display: flex;
   cursor: pointer;
-}
-
-.option {
-  margin: 12px 0;
+  display: flex;
 }
 
 .option,
@@ -26,7 +22,7 @@
 }
 
 .option {
-  text-decoration: none;
   display: flex;
   gap: 6px;
+  text-decoration: none;
 }

@@ -16,9 +16,8 @@ import {
 import { Card } from '@/services/cards/cards.types'
 import { RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from '../deck-list-table/deck-list-table.module.scss'
+import { cn } from './deck-table.styles'
 
 type DeckTableProps = {
   cards: Card[]
@@ -28,11 +27,6 @@ type DeckTableProps = {
 }
 
 export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) => {
-  const cn = {
-    sort: clsx(s.sort),
-    sortIcon: clsx(s.sortIcon),
-  }
-
   const sortHandler = () => {
     onSort()
   }
@@ -77,7 +71,7 @@ export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) =
             <FlexContainer gap={'6px'}>
               Last Updated
               <Button className={cn.sort} onClick={sortHandler} variant={'icon'}>
-                <ArrowUp className={cn.sortIcon} />
+                <ArrowUp />
               </Button>
             </FlexContainer>
           </TableHeaderCell>
