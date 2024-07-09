@@ -112,7 +112,7 @@ export const DeckPage = () => {
             title={deck.name}
           />
           <FlexContainer fd={'column'} gap={'20px'}>
-            <Button as={Link} className={cn.cardControl} to={PATH.CARD}>
+            <Button as={Link} className={cn.cardControl} to={PATH.CARD_LEARN}>
               Learn Deck
             </Button>
             {/* todo: add check if current Deck Author is me then show Button*/}

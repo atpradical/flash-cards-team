@@ -1,10 +1,9 @@
-import { ReactNode, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
 import { Button, Card, Image, Typography } from '@/components/ui/primitives'
-import { useGetCardQuery } from '@/services/flashcards-api'
+import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
 import { RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
@@ -12,18 +11,15 @@ import clsx from 'clsx'
 import s from './learn-card.module.scss'
 
 type SelfRateFormProps = {
-  answer: string
-  children?: ReactNode
+  card: GetRandomCardToLearnResponse
   deckName: string
-  question: string
-  triesCount?: number
 }
 
-export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfRateFormProps) => {
-  const { cardId } = useParams()
-  const { data } = useGetCardQuery({ id: cardId ?? '' })
-  const { answerImg, questionImg } = data ?? {}
+export const LearnCard = ({ card, deckName }: SelfRateFormProps) => {
+  const { answer, answerImg, question, questionImg, shots } = card
+
   const [isAnswerShowed, setIsAnswerShowed] = useState<boolean>(false)
+
   const cn = {
     button: clsx(s.button),
     container: clsx(s.container),
@@ -48,9 +44,11 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
         </Typography>
         <FlexContainer fd={'column'} gap={'18px'}>
           <FlexContainer>
-            <Typography variant={'subtitle1'}>Question:</Typography>
-            <Typography className={cn.incoming} variant={'body1'}>
-              {question}
+            <Typography variant={'subtitle1'}>
+              Question:&nbsp;
+              <Typography className={cn.incoming} variant={'body1'}>
+                {question}
+              </Typography>
             </Typography>
           </FlexContainer>
           {questionCover && (
@@ -58,19 +56,21 @@ export const LearnCard = ({ answer, deckName, question, triesCount = 10 }: SelfR
           )}
           <FlexContainer>
             <Typography className={cn.triesText} gray variant={'body2'}>
-              Количество попыток ответов на вопрос:
-            </Typography>
-            <Typography className={cn.triesCount} gray variant={'subtitle2'}>
-              {triesCount}
+              Количество попыток ответов на вопрос:&nbsp;
+              <Typography className={cn.triesCount} gray variant={'subtitle2'}>
+                {shots}
+              </Typography>
             </Typography>
           </FlexContainer>
         </FlexContainer>
         {isAnswerShowed ? (
           <FlexContainer fd={'column'} gap={'18px'}>
             <FlexContainer>
-              <Typography variant={'subtitle1'}>Answer:</Typography>
-              <Typography className={cn.incoming} variant={'body1'}>
-                {answer}
+              <Typography variant={'subtitle1'}>
+                Answer:&nbsp;
+                <Typography className={cn.incoming} variant={'body1'}>
+                  {answer}
+                </Typography>
               </Typography>
             </FlexContainer>
             {answerCover && (

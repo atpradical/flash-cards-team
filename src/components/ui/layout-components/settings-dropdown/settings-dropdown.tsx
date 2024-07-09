@@ -37,7 +37,7 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
       <Content>
         <Arrow />
         <Item>
-          <Typography as={Link} className={cn.option} to={PATH.CARD} variant={'caption'}>
+          <Typography as={Link} className={cn.option} to={PATH.CARD_LEARN} variant={'caption'}>
             <PlayCircleOutline className={cn.icon} />
             Learn
           </Typography>
