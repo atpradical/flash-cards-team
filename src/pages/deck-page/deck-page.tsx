@@ -16,6 +16,8 @@ import clsx from 'clsx'
 
 import s from './deck-page.module.scss'
 
+import { EmptyDeckPage } from './empty-deck-page'
+
 export const DeckPage = () => {
   const cn = {
     cardControl: clsx(s.cardControl),
@@ -97,7 +99,7 @@ export const DeckPage = () => {
   }
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
-  return (
+  return cardsData?.items ? (
     <Page>
       <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'} pd={'0 20px'}>
         <Button as={Link} className={cn.goBack} to={PATH.DECK_LIST} variant={'link'}>
@@ -179,5 +181,7 @@ export const DeckPage = () => {
         />
       </FlexContainer>
     </Page>
+  ) : (
+    <EmptyDeckPage />
   )
 }
