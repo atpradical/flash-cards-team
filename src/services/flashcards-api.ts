@@ -5,6 +5,7 @@ import {
   CreateCardResponse,
   GetCardArgs,
   GetCardsArgs,
+  GetRandomCardToLearnArgs,
   GetRandomCardToLearnResponse,
 } from '@/services/cards/cards.types'
 import { DeckResponse, DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
@@ -59,11 +60,11 @@ export const flashcardsApi = createApi({
           }
         },
       }),
-      getRandomCard: builder.query<GetRandomCardToLearnResponse, { id: string }>({
+      getRandomCard: builder.query<GetRandomCardToLearnResponse, GetRandomCardToLearnArgs>({
         query: ({ id, ...args }) => {
           return {
             method: 'GET',
-            params: args ?? '',
+            params: args ?? undefined,
             url: `/v1/decks/${id}/learn`,
           }
         },

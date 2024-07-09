@@ -3,21 +3,15 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button, Progress } from '@/components/ui/primitives'
+import { cn } from '@/pages/card-page/card-page.styles'
 import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
 import { Deck } from '@/services/decks/deck.types'
 import { useGetDeckQuery, useGetRandomCardQuery } from '@/services/flashcards-api'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
-import clsx from 'clsx'
-
-import s from './card-page.module.scss'
 
 export const CardPage = () => {
-  const cn = {
-    goBack: clsx(s.goBack),
-    icon: clsx(s.icon),
-  }
   const { deckId } = useParams()
 
   const {
