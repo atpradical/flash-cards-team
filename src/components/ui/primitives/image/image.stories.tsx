@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import myImage from '@/assets/webp/react-logo.webp'
+import myImage from '@/assets/webp/dummy-cover.webp'
 import { Image } from '@/components/ui/primitives/image/image'
 import { RATIO } from '@/shared/enums'
 

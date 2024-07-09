@@ -1,4 +1,4 @@
-import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { Nullable } from '@/common/types'
 import { SettingsDropdown } from '@/components/ui/layout-components'
 import { Image, Typography } from '@/components/ui/primitives'
