@@ -1,5 +1,5 @@
 import { ArrowUp } from '@/assets/icons'
-import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
@@ -15,9 +15,8 @@ import {
 import { Deck } from '@/services/decks/deck.types'
 import { RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from './deck-list-table.module.scss'
+import { cn } from './deck-list-table.styles'
 
 type DecksListTableProps = {
   deckList: Deck[]
@@ -34,11 +33,6 @@ export const DeckListTable = ({
   onLearn,
   onSort,
 }: DecksListTableProps) => {
-  const cn = {
-    sort: clsx(s.sort),
-    sortIcon: clsx(s.sortIcon),
-  }
-
   const sortHandler = () => {
     onSort()
   }
@@ -75,7 +69,7 @@ export const DeckListTable = ({
             <FlexContainer gap={'6px'}>
               Last Updated
               <Button className={cn.sort} onClick={sortHandler} variant={'icon'}>
-                <ArrowUp className={cn.sortIcon} />
+                <ArrowUp />
               </Button>
             </FlexContainer>
           </TableHeaderCell>
