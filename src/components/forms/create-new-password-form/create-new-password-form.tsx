@@ -1,14 +1,12 @@
 import { useForm } from 'react-hook-form'
 
+import { cn } from '@/components/forms/create-new-password-form/create-new-password-from.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { passwordSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
 import { z } from 'zod'
-
-import s from './create-new-password-form.module.scss'
 
 type CreateNewPasswordFormProps = {
   onSubmit: (data: FormValues) => void
@@ -32,12 +30,6 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
   const formHandler = handleSubmit(data => {
     onSubmit(data)
   })
-
-  const cn = {
-    container: clsx(s.container),
-    form: clsx(s.form),
-    reminder: clsx(s.reminder),
-  }
 
   return (
     <Card className={cn.container}>
