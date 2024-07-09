@@ -5,7 +5,7 @@ import {
   CreateCardResponse,
   GetCardArgs,
   GetCardsArgs,
-  GetRandomCardToLearn,
+  GetRandomCardToLearnResponse,
 } from '@/services/cards/cards.types'
 import { DeckResponse, DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
@@ -59,7 +59,7 @@ export const flashcardsApi = createApi({
           }
         },
       }),
-      getRandomCard: builder.query<GetRandomCardToLearn, { id: string }>({
+      getRandomCard: builder.query<GetRandomCardToLearnResponse, { id: string }>({
         query: ({ id, ...args }) => {
           return {
             method: 'GET',

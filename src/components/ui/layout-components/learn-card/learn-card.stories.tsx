@@ -1,13 +1,10 @@
 import { LearnCard } from '@/components/ui/layout-components'
+import { learnCardData } from '@/components/ui/layout-components/learn-card/learn-card.mock'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  argTypes: {
-    answer: { control: 'text' },
-    question: { control: 'text' },
-  },
+  argTypes: {},
   component: LearnCard,
-  tags: ['autodocs'],
   title: 'Components/LearnCard',
 } satisfies Meta<typeof LearnCard>
 
@@ -16,8 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const LearnCardBase: Story = {
   args: {
-    answer: 'This is how "This" works in JavaScript',
+    card: learnCardData,
     deckName: 'Deck Name',
-    question: 'How "This" works in JavaScript?',
   },
 }

@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button, Progress } from '@/components/ui/primitives'
-import { Card } from '@/services/cards/cards.types'
+import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
 import { Deck } from '@/services/decks/deck.types'
 import { useGetDeckQuery, useGetRandomCardQuery } from '@/services/flashcards-api'
 import { PATH } from '@/shared/enums'
@@ -27,7 +27,7 @@ export const CardPage = () => {
   } = useGetDeckQuery({ id: deckId ?? '' })
 
   const {
-    data: card = {} as Card,
+    data: card = {} as GetRandomCardToLearnResponse,
     error: cardError,
     isLoading: isCardLoading,
   } = useGetRandomCardQuery({ id: deckId ?? '' })

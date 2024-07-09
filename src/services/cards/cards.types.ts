@@ -53,4 +53,4 @@ export type CreateCardArgs = {
   questionVideo?: string
 }
 
-export type GetRandomCardToLearn = Card
+export type GetRandomCardToLearnResponse = Omit<Card, 'userId'>

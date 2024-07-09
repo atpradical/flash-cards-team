@@ -4,7 +4,7 @@ import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
 import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
 import { Button, Card, Image, Typography } from '@/components/ui/primitives'
-import { Card as CardType } from '@/services/cards/cards.types'
+import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
 import { RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
@@ -12,7 +12,7 @@ import clsx from 'clsx'
 import s from './learn-card.module.scss'
 
 type SelfRateFormProps = {
-  card: CardType
+  card: GetRandomCardToLearnResponse
   deckName: string
 }
 
