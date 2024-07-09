@@ -1,16 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
+import { cn } from '@/components/forms/sign-up-form/sign-up-form.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
 import { emailSchema, passwordSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
 import { z } from 'zod'
-
-import s from './sign-up-form.module.scss'
 
 const SignUpScheme = z
   .object({
@@ -42,13 +40,6 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const formHandler = handleSubmit(data => {
     onSubmit(data)
   })
-
-  const cn = {
-    button: clsx(s.button),
-    container: clsx(s.container),
-    form: clsx(s.form),
-    reminder: clsx(s.reminder),
-  }
 
   return (
     <Card className={cn.container}>
