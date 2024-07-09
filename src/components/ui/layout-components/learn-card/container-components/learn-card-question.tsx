@@ -1,4 +1,4 @@
-import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { cn } from '@/components/ui/layout-components/learn-card/learn-card.styles'
 import { Image, Typography } from '@/components/ui/primitives'
 import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
@@ -11,7 +11,7 @@ type CardPageQuestionProps = Pick<
 >
 
 export const LearnCardQuestion = ({ question, questionImg, shots }: CardPageQuestionProps) => {
-  const cover = questionImg ?? dummyQuestionCover
+  const cover = questionImg ?? dummyCover
 
   return (
     <FlexContainer fd={'column'} gap={'18px'}>

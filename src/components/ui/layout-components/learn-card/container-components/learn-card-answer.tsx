@@ -1,4 +1,4 @@
-import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
 import { cn } from '@/components/ui/layout-components/learn-card/learn-card.styles'
 import { Image, Typography } from '@/components/ui/primitives'
@@ -10,7 +10,7 @@ type CardPageAnswerProps = {
   onSubmit: () => void
 } & Pick<GetRandomCardToLearnResponse, 'answer' | 'answerImg'>
 export const LearnCardAnswer = ({ answer, answerImg, onSubmit }: CardPageAnswerProps) => {
-  const cover = answerImg ?? dummyAnswerCover
+  const cover = answerImg ?? dummyCover
 
   return (
     <FlexContainer fd={'column'} gap={'18px'}>
