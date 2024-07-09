@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { CloseOutline, ImageOutline } from '@/assets/icons'
-import dummyImage from '@/assets/webp/cover-default.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import {
   Button,
   Dialog,
@@ -106,7 +106,7 @@ export const AddNewCardDialogForm = ({
                 name={'question'}
                 placeholder={'Write down the question.'}
               />
-              <Image alt={'some question'} ratio={RATIO.XL} src={dummyImage} variant={'xl'} />
+              <Image alt={'some question'} ratio={RATIO.XL} src={dummyCover} variant={'xl'} />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
                 <ImageOutline className={cn.icon} />
                 Upload image
@@ -118,7 +118,7 @@ export const AddNewCardDialogForm = ({
                 name={'answer'}
                 placeholder={'What is the correct answer to the question?'}
               />
-              <Image alt={'some answer'} ratio={RATIO.XL} src={dummyImage} variant={'xl'} />
+              <Image alt={'some answer'} ratio={RATIO.XL} src={dummyCover} variant={'xl'} />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
                 <ImageOutline className={cn.icon} />
                 Upload image

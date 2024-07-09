@@ -1,6 +1,5 @@
 import { ArrowUp } from '@/assets/icons'
-import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
-import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
@@ -39,8 +38,8 @@ export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) =
   }
 
   const TableContent = cards.map(el => {
-    const questionCover = el.questionImg ?? dummyQuestionCover
-    const answerCover = el.answerImg ?? dummyAnswerCover
+    const questionCover = el.questionImg ?? dummyCover
+    const answerCover = el.answerImg ?? dummyCover
 
     return (
       <TableRow key={el.id}>
