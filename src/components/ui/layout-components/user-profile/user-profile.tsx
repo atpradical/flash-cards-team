@@ -5,9 +5,8 @@ import { ProfileDropdown } from '@/components/ui/layout-components'
 import { Avatar, Button, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from './user-profile.module.scss'
+import { cn } from './user-profile.styles'
 
 type Props = {
   isAuthorized: boolean
@@ -15,8 +14,6 @@ type Props = {
 }
 
 export const UserProfile = ({ isAuthorized, userData: { email, name, photo } }: Props) => {
-  const cn = clsx(s.link)
-
   if (!isAuthorized) {
     return (
       <Button as={Link} to={PATH.SIGN_IN} variant={'secondary'}>

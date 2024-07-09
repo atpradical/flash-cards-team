@@ -3,9 +3,8 @@ import { ChangeEvent } from 'react'
 import { TrashOutline } from '@/assets/icons'
 import { Button, Slider, Tab, TabSwitcher, TextField, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from './table-filter-bar.module.scss'
+import { cn } from './table-filter-bar.styles'
 
 type TableFilterBarProps = {
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -23,11 +22,6 @@ export const TableFilterBar = ({
     { title: 'My Cards', value: 'tab-value-1' },
     { title: 'All Cards', value: 'tab-value-2' },
   ]
-  const cn = {
-    button: clsx(s.button),
-    slider: clsx(s.slider),
-    tabs: clsx(s.tabs),
-  }
 
   return (
     <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>

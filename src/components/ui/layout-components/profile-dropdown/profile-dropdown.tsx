@@ -14,9 +14,8 @@ import {
   Trigger,
 } from '@/components/ui/primitives/dropdown/dropdown'
 import { PATH } from '@/shared/enums'
-import clsx from 'clsx'
 
-import s from './profile-dropdown.module.scss'
+import { cn } from './profile-dropdown.styles'
 
 type Props = {
   trigger: ReactNode
@@ -24,16 +23,11 @@ type Props = {
 
 export const ProfileDropdown = (props: Props) => {
   const { email, name, photo, trigger } = props
-  const cn = {
-    icon: clsx(s.icon),
-    option: clsx(s.option),
-    trigger: clsx(s.trigger),
-  }
 
   return (
     <Root>
       <Trigger className={cn.trigger}>{trigger}</Trigger>
-      <Content className={s.menu}>
+      <Content className={cn.menu}>
         <Arrow />
         <Label>
           <Avatar size={'s'} src={photo.src} title={'Photo'} />
