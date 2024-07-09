@@ -9,7 +9,7 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 type CardPageAnswerProps = {
   onSubmit: () => void
 } & Pick<GetRandomCardToLearnResponse, 'answer' | 'answerImg'>
-export const CardPageAnswer = ({ answer, answerImg, onSubmit }: CardPageAnswerProps) => {
+export const LearnCardAnswer = ({ answer, answerImg, onSubmit }: CardPageAnswerProps) => {
   const cover = answerImg ?? dummyAnswerCover
 
   return (

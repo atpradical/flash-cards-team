@@ -54,3 +54,8 @@ export type CreateCardArgs = {
 }
 
 export type GetRandomCardToLearnResponse = Omit<Card, 'userId'>
+
+export type GetRandomCardToLearnArgs = {
+  id: string
+  previousCard?: string
+}

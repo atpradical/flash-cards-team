@@ -1,13 +1,10 @@
 import { useState } from 'react'
 
 import { Button, Card, Typography } from '@/components/ui/primitives'
-import {
-  CardPageAnswer as Answer,
-  CardPageQuestion as Question,
-} from '@/pages/card-page/container-components'
 import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
+import { LearnCardAnswer as Answer, LearnCardQuestion as Question } from './container-components'
 import { cn } from './learn-card.styles'
 
 type SelfRateFormProps = {

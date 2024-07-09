@@ -10,7 +10,7 @@ type CardPageQuestionProps = Pick<
   'question' | 'questionImg' | 'shots'
 >
 
-export const CardPageQuestion = ({ question, questionImg, shots }: CardPageQuestionProps) => {
+export const LearnCardQuestion = ({ question, questionImg, shots }: CardPageQuestionProps) => {
   const cover = questionImg ?? dummyQuestionCover
 
   return (
