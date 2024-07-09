@@ -52,3 +52,5 @@ export type CreateCardArgs = {
   questionImg?: string
   questionVideo?: string
 }
+
+export type GetRandomCardToLearn = Card

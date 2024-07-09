@@ -3,7 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button, Progress } from '@/components/ui/primitives'
-import { useGetCardQuery } from '@/services/flashcards-api'
+import { Card } from '@/services/cards/cards.types'
+import { Deck } from '@/services/decks/deck.types'
+import { useGetDeckQuery, useGetRandomCardQuery } from '@/services/flashcards-api'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -16,15 +18,23 @@ export const CardPage = () => {
     goBack: clsx(s.goBack),
     icon: clsx(s.icon),
   }
-  const { cardId } = useParams()
-  const { data, error, isLoading } = useGetCardQuery({ id: cardId ?? '' })
-  const { answer = '', question = '' } = data ?? {}
-  // todo: replace deck name depending on "name" property in RTK request for deck
-  const deckName = 'Coins'
+  const { deckId } = useParams()
 
-  console.log(error)
+  const {
+    data: deck = {} as Deck,
+    error: deckError,
+    isLoading: isLoadingDeck,
+  } = useGetDeckQuery({ id: deckId ?? '' })
 
-  if (isLoading) {
+  const {
+    data: card = {} as Card,
+    error: cardError,
+    isLoading: isCardLoading,
+  } = useGetRandomCardQuery({ id: deckId ?? '' })
+
+  console.log(deckError, cardError)
+
+  if (isLoadingDeck || isCardLoading) {
     return <Progress />
   }
 
@@ -36,7 +46,7 @@ export const CardPage = () => {
           Back to Deck
         </Button>
         <FlexContainer jc={'center'}>
-          <LearnCard answer={answer} deckName={deckName} question={question} />
+          <LearnCard card={card} deckName={deck.name} />
         </FlexContainer>
       </FlexContainer>
     </Page>

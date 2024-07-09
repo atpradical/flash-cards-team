@@ -1,5 +1,5 @@
 export enum PATH {
-  CARD = '/card/:cardId',
+  CARD_LEARN = '/deck/:deckId/learn',
   CHECK_EMAIL = '/check-email',
   DECK = '/deck/:deckId',
   DECK_LIST = '/deck-list',
