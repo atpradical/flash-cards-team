@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-import dummyAnswerCover from '@/assets/webp/dummy-answer-cover.webp'
-import dummyQuestionCover from '@/assets/webp/dummy-question-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form/self-rate-form'
 import { Button, Card, Image, Typography } from '@/components/ui/primitives'
 import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
@@ -34,8 +33,8 @@ export const LearnCard = ({ card, deckName }: SelfRateFormProps) => {
   const showAnswerHandler = () => {
     setIsAnswerShowed(true)
   }
-  const questionCover = questionImg ?? dummyQuestionCover
-  const answerCover = answerImg ?? dummyAnswerCover
+  const questionCover = questionImg ?? dummyCover
+  const answerCover = answerImg ?? dummyCover
 
   return (
     <Card className={cn.container}>

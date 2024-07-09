@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import myImage from '@/assets/webp/react-logo.webp'
+import myImage from '@/assets/webp/dummy-cover.webp'
 import { DeckTitle } from '@/components/ui/layout-components'
 import { action } from '@storybook/addon-actions'
 
