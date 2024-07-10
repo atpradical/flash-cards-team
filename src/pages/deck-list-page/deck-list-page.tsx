@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
+import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Progress, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
@@ -98,7 +98,7 @@ export const DeckListPage = () => {
           pageSize={itemsPerPage}
           totalCount={pagination.totalItems}
         />
-        <AddNewDeckDialogForm onOpenChange={addNewDeckHandler} open={showAddDeckDialog} />
+        <DeckDialogForm onOpenChange={addNewDeckHandler} open={showAddDeckDialog} />
         <DeleteDialogForm
           entity={'Deck'}
           id={'12345'}
@@ -107,7 +107,7 @@ export const DeckListPage = () => {
           onSubmit={() => console.log('delete dialog form submit invoked!')}
           open={showDeleteDeckDialog}
         />
-        <AddNewDeckDialogForm onOpenChange={editDeckHandler} open={showEditDeckDialog} />
+        <DeckDialogForm onOpenChange={editDeckHandler} open={showEditDeckDialog} />
       </FlexContainer>
     </Page>
   )

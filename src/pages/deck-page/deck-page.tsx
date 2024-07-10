@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons'
-import { AddNewCardDialogForm, AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
+import { CardDialogForm, DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Progress, TextField } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
@@ -143,18 +143,18 @@ export const DeckPage = () => {
           totalCount={pagination.totalItems}
         />
         {/* todo: change mock deckId later*/}
-        <AddNewCardDialogForm
+        <CardDialogForm
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
           onOpenChange={createCardHandler}
           open={showCreateNewCardDialogForm}
         />
-        <AddNewCardDialogForm
+        <CardDialogForm
           action={'UPDATE'}
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
           onOpenChange={updateCardHandler}
           open={showUpdateCardDialogForm}
         />
-        <AddNewDeckDialogForm
+        <DeckDialogForm
           onOpenChange={setShowAddNewDeckDialogForm}
           open={showAddNewDeckDialogForm}
         />
