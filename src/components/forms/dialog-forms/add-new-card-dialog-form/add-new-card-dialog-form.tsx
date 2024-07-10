@@ -37,7 +37,6 @@ type AddNewCardDialogFormProps = {
   action?: 'CREATE' | 'UPDATE'
   deckId: string
   onOpenChange: (open: boolean) => void
-  onSubmit: () => void
   open: boolean
 }
 
@@ -45,10 +44,9 @@ export const AddNewCardDialogForm = ({
   action = 'CREATE',
   deckId,
   onOpenChange,
-  onSubmit,
   open,
 }: AddNewCardDialogFormProps) => {
-  const [createCard, { isLoading }] = useCreateCardMutation()
+  const [createCard, { isLoading, isSuccess }] = useCreateCardMutation()
 
   const { control, handleSubmit, reset } = useForm<AddNewCardDialogFormValues>({
     mode: 'onSubmit',
@@ -68,8 +66,9 @@ export const AddNewCardDialogForm = ({
     if (action === 'CREATE') {
       createCard({ ...formData, deckId })
     }
-    reset()
-    onSubmit()
+    if (isSuccess) {
+      reset()
+    }
   })
 
   const cancelFormHandler = () => {

@@ -22,7 +22,6 @@ export const AddNewCardFormExample: Story = {
     action: 'CREATE',
     deckId: 'cly7c2vqa0drxpb015rp9sbi7',
     onOpenChange: action('onOpenChange action invoked!'),
-    onSubmit: action('onSubmit action invoked!'),
     open: true,
   },
   render: () => (

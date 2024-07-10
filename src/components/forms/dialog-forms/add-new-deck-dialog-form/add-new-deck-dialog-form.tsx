@@ -33,16 +33,11 @@ type AddNewDeckDialogFormValues = z.infer<typeof AddNewDeckDialogFormScheme>
 
 type AddNewDeckDialogFormProps = {
   onOpenChange: (open: boolean) => void
-  onSubmit: () => void
   open: boolean
 }
 
-export const AddNewDeckDialogForm = ({
-  onOpenChange,
-  onSubmit,
-  open,
-}: AddNewDeckDialogFormProps) => {
-  const [createDeck, { isLoading }] = useCreateDeckMutation()
+export const AddNewDeckDialogForm = ({ onOpenChange, open }: AddNewDeckDialogFormProps) => {
+  const [createDeck, { isLoading, isSuccess }] = useCreateDeckMutation()
 
   const { control, handleSubmit, reset } = useForm<AddNewDeckDialogFormValues>({
     mode: 'onSubmit',
@@ -58,8 +53,9 @@ export const AddNewDeckDialogForm = ({
 
   const formHandler = handleSubmit(formData => {
     createDeck(formData)
-    reset()
-    onSubmit()
+    if (isSuccess) {
+      reset()
+    }
     onOpenChange(open)
   })
 
