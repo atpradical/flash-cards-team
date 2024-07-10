@@ -95,9 +95,13 @@ export const DeckPage = () => {
     setCurrentPage(currentPage)
   }
 
+  console.log({ isLoadingCards, isLoadingDeck })
+
   if (isLoadingCards || isLoadingDeck) {
     return <Progress />
   }
+
+  const isEmpty = cards.length === 0
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
   return (
@@ -107,51 +111,56 @@ export const DeckPage = () => {
           <ArrowBackOutline className={cn.icon} />
           Back to Decks List
         </Button>
-        {Object.keys(deck).length ? (
-          <>
-            <FlexContainer ai={'start'} jc={'start'}>
-              <DeckTitle
-                cover={deck.cover}
-                onDelete={deleteDeckHandler}
-                onEdit={editDeckHandler}
-                title={deck.name}
-              />
 
-              <FlexContainer fd={'column'} gap={'20px'}>
-                <Button as={Link} className={cn.cardControl} to={PATH.CARD}>
-                  Learn Deck
-                </Button>
-                {/* todo: add check if current Deck Author is me then show Button*/}
-                <Button className={cn.cardControl} onClick={createCardHandler}>
-                  Add New Card
-                </Button>
-              </FlexContainer>
+        <FlexContainer ai={'start'} jc={'start'}>
+          <DeckTitle
+            cover={deck.cover}
+            onDelete={deleteDeckHandler}
+            onEdit={editDeckHandler}
+            title={(deck.name ??= 'Name Deck')}
+          />
+
+          {!isEmpty && (
+            <FlexContainer fd={'column'} gap={'20px'}>
+              <Button as={Link} className={cn.cardControl} to={PATH.CARD}>
+                Learn Deck
+              </Button>
+              {/* todo: add check if current Deck Author is me then show Button*/}
+              <Button className={cn.cardControl} onClick={createCardHandler}>
+                Add New Card
+              </Button>
             </FlexContainer>
-            <TextField
-              label={'Find question'}
-              onChange={searchCardHandler}
-              placeholder={'Find card'}
-              value={search}
-              variant={'search'}
-            />
-            <DeckTable
-              cards={cards}
-              onDelete={deleteCardHandler}
-              onEdit={updateCardHandler}
-              onSort={() => console.log('onSort invoked!')}
-            />
-            <Pagination
-              className={cn.pagination}
-              currentPage={currentPage}
-              onPageChange={paginationCurrentPageHandler}
-              onPageSizeChange={paginationPageSizeHandler}
-              pageSize={itemsPerPage}
-              totalCount={pagination.totalItems}
-            />
-          </>
-        ) : (
-          <EmptyDeck createCardHandler={createCardHandler} />
+          )}
+        </FlexContainer>
+        {isEmpty && <EmptyDeck createCardHandler={createCardHandler} />}
+        {!isEmpty && (
+          <TextField
+            label={'Find question'}
+            onChange={searchCardHandler}
+            placeholder={'Find card'}
+            value={search}
+            variant={'search'}
+          />
         )}
+        {!isEmpty && (
+          <DeckTable
+            cards={cards}
+            onDelete={deleteCardHandler}
+            onEdit={updateCardHandler}
+            onSort={() => console.log('onSort invoked!')}
+          />
+        )}
+        {!isEmpty && (
+          <Pagination
+            className={cn.pagination}
+            currentPage={currentPage}
+            onPageChange={paginationCurrentPageHandler}
+            onPageSizeChange={paginationPageSizeHandler}
+            pageSize={itemsPerPage}
+            totalCount={pagination.totalItems}
+          />
+        )}
+
         {/* todo: change mock deckId later*/}
         <AddNewCardDialogForm
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}

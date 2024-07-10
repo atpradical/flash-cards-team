@@ -48,7 +48,7 @@ export const AddNewCardDialogForm = ({
   onSubmit,
   open,
 }: AddNewCardDialogFormProps) => {
-  const [createCard, { isLoading }] = useCreateCardMutation()
+  const [createCard] = useCreateCardMutation()
 
   const { control, handleSubmit, reset } = useForm<AddNewCardDialogFormValues>({
     mode: 'onSubmit',
@@ -79,10 +79,6 @@ export const AddNewCardDialogForm = ({
 
   const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {
     e.preventDefault()
-  }
-
-  if (isLoading) {
-    return <Progress />
   }
 
   return (
