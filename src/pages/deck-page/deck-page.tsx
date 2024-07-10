@@ -146,19 +146,16 @@ export const DeckPage = () => {
         <AddNewCardDialogForm
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
           onOpenChange={createCardHandler}
-          onSubmit={createCardHandler}
           open={showCreateNewCardDialogForm}
         />
         <AddNewCardDialogForm
           action={'UPDATE'}
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
           onOpenChange={updateCardHandler}
-          onSubmit={() => console.log('onSubmit')}
           open={showUpdateCardDialogForm}
         />
         <AddNewDeckDialogForm
           onOpenChange={setShowAddNewDeckDialogForm}
-          onSubmit={() => console.log('onSubmit')}
           open={showAddNewDeckDialogForm}
         />
         <DeleteDialogForm

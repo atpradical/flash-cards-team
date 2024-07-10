@@ -98,11 +98,7 @@ export const DeckListPage = () => {
           pageSize={itemsPerPage}
           totalCount={pagination.totalItems}
         />
-        <AddNewDeckDialogForm
-          onOpenChange={addNewDeckHandler}
-          onSubmit={() => console.log('Form submit invoked!')}
-          open={showAddDeckDialog}
-        />
+        <AddNewDeckDialogForm onOpenChange={addNewDeckHandler} open={showAddDeckDialog} />
         <DeleteDialogForm
           entity={'Deck'}
           id={'12345'}
@@ -111,11 +107,7 @@ export const DeckListPage = () => {
           onSubmit={() => console.log('delete dialog form submit invoked!')}
           open={showDeleteDeckDialog}
         />
-        <AddNewDeckDialogForm
-          onOpenChange={editDeckHandler}
-          onSubmit={() => console.log('add dialog form submit invoked!')}
-          open={showEditDeckDialog}
-        />
+        <AddNewDeckDialogForm onOpenChange={editDeckHandler} open={showEditDeckDialog} />
       </FlexContainer>
     </Page>
   )
