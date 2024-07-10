@@ -3,7 +3,7 @@ import { Control, FieldValues, UseControllerProps } from 'react-hook-form'
 
 import { ImageOutline } from '@/assets/icons'
 import dummyCover from '@/assets/webp/dummy-cover.webp'
-import { Button, Image, TextFieldProps, Typography } from '@/components/ui/primitives'
+import { Button, Image, Typography } from '@/components/ui/primitives'
 import { RATIO } from '@/shared/enums'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 
@@ -17,20 +17,7 @@ type Props<T extends FieldValues> = {
   noSubtitle?: boolean
   placeholder: string
   uploadImageHandler: (e: ChangeEvent<HTMLButtonElement>) => void
-} & Omit<
-  TextFieldProps,
-  | 'control'
-  | 'defaultValue'
-  | 'disabled'
-  | 'error'
-  | 'helperText'
-  | 'name'
-  | 'onBlur'
-  | 'onChange'
-  | 'ref'
-  | 'value'
-> &
-  UseControllerProps<T>
+} & UseControllerProps<T>
 
 export const DialogFormSection = <T extends FieldValues>({
   control,

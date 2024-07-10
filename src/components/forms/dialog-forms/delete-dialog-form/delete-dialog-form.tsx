@@ -33,6 +33,8 @@ export const DeleteDialogForm = ({
   onSubmit,
   open,
 }: DeleteDialogFormProps) => {
+  const title = `Delete ${entity}`
+
   const { handleSubmit } = useForm<DeleteDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(DeleteFormScheme),
@@ -49,7 +51,7 @@ export const DeleteDialogForm = ({
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
-        <Header title={`Delete ${entity}`} />
+        <Header title={title} />
         <Description>
           {`Do you really want to remove ${entity}: `}
           <b>{name}</b>
@@ -58,11 +60,7 @@ export const DeleteDialogForm = ({
           {entity === 'Deck' ? 'All cards will be deleted.' : ''}
         </Description>
         <form className={cn.form} onSubmit={formHandler}>
-          <Footer
-            cancelFormHandler={cancelFormHandler}
-            formHandler={formHandler}
-            title={`Delete ${entity}`}
-          />
+          <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
         </form>
       </DialogContent>
     </Dialog>

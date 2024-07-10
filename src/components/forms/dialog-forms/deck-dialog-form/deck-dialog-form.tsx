@@ -31,14 +31,14 @@ type DeckDialogFormProps = {
 }
 
 export const DeckDialogForm = ({ action = 'CREATE', onOpenChange, open }: DeckDialogFormProps) => {
+  const title = action === 'CREATE' ? 'Add New Deck' : 'Change Deck'
+
   const [createDeck, { isLoading, isSuccess }] = useCreateDeckMutation()
 
   const { control, handleSubmit, reset } = useForm<DeckDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(DeckDialogFormScheme),
   })
-
-  const dialogTitle = action === 'CREATE' ? 'Add New Deck' : 'Change Deck'
 
   const formHandler = handleSubmit(formData => {
     createDeck(formData)
@@ -64,7 +64,7 @@ export const DeckDialogForm = ({ action = 'CREATE', onOpenChange, open }: DeckDi
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
-        <Header title={dialogTitle} />
+        <Header title={title} />
         <Body>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'24px'}>
@@ -81,11 +81,7 @@ export const DeckDialogForm = ({ action = 'CREATE', onOpenChange, open }: DeckDi
             </FlexContainer>
           </form>
         </Body>
-        <Footer
-          cancelFormHandler={cancelFormHandler}
-          formHandler={formHandler}
-          title={dialogTitle}
-        />
+        <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
       </DialogContent>
     </Dialog>
   )

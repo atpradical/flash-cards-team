@@ -40,14 +40,14 @@ export const CardDialogForm = ({
   onOpenChange,
   open,
 }: CardDialogFormProps) => {
+  const title = action === 'CREATE' ? 'Add New Card' : 'Change Card'
+
   const [createCard, { isLoading, isSuccess }] = useCreateCardMutation()
 
   const { control, handleSubmit, reset } = useForm<CardDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(CardDialogFormScheme),
   })
-
-  const dialogTitle = action === 'CREATE' ? 'Add New Card' : 'Change Card'
 
   const formHandler = handleSubmit(formData => {
     if (action === 'CREATE') {
@@ -74,7 +74,7 @@ export const CardDialogForm = ({
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <Content className={cn.container}>
-        <Header title={dialogTitle} />
+        <Header title={title} />
         <Body>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'14px'}>
@@ -97,11 +97,7 @@ export const CardDialogForm = ({
             </FlexContainer>
           </form>
         </Body>
-        <Footer
-          cancelFormHandler={cancelFormHandler}
-          formHandler={formHandler}
-          title={dialogTitle}
-        />
+        <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
       </Content>
     </Dialog>
   )
