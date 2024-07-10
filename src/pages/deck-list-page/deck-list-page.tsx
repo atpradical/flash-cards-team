@@ -100,7 +100,6 @@ export const DeckListPage = () => {
         />
         <DeckDialogForm onOpenChange={addNewDeckHandler} open={showAddDeckDialog} />
         <DeleteDialogForm
-          entity={'Deck'}
           id={'12345'}
           name={"Some Deck's Name"}
           onOpenChange={deleteDeckHandler}

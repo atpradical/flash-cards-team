@@ -15,6 +15,7 @@ import {
   Progress,
 } from '@/components/ui/primitives'
 import { useCreateCardMutation } from '@/services/flashcards-api'
+import { DIALOG_ACTION } from '@/shared/enums'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,19 +29,19 @@ const CardDialogFormScheme = z.object({
 type CardDialogFormValues = z.infer<typeof CardDialogFormScheme>
 
 type CardDialogFormProps = {
-  action?: 'CREATE' | 'UPDATE'
+  action?: DIALOG_ACTION
   deckId: string
   onOpenChange: (open: boolean) => void
   open: boolean
 }
 
 export const CardDialogForm = ({
-  action = 'CREATE',
+  action = DIALOG_ACTION.CREATE,
   deckId,
   onOpenChange,
   open,
 }: CardDialogFormProps) => {
-  const title = action === 'CREATE' ? 'Add New Card' : 'Change Card'
+  const title = action === DIALOG_ACTION.CREATE ? 'Add New Card' : 'Change Card'
 
   const [createCard, { isLoading, isSuccess }] = useCreateCardMutation()
 

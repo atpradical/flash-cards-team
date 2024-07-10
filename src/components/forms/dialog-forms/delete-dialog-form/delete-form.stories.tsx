@@ -17,7 +17,6 @@ type Story = StoryObj<typeof meta>
 
 export const DeleteDialogForm: Story = {
   args: {
-    entity: 'Deck',
     id: '12345',
     name: 'Some Name',
     onOpenChange: action('onOpenChange action invoked!'),

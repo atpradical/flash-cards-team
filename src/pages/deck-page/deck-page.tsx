@@ -6,25 +6,15 @@ import { CardDialogForm, DeckDialogForm, DeleteDialogForm } from '@/components/f
 import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Progress, TextField } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
+import { cn } from '@/pages/deck-page/deck-page.styles'
 import { PaginationModel } from '@/services/cards/cards.types'
 import { Deck } from '@/services/decks/deck.types'
 import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashcards-api'
-import { PATH } from '@/shared/enums'
+import { DIALOG_ENTITY, PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
-import clsx from 'clsx'
-
-import s from './deck-page.module.scss'
 
 export const DeckPage = () => {
-  const cn = {
-    cardControl: clsx(s.cardControl),
-    goBack: clsx(s.goBack),
-    icon: clsx(s.icon),
-    image: clsx(s.image),
-    pagination: clsx(s.pagination),
-  }
-
   const [showCreateNewCardDialogForm, setShowCreateNewCardDialogForm] = useState(false)
   const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
@@ -159,7 +149,7 @@ export const DeckPage = () => {
           open={showAddNewDeckDialogForm}
         />
         <DeleteDialogForm
-          entity={'Card'}
+          entity={DIALOG_ENTITY.CARD}
           id={'15'}
           name={'Some name'}
           onOpenChange={deleteCardHandler}
@@ -167,7 +157,6 @@ export const DeckPage = () => {
           open={showDeleteCardDialogForm}
         />
         <DeleteDialogForm
-          entity={'Deck'}
           id={'15'}
           name={'Some name'}
           onOpenChange={deleteDeckHandler}

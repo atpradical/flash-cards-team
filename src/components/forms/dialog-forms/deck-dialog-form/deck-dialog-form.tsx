@@ -5,6 +5,7 @@ import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent, Progress } from '@/components/ui/primitives'
 import { useCreateDeckMutation } from '@/services/flashcards-api'
+import { DIALOG_ACTION } from '@/shared/enums'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -25,13 +26,17 @@ const DeckDialogFormScheme = z.object({
 type DeckDialogFormValues = z.infer<typeof DeckDialogFormScheme>
 
 type DeckDialogFormProps = {
-  action?: 'CREATE' | 'UPDATE'
+  action?: DIALOG_ACTION
   onOpenChange: (open: boolean) => void
   open: boolean
 }
 
-export const DeckDialogForm = ({ action = 'CREATE', onOpenChange, open }: DeckDialogFormProps) => {
-  const title = action === 'CREATE' ? 'Add New Deck' : 'Change Deck'
+export const DeckDialogForm = ({
+  action = DIALOG_ACTION.CREATE,
+  onOpenChange,
+  open,
+}: DeckDialogFormProps) => {
+  const title = action === DIALOG_ACTION.CREATE ? 'Add New Deck' : 'Change Deck'
 
   const [createDeck, { isLoading, isSuccess }] = useCreateDeckMutation()
 

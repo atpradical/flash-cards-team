@@ -6,6 +6,7 @@ import {
 } from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
+import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -17,7 +18,7 @@ const DeleteFormScheme = z.object({
 type DeleteDialogFormValues = z.infer<typeof DeleteFormScheme>
 
 type DeleteDialogFormProps = {
-  entity: 'Card' | 'Deck'
+  entity?: DIALOG_ENTITY
   id: string
   name: string
   onOpenChange: (open: boolean) => void
@@ -26,7 +27,7 @@ type DeleteDialogFormProps = {
 }
 
 export const DeleteDialogForm = ({
-  entity,
+  entity = DIALOG_ENTITY.DECK,
   id,
   name,
   onOpenChange,
@@ -57,7 +58,7 @@ export const DeleteDialogForm = ({
           <b>{name}</b>
           {`?`}
           <br />
-          {entity === 'Deck' ? 'All cards will be deleted.' : ''}
+          {entity === DIALOG_ENTITY.DECK ? 'All cards will be deleted.' : ''}
         </Description>
         <form className={cn.form} onSubmit={formHandler}>
           <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
