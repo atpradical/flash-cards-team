@@ -10,7 +10,7 @@ import { cn } from '@/pages/deck-page/deck-page.styles'
 import { PaginationModel } from '@/services/cards/cards.types'
 import { Deck } from '@/services/decks/deck.types'
 import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashcards-api'
-import { DIALOG_ENTITY, PATH } from '@/shared/enums'
+import { DIALOG_ACTION, DIALOG_ENTITY, PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -139,7 +139,7 @@ export const DeckPage = () => {
           open={showCreateNewCardDialogForm}
         />
         <CardDialogForm
-          action={'UPDATE'}
+          action={DIALOG_ACTION.UPDATE}
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
           onOpenChange={updateCardHandler}
           open={showUpdateCardDialogForm}
