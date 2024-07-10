@@ -40,17 +40,12 @@ export const Select = forwardRef<SelectRef, SelectProps>(
       label: clsx(s.label, disabled && s.disabled),
       placeholder: clsx(s.placeholder),
       selectContent: clsx(s.selectContent),
-      selectOption: clsx(s.selectItem, disabled && s.disabled),
+      selectOption: clsx(s.selectItem),
       selectTrigger: clsx(s.selectTrigger, className),
     }
 
     const selectItems = options?.map((option, index) => (
-      <RadixSelect.Item
-        className={cn.selectOption}
-        disabled={disabled}
-        key={index + option}
-        value={option}
-      >
+      <RadixSelect.Item className={cn.selectOption} key={index + option} value={option}>
         <RadixSelect.ItemText>
           <Typography as={'span'}>{option}</Typography>
         </RadixSelect.ItemText>

@@ -68,12 +68,6 @@
     color: var(--color-accent-300);
     background-color: var(--color-accent-900);
     outline: none;
-
-    &.disabled {
-      cursor: default;
-      color: var(--color-dark-300);
-      background-color: transparent;
-    }
   }
 }
 

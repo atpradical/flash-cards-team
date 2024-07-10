@@ -17,8 +17,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const options = ['10', '20', '30', '50', '100']
-
 export const SelectBaseExample: Story = {
   args: {
     label: 'Select Box',
@@ -30,9 +28,9 @@ export const SelectBaseExample: Story = {
 
 export const SelectWithDefaultValue: Story = {
   args: {
-    defaultValue: options[0],
+    defaultValue: '10',
     onValueChange: action('Mock action invoked'),
-    value: options[0],
+    value: '10',
   },
 }
 
@@ -40,7 +38,7 @@ export const SelectWithDisabled: Story = {
   args: {
     disabled: true,
     onValueChange: action('Mock action invoked'),
-    value: options[1],
+    value: '20',
   },
 }
 
