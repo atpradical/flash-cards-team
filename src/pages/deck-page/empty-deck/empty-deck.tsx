@@ -3,15 +3,14 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 
 type EmptyDeckProps = {
   createCardHandler: () => void
-  title?: string
 }
-
-export const EmptyDeck = ({ createCardHandler, title = 'Name Deck' }: EmptyDeckProps) => {
+// вообще не вижу смысла зачем EmptyDeck titlt, излишне для пустой колоды
+export const EmptyDeck = ({ createCardHandler }: EmptyDeckProps) => {
   return (
     <FlexContainer fd={'column'} gap={'30px'} jc={'center'}>
       <FlexContainer pd={'0 0 40px 0'}>
         <Typography as={'h1'} variant={'h1'}>
-          {title}
+          {'Name Deck'}
         </Typography>
       </FlexContainer>
       <Typography gray variant={'body1'}>

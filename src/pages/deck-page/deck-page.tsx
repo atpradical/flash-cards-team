@@ -150,7 +150,7 @@ export const DeckPage = () => {
             />
           </>
         ) : (
-          <EmptyDeck createCardHandler={createCardHandler} title={deck.name} />
+          <EmptyDeck createCardHandler={createCardHandler} />
         )}
         {/* todo: change mock deckId later*/}
         <AddNewCardDialogForm
