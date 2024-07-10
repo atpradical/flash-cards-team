@@ -10,8 +10,10 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
+  Progress,
   Typography,
 } from '@/components/ui/primitives'
+import { useCreateDeckMutation } from '@/services/flashcards-api'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -23,15 +25,15 @@ import { z } from 'zod'
 import s from './../dialog-forms.module.scss'
 
 const AddNewDeckDialogFormScheme = z.object({
-  deckName: deckNameScheme,
-  privateDeck: privateDeckScheme,
+  isPrivate: privateDeckScheme,
+  name: deckNameScheme,
 })
 
 type AddNewDeckDialogFormValues = z.infer<typeof AddNewDeckDialogFormScheme>
 
 type AddNewDeckDialogFormProps = {
   onOpenChange: (open: boolean) => void
-  onSubmit: (data: AddNewDeckDialogFormValues) => void
+  onSubmit: () => void
   open: boolean
 }
 
@@ -40,7 +42,9 @@ export const AddNewDeckDialogForm = ({
   onSubmit,
   open,
 }: AddNewDeckDialogFormProps) => {
-  const { control, handleSubmit } = useForm<AddNewDeckDialogFormValues>({
+  const [createDeck, { isLoading }] = useCreateDeckMutation()
+
+  const { control, handleSubmit, reset } = useForm<AddNewDeckDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(AddNewDeckDialogFormScheme),
   })
@@ -52,12 +56,24 @@ export const AddNewDeckDialogForm = ({
     icon: clsx(s.icon),
   }
 
-  const formHandler = handleSubmit(data => {
-    onSubmit(data)
+  const formHandler = handleSubmit(formData => {
+    createDeck(formData)
+    reset()
+    onSubmit()
+    onOpenChange(open)
   })
+
+  const cancelFormHandler = () => {
+    reset()
+    onOpenChange(open)
+  }
 
   const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {
     e.preventDefault()
+  }
+
+  if (isLoading) {
+    return <Progress />
   }
 
   return (
@@ -77,19 +93,19 @@ export const AddNewDeckDialogForm = ({
               <ControlledTextField
                 control={control}
                 label={"Deck's Name"}
-                name={'deckName'}
+                name={'name'}
                 placeholder={'How should we call your deck?'}
               />
               <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
                 <ImageOutline className={cn.icon} />
                 Upload image
               </Button>
-              <ControlledCheckbox control={control} label={'Private deck'} name={'privateDeck'} />
+              <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
             </FlexContainer>
           </form>
         </DialogBody>
         <DialogFooter flexContainerProps={{ jc: 'space-between' }}>
-          <Button onClick={onOpenChange} variant={'secondary'}>
+          <Button onClick={cancelFormHandler} variant={'secondary'}>
             Cancel
           </Button>
           <Button onClick={formHandler}>Add New Deck</Button>

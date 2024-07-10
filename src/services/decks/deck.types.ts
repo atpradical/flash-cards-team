@@ -35,4 +35,12 @@ export type GetDecksArgs = {
   orderBy?: string // todo: recheck type for 'orderBy?: string' property during sort table task
 }
 
+export type CreateDeckResponse = Deck
+
+export type CreateDeckArgs = {
+  cover?: string
+  isPrivate?: boolean
+  name: string
+}
+
 export type DeckResponse = Omit<Deck, 'updated'>
