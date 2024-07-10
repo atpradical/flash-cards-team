@@ -52,3 +52,10 @@ export type CreateCardArgs = {
   questionImg?: string
   questionVideo?: string
 }
+
+export type GetRandomCardToLearnResponse = Omit<Card, 'userId'>
+
+export type GetRandomCardToLearnArgs = {
+  id: string
+  previousCard?: string
+}

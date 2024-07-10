@@ -5,8 +5,16 @@ import {
   CreateCardResponse,
   GetCardArgs,
   GetCardsArgs,
+  GetRandomCardToLearnArgs,
+  GetRandomCardToLearnResponse,
 } from '@/services/cards/cards.types'
-import { DeckResponse, DecksListResponse, GetDecksArgs } from '@/services/decks/deck.types'
+import {
+  CreateDeckArgs,
+  CreateDeckResponse,
+  DeckResponse,
+  DecksListResponse,
+  GetDecksArgs,
+} from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const flashcardsApi = createApi({
@@ -25,6 +33,14 @@ export const flashcardsApi = createApi({
           body: args,
           method: 'POST',
           url: `v1/decks/${deckId}/cards`,
+        }),
+      }),
+      createDeck: builder.mutation<CreateDeckResponse, CreateDeckArgs>({
+        invalidatesTags: ['Decks'],
+        query: args => ({
+          body: args,
+          method: 'POST',
+          url: 'v1/decks',
         }),
       }),
       getCard: builder.query<Card, GetCardArgs>({
@@ -50,6 +66,7 @@ export const flashcardsApi = createApi({
         },
       }),
       getDecks: builder.query<DecksListResponse, GetDecksArgs | void>({
+        providesTags: ['Decks'],
         query: args => {
           return {
             method: 'GET',
@@ -58,16 +75,26 @@ export const flashcardsApi = createApi({
           }
         },
       }),
+      getRandomCard: builder.query<GetRandomCardToLearnResponse, GetRandomCardToLearnArgs>({
+        query: ({ id, ...args }) => {
+          return {
+            method: 'GET',
+            params: args ?? undefined,
+            url: `/v1/decks/${id}/learn`,
+          }
+        },
+      }),
     }
   },
   reducerPath: 'flashcardsApi',
-  tagTypes: ['Cards'],
+  tagTypes: ['Cards', 'Decks'],
 })
 
 export const {
   useCreateCardMutation,
-  useGetCardQuery,
+  useCreateDeckMutation,
   useGetCardsQuery,
   useGetDeckQuery,
   useGetDecksQuery,
+  useGetRandomCardQuery,
 } = flashcardsApi

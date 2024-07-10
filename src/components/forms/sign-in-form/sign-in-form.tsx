@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
+import { cn } from '@/components/forms/sign-in-form/sign-in-form.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
 import { emailSchema, passwordSchema, rememberMeSchema } from '@/shared/schemes'
@@ -8,10 +9,7 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
 import { z } from 'zod'
-
-import s from './sign-in-form.module.scss'
 
 type SignInFormProps = {
   onSubmit: (data: FormValues) => void
@@ -39,14 +37,6 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
   const formHandler = handleSubmit(data => {
     onSubmit(data)
   })
-
-  const cn = {
-    buttonSign: clsx(s.buttonSign),
-    container: clsx(s.container),
-    form: clsx(s.form),
-    link: clsx(s.link),
-    typography: clsx(s.typography),
-  }
 
   return (
     <Card className={cn.container}>

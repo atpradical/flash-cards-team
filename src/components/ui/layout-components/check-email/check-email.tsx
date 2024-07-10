@@ -4,22 +4,14 @@ import { CheckEmailIcon } from '@/assets/icons'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from './check-email.module.scss'
+import { cn } from './check-email.styles'
 
 type CheckEmailProps = {
   email: string
 }
 
 export const CheckEmail = ({ email }: CheckEmailProps) => {
-  const cn = {
-    button: clsx(s.button),
-    container: clsx(s.container),
-    reminder: clsx(s.reminder),
-    title: clsx(s.title),
-  }
-
   return (
     <Card className={cn.container}>
       <FlexContainer fd={'column'}>

@@ -1,12 +1,11 @@
-import dummyCover from '@/assets/webp/dummy-deck-cover.webp'
+import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { Nullable } from '@/common/types'
 import { SettingsDropdown } from '@/components/ui/layout-components'
 import { Image, Typography } from '@/components/ui/primitives'
 import { RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
-import s from './deck-title.module.scss'
+import { cn } from './deck-title.styles'
 
 type DeckTitleProps = {
   cover: Nullable<string>
@@ -16,10 +15,6 @@ type DeckTitleProps = {
 }
 
 export const DeckTitle = ({ cover, onDelete, onEdit, title }: DeckTitleProps) => {
-  const cn = {
-    container: clsx(s.container),
-  }
-
   cover ??= dummyCover
 
   return (

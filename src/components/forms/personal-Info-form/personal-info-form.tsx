@@ -1,14 +1,12 @@
 import { useForm } from 'react-hook-form'
 
+import { cn } from '@/components/forms/personal-Info-form/personal-info-form.styles'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { nicknameScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
 import { z } from 'zod'
-
-import s from './personal-info-form.module.scss'
 
 const PersonalInfoFormScheme = z
   .object({
@@ -33,13 +31,6 @@ export const PersonalInfoForm = ({ onSubmit, src }: PersonalInfoFormProps) => {
   })
 
   const formHandler = handleSubmit(data => onSubmit(data))
-
-  const cn = {
-    avatar: clsx(s.avatar),
-    button: clsx(s.button),
-    container: clsx(s.container),
-    form: clsx(s.form),
-  }
 
   return (
     <Card className={cn.container}>

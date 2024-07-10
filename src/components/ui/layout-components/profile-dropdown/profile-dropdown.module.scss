@@ -2,20 +2,21 @@
   width: 16px;
   height: 16px;
 }
+
 .menu {
   min-width: 218px;
 }
 
 .trigger {
-  display: flex;
   cursor: pointer;
+  display: flex;
 }
 
 .option {
-  text-decoration: none;
   display: flex;
   gap: 6px;
   color: var(--color-light-100);
+  text-decoration: none;
 
   &:hover {
     color: var(--color-accent-300);
