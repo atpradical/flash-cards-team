@@ -12,7 +12,6 @@ import {
   DialogFooter,
   DialogHeader,
   Image,
-  Progress,
   Typography,
 } from '@/components/ui/primitives'
 import { useCreateCardMutation } from '@/services/flashcards-api'
