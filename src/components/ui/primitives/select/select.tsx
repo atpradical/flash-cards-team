@@ -45,7 +45,12 @@ export const Select = forwardRef<SelectRef, SelectProps>(
     }
 
     const selectItems = options?.map((option, index) => (
-      <RadixSelect.Item className={cn.selectOption} key={index + option} value={option}>
+      <RadixSelect.Item
+        className={cn.selectOption}
+        disabled={disabled}
+        key={index + option}
+        value={option}
+      >
         <RadixSelect.ItemText>
           <Typography as={'span'}>{option}</Typography>
         </RadixSelect.ItemText>

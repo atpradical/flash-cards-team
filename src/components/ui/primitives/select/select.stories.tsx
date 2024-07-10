@@ -31,13 +31,12 @@ export const SelectBaseExample: Story = {
 export const SelectWithDefaultValue: Story = {
   args: {
     defaultValue: options[0],
-    disabled: true,
     onValueChange: action('Mock action invoked'),
     value: options[0],
   },
 }
 
-export const SelectWithDisabledOptions: Story = {
+export const SelectWithDisabled: Story = {
   args: {
     disabled: true,
     onValueChange: action('Mock action invoked'),
