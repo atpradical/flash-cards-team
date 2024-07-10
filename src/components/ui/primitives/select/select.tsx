@@ -8,17 +8,11 @@ import clsx from 'clsx'
 
 import s from './select.module.scss'
 
-export type SelectOption = {
-  disabled?: boolean
-  title: string
-  value: string
-}
-
 export type SelectProps = {
   className?: string
   label?: string
   onValueChange: (value: string) => void
-  options?: SelectOption[]
+  options?: string[]
   placeholder?: string
   value: string
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
@@ -33,7 +27,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
       disabled,
       label,
       onValueChange,
-      options,
+      options = ['10', '20', '30', '50', '100'],
       placeholder,
       value,
       ...rest
@@ -46,19 +40,14 @@ export const Select = forwardRef<SelectRef, SelectProps>(
       label: clsx(s.label, disabled && s.disabled),
       placeholder: clsx(s.placeholder),
       selectContent: clsx(s.selectContent),
-      selectOption: clsx(s.selectItem),
+      selectOption: clsx(s.selectItem, disabled && s.disabled),
       selectTrigger: clsx(s.selectTrigger, className),
     }
 
     const selectItems = options?.map((option, index) => (
-      <RadixSelect.Item
-        className={`${cn.selectOption} ${option.disabled && cn.disabled}`}
-        disabled={option.disabled}
-        key={index + option.value}
-        value={option.value}
-      >
+      <RadixSelect.Item className={cn.selectOption} key={index + option} value={option}>
         <RadixSelect.ItemText>
-          <Typography as={'span'}>{option.title}</Typography>
+          <Typography as={'span'}>{option}</Typography>
         </RadixSelect.ItemText>
       </RadixSelect.Item>
     ))

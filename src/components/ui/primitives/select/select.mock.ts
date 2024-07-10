@@ -1,5 +1,9 @@
-import { SelectOption } from '@/components/ui/primitives'
-
+export type SelectOption = {
+  disabled?: boolean
+  title: string
+  value: string
+}
+//удалить этот файл?
 // ----------- Select data example -----------
 export const mockOptions1: SelectOption[] = [
   { title: 'some option 1', value: 'option-1' },
