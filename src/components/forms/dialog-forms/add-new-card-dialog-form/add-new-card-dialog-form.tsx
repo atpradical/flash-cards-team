@@ -12,7 +12,6 @@ import {
   DialogFooter,
   DialogHeader,
   Image,
-  Progress,
   Typography,
 } from '@/components/ui/primitives'
 import { useCreateCardMutation } from '@/services/flashcards-api'
@@ -46,7 +45,7 @@ export const AddNewCardDialogForm = ({
   onOpenChange,
   open,
 }: AddNewCardDialogFormProps) => {
-  const [createCard, { isLoading, isSuccess }] = useCreateCardMutation()
+  const [createCard, { isSuccess }] = useCreateCardMutation()
 
   const { control, handleSubmit, reset } = useForm<AddNewCardDialogFormValues>({
     mode: 'onSubmit',
@@ -78,10 +77,6 @@ export const AddNewCardDialogForm = ({
 
   const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {
     e.preventDefault()
-  }
-
-  if (isLoading) {
-    return <Progress />
   }
 
   return (
