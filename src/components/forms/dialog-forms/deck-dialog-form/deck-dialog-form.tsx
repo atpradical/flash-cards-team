@@ -27,6 +27,7 @@ type DeckDialogFormValues = z.infer<typeof DeckDialogFormScheme>
 
 type DeckDialogFormProps = {
   action?: DIALOG_ACTION
+  deckId?: string
   onOpenChange: (open: boolean) => void
   open: boolean
 }
