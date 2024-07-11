@@ -1,5 +1,8 @@
+import { useState } from 'react'
+
 import { ArrowUp } from '@/assets/icons'
 import dummyCover from '@/assets/webp/dummy-cover.webp'
+import { CardDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
@@ -14,19 +17,21 @@ import {
   TableRow,
 } from '@/components/ui/primitives'
 import { Card } from '@/services/cards/cards.types'
-import { RATIO, VARIANT } from '@/shared/enums'
+import { DIALOG_ACTION, DIALOG_ENTITY, RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './deck-table.styles'
 
 type DeckTableProps = {
   cards: Card[]
-  onDelete: () => void
-  onEdit: () => void
   onSort: () => void
 }
 
-export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) => {
+export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
+  const [selectedCardId, setSelectedCardId] = useState('')
+  const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
+  const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
+
   const sortHandler = () => {
     onSort()
   }
@@ -34,6 +39,15 @@ export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) =
   const TableContent = cards.map(el => {
     const questionCover = el.questionImg ?? dummyCover
     const answerCover = el.answerImg ?? dummyCover
+
+    const onEditHandler = (cardId: string) => {
+      setSelectedCardId(cardId)
+      setShowUpdateCardDialogForm(true)
+    }
+    const onDeleteHandler = (cardId: string) => {
+      setSelectedCardId(cardId)
+      setShowDeleteCardDialogForm(true)
+    }
 
     return (
       <TableRow key={el.id}>
@@ -55,7 +69,12 @@ export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) =
         </TableCell>
         <TableCell>
           {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
-          <Actions onDelete={onDelete} onEdit={onEdit} onLearn={() => {}} variant={VARIANT.ALL} />
+          <Actions
+            onDelete={() => onDeleteHandler(el.id)}
+            onEdit={() => onEditHandler(el.id)}
+            onLearn={() => {}}
+            variant={VARIANT.ALL}
+          />
         </TableCell>
       </TableRow>
     )
@@ -80,6 +99,20 @@ export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) =
         </TableRow>
       </TableHeader>
       <TableBody>{TableContent}</TableBody>
+      <CardDialogForm
+        action={DIALOG_ACTION.UPDATE}
+        cardId={selectedCardId}
+        onOpenChange={setShowUpdateCardDialogForm}
+        open={showUpdateCardDialogForm}
+      />
+      <DeleteDialogForm
+        entity={DIALOG_ENTITY.CARD}
+        entityId={selectedCardId}
+        name={'Some name'}
+        onOpenChange={setShowDeleteCardDialogForm}
+        onSubmit={() => console.log('onSubmit')}
+        open={showDeleteCardDialogForm}
+      />
     </TableContainer>
   )
 }

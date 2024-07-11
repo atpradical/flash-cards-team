@@ -19,7 +19,7 @@ type DeleteDialogFormValues = z.infer<typeof DeleteFormScheme>
 
 type DeleteDialogFormProps = {
   entity?: DIALOG_ENTITY
-  id: string
+  entityId: string
   name: string
   onOpenChange: (open: boolean) => void
   onSubmit: (data: DeleteDialogFormValues) => void
@@ -28,7 +28,7 @@ type DeleteDialogFormProps = {
 
 export const DeleteDialogForm = ({
   entity = DIALOG_ENTITY.DECK,
-  id,
+  entityId,
   name,
   onOpenChange,
   onSubmit,
@@ -42,11 +42,11 @@ export const DeleteDialogForm = ({
   })
 
   const formHandler = handleSubmit(() => {
-    onSubmit({ entityId: id })
+    onSubmit({ entityId })
   })
 
   const cancelFormHandler = () => {
-    onOpenChange(open)
+    onOpenChange(false)
   }
 
   return (
