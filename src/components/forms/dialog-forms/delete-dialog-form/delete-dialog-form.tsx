@@ -1,22 +1,15 @@
 import { useForm } from 'react-hook-form'
 
-import { CloseOutline } from '@/assets/icons'
 import {
-  Button,
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  Typography,
-} from '@/components/ui/primitives'
+  DialogFormFooter as Footer,
+  DialogFromHeader as Header,
+} from '@/components/forms/dialog-forms/container-components'
+import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
+import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
+import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
 import { z } from 'zod'
-
-import s from './../dialog-forms.module.scss'
 
 const DeleteFormScheme = z.object({
   entityId: entityIdScheme,
@@ -25,7 +18,7 @@ const DeleteFormScheme = z.object({
 type DeleteDialogFormValues = z.infer<typeof DeleteFormScheme>
 
 type DeleteDialogFormProps = {
-  entity: 'Card' | 'Deck'
+  entity?: DIALOG_ENTITY
   id: string
   name: string
   onOpenChange: (open: boolean) => void
@@ -34,57 +27,41 @@ type DeleteDialogFormProps = {
 }
 
 export const DeleteDialogForm = ({
-  entity,
+  entity = DIALOG_ENTITY.DECK,
   id,
   name,
   onOpenChange,
   onSubmit,
   open,
 }: DeleteDialogFormProps) => {
+  const title = `Delete ${entity}`
+
   const { handleSubmit } = useForm<DeleteDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(DeleteFormScheme),
   })
 
-  const cn = {
-    close: clsx(s.close),
-    container: clsx(s.container),
-    form: clsx(s.form),
-  }
-
   const formHandler = handleSubmit(() => {
     onSubmit({ entityId: id })
   })
 
-  const descriptionMessage = (
-    <DialogDescription>
-      {`Do you really want to remove ${entity}: `}
-      <b>{name}</b>
-      {`?`}
-      <br />
-      {entity === 'Deck' ? 'All cards will be deleted.' : ''}
-    </DialogDescription>
-  )
+  const cancelFormHandler = () => {
+    onOpenChange(open)
+  }
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
-        <DialogHeader>
-          <Typography as={'h3'} variant={'h3'}>
-            {`Delete ${entity}`}
-          </Typography>
-          <DialogClose asChild className={cn.close}>
-            <CloseOutline />
-          </DialogClose>
-        </DialogHeader>
-        {descriptionMessage}
+        <Header title={title} />
+        <Description>
+          {`Do you really want to remove ${entity}: `}
+          <b>{name}</b>
+          {`?`}
+          <br />
+          {entity === DIALOG_ENTITY.DECK ? 'All cards will be deleted.' : ''}
+        </Description>
         <form className={cn.form} onSubmit={formHandler}>
-          <DialogFooter flexContainerProps={{ jc: 'space-between' }}>
-            <Button onClick={onOpenChange} type={'button'} variant={'secondary'}>
-              Cancel
-            </Button>
-            <Button>Delete Card</Button>
-          </DialogFooter>
+          <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
         </form>
       </DialogContent>
     </Dialog>

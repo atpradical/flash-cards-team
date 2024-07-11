@@ -2,31 +2,21 @@ import { ChangeEvent, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons'
-import { AddNewCardDialogForm, AddNewDeckDialogForm, DeleteDialogForm } from '@/components/forms'
+import { CardDialogForm, DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Progress, TextField } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
+import { cn } from '@/pages/deck-page/deck-page.styles'
 import { PaginationModel } from '@/services/cards/cards.types'
 import { Deck } from '@/services/decks/deck.types'
 import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashcards-api'
-import { PATH } from '@/shared/enums'
+import { DIALOG_ACTION, DIALOG_ENTITY, PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
-import clsx from 'clsx'
-
-import s from './deck-page.module.scss'
 
 import { EmptyDeck } from './empty-deck'
 
 export const DeckPage = () => {
-  const cn = {
-    cardControl: clsx(s.cardControl),
-    goBack: clsx(s.goBack),
-    icon: clsx(s.icon),
-    image: clsx(s.image),
-    pagination: clsx(s.pagination),
-  }
-
   const [showCreateNewCardDialogForm, setShowCreateNewCardDialogForm] = useState(false)
   const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
@@ -162,23 +152,23 @@ export const DeckPage = () => {
         )}
 
         {/* todo: change mock deckId later*/}
-        <AddNewCardDialogForm
+        <CardDialogForm
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
           onOpenChange={createCardHandler}
           open={showCreateNewCardDialogForm}
         />
-        <AddNewCardDialogForm
-          action={'UPDATE'}
+        <CardDialogForm
+          action={DIALOG_ACTION.UPDATE}
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
           onOpenChange={updateCardHandler}
           open={showUpdateCardDialogForm}
         />
-        <AddNewDeckDialogForm
+        <DeckDialogForm
           onOpenChange={setShowAddNewDeckDialogForm}
           open={showAddNewDeckDialogForm}
         />
         <DeleteDialogForm
-          entity={'Card'}
+          entity={DIALOG_ENTITY.CARD}
           id={'15'}
           name={'Some name'}
           onOpenChange={deleteCardHandler}
@@ -186,7 +176,6 @@ export const DeckPage = () => {
           open={showDeleteCardDialogForm}
         />
         <DeleteDialogForm
-          entity={'Deck'}
           id={'15'}
           name={'Some name'}
           onOpenChange={deleteDeckHandler}
