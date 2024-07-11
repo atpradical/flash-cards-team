@@ -14,6 +14,8 @@ import { DIALOG_ACTION, DIALOG_ENTITY, PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
+import { EmptyDeck } from './empty-deck'
+
 export const DeckPage = () => {
   const [showCreateNewCardDialogForm, setShowCreateNewCardDialogForm] = useState(false)
   const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
@@ -48,6 +50,7 @@ export const DeckPage = () => {
   // todo: delete console.log with error during err handling task completion
   console.log(cardsError)
   console.log(deckError)
+  console.log('deck', deck)
 
   const editDeckHandler = () => {
     setShowAddNewDeckDialogForm(!showAddNewDeckDialogForm)
@@ -82,9 +85,13 @@ export const DeckPage = () => {
     setCurrentPage(currentPage)
   }
 
+  console.log({ isLoadingCards, isLoadingDeck })
+
   if (isLoadingCards || isLoadingDeck) {
     return <Progress />
   }
+
+  const isEmpty = cards.length === 0
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
   return (
@@ -94,44 +101,56 @@ export const DeckPage = () => {
           <ArrowBackOutline className={cn.icon} />
           Back to Decks List
         </Button>
+
         <FlexContainer ai={'start'} jc={'start'}>
           <DeckTitle
             cover={deck.cover}
             onDelete={deleteDeckHandler}
             onEdit={editDeckHandler}
-            title={deck.name}
+            title={(deck.name ??= 'Name Deck')}
           />
-          <FlexContainer fd={'column'} gap={'20px'}>
-            <Button as={Link} className={cn.cardControl} to={PATH.CARD_LEARN}>
-              Learn Deck
-            </Button>
-            {/* todo: add check if current Deck Author is me then show Button*/}
-            <Button className={cn.cardControl} onClick={createCardHandler}>
-              Add New Card
-            </Button>
-          </FlexContainer>
+
+          {!isEmpty && (
+            <FlexContainer fd={'column'} gap={'20px'}>
+              <Button as={Link} className={cn.cardControl} to={PATH.CARD_LEARN}>
+                Learn Deck
+              </Button>
+              {/* todo: add check if current Deck Author is me then show Button*/}
+              <Button className={cn.cardControl} onClick={createCardHandler}>
+                Add New Card
+              </Button>
+            </FlexContainer>
+          )}
         </FlexContainer>
-        <TextField
-          label={'Find question'}
-          onChange={searchCardHandler}
-          placeholder={'Find card'}
-          value={search}
-          variant={'search'}
-        />
-        <DeckTable
-          cards={cards}
-          onDelete={deleteCardHandler}
-          onEdit={updateCardHandler}
-          onSort={() => console.log('onSort invoked!')}
-        />
-        <Pagination
-          className={cn.pagination}
-          currentPage={currentPage}
-          onPageChange={paginationCurrentPageHandler}
-          onPageSizeChange={paginationPageSizeHandler}
-          pageSize={itemsPerPage}
-          totalCount={pagination.totalItems}
-        />
+        {isEmpty && <EmptyDeck createCardHandler={createCardHandler} />}
+        {!isEmpty && (
+          <TextField
+            label={'Find question'}
+            onChange={searchCardHandler}
+            placeholder={'Find card'}
+            value={search}
+            variant={'search'}
+          />
+        )}
+        {!isEmpty && (
+          <DeckTable
+            cards={cards}
+            onDelete={deleteCardHandler}
+            onEdit={updateCardHandler}
+            onSort={() => console.log('onSort invoked!')}
+          />
+        )}
+        {!isEmpty && (
+          <Pagination
+            className={cn.pagination}
+            currentPage={currentPage}
+            onPageChange={paginationCurrentPageHandler}
+            onPageSizeChange={paginationPageSizeHandler}
+            pageSize={itemsPerPage}
+            totalCount={pagination.totalItems}
+          />
+        )}
+
         {/* todo: change mock deckId later*/}
         <CardDialogForm
           deckId={'cly7c2vqa0drxpb015rp9sbi7'}
