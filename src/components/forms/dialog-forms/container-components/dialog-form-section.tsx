@@ -9,6 +9,7 @@ import { ControlledTextField } from '@/shared/ui/form-components/controlled-text
 
 import { cn } from '../dialog-forms.styles'
 
+// todo: ask Andrey to recheck generic type
 type Props<T extends FieldValues> = {
   control: Control<T>
   cover?: string
