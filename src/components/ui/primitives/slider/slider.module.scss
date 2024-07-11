@@ -47,8 +47,8 @@
 
   display: block;
 
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
 
   background-color: var(--color-light-100);
   border-radius: var(--border-radius-l);
@@ -60,12 +60,16 @@
 
   &:hover,
   &:focus {
-    width: 14px;
-    height: 14px;
-    box-shadow: var(--shadow-0) var(--color-accent-500);
+    width: 12px;
+    height: 12px;
+    box-shadow: 0 0 0 4px var(--color-accent-500);
   }
 
   &:focus {
     outline: none;
+  }
+
+  &:active {
+    cursor: grabbing;
   }
 }

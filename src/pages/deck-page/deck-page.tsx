@@ -132,12 +132,12 @@ export const DeckPage = () => {
             />
           </>
         )}
-        {/* todo: change mock deckId later*/}
         <CardDialogForm onOpenChange={createCardHandler} open={showCreateNewCardDialogForm} />
         <DeckDialogForm
           onOpenChange={setShowAddNewDeckDialogForm}
           open={showAddNewDeckDialogForm}
         />
+        {/* todo: change mock deckId later*/}
         <DeleteDialogForm
           entityId={'15'}
           name={'Some name'}
