@@ -15,7 +15,7 @@ export default meta
 
 export const Example: Story = {
   args: {
-    deckList: DeckListExample,
+    decks: DeckListExample,
     onSort: action('onSort action invoked!'),
   },
 }
