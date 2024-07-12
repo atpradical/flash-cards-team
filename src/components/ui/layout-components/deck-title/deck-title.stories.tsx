@@ -16,6 +16,7 @@ export default meta
 export const Example: Story = {
   args: {
     cover: myImage,
+    learnDeckPath: '',
     onDelete: action('onDelete was action invoked'),
     onEdit: action('onEdit was action invoked'),
     title: "Fried's Deck",

@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, generatePath, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
@@ -13,6 +13,7 @@ import { Page } from '@/shared/ui/page'
 
 export const CardPage = () => {
   const { deckId } = useParams()
+  const deckPagePath = deckId && generatePath(PATH.DECK, { deckId })
 
   const {
     data: deck = {} as Deck,
@@ -35,7 +36,7 @@ export const CardPage = () => {
   return (
     <Page>
       <FlexContainer fd={'column'} gap={'36px'} jc={'left'} pd={'0 20px'}>
-        <Button as={Link} className={cn.goBack} to={PATH.DECK} variant={'link'}>
+        <Button as={Link} className={cn.goBack} to={deckPagePath} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
           Back to Deck
         </Button>
