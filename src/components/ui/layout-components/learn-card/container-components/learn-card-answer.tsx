@@ -15,9 +15,9 @@ export const LearnCardAnswer = ({ answer, answerImg, onSubmit }: CardPageAnswerP
   return (
     <FlexContainer fd={'column'} gap={'18px'}>
       <FlexContainer>
-        <Typography variant={'subtitle1'}>
+        <Typography as={'span'} variant={'subtitle1'}>
           Answer:&nbsp;
-          <Typography className={cn.incoming} variant={'body1'}>
+          <Typography as={'span'} className={cn.incoming} variant={'body1'}>
             {answer}
           </Typography>
         </Typography>

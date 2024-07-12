@@ -1,9 +1,7 @@
 import { ChangeEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
-import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
-import { TableFilterBar } from '@/components/ui/layout-components'
-import { DeckListTable } from '@/components/ui/layout-components/tables'
+import { DeckDialogForm } from '@/components/forms'
+import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Progress, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
 import { PaginationModel } from '@/services/cards/cards.types'
@@ -13,8 +11,6 @@ import { Page } from '@/shared/ui/page'
 
 export const DeckListPage = () => {
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
-  const [showEditDeckDialog, setEditDeckDialog] = useState(false)
-  const [showDeleteDeckDialog, setDeleteDeckDialog] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
@@ -30,23 +26,6 @@ export const DeckListPage = () => {
   })
 
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
-
-  const navigate = useNavigate()
-
-  const deleteDeckHandler = () => {
-    setDeleteDeckDialog(!showDeleteDeckDialog)
-  }
-
-  const editDeckHandler = () => {
-    setEditDeckDialog(!showEditDeckDialog)
-  }
-  const addNewDeckHandler = () => {
-    setShowAddDeckDialog(!showAddDeckDialog)
-  }
-
-  const learnDeckHandler = () => {
-    navigate('/deck')
-  }
 
   const paginationCurrentPageHandler = (currentPage: number) => {
     setCurrentPage(currentPage)
@@ -77,7 +56,7 @@ export const DeckListPage = () => {
           <Typography as={'h1'} variant={'h1'}>
             {"Deck's list"}
           </Typography>
-          <Button onClick={addNewDeckHandler}>Add New Deck</Button>
+          <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
         </FlexContainer>
         <TableFilterBar
           onSearchChange={searchDeckHandler}
@@ -85,13 +64,7 @@ export const DeckListPage = () => {
           search={search}
           sliderRange={sliderRange}
         />
-        <DeckListTable
-          deckList={decks}
-          onDelete={deleteDeckHandler}
-          onEdit={editDeckHandler}
-          onLearn={learnDeckHandler}
-          onSort={() => console.log('onSort invoked!')}
-        />
+        <DeckListTable decks={decks} onSort={() => console.log('onSort invoked!')} />
         <Pagination
           currentPage={currentPage}
           onPageChange={paginationCurrentPageHandler}
@@ -99,15 +72,7 @@ export const DeckListPage = () => {
           pageSize={itemsPerPage}
           totalCount={pagination.totalItems}
         />
-        <DeckDialogForm onOpenChange={addNewDeckHandler} open={showAddDeckDialog} />
-        <DeleteDialogForm
-          id={'12345'}
-          name={"Some Deck's Name"}
-          onOpenChange={deleteDeckHandler}
-          onSubmit={() => console.log('delete dialog form submit invoked!')}
-          open={showDeleteDeckDialog}
-        />
-        <DeckDialogForm onOpenChange={editDeckHandler} open={showEditDeckDialog} />
+        <DeckDialogForm onOpenChange={setShowAddDeckDialog} open={showAddDeckDialog} />
       </FlexContainer>
     </Page>
   )

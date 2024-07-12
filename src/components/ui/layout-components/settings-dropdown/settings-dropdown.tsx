@@ -10,16 +10,16 @@ import {
   Separator,
   Trigger,
 } from '@/components/ui/primitives/dropdown/dropdown'
-import { PATH } from '@/shared/enums'
 
 import { cn } from './settings-dropdown.styles'
 
 type DropdownSettingsProps = {
+  learnDeckPath: string
   onDelete: () => void
   onEdit: () => void
 }
 
-export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) => {
+export const SettingsDropdown = ({ learnDeckPath, onDelete, onEdit }: DropdownSettingsProps) => {
   return (
     <Root>
       <Trigger asChild className={cn.trigger}>
@@ -28,7 +28,7 @@ export const SettingsDropdown = ({ onDelete, onEdit }: DropdownSettingsProps) =>
       <Content>
         <Arrow />
         <Item>
-          <Typography as={Link} className={cn.option} to={PATH.CARD_LEARN} variant={'caption'}>
+          <Typography as={Link} className={cn.option} to={learnDeckPath} variant={'caption'}>
             <PlayCircleOutline className={cn.icon} />
             Learn
           </Typography>

@@ -16,18 +16,18 @@ export const LearnCardQuestion = ({ question, questionImg, shots }: CardPageQues
   return (
     <FlexContainer fd={'column'} gap={'18px'}>
       <FlexContainer>
-        <Typography variant={'subtitle1'}>
+        <Typography as={'span'} variant={'subtitle1'}>
           Question:&nbsp;
-          <Typography className={cn.incoming} variant={'body1'}>
+          <Typography as={'span'} className={cn.incoming} variant={'body1'}>
             {question}
           </Typography>
         </Typography>
       </FlexContainer>
       {cover && <Image alt={'Question image'} ratio={RATIO.L} src={cover} variant={'l'} />}
       <FlexContainer>
-        <Typography className={cn.triesText} gray variant={'body2'}>
+        <Typography as={'span'} className={cn.triesText} gray variant={'body2'}>
           Количество попыток ответов на вопрос:&nbsp;
-          <Typography className={cn.triesCount} gray variant={'subtitle2'}>
+          <Typography as={'span'} className={cn.triesCount} gray variant={'subtitle2'}>
             {shots}
           </Typography>
         </Typography>
