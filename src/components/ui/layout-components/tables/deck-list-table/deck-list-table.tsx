@@ -48,6 +48,7 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
         <PositionCell content={el.author.name} />
         <PositionCell>
           <Actions
+            id={el.id}
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
             onLearn={learnDeckPath}

@@ -6,7 +6,7 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: Actions,
-  title: 'Components/Actions',
+  title: 'Layout Components/Actions',
 } satisfies Meta<typeof Actions>
 
 export default meta
@@ -14,6 +14,7 @@ type Story = StoryObj<typeof meta>
 
 export const ActionsAll: Story = {
   args: {
+    id: '12345',
     onDelete: action('delete invoked!'),
     onEdit: action('edit invoked!'),
     onLearn: 'clyh5nywc001npb013u2y57ec',
@@ -24,6 +25,7 @@ export const ActionsAll: Story = {
 
 export const ActionsLearn: Story = {
   args: {
+    id: '12345',
     onDelete: action('delete invoked!'),
     onEdit: action('edit invoked!'),
     onLearn: 'clyh5nywc001npb013u2y57ec',
@@ -34,6 +36,7 @@ export const ActionsLearn: Story = {
 
 export const ActionsEdit: Story = {
   args: {
+    id: '12345',
     onDelete: action('delete invoked!'),
     onEdit: action('edit invoked!'),
     onLearn: 'clyh5nywc001npb013u2y57ec',
