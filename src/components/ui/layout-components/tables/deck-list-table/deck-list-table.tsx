@@ -49,9 +49,11 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
         <PositionCell>
           <Actions
             id={el.id}
+            isFavorite={el.isFavorite}
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
             onLearn={learnDeckPath}
+            // todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery
             variant={VARIANT.ALL}
           />
         </PositionCell>

@@ -3,13 +3,13 @@ import { ACTIONS, VARIANT } from '@/shared/enums'
 
 export function getActionButtons(tools: ActionButton[], showTools: VARIANT) {
   switch (showTools) {
-    case VARIANT.ALL:
-      return tools
+    case VARIANT.NONE:
+      return []
     case VARIANT.ONLY_LEARN:
-      return tools.filter(el => el.label === ACTIONS.LEARN)
+      return tools.filter(el => el.label === ACTIONS.LEARN || el.label === ACTIONS.FAVORITE)
     case VARIANT.ONLY_EDITS:
       return tools.filter(el => el.label !== ACTIONS.LEARN && el.label !== ACTIONS.FAVORITE)
     default:
-      return []
+      return tools
   }
 }

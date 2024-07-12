@@ -47,12 +47,12 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
           <Grade stars={el.grade} />
         </PositionCell>
         <PositionCell>
-          {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
           <Actions
             id={el.id}
             onDelete={() => onDeleteHandler(el.id)}
             onEdit={() => onEditHandler(el.id)}
             onLearn={''}
+            // todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery
             variant={VARIANT.ALL}
           />
         </PositionCell>

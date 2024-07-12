@@ -31,7 +31,7 @@ type ActionsProps = {
 
 export const Actions = ({
   id,
-  isFavorite = false,
+  isFavorite,
   onDelete,
   onEdit,
   onLearn,
