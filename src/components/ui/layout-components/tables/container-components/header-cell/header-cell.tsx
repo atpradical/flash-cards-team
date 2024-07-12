@@ -1,14 +1,15 @@
-import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useState } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
-import { SortButton } from '@/components/ui/layout-components/tables/container-components/sort-button/sort-button'
 import { TableHeaderCell } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
 import s from './header-cell.module.scss'
 
+import { SortButton } from '../sort-button'
+
 type Props = {
-  content: ReactNode
+  content: string
   onSort?: () => void
   sortable?: boolean
 } & ComponentPropsWithoutRef<typeof TableHeaderCell>
