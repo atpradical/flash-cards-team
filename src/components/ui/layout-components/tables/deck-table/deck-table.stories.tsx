@@ -2,20 +2,21 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import { DeckTable } from '@/components/ui/layout-components'
-import { CardListExample } from '@/components/ui/layout-components/deck-table/deck-table.mock'
 import { action } from '@storybook/addon-actions'
+
+import { DeckTable as DeckTableComponent } from './deck-table'
+import { CardListExample } from './deck-table.mock'
 
 const meta = {
   argTypes: {},
-  component: DeckTable,
-  title: 'Components/DeckTable',
-} satisfies Meta<typeof DeckTable>
+  component: DeckTableComponent,
+  title: 'Layout Components/Tables/Deck Table',
+} satisfies Meta<typeof DeckTableComponent>
 
 type Story = StoryObj<typeof meta>
 export default meta
 
-export const Example: Story = {
+export const DeckTable: Story = {
   args: {
     cards: CardListExample,
     onDelete: action('onDelete action invoked!'),
@@ -24,7 +25,7 @@ export const Example: Story = {
   },
   render: () => (
     <MemoryRouter>
-      <DeckTable {...Example.args} />
+      <DeckTableComponent {...DeckTable.args} />
     </MemoryRouter>
   ),
 }

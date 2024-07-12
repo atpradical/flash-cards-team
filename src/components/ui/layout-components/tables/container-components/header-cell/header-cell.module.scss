@@ -1,0 +1,7 @@
+.hcell {
+  &:hover {
+    cursor: pointer;
+    color: var(--color-warning-100);
+    background-color: var(--color-dark-300);
+  }
+}

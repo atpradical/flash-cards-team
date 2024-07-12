@@ -1,19 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DeckListTable } from '@/components/ui/layout-components'
-import { DeckListExample } from '@/components/ui/layout-components/deck-list-table/deck-list-table.mock'
 import { action } from '@storybook/addon-actions'
+
+import { DeckListTable as DeckListTableComponent } from './deck-list-table'
+import { DeckListExample } from './deck-list-table.mock'
 
 const meta = {
   argTypes: {},
-  component: DeckListTable,
-  title: 'Components/DeckListTable',
-} satisfies Meta<typeof DeckListTable>
+  component: DeckListTableComponent,
+  title: 'Layout Components/Tables/Deck List Table',
+} satisfies Meta<typeof DeckListTableComponent>
 
 type Story = StoryObj<typeof meta>
 export default meta
 
-export const Example: Story = {
+export const DeckListTable: Story = {
   args: {
     deckList: DeckListExample,
     onDelete: action('on learn action invoked!'),
