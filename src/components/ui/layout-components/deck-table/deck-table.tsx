@@ -72,7 +72,7 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
           <Actions
             onDelete={() => onDeleteHandler(el.id)}
             onEdit={() => onEditHandler(el.id)}
-            onLearn={() => {}}
+            onLearn={''}
             variant={VARIANT.ALL}
           />
         </TableCell>

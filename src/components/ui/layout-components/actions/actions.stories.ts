@@ -16,7 +16,7 @@ export const ActionsAll: Story = {
   args: {
     onDelete: action('delete invoked!'),
     onEdit: action('edit invoked!'),
-    onLearn: action('play invoked!'),
+    onLearn: 'clyh5nywc001npb013u2y57ec',
     style: { maxWidth: '100%' },
     variant: VARIANT.ALL,
   },
@@ -26,7 +26,7 @@ export const ActionsLearn: Story = {
   args: {
     onDelete: action('delete invoked!'),
     onEdit: action('edit invoked!'),
-    onLearn: action('play invoked!'),
+    onLearn: 'clyh5nywc001npb013u2y57ec',
     style: { maxWidth: '100%' },
     variant: VARIANT.ONLY_LEARN,
   },
@@ -36,7 +36,7 @@ export const ActionsEdit: Story = {
   args: {
     onDelete: action('delete invoked!'),
     onEdit: action('edit invoked!'),
-    onLearn: action('play invoked!'),
+    onLearn: 'clyh5nywc001npb013u2y57ec',
     style: { maxWidth: '100%' },
     variant: VARIANT.ONLY_EDITS,
   },
