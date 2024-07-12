@@ -56,7 +56,7 @@ export const DeckListPage = () => {
           <Typography as={'h1'} variant={'h1'}>
             {"Deck's list"}
           </Typography>
-          <Button onClick={() => setShowAddDeckDialog(!showAddDeckDialog)}>Add New Deck</Button>
+          <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
         </FlexContainer>
         <TableFilterBar
           onSearchChange={searchDeckHandler}
@@ -72,10 +72,7 @@ export const DeckListPage = () => {
           pageSize={itemsPerPage}
           totalCount={pagination.totalItems}
         />
-        <DeckDialogForm
-          onOpenChange={() => setShowAddDeckDialog(!showAddDeckDialog)}
-          open={showAddDeckDialog}
-        />
+        <DeckDialogForm onOpenChange={setShowAddDeckDialog} open={showAddDeckDialog} />
       </FlexContainer>
     </Page>
   )
