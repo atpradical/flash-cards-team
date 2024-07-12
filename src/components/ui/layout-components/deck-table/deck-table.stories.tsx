@@ -18,8 +18,6 @@ export default meta
 export const Example: Story = {
   args: {
     cards: CardListExample,
-    onDelete: action('onDelete action invoked!'),
-    onEdit: action('onEdit action invoked!'),
     onSort: action('onSort action invoked!'),
   },
   render: () => (

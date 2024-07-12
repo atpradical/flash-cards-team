@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import {
@@ -30,18 +31,20 @@ type CardDialogFormValues = z.infer<typeof CardDialogFormScheme>
 
 type CardDialogFormProps = {
   action?: DIALOG_ACTION
-  deckId: string
+  cardId?: string
   onOpenChange: (open: boolean) => void
   open: boolean
 }
 
 export const CardDialogForm = ({
   action = DIALOG_ACTION.CREATE,
-  deckId,
+  cardId,
   onOpenChange,
   open,
 }: CardDialogFormProps) => {
   const title = action === DIALOG_ACTION.CREATE ? 'Add New Card' : 'Change Card'
+
+  const { deckId } = useParams()
 
   const [createCard, { isLoading, isSuccess }] = useCreateCardMutation()
 
@@ -52,7 +55,7 @@ export const CardDialogForm = ({
 
   const formHandler = handleSubmit(formData => {
     if (action === 'CREATE') {
-      createCard({ ...formData, deckId })
+      createCard({ ...formData, deckId: deckId ?? 'bad-deckId' })
     }
     if (isSuccess) {
       reset()
@@ -61,7 +64,7 @@ export const CardDialogForm = ({
 
   const cancelFormHandler = () => {
     reset()
-    onOpenChange(open)
+    onOpenChange(false)
   }
 
   const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {
@@ -71,6 +74,8 @@ export const CardDialogForm = ({
   if (isLoading) {
     return <Progress />
   }
+
+  console.log(cardId)
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
