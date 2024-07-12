@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { generatePath } from 'react-router-dom'
 
 import { ArrowUp } from '@/assets/icons'
 import dummyCover from '@/assets/webp/dummy-cover.webp'
@@ -17,17 +17,17 @@ import {
   TableRow,
 } from '@/components/ui/primitives'
 import { Deck } from '@/services/decks/deck.types'
-import { DIALOG_ACTION, DIALOG_ENTITY, RATIO, VARIANT } from '@/shared/enums'
+import { DIALOG_ACTION, DIALOG_ENTITY, PATH, RATIO, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './deck-list-table.styles'
 
 type DecksListTableProps = {
-  deckList: Deck[]
+  decks: Deck[]
   onSort: () => void
 }
 
-export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
+export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
   const sortHandler = () => {
     onSort()
   }
@@ -35,29 +35,22 @@ export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
   const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
 
-  const [currentDeckId, setCurrentDeckId] = useState<string>('')
-  const [nameDeck, setNameDeck] = useState<string>('')
+  const [currentDeckId, setCurrentDeckId] = useState('')
 
-  const navigate = useNavigate()
-
-  const TableContent = deckList.map(el => {
+  const TableContent = decks.map(el => {
     const cover = el.cover ?? dummyCover
 
-    const openEditDeckHandler = (id: string) => {
-      setCurrentDeckId(id)
+    const openEditDeckHandler = (deckId: string) => {
+      setCurrentDeckId(deckId)
       setShowEditDeckDialog(!showEditDeckDialog)
     }
 
-    const openDeleteDeckHandler = (id: string) => {
-      setNameDeck(el.name)
-      setCurrentDeckId(id)
+    const openDeleteDeckHandler = (deckId: string) => {
+      setCurrentDeckId(deckId)
       setShowDeleteDeckDialog(!showDeleteDeckDialog)
     }
 
-    const learnDeckHandler = (id: string) => {
-      setCurrentDeckId(id)
-      navigate(`/deck/${id}`)
-    }
+    const learnDeckPath = generatePath(PATH.DECK, { deckId: el.id })
 
     return (
       <TableRow key={el.id}>
@@ -75,7 +68,7 @@ export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
           <Actions
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
-            onLearn={() => learnDeckHandler(el.id)}
+            onLearn={learnDeckPath}
             variant={VARIANT.ALL}
           />
         </TableCell>
@@ -102,21 +95,19 @@ export const DeckListTable = ({ deckList, onSort }: DecksListTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>{TableContent}</TableBody>
-
-      <DeleteDialogForm
-        entity={DIALOG_ENTITY.DECK}
-        id={currentDeckId}
-        name={nameDeck}
-        onOpenChange={setShowDeleteDeckDialog}
-        onSubmit={() => console.log('delete dialog form submit invoked!')}
-        open={showDeleteDeckDialog}
-      />
-
       <DeckDialogForm
         action={DIALOG_ACTION.UPDATE}
         deckId={currentDeckId}
         onOpenChange={setShowEditDeckDialog}
         open={showEditDeckDialog}
+      />
+      <DeleteDialogForm
+        entity={DIALOG_ENTITY.DECK}
+        id={currentDeckId}
+        name={'Name Deck'}
+        onOpenChange={setShowDeleteDeckDialog}
+        onSubmit={() => console.log('delete dialog form submit invoked!')}
+        open={showDeleteDeckDialog}
       />
     </TableContainer>
   )

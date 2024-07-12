@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 import { EditOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
 import { getActionButtons } from '@/components/ui/layout-components/actions/utils/utils'
@@ -12,12 +13,13 @@ export type ActionButton = {
   handler?: () => void
   icon: ReactNode
   label: ACTIONS
+  path?: string
 }
 
 type ActionsProps = {
   onDelete: () => void
   onEdit: () => void
-  onLearn: () => void
+  onLearn: string
   variant?: VARIANT
 } & ComponentPropsWithoutRef<typeof FlexContainer>
 
@@ -28,9 +30,6 @@ export const Actions = ({
   variant = VARIANT.ALL,
   ...restFlexContainer
 }: ActionsProps) => {
-  const learnHandler = () => {
-    onLearn()
-  }
   const editHandler = () => {
     onEdit()
   }
@@ -40,9 +39,9 @@ export const Actions = ({
 
   const actionButtons: ActionButton[] = [
     {
-      handler: learnHandler,
       icon: <PlayCircleOutline className={cn.action} />,
       label: ACTIONS.LEARN,
+      path: onLearn,
     },
     { handler: editHandler, icon: <EditOutline className={cn.action} />, label: ACTIONS.EDIT },
     { handler: deleteHandler, icon: <TrashOutline className={cn.action} />, label: ACTIONS.DELETE },
@@ -51,7 +50,14 @@ export const Actions = ({
   return (
     <FlexContainer gap={'10px'} {...restFlexContainer}>
       {getActionButtons(actionButtons, variant).map(el => (
-        <Button className={cn.button} key={el.label} onClick={el.handler} variant={'link'}>
+        <Button
+          as={el.path && Link}
+          className={cn.button}
+          key={el.label}
+          onClick={el.handler}
+          to={el.path}
+          variant={'link'}
+        >
           {el.icon}
         </Button>
       ))}
