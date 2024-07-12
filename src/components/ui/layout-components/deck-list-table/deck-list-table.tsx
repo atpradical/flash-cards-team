@@ -4,7 +4,7 @@ import { generatePath } from 'react-router-dom'
 import { ArrowUp } from '@/assets/icons'
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
-import { Actions } from '@/components/ui/layout-components/actions'
+import { Actions } from '@/components/ui/layout-components'
 import { convertToDDMMYYYY } from '@/components/ui/layout-components/deck-list-table/utils/utils'
 import {
   Button,
@@ -63,11 +63,13 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
         <TableCell>{convertToDDMMYYYY(el.updated)}</TableCell>
         <TableCell>{el.author.name}</TableCell>
         <TableCell>
-          {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
           <Actions
+            id={el.id}
+            isFavorite={el.isFavorite}
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
             onLearn={learnDeckPath}
+            // todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery
             variant={VARIANT.ALL}
           />
         </TableCell>

@@ -1,11 +1,15 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-import { EditOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
-import { getActionButtons } from '@/components/ui/layout-components/actions/utils/utils'
+import { EditOutline, Heart, HeartOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
 import { Button } from '@/components/ui/primitives'
+import {
+  useAddDeckToFavoriteMutation,
+  useRemoveDeckToFavoriteMutation,
+} from '@/services/flashcards-api'
 import { ACTIONS, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
+import { getActionButtons } from '@/shared/utils/get-action-buttons.utils'
 
 import { cn } from './actions.styles'
 
@@ -17,24 +21,40 @@ export type ActionButton = {
 }
 
 type ActionsProps = {
+  id: string
+  isFavorite?: boolean
   onDelete: () => void
   onEdit: () => void
-  onLearn: string
+  onLearn?: string
   variant?: VARIANT
 } & ComponentPropsWithoutRef<typeof FlexContainer>
 
 export const Actions = ({
+  id,
+  isFavorite = false,
   onDelete,
   onEdit,
   onLearn,
   variant = VARIANT.ALL,
   ...restFlexContainer
 }: ActionsProps) => {
+  const [addDeckToFavorite] = useAddDeckToFavoriteMutation()
+  const [removeDeckToFavorite] = useRemoveDeckToFavoriteMutation()
+
   const editHandler = () => {
     onEdit()
   }
+
   const deleteHandler = () => {
     onDelete()
+  }
+
+  const favoriteHandler = () => {
+    if (isFavorite) {
+      removeDeckToFavorite({ id })
+    } else {
+      addDeckToFavorite({ id })
+    }
   }
 
   const actionButtons: ActionButton[] = [
@@ -45,6 +65,15 @@ export const Actions = ({
     },
     { handler: editHandler, icon: <EditOutline className={cn.action} />, label: ACTIONS.EDIT },
     { handler: deleteHandler, icon: <TrashOutline className={cn.action} />, label: ACTIONS.DELETE },
+    {
+      handler: favoriteHandler,
+      icon: isFavorite ? (
+        <Heart className={cn.favorite} />
+      ) : (
+        <HeartOutline className={cn.favorite} />
+      ),
+      label: ACTIONS.FAVORITE,
+    },
   ]
 
   return (
