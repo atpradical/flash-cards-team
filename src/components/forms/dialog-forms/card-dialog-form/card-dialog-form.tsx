@@ -60,6 +60,7 @@ export const CardDialogForm = ({
     if (isSuccess) {
       reset()
     }
+    onOpenChange(false)
   })
 
   const cancelFormHandler = () => {
