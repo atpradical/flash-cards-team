@@ -15,10 +15,7 @@ export default meta
 
 export const Example: Story = {
   args: {
-    deckList: DeckListExample,
-    onDelete: action('on learn action invoked!'),
-    onEdit: action('on learn action invoked!'),
-    onLearn: action('on learn action invoked!'),
+    decks: DeckListExample,
     onSort: action('onSort action invoked!'),
   },
 }

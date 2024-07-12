@@ -55,7 +55,7 @@ export const DeckTable = ({ cards, onDelete, onEdit, onSort }: DeckTableProps) =
         </TableCell>
         <TableCell>
           {/*todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery*/}
-          <Actions onDelete={onDelete} onEdit={onEdit} onLearn={() => {}} variant={VARIANT.ALL} />
+          <Actions onDelete={onDelete} onEdit={onEdit} onLearn={''} variant={VARIANT.ALL} />
         </TableCell>
       </TableRow>
     )
