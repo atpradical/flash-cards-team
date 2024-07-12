@@ -44,3 +44,4 @@ export type CreateDeckArgs = {
 }
 
 export type DeckResponse = Omit<Deck, 'updated'>
+export type DeleteDeckResponse = Omit<Deck, 'author' | 'isFavorite'>

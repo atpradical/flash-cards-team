@@ -21,6 +21,7 @@ import { DIALOG_ACTION, DIALOG_ENTITY, PATH, RATIO, VARIANT } from '@/shared/enu
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './deck-list-table.styles'
+import { useDeleteDeckMutation } from '@/services/flashcards-api'
 
 type DecksListTableProps = {
   decks: Deck[]
@@ -36,6 +37,8 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
     onSort()
   }
 
+  const {} = useDeleteDeckMutation()
+
   const TableContent = decks.map(el => {
     const cover = el.cover ?? dummyCover
 
@@ -47,6 +50,7 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
     const openDeleteDeckHandler = (deckId: string) => {
       setDeckId(deckId)
       setShowDeleteDeckDialog(!showDeleteDeckDialog)
+      //
     }
 
     const learnDeckPath = generatePath(PATH.DECK, { deckId: el.id })
@@ -105,6 +109,7 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
         entityId={deckId}
         name={'Name Deck'}
         onOpenChange={setShowDeleteDeckDialog}
+        //
         onSubmit={() => console.log('delete dialog form submit invoked!')}
         open={showDeleteDeckDialog}
       />
