@@ -28,25 +28,24 @@ type DecksListTableProps = {
 }
 
 export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
+  const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
+  const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
+  const [deckId, setDeckId] = useState('')
+
   const sortHandler = () => {
     onSort()
   }
-
-  const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
-  const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
-
-  const [currentDeckId, setCurrentDeckId] = useState('')
 
   const TableContent = decks.map(el => {
     const cover = el.cover ?? dummyCover
 
     const openEditDeckHandler = (deckId: string) => {
-      setCurrentDeckId(deckId)
+      setDeckId(deckId)
       setShowEditDeckDialog(!showEditDeckDialog)
     }
 
     const openDeleteDeckHandler = (deckId: string) => {
-      setCurrentDeckId(deckId)
+      setDeckId(deckId)
       setShowDeleteDeckDialog(!showDeleteDeckDialog)
     }
 
@@ -97,13 +96,13 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
       <TableBody>{TableContent}</TableBody>
       <DeckDialogForm
         action={DIALOG_ACTION.UPDATE}
-        deckId={currentDeckId}
+        deckId={deckId}
         onOpenChange={setShowEditDeckDialog}
         open={showEditDeckDialog}
       />
       <DeleteDialogForm
         entity={DIALOG_ENTITY.DECK}
-        id={currentDeckId}
+        entityId={deckId}
         name={'Name Deck'}
         onOpenChange={setShowDeleteDeckDialog}
         onSubmit={() => console.log('delete dialog form submit invoked!')}
