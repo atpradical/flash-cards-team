@@ -48,7 +48,7 @@ export const DeckListPage = () => {
     return <Progress />
   }
 
-  //todo: replace related mock data and functions during RTQuery tasks implementation
+  // todo: replace related mock data and functions during RTQuery tasks implementation
   return (
     <Page>
       <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>

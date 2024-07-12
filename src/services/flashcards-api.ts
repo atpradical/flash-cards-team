@@ -27,6 +27,13 @@ export const flashcardsApi = createApi({
   }),
   endpoints: builder => {
     return {
+      addDeckToFavorite: builder.mutation<null, { id: string }>({
+        invalidatesTags: ['Decks'],
+        query: ({ id }) => ({
+          method: 'POST',
+          url: `v1/decks/${id}/favorite`,
+        }),
+      }),
       createCard: builder.mutation<CreateCardResponse, CreateCardArgs>({
         invalidatesTags: ['Cards'],
         query: ({ deckId, ...args }) => ({
@@ -84,6 +91,13 @@ export const flashcardsApi = createApi({
           }
         },
       }),
+      removeDeckToFavorite: builder.mutation<null, { id: string }>({
+        invalidatesTags: ['Decks'],
+        query: ({ id }) => ({
+          method: 'DELETE',
+          url: `v1/decks/${id}/favorite`,
+        }),
+      }),
     }
   },
   reducerPath: 'flashcardsApi',
@@ -91,10 +105,12 @@ export const flashcardsApi = createApi({
 })
 
 export const {
+  useAddDeckToFavoriteMutation,
   useCreateCardMutation,
   useCreateDeckMutation,
   useGetCardsQuery,
   useGetDeckQuery,
   useGetDecksQuery,
   useGetRandomCardQuery,
+  useRemoveDeckToFavoriteMutation,
 } = flashcardsApi
