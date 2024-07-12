@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
+import { store } from '@/services/store'
 import { action } from '@storybook/addon-actions'
 
 import { DeckTable as DeckTableComponent } from './deck-table'
@@ -23,7 +25,9 @@ export const DeckTable: Story = {
   },
   render: () => (
     <MemoryRouter>
-      <DeckTableComponent {...DeckTable.args} />
+      <Provider store={store}>
+        <DeckTableComponent {...DeckTable.args} />
+      </Provider>
     </MemoryRouter>
   ),
 }

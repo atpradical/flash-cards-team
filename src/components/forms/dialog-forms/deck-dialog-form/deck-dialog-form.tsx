@@ -51,12 +51,12 @@ export const DeckDialogForm = ({
     if (isSuccess) {
       reset()
     }
-    onOpenChange(open)
+    onOpenChange(false)
   })
 
   const cancelFormHandler = () => {
     reset()
-    onOpenChange(open)
+    onOpenChange(false)
   }
 
   const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {

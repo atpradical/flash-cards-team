@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
+
+import { store } from '@/services/store'
 import { action } from '@storybook/addon-actions'
 
 import { DeckListTable as DeckListTableComponent } from './deck-list-table'
@@ -19,4 +23,11 @@ export const DeckListTable: Story = {
     decks: DeckListExample,
     onSort: action('onSort action invoked!'),
   },
+  render: () => (
+    <MemoryRouter>
+      <Provider store={store}>
+        <DeckListTableComponent {...DeckListTable.args} />
+      </Provider>
+    </MemoryRouter>
+  ),
 }
