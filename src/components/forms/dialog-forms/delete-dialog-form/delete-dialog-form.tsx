@@ -36,7 +36,6 @@ export const DeleteDialogForm = ({
   const title = `Delete ${entity}`
 
   const [deleteCard, { isLoading: isLoadingDeleteCard }] = useDeleteCardMutation()
-
   const [deleteDeck, { isLoading: isLoadingDeleteDeck }] = useDeleteDeckMutation()
 
   const { handleSubmit } = useForm<DeleteDialogFormValues>({
@@ -52,7 +51,6 @@ export const DeleteDialogForm = ({
   })
 
   const cancelFormHandler = () => {
-    // reset() ?? need?
     onOpenChange(false)
   }
 
