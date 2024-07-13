@@ -60,11 +60,18 @@ export const DeleteDialogForm = ({
     onOpenChange(false)
   }
 
+  if (isLoading) {
+    //постоянно приходит false
+    return <Progress />
+  } // не работает
+
+  console.log('isLoading', isLoading)
+
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
         <Header title={title} />
-        {isLoading && <Progress />}
+        {/* {isLoading && <Progress />} */}
         <Description>
           {`Do you really want to remove ${entity}:  `}
           <b>{name}</b>
