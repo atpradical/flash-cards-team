@@ -4,6 +4,6 @@ export enum DIALOG_ACTION {
 }
 
 export enum DIALOG_ENTITY {
-  CARD = 'CARD',
-  DECK = 'DECK',
+  CARD = 'Card',
+  DECK = 'Deck',
 }

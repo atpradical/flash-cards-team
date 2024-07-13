@@ -46,7 +46,7 @@ export const ControlledTextField = <T extends FieldValues>({
       onBlur={onBlur}
       onChange={onChange}
       ref={ref}
-      value={value}
+      value={value ?? ''}
       {...field}
     />
   )

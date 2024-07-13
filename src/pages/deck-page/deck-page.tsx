@@ -32,13 +32,13 @@ export const DeckPage = () => {
   const {
     data: deck = {} as Deck,
     error: deckError,
-    isLoading: isLoadingDeck,
+    isFetching: isFetchingDeck,
   } = useGetDeckQuery({ id: deckId ?? '' })
 
   const {
     data: cardsData,
     error: cardsError,
-    isLoading: isLoadingCards,
+    isFetching: isFetchingCards,
   } = useGetCardsQuery({
     currentPage,
     deckId: deckId ?? '',
@@ -78,15 +78,14 @@ export const DeckPage = () => {
     setCurrentPage(currentPage)
   }
 
-  if (isLoadingCards || isLoadingDeck) {
-    return <Progress />
-  }
+  const fetching = isFetchingCards || isFetchingDeck
 
   const isEmpty = cards.length === 0
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
   return (
     <Page>
+      {fetching && <Progress />}
       <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'} pd={'0 20px'}>
         <Button as={Link} className={cn.goBack} to={PATH.DECK_LIST} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
@@ -122,7 +121,7 @@ export const DeckPage = () => {
               value={search}
               variant={'search'}
             />
-            <DeckTable cards={cards} onSort={() => console.log('onSort invoked!')} />
+            <DeckTable cards={cards} onSort={() => {}} />
             <Pagination
               className={cn.pagination}
               currentPage={currentPage}
@@ -143,7 +142,6 @@ export const DeckPage = () => {
           entityId={'15'}
           name={'Some name'}
           onOpenChange={deleteDeckHandler}
-          onSubmit={() => console.log('onSubmit')}
           open={showDeleteDeckDialogForm}
         />
       </FlexContainer>
