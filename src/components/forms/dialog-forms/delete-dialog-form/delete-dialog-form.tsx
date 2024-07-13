@@ -6,6 +6,7 @@ import {
 } from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
+import { useDeleteCardMutation } from '@/services/flashcards-api'
 import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,7 +23,6 @@ type DeleteDialogFormProps = {
   entityId: string
   name: string
   onOpenChange: (open: boolean) => void
-  onSubmit: (data: DeleteDialogFormValues) => void
   open: boolean
 }
 
@@ -31,10 +31,11 @@ export const DeleteDialogForm = ({
   entityId,
   name,
   onOpenChange,
-  onSubmit,
   open,
 }: DeleteDialogFormProps) => {
   const title = `Delete ${entity}`
+
+  const [deleteCard, { isLoading }] = useDeleteCardMutation()
 
   const { handleSubmit } = useForm<DeleteDialogFormValues>({
     mode: 'onSubmit',
@@ -42,7 +43,7 @@ export const DeleteDialogForm = ({
   })
 
   const formHandler = handleSubmit(() => {
-    onSubmit({ entityId })
+    deleteCard({ id: entityId }).then(() => cancelFormHandler())
   })
 
   const cancelFormHandler = () => {
@@ -52,7 +53,7 @@ export const DeleteDialogForm = ({
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
-        <Header title={title} />
+        <Header load={isLoading} title={title} />
         <Description>
           {`Do you really want to remove ${entity}: `}
           <b>{name}</b>
@@ -61,7 +62,7 @@ export const DeleteDialogForm = ({
           {entity === DIALOG_ENTITY.DECK ? 'All cards will be deleted.' : ''}
         </Description>
         <form className={cn.form} onSubmit={formHandler}>
-          <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
+          <Footer onCancel={cancelFormHandler} onSubmit={formHandler} title={title} />
         </form>
       </DialogContent>
     </Dialog>

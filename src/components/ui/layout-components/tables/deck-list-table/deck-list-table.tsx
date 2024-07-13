@@ -84,7 +84,6 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
         entityId={deckId}
         name={'Name Deck'}
         onOpenChange={setShowDeleteDeckDialog}
-        onSubmit={() => console.log('delete dialog form submit invoked!')}
         open={showDeleteDeckDialog}
       />
     </TableContainer>

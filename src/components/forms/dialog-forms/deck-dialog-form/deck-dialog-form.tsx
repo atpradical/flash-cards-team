@@ -87,7 +87,7 @@ export const DeckDialogForm = ({
             </FlexContainer>
           </form>
         </Body>
-        <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
+        <Footer onCancel={cancelFormHandler} onSubmit={formHandler} title={title} />
       </DialogContent>
     </Dialog>
   )

@@ -1,18 +1,18 @@
 import { Button, DialogFooter } from '@/components/ui/primitives'
 
 type Props = {
-  cancelFormHandler: () => void
-  formHandler: () => void
+  onCancel: () => void
+  onSubmit: () => void
   title: string
 }
 
-export const DialogFormFooter = ({ cancelFormHandler, formHandler, title }: Props) => {
+export const DialogFormFooter = ({ onCancel, onSubmit, title }: Props) => {
   return (
     <DialogFooter flexContainerProps={{ jc: 'space-between' }}>
-      <Button onClick={cancelFormHandler} variant={'secondary'}>
+      <Button onClick={onCancel} variant={'secondary'}>
         Cancel
       </Button>
-      <Button onClick={formHandler}>{title}</Button>
+      <Button onClick={onSubmit}>{title}</Button>
     </DialogFooter>
   )
 }
