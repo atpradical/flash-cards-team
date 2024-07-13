@@ -5,10 +5,8 @@ import {
   DialogFromHeader as Header,
 } from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
-
-import { useDeleteCardMutation } from '@/services/flashcards-api'
 import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
-import { useDeleteDeckMutation } from '@/services/flashcards-api'
+import { useDeleteCardMutation, useDeleteDeckMutation } from '@/services/flashcards-api'
 import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -37,9 +35,9 @@ export const DeleteDialogForm = ({
 }: DeleteDialogFormProps) => {
   const title = `Delete ${entity}`
 
-  const [deleteCard, { isLoading }] = useDeleteCardMutation()
+  const [deleteCard, { isLoading: isLoadingDeleteCard }] = useDeleteCardMutation()
 
-  // const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+  const [deleteDeck, { isLoading: isLoadingDeleteDeck }] = useDeleteDeckMutation()
 
   const { handleSubmit } = useForm<DeleteDialogFormValues>({
     mode: 'onSubmit',
@@ -47,8 +45,10 @@ export const DeleteDialogForm = ({
   })
 
   const formHandler = handleSubmit(() => {
-    deleteCard({ id: entityId }).then(() => cancelFormHandler())
-    // deleteDeck({ id: entityId }).then(() => cancelFormHandler())
+    if (entity === DIALOG_ENTITY.CARD) {
+      deleteCard({ id: entityId }).then(() => cancelFormHandler())
+    }
+    deleteDeck({ id: entityId }).then(() => cancelFormHandler())
   })
 
   const cancelFormHandler = () => {
@@ -56,12 +56,12 @@ export const DeleteDialogForm = ({
     onOpenChange(false)
   }
 
+  const isLoading = isLoadingDeleteCard || isLoadingDeleteDeck
+
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
         <Header load={isLoading} title={title} />
-        <Header title={title} />
-
         <Description>
           {`Do you really want to remove ${entity}:  `}
           <b>{name}</b>
