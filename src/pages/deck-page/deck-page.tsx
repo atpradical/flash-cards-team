@@ -52,6 +52,7 @@ export const DeckPage = () => {
   console.log(cardsError)
   console.log(deckError)
   console.log('deck', deck)
+  console.log('deckId', deckId)
 
   const editDeckHandler = () => {
     setShowAddNewDeckDialogForm(!showAddNewDeckDialogForm)
@@ -136,10 +137,9 @@ export const DeckPage = () => {
           onOpenChange={setShowAddNewDeckDialogForm}
           open={showAddNewDeckDialogForm}
         />
-        {/* todo: change mock deckId later*/}
         <DeleteDialogForm
-          entityId={'15'}
-          name={'Some name'}
+          entityId={deckId ?? ''}
+          name={deck.name}
           onOpenChange={deleteDeckHandler}
           open={showDeleteDeckDialogForm}
         />

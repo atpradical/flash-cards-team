@@ -24,6 +24,8 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
     onSort()
   }
 
+  const deckData = decks.find(el => el.id === deckId) ?? ({} as Deck)
+
   const TableContent = decks.map(el => {
     const cover = el.cover ?? dummyCover
     const cardsCount = el.cardsCount.toString()
@@ -82,7 +84,7 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
       <DeleteDialogForm
         entity={DIALOG_ENTITY.DECK}
         entityId={deckId}
-        name={'Name Deck'}
+        name={deckData.name ?? 'Deck name'}
         onOpenChange={setShowDeleteDeckDialog}
         open={showDeleteDeckDialog}
       />
