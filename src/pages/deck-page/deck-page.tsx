@@ -139,7 +139,6 @@ export const DeckPage = () => {
           onOpenChange={setShowAddNewDeckDialogForm}
           open={showAddNewDeckDialogForm}
         />
-        {/* todo: change mock deckId later*/}
         <DeleteDialogForm
           entityId={deckId ?? ''}
           name={'Some name'}
