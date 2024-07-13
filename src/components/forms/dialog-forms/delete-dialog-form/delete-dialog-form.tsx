@@ -5,7 +5,13 @@ import {
   DialogFromHeader as Header,
 } from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
-import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
+import {
+  DialogDescription as Description,
+  Dialog,
+  DialogContent,
+  Progress,
+} from '@/components/ui/primitives'
+import { useDeleteDeckMutation } from '@/services/flashcards-api'
 import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,7 +28,6 @@ type DeleteDialogFormProps = {
   entityId: string
   name: string
   onOpenChange: (open: boolean) => void
-  onSubmit: (data: DeleteDialogFormValues) => void
   open: boolean
 }
 
@@ -31,21 +36,27 @@ export const DeleteDialogForm = ({
   entityId,
   name,
   onOpenChange,
-  onSubmit,
   open,
 }: DeleteDialogFormProps) => {
   const title = `Delete ${entity}`
 
-  const { handleSubmit } = useForm<DeleteDialogFormValues>({
+  const [deleteDeck, { isLoading, isSuccess }] = useDeleteDeckMutation()
+
+  const { handleSubmit, reset } = useForm<DeleteDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(DeleteFormScheme),
   })
 
   const formHandler = handleSubmit(() => {
-    onSubmit({ entityId })
+    deleteDeck({ id: entityId })
+    if (isSuccess) {
+      reset()
+    }
+    onOpenChange(false)
   })
 
   const cancelFormHandler = () => {
+    reset()
     onOpenChange(false)
   }
 
@@ -53,8 +64,9 @@ export const DeleteDialogForm = ({
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
         <Header title={title} />
+        {isLoading && <Progress />}
         <Description>
-          {`Do you really want to remove ${entity}: `}
+          {`Do you really want to remove ${entity}:  `}
           <b>{name}</b>
           {`?`}
           <br />

@@ -51,6 +51,15 @@ export const flashcardsApi = createApi({
           url: 'v1/decks',
         }),
       }),
+      deleteDeck: builder.mutation<DeleteDeckResponse, { id: string }>({
+        invalidatesTags: ['Decks'],
+        query: ({ id }) => {
+          return {
+            method: 'DELETE',
+            url: `/v1/decks/${id}`,
+          }
+        },
+      }),
       getCard: builder.query<Card, GetCardArgs>({
         query: ({ id }) => ({
           method: 'GET',
@@ -99,15 +108,6 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${id}/favorite`,
         }),
       }),
-      deleteDeck: builder.mutation<DeleteDeckResponse, { id: string }>({
-        invalidatesTags: ['Decks'],
-        query: ({ id }) => {
-          return {
-            method: 'DELETE',
-            url: `/v1/decks/${id}`,
-          }
-        },
-      }),
     }
   },
   reducerPath: 'flashcardsApi',
@@ -118,10 +118,10 @@ export const {
   useAddDeckToFavoriteMutation,
   useCreateCardMutation,
   useCreateDeckMutation,
+  useDeleteDeckMutation,
   useGetCardsQuery,
   useGetDeckQuery,
   useGetDecksQuery,
   useGetRandomCardQuery,
   useRemoveDeckToFavoriteMutation,
-  useDeleteDeckMutation,
 } = flashcardsApi

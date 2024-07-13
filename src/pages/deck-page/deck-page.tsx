@@ -52,6 +52,7 @@ export const DeckPage = () => {
   console.log(cardsError)
   console.log(deckError)
   console.log('deck', deck)
+  console.log('deckId', deckId)
 
   const editDeckHandler = () => {
     setShowAddNewDeckDialogForm(!showAddNewDeckDialogForm)
@@ -140,10 +141,9 @@ export const DeckPage = () => {
         />
         {/* todo: change mock deckId later*/}
         <DeleteDialogForm
-          entityId={'15'}
+          entityId={deckId ?? ''}
           name={'Some name'}
           onOpenChange={deleteDeckHandler}
-          onSubmit={() => console.log('onSubmit')}
           open={showDeleteDeckDialogForm}
         />
       </FlexContainer>
