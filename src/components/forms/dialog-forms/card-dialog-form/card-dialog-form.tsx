@@ -46,7 +46,7 @@ export const CardDialogForm = ({
 
   const { deckId } = useParams()
 
-  const [createCard, { isLoading, isSuccess }] = useCreateCardMutation()
+  const [createCard, { isLoading }] = useCreateCardMutation()
 
   const { control, handleSubmit, reset } = useForm<CardDialogFormValues>({
     mode: 'onSubmit',
@@ -57,10 +57,6 @@ export const CardDialogForm = ({
     if (action === 'CREATE') {
       createCard({ ...formData, deckId: deckId ?? 'bad-deckId' })
     }
-    if (isSuccess) {
-      reset()
-    }
-    onOpenChange(false)
   })
 
   const cancelFormHandler = () => {
@@ -72,16 +68,13 @@ export const CardDialogForm = ({
     e.preventDefault()
   }
 
-  if (isLoading) {
-    return <Progress />
-  }
-
   console.log(cardId)
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <Content className={cn.container}>
         <Header title={title} />
+        {isLoading && <Progress />}
         <Body>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'14px'}>
@@ -104,7 +97,7 @@ export const CardDialogForm = ({
             </FlexContainer>
           </form>
         </Body>
-        <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
+        <Footer onCancel={cancelFormHandler} onSubmit={formHandler} title={title} />
       </Content>
     </Dialog>
   )

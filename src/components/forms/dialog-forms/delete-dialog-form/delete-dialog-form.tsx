@@ -5,12 +5,9 @@ import {
   DialogFromHeader as Header,
 } from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
-import {
-  DialogDescription as Description,
-  Dialog,
-  DialogContent,
-  Progress,
-} from '@/components/ui/primitives'
+
+import { useDeleteCardMutation } from '@/services/flashcards-api'
+import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
 import { useDeleteDeckMutation } from '@/services/flashcards-api'
 import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
@@ -40,27 +37,31 @@ export const DeleteDialogForm = ({
 }: DeleteDialogFormProps) => {
   const title = `Delete ${entity}`
 
-  const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+  const [deleteCard, { isLoading }] = useDeleteCardMutation()
 
-  const { handleSubmit, reset } = useForm<DeleteDialogFormValues>({
+  // const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+
+  const { handleSubmit } = useForm<DeleteDialogFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(DeleteFormScheme),
   })
 
   const formHandler = handleSubmit(() => {
-    deleteDeck({ id: entityId }).then(() => cancelFormHandler())
+    deleteCard({ id: entityId }).then(() => cancelFormHandler())
+    // deleteDeck({ id: entityId }).then(() => cancelFormHandler())
   })
 
   const cancelFormHandler = () => {
-    reset()
+    // reset() ?? need?
     onOpenChange(false)
   }
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
+        <Header load={isLoading} title={title} />
         <Header title={title} />
-        {isLoading && <Progress />}
+
         <Description>
           {`Do you really want to remove ${entity}:  `}
           <b>{name}</b>
@@ -69,7 +70,7 @@ export const DeleteDialogForm = ({
           {entity === DIALOG_ENTITY.DECK ? 'All cards will be deleted.' : ''}
         </Description>
         <form className={cn.form} onSubmit={formHandler}>
-          <Footer cancelFormHandler={cancelFormHandler} formHandler={formHandler} title={title} />
+          <Footer onCancel={cancelFormHandler} onSubmit={formHandler} title={title} />
         </form>
       </DialogContent>
     </Dialog>

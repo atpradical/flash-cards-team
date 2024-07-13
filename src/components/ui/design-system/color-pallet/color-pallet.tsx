@@ -6,7 +6,7 @@ import {
   PalletItem,
 } from '@/components/ui/design-system/color-pallet/color-pallet.mock'
 import { cn } from '@/components/ui/design-system/color-pallet/color-pallet.styles'
-import { Typography } from '@/components/ui/primitives'
+import { Card, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 type ColorPalletProps = {
@@ -17,7 +17,7 @@ export const ColorPalette = ({ colors }: ColorPalletProps) => {
   const category = Object.keys(colors)
 
   return (
-    <div className={cn.container}>
+    <Card className={cn.container}>
       {category.map((el, index) => {
         const key = el + index
         const category = el as PalletCategory
@@ -29,7 +29,7 @@ export const ColorPalette = ({ colors }: ColorPalletProps) => {
           </FlexContainer>
         )
       })}
-    </div>
+    </Card>
   )
 }
 

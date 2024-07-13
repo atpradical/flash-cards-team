@@ -16,9 +16,10 @@ type DeckTableProps = {
 }
 
 export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
-  const [cardId, setCardId] = useState('')
   const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
+  const [cardId, setCardId] = useState('')
+  const cardData = cards.find(el => el.id === cardId) ?? ({} as Card)
 
   const sortHandler = () => {
     onSort()
@@ -81,7 +82,7 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
       <DeleteDialogForm
         entity={DIALOG_ENTITY.CARD}
         entityId={cardId}
-        name={'Some name'}
+        name={cardData.question ?? ''}
         onOpenChange={setShowDeleteCardDialogForm}
         open={showDeleteCardDialogForm}
       />

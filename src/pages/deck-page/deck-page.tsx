@@ -5,7 +5,7 @@ import { ArrowBackOutline } from '@/assets/icons'
 import { CardDialogForm, DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { DeckTitle } from '@/components/ui/layout-components'
 import { DeckTable } from '@/components/ui/layout-components/tables'
-import { Button, Progress, TextField } from '@/components/ui/primitives'
+import { Button, TextField } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
 import { cn } from '@/pages/deck-page/deck-page.styles'
 import { PaginationModel } from '@/services/cards/cards.types'
@@ -32,13 +32,13 @@ export const DeckPage = () => {
   const {
     data: deck = {} as Deck,
     error: deckError,
-    isLoading: isLoadingDeck,
+    isFetching: isFetchingDeck,
   } = useGetDeckQuery({ id: deckId ?? '' })
 
   const {
     data: cardsData,
     error: cardsError,
-    isLoading: isLoadingCards,
+    isFetching: isFetchingCards,
   } = useGetCardsQuery({
     currentPage,
     deckId: deckId ?? '',
@@ -79,15 +79,13 @@ export const DeckPage = () => {
     setCurrentPage(currentPage)
   }
 
-  if (isLoadingCards || isLoadingDeck) {
-    return <Progress />
-  }
+  const fetching = isFetchingCards || isFetchingDeck
 
-  const isEmpty = cards.length === 0
+  const isEmpty = cards.length === 0 && !search
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
   return (
-    <Page>
+    <Page load={fetching}>
       <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'} pd={'0 20px'}>
         <Button as={Link} className={cn.goBack} to={PATH.DECK_LIST} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
@@ -123,7 +121,7 @@ export const DeckPage = () => {
               value={search}
               variant={'search'}
             />
-            <DeckTable cards={cards} onSort={() => console.log('onSort invoked!')} />
+            <DeckTable cards={cards} onSort={() => {}} />
             <Pagination
               className={cn.pagination}
               currentPage={currentPage}
