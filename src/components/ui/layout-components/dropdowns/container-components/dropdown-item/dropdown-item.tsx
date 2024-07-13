@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom'
 
 import { Item, Separator, Typography } from '@/components/ui/primitives'
 
-import { cn } from '../settings-dropdown.styles'
+import { cn } from '../../dropdowns.styles'
 
 type Props = {
   icon: ReactNode
+  noSep?: boolean
   path?: string
-  separator?: boolean
   title: string
 } & ComponentPropsWithoutRef<typeof Item>
-export const SettingsDropdownItem = (props: Props) => {
-  const { icon, onClick, path, separator = false, title, ...rest } = props
+export const DropdownItem = (props: Props) => {
+  const { icon, noSep = false, onClick, path, title, ...rest } = props
 
   return (
     <>
@@ -21,7 +21,7 @@ export const SettingsDropdownItem = (props: Props) => {
           {icon} {title}
         </Typography>
       </Item>
-      {separator && <Separator />}
+      {!noSep && <Separator />}
     </>
   )
 }

@@ -1,8 +1,8 @@
 import { EditOutline, MoreVerticalOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
-import { Arrow, Content, Root, Trigger } from '@/components/ui/primitives/dropdown/dropdown'
+import { Arrow, Content, Root, Trigger } from '@/components/ui/primitives'
 
-import { SettingsDropdownItem as DropdownItem } from './container-components/settings-dropdown-item'
-import { cn } from './settings-dropdown.styles'
+import { DropdownItem } from '../container-components'
+import { cn } from '../dropdowns.styles'
 
 type DropdownSettingsProps = {
   learnDeckPath: string
@@ -24,9 +24,9 @@ export const SettingsDropdown = ({ learnDeckPath, onDelete, onEdit }: DropdownSe
       </Trigger>
       <Content>
         <Arrow />
-        <DropdownItem icon={icons.play} path={learnDeckPath} separator title={'Learn'} />
-        <DropdownItem icon={icons.edit} onClick={onEdit} separator title={'Edit'} />
-        <DropdownItem icon={icons.delete} onClick={onDelete} title={'Delete'} />
+        <DropdownItem icon={icons.play} path={learnDeckPath} title={'Learn'} />
+        <DropdownItem icon={icons.edit} onClick={onEdit} title={'Edit'} />
+        <DropdownItem icon={icons.delete} noSep onClick={onDelete} title={'Delete'} />
       </Content>
     </Root>
   )
