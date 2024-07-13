@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
-import { Button, Progress, Typography } from '@/components/ui/primitives'
+import { Button, Typography } from '@/components/ui/primitives'
 import { Pagination } from '@/components/ui/primitives/pagination'
 import { PaginationModel } from '@/services/cards/cards.types'
 import { useGetDecksQuery } from '@/services/flashcards-api'
@@ -44,13 +44,8 @@ export const DeckListPage = () => {
     setSliderRange([...sliderRange])
   }
 
-  if (isLoading) {
-    return <Progress />
-  }
-
-  // todo: replace related mock data and functions during RTQuery tasks implementation
   return (
-    <Page>
+    <Page load={isLoading}>
       <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>
         <FlexContainer jc={'space-between'}>
           <Typography as={'h1'} variant={'h1'}>
@@ -64,6 +59,7 @@ export const DeckListPage = () => {
           search={search}
           sliderRange={sliderRange}
         />
+        {/*todo: replace mock function during sorting task*/}
         <DeckListTable decks={decks} onSort={() => {}} />
         <Pagination
           currentPage={currentPage}

@@ -22,9 +22,9 @@ export const DeckDialogForm: Story = {
     onOpenChange: action('onOpenChange action invoked!'),
     open: true,
   },
-  render: () => (
+  render: args => (
     <Provider store={store}>
-      <DeckDialogFormComponent {...DeckDialogForm.args} />
+      <DeckDialogFormComponent {...args} />
     </Provider>
   ),
 }
