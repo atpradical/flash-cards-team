@@ -5,12 +5,7 @@ import {
   DialogFromHeader as Header,
 } from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
-import {
-  DialogDescription as Description,
-  Dialog,
-  DialogContent,
-  Progress,
-} from '@/components/ui/primitives'
+import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
 import { useDeleteCardMutation } from '@/services/flashcards-api'
 import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
@@ -58,8 +53,7 @@ export const DeleteDialogForm = ({
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
-        <Header title={title} />
-        {isLoading && <Progress />}
+        <Header load={isLoading} title={title} />
         <Description>
           {`Do you really want to remove ${entity}: `}
           <b>{name}</b>
