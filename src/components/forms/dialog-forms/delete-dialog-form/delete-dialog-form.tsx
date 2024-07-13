@@ -40,7 +40,7 @@ export const DeleteDialogForm = ({
 }: DeleteDialogFormProps) => {
   const title = `Delete ${entity}`
 
-  const [deleteDeck, { isLoading, isSuccess }] = useDeleteDeckMutation()
+  const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
 
   const { handleSubmit, reset } = useForm<DeleteDialogFormValues>({
     mode: 'onSubmit',
@@ -48,11 +48,7 @@ export const DeleteDialogForm = ({
   })
 
   const formHandler = handleSubmit(() => {
-    deleteDeck({ id: entityId })
-    if (isSuccess) {
-      reset()
-    }
-    onOpenChange(false)
+    deleteDeck({ id: entityId }).then(() => cancelFormHandler())
   })
 
   const cancelFormHandler = () => {
@@ -60,18 +56,11 @@ export const DeleteDialogForm = ({
     onOpenChange(false)
   }
 
-  if (isLoading) {
-    //постоянно приходит false
-    return <Progress />
-  } // не работает
-
-  console.log('isLoading', isLoading)
-
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
         <Header title={title} />
-        {/* {isLoading && <Progress />} */}
+        {isLoading && <Progress />}
         <Description>
           {`Do you really want to remove ${entity}:  `}
           <b>{name}</b>

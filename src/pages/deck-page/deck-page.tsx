@@ -141,7 +141,7 @@ export const DeckPage = () => {
         />
         <DeleteDialogForm
           entityId={deckId ?? ''}
-          name={'Some name'}
+          name={deck.name}
           onOpenChange={deleteDeckHandler}
           open={showDeleteDeckDialogForm}
         />
