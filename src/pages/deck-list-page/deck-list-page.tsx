@@ -64,7 +64,7 @@ export const DeckListPage = () => {
           search={search}
           sliderRange={sliderRange}
         />
-        <DeckListTable decks={decks} onSort={() => console.log('onSort invoked!')} />
+        <DeckListTable decks={decks} onSort={() => {}} />
         <Pagination
           currentPage={currentPage}
           onPageChange={paginationCurrentPageHandler}

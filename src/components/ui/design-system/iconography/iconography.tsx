@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Icon } from '@/components/ui/design-system/iconography/iconography.mock'
-import { Typography } from '@/components/ui/primitives'
+import { Card, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './iconography.styles'
@@ -12,7 +12,7 @@ type iconListProps = {
 
 export const Iconography = ({ icons }: iconListProps) => {
   return (
-    <div className={cn.container}>
+    <Card className={cn.container}>
       <FlexContainer ai={'start'} fw={'wrap'} gap={'12px'}>
         {icons.map(el => {
           return (
@@ -25,7 +25,7 @@ export const Iconography = ({ icons }: iconListProps) => {
           )
         })}
       </FlexContainer>
-    </div>
+    </Card>
   )
 }
 

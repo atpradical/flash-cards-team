@@ -20,7 +20,6 @@ export const DeleteDialogForm: Story = {
     entityId: '12345',
     name: 'Some Name',
     onOpenChange: action('onOpenChange action invoked!'),
-    onSubmit: action('onSubmit action invoked!'),
     open: true,
   },
 }

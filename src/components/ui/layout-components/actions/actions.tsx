@@ -5,7 +5,7 @@ import { EditOutline, Heart, HeartOutline, PlayCircleOutline, TrashOutline } fro
 import { Button } from '@/components/ui/primitives'
 import {
   useAddDeckToFavoriteMutation,
-  useRemoveDeckToFavoriteMutation,
+  useRemoveDeckFromFavoriteMutation,
 } from '@/services/flashcards-api'
 import { ACTIONS, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -39,7 +39,7 @@ export const Actions = ({
   ...restFlexContainer
 }: ActionsProps) => {
   const [addDeckToFavorite] = useAddDeckToFavoriteMutation()
-  const [removeDeckToFavorite] = useRemoveDeckToFavoriteMutation()
+  const [removeDeckFromFavorite] = useRemoveDeckFromFavoriteMutation()
 
   const editHandler = () => {
     onEdit()
@@ -51,7 +51,7 @@ export const Actions = ({
 
   const favoriteHandler = () => {
     if (isFavorite) {
-      removeDeckToFavorite({ id })
+      removeDeckFromFavorite({ id })
     } else {
       addDeckToFavorite({ id })
     }
