@@ -13,6 +13,7 @@ import {
   CreateDeckResponse,
   DeckResponse,
   DecksListResponse,
+  DeleteDeckResponse,
   GetDecksArgs,
 } from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
@@ -56,6 +57,15 @@ export const flashcardsApi = createApi({
           method: 'DELETE',
           url: `v1/cards/${id}`,
         }),
+      }),
+      deleteDeck: builder.mutation<DeleteDeckResponse, { id: string }>({
+        invalidatesTags: ['Decks'],
+        query: ({ id }) => {
+          return {
+            method: 'DELETE',
+            url: `/v1/decks/${id}`,
+          }
+        },
       }),
       getCard: builder.query<Card, GetCardArgs>({
         query: ({ id }) => ({
@@ -116,6 +126,7 @@ export const {
   useCreateCardMutation,
   useCreateDeckMutation,
   useDeleteCardMutation,
+  useDeleteDeckMutation,
   useGetCardsQuery,
   useGetDeckQuery,
   useGetDecksQuery,
