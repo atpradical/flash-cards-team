@@ -80,7 +80,7 @@ export const DeckPage = () => {
 
   const fetching = isFetchingCards || isFetchingDeck
 
-  const isEmpty = cards.length === 0
+  const isEmpty = cards.length === 0 && !search
 
   // todo: delete mock data from components props during relevant Routing or RTKQuery task.
   return (
