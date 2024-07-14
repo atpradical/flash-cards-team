@@ -60,9 +60,11 @@ export type GetRandomCardToLearnArgs = {
   previousCard?: string
 }
 
+export type UpdateCardResponse = Omit<Card, 'grade'>
+
 export type UpdateCardArgs = {
-  id: string
   cover?: File
-  name?: string
+  id: string
   isPrivate?: boolean
+  name?: string
 }

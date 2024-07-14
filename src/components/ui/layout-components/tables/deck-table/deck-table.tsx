@@ -76,7 +76,8 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
       <TableBody>{TableContent}</TableBody>
       <CardDialogForm
         action={DIALOG_ACTION.UPDATE}
-        cardId={cardId}
+        // cardId={cardId}
+        card={cardData}
         onOpenChange={setShowUpdateCardDialogForm}
         open={showUpdateCardDialogForm}
       />
