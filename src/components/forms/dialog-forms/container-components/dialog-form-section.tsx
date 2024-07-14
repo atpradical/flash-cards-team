@@ -33,6 +33,8 @@ export const DialogFormSection = <T extends FieldValues>({
 }: Props<T>) => {
   const subtitle = name.charAt(0).toUpperCase() + name.slice(1)
 
+  const title = action === DIALOG_ACTION.UPDATE ? 'Change image' : 'Upload image'
+
   const deleteImageHandler = (flag: boolean) => {
     console.log(flag)
   }
@@ -47,7 +49,7 @@ export const DialogFormSection = <T extends FieldValues>({
       </div>
       <Button as={'button'} fullWidth onClick={uploadImageHandler} variant={'secondary'}>
         <ImageOutline className={cn.icon} />
-        Upload image
+        {title}
       </Button>
     </>
   )
