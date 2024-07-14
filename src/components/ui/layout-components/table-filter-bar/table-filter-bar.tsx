@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 
 import { TrashOutline } from '@/assets/icons'
-import { Button, Slider, Tab, TabSwitcher, TextField, Typography } from '@/components/ui/primitives'
+import { Button, Slider, Tab, TabSwitcher, TextField } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './table-filter-bar.styles'
@@ -32,10 +32,7 @@ export const TableFilterBar = ({
         variant={'search'}
       />
       <TabSwitcher className={cn.tabs} label={'Show decks cards'} tabs={tabs} />
-      <div className={cn.slider}>
-        <Typography>Number of cards</Typography>
-        <Slider onRangeChange={onSliderChange} range={sliderRange} />
-      </div>
+      <Slider label={'Number of cards'} onRangeChange={onSliderChange} range={sliderRange} />
       <Button className={cn.button} variant={'secondary'}>
         <TrashOutline />
         Clear Filter
