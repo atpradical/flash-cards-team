@@ -58,12 +58,11 @@ export const CardDialogForm = ({
 
   const formHandler = handleSubmit(formData => {
     if (action === 'CREATE') {
-      createCard({ ...formData, deckId: deckId ?? 'bad-deckId' })
+      createCard({ ...formData, deckId: deckId ?? '' }).then(() => cancelFormHandler())
       reset()
-    }
-
-    if (action === 'UPDATE') {
+    } else {
       updateCard({ ...formData, id }).then(() => cancelFormHandler())
+      reset()
     }
   })
 

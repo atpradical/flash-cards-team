@@ -122,7 +122,7 @@ export const flashcardsApi = createApi({
         }),
       }),
       updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
-        invalidatesTags: ['Cards', 'Card'],
+        invalidatesTags: ['Cards'],
         query: ({ id, ...body }) => ({
           body,
           method: 'PATCH',
@@ -140,7 +140,7 @@ export const flashcardsApi = createApi({
     }
   },
   reducerPath: 'flashcardsApi',
-  tagTypes: ['Cards', 'Card', 'Decks', 'Deck'],
+  tagTypes: ['Cards', 'Decks', 'Deck'],
 })
 
 export const {
