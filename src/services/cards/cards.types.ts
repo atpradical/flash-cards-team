@@ -59,3 +59,10 @@ export type GetRandomCardToLearnArgs = {
   id: string
   previousCard?: string
 }
+
+export type UpdateCardArgs = {
+  id: string
+  cover?: File
+  name?: string
+  isPrivate?: boolean
+}

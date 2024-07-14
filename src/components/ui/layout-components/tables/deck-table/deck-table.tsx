@@ -33,6 +33,7 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
     const onEditHandler = (cardId: string) => {
       setCardId(cardId)
       setShowUpdateCardDialogForm(true)
+      //
     }
     const onDeleteHandler = (cardId: string) => {
       setCardId(cardId)

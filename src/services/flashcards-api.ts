@@ -7,6 +7,7 @@ import {
   GetCardsArgs,
   GetRandomCardToLearnArgs,
   GetRandomCardToLearnResponse,
+  UpdateCardArgs,
 } from '@/services/cards/cards.types'
 import {
   CreateDeckArgs,
@@ -115,10 +116,26 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${id}/favorite`,
         }),
       }),
+      updateCard: builder.mutation<DeleteDeckResponse, UpdateCardArgs>({
+        //DeleteDeckResponse the same for card/deck
+        invalidatesTags: ['Cards'], // и 'Card'?
+        query: ({ id, cover, name, isPrivate }) => {
+          const formData = new FormData()
+          if (cover) formData.append('cover', cover)
+          if (name) formData.append('name', name)
+          if (isPrivate !== undefined) formData.append('isPrivate', isPrivate.toString())
+
+          return {
+            body: formData,
+            method: 'PATCH',
+            url: `/v1/decks/${id}`,
+          }
+        },
+      }),
     }
   },
   reducerPath: 'flashcardsApi',
-  tagTypes: ['Cards', 'Decks'],
+  tagTypes: ['Cards', 'Card', 'Decks'],
 })
 
 export const {
@@ -128,8 +145,10 @@ export const {
   useDeleteCardMutation,
   useDeleteDeckMutation,
   useGetCardsQuery,
+  useGetCardQuery,
   useGetDeckQuery,
   useGetDecksQuery,
   useGetRandomCardQuery,
   useRemoveDeckFromFavoriteMutation,
+  useUpdateCardMutation,
 } = flashcardsApi
