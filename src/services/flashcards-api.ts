@@ -7,6 +7,8 @@ import {
   GetCardsArgs,
   GetRandomCardToLearnArgs,
   GetRandomCardToLearnResponse,
+  UpdateCardArgs,
+  UpdateCardResponse,
 } from '@/services/cards/cards.types'
 import {
   CreateDeckArgs,
@@ -119,6 +121,14 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${id}/favorite`,
         }),
       }),
+      updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
+        invalidatesTags: ['Cards'],
+        query: ({ id, ...body }) => ({
+          body,
+          method: 'PATCH',
+          url: `/v1/cards/${id}`,
+        }),
+      }),
       updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
         invalidatesTags: ['Decks', 'Deck'],
         query: ({ id, ...body }) => ({
@@ -139,10 +149,12 @@ export const {
   useCreateDeckMutation,
   useDeleteCardMutation,
   useDeleteDeckMutation,
+  useGetCardQuery,
   useGetCardsQuery,
   useGetDeckQuery,
   useGetDecksQuery,
   useGetRandomCardQuery,
   useRemoveDeckFromFavoriteMutation,
+  useUpdateCardMutation,
   useUpdateDeckMutation,
 } = flashcardsApi
