@@ -19,6 +19,8 @@ export type Deck = {
   userId: string
 }
 
+export type DeckId = Pick<Deck, 'id'>
+
 export type DecksListResponse = {
   items: Deck[]
   pagination: PaginationModel
@@ -42,10 +44,7 @@ export type CreateDeckArgs = {
   name: string
 }
 
-export type DeckResponse = Omit<Deck, 'updated'>
-export type DeleteDeckResponse = Omit<Deck, 'author' | 'isFavorite'>
-
-export type DeckId = { id: string }
-
+export type GetDeckResponse = Omit<Deck, 'updated'>
 export type UpdateDeckResponse = DeleteDeckResponse
 export type UpdateDeckArgs = DeckId & Partial<CreateDeckArgs>
+export type DeleteDeckResponse = Omit<Deck, 'author' | 'isFavorite'>

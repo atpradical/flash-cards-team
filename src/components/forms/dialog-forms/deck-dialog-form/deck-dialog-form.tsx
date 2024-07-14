@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
-import { DeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
+import { GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -27,7 +27,7 @@ type DeckDialogFormValues = z.infer<typeof DeckDialogFormScheme>
 
 type DeckDialogFormProps = {
   action?: DIALOG_ACTION
-  deck?: DeckResponse
+  deck?: GetDeckResponse
   onOpenChange: (open: boolean) => void
   open: boolean
 }
@@ -40,7 +40,7 @@ export const DeckDialogForm = ({
 }: DeckDialogFormProps) => {
   const title = action === DIALOG_ACTION.CREATE ? 'Add New Deck' : 'Change Deck'
 
-  const { id = '', isPrivate = false, name = '' } = deck ?? ({} as DeckResponse)
+  const { id = '', isPrivate = false, name = '' } = deck ?? ({} as GetDeckResponse)
 
   const [createDeck, { isLoading: isCreateLoading }] = useCreateDeckMutation()
   const [updateDeck, { isLoading: isUpdateLoading }] = useUpdateDeckMutation()

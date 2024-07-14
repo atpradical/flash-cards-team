@@ -2,9 +2,9 @@ import {
   CreateDeckArgs,
   CreateDeckResponse,
   DeckId,
-  DeckResponse,
   DecksListResponse,
   DeleteDeckResponse,
+  GetDeckResponse,
   GetDecksArgs,
   UpdateDeckArgs,
   UpdateDeckResponse,
@@ -38,7 +38,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
-      getDeck: builder.query<DeckResponse, DeckId>({
+      getDeck: builder.query<GetDeckResponse, DeckId>({
         providesTags: ['Deck'],
         query: ({ id }) => {
           return {
@@ -74,6 +74,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
       }),
     }
   },
+  overrideExisting: false,
 })
 
 export const {

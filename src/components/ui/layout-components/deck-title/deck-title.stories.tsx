@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 
 import { DeckTitle as DeckTitleComponent } from '@/components/ui/layout-components'
 import { store } from '@/services'
-import { DeckResponse } from '@/services/decks/deck.types'
+import { GetDeckResponse } from '@/services/decks/deck.types'
 
 const meta = {
   argTypes: {},
@@ -17,7 +17,7 @@ export default meta
 
 export const DeckTitle: Story = {
   args: {
-    deck: { name: "Friend's Deck" } as DeckResponse,
+    deck: { name: "Friend's Deck" } as GetDeckResponse,
     learnDeckPath: '',
   },
   render: args => {

@@ -64,6 +64,7 @@ export const cardsApi = flashcardsApi.injectEndpoints({
       }),
     }
   },
+  overrideExisting: false,
 })
 
 export const {
