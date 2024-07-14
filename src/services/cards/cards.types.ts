@@ -1,12 +1,5 @@
 import { Nullable } from '@/common/types'
 
-export type PaginationModel = {
-  currentPage: number
-  itemsPerPage: number
-  totalItems: number
-  totalPages: number
-}
-
 export type Card = {
   answer: string
   answerImg?: Nullable<string>
@@ -22,6 +15,8 @@ export type Card = {
   updated: string
   userId: string
 }
+
+export type CardId = Pick<Card, 'id'>
 
 export type CardsListResponse = {
   items: Card[]
@@ -53,6 +48,10 @@ export type CreateCardArgs = {
   questionVideo?: string
 }
 
+export type UpdateCardResponse = Omit<Card, 'grade'>
+
+export type UpdateCardArgs = GetCardArgs & Partial<CreateCardArgs>
+
 export type GetRandomCardToLearnResponse = Omit<Card, 'userId'>
 
 export type GetRandomCardToLearnArgs = {
@@ -60,6 +59,9 @@ export type GetRandomCardToLearnArgs = {
   previousCard?: string
 }
 
-export type UpdateCardResponse = Omit<Card, 'grade'>
-
-export type UpdateCardArgs = GetCardArgs & Partial<CreateCardArgs>
+export type PaginationModel = {
+  currentPage: number
+  itemsPerPage: number
+  totalItems: number
+  totalPages: number
+}

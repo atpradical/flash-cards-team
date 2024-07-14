@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 
 import { DeleteDialogForm as DeleteDialogFormComponent } from '@/components/forms'
-import { store } from '@/services/store'
+import { store } from '@/services'
 import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
 

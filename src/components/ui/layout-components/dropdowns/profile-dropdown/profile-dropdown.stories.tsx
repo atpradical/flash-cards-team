@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom'
 import dummyImage from '@/assets/webp/avatar-default.webp'
 import { ProfileDropdown as ProfileDropdownComponent } from '@/components/ui/layout-components'
 import { Avatar } from '@/components/ui/primitives'
-import { store } from '@/services/store'
+import { store } from '@/services'
 
 const meta = {
   argTypes: {},

@@ -3,20 +3,20 @@ import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
-import {
-  DialogFormFooter as Footer,
-  DialogFromHeader as Header,
-  DialogFormSection as Section,
-} from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, DialogContent as Content, Dialog } from '@/components/ui/primitives'
-import { Card } from '@/services/cards/cards.types'
-import { useCreateCardMutation, useUpdateCardMutation } from '@/services/flashcards-api'
+import { Card, useCreateCardMutation, useUpdateCardMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+
+import {
+  DialogFormFooter as Footer,
+  DialogFromHeader as Header,
+  DialogFormSection as Section,
+} from '../container-components'
 
 const CardDialogFormScheme = z.object({
   answer: cardAnswerScheme,

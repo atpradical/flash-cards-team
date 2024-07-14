@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 
 import { CardsHeader } from '@/components/ui/layout-components'
-import { store } from '@/services/store'
+import { store } from '@/services'
 import { Layout } from '@/shared/ui/layout'
 
 export function App() {

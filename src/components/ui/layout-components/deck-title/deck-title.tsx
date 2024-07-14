@@ -4,14 +4,14 @@ import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { SettingsDropdown } from '@/components/ui/layout-components'
 import { Image, Typography } from '@/components/ui/primitives'
-import { DeckResponse } from '@/services/decks/deck.types'
+import { GetDeckResponse } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './deck-title.styles'
 
 type DeckTitleProps = {
-  deck: DeckResponse
+  deck: GetDeckResponse
   learnDeckPath: string
 }
 
