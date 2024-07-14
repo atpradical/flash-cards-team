@@ -25,3 +25,34 @@
     border-radius: var(--border-radius-s);
   }
 }
+
+.trash {
+  width: var(--icon-size-m);
+  height: var(--icon-size-m);
+  color: var(--color-danger-500);
+}
+
+.delete {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  padding: 6px;
+
+  background-color: rgb(23 23 23 / 70%);
+  box-shadow: 0 0 5px rgb(250 250 250 / 60%);
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(128 128 128 / 70%);
+  }
+
+  &:active {
+    background-color: rgb(23 23 23 / 70%);
+  }
+}
+
+.relative {
+  position: relative;
+  width: 100%;
+}
