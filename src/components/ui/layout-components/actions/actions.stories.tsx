@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
 import { Actions } from '@/components/ui/layout-components'
-import { store } from '@/services/store'
+import { store } from '@/services'
 import { VARIANT } from '@/shared/enums'
 import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'

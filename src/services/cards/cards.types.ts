@@ -63,3 +63,5 @@ export type GetRandomCardToLearnArgs = {
 export type UpdateCardResponse = Omit<Card, 'grade'>
 
 export type UpdateCardArgs = GetCardArgs & Partial<CreateCardArgs>
+
+export type CardId = { id: string }

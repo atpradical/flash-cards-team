@@ -1,16 +1,14 @@
 import { useForm } from 'react-hook-form'
 
-import {
-  DialogFormFooter as Footer,
-  DialogFromHeader as Header,
-} from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
-import { useDeleteCardMutation, useDeleteDeckMutation } from '@/services/flashcards-api'
+import { useDeleteCardMutation, useDeleteDeckMutation } from '@/services'
 import { DIALOG_ENTITY } from '@/shared/enums'
 import { entityIdScheme } from '@/shared/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+
+import { DialogFormFooter as Footer, DialogFromHeader as Header } from '../container-components'
 
 const DeleteFormScheme = z.object({
   entityId: entityIdScheme,

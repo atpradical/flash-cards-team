@@ -1,6 +1,5 @@
 import { Nullable } from '@/common/types'
-
-import { PaginationModel } from '../cards/cards.types'
+import { PaginationModel } from '@/services'
 
 export type Author = {
   id: string

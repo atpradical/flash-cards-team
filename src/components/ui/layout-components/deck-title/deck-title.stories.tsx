@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
 import { DeckTitle as DeckTitleComponent } from '@/components/ui/layout-components'
+import { store } from '@/services'
 import { DeckResponse } from '@/services/decks/deck.types'
-import { store } from '@/services/store'
 
 const meta = {
   argTypes: {},
