@@ -26,7 +26,7 @@ export const Slider = forwardRef<SliderRef, Props>(
     }
 
     return (
-      <FlexContainer ai={'flex-start'} fd={'column'}>
+      <div>
         {label && <Typography as={'label'}>{label}</Typography>}
         <FlexContainer>
           <Typography className={cn.outputWrap} variant={'body1'}>
@@ -51,7 +51,7 @@ export const Slider = forwardRef<SliderRef, Props>(
             {range[1]}
           </Typography>
         </FlexContainer>
-      </FlexContainer>
+      </div>
     )
   }
 )
