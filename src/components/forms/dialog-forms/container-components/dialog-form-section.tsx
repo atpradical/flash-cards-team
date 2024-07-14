@@ -8,7 +8,7 @@ import { DIALOG_ACTION, RATIO } from '@/shared/enums'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 
 import { cn } from '../dialog-forms.styles'
-import { DialogImageDelete as Delete } from '../dialog-image-delete'
+import { DialogImageDelete as Delete } from './dialog-image-delete'
 
 // todo: ask Andrey to recheck generic type
 type Props<T extends FieldValues> = {
