@@ -17,11 +17,11 @@ const icons = {
 }
 
 export const SettingsDropdown = ({ learnDeckPath, onDelete, onEdit }: DropdownSettingsProps) => {
+  const trigger = <MoreVerticalOutline className={cn.triggerIcon} />
+
   return (
     <Root>
-      <Trigger asChild className={cn.trigger}>
-        <MoreVerticalOutline className={cn.triggerIcon} />
-      </Trigger>
+      <Trigger className={cn.trigger}>{trigger}</Trigger>
       <Content>
         <Arrow />
         <DropdownItem icon={icons.play} path={learnDeckPath} title={'Learn'} />
