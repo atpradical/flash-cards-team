@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 
 import { CardDialogForm as CardDialogFormComponent } from '@/components/forms/'
 import { store } from '@/services/store'
+import { DIALOG_ACTION } from '@/shared/enums'
 import { action } from '@storybook/addon-actions'
 
 const meta = {
@@ -19,12 +20,13 @@ type Story = StoryObj<typeof meta>
 
 export const CardDialogForm: Story = {
   args: {
+    action: DIALOG_ACTION.UPDATE,
     onOpenChange: action('onOpenChange action invoked!'),
     open: true,
   },
-  render: () => (
+  render: args => (
     <Provider store={store}>
-      <CardDialogFormComponent {...CardDialogForm.args} />
+      <CardDialogFormComponent {...args} />
     </Provider>
   ),
 }

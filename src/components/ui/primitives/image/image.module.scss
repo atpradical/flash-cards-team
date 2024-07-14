@@ -1,6 +1,7 @@
 .container {
   overflow: hidden;
   flex-shrink: 0;
+  max-width: 100%;
 }
 
 .image {
@@ -22,5 +23,5 @@
 }
 
 .xl {
-  width: 484px;
+  width: 492px;
 }

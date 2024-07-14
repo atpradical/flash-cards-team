@@ -4,10 +4,17 @@ import { Provider } from 'react-redux'
 
 import { DeckDialogForm as DeckDialogFormComponent } from '@/components/forms'
 import { store } from '@/services/store'
+import { DIALOG_ACTION } from '@/shared/enums'
 import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {
+    action: {
+      control: {
+        options: [DIALOG_ACTION.CREATE, DIALOG_ACTION.UPDATE],
+        type: 'select',
+      },
+    },
     open: { control: 'boolean' },
   },
   component: DeckDialogFormComponent,
@@ -19,6 +26,7 @@ type Story = StoryObj<typeof meta>
 
 export const DeckDialogForm: Story = {
   args: {
+    action: DIALOG_ACTION.UPDATE,
     onOpenChange: action('onOpenChange action invoked!'),
     open: true,
   },
