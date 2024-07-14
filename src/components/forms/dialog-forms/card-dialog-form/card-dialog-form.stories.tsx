@@ -21,7 +21,6 @@ type Story = StoryObj<typeof meta>
 export const CardDialogForm: Story = {
   args: {
     action: DIALOG_ACTION.UPDATE,
-    cardId: 'cly7c2vqa0drxpb015rp9sbi7',
     onOpenChange: action('onOpenChange action invoked!'),
     open: true,
   },
