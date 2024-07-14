@@ -34,10 +34,10 @@
 
 .delete {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 6px;
+  right: 6px;
 
-  padding: 5px;
+  padding: 6px;
 
   background-color: rgb(23 23 23 / 70%);
   box-shadow: 0 0 5px rgb(250 250 250 / 60%);
@@ -55,12 +55,4 @@
 .relative {
   position: relative;
   width: 100%;
-}
-
-.hidden {
-  display: none;
-}
-
-.show {
-  display: inline-flex;
 }
