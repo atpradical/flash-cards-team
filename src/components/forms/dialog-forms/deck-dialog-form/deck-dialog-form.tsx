@@ -41,7 +41,7 @@ export const DeckDialogForm = ({
 }: DeckDialogFormProps) => {
   const title = action === DIALOG_ACTION.CREATE ? 'Add New Deck' : 'Change Deck'
 
-  const { id = 'badID', isPrivate = false, name = '' } = deck ?? ({} as DeckResponse)
+  const { id = '', isPrivate = false, name = '' } = deck ?? ({} as DeckResponse)
 
   const [createDeck, { isLoading: isCreateLoading }] = useCreateDeckMutation()
   const [updateDeck, { isLoading: isUpdateLoading }] = useUpdateDeckMutation()

@@ -26,7 +26,7 @@ export const SettingsDropdown = ({ learnDeckPath, onDelete, onEdit }: DropdownSe
         <Arrow />
         <DropdownItem icon={icons.play} path={learnDeckPath} title={'Learn'} />
         <DropdownItem icon={icons.edit} onClick={onEdit} title={'Edit'} />
-        <DropdownItem icon={icons.delete} noSep onClick={onDelete} title={'Delete'} />
+        <DropdownItem icon={icons.delete} noSeparator onClick={onDelete} title={'Delete'} />
       </Content>
     </Root>
   )

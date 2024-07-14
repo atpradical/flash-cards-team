@@ -7,12 +7,12 @@ import { cn } from '../../dropdowns.styles'
 
 type Props = {
   icon: ReactNode
-  noSep?: boolean
+  noSeparator?: boolean
   path?: string
   title: string
 } & ComponentPropsWithoutRef<typeof Item>
 export const DropdownItem = (props: Props) => {
-  const { icon, noSep = false, onClick, path, title, ...rest } = props
+  const { icon, noSeparator = false, onClick, path, title, ...rest } = props
 
   return (
     <>
@@ -21,7 +21,7 @@ export const DropdownItem = (props: Props) => {
           {icon} {title}
         </Typography>
       </Item>
-      {!noSep && <Separator />}
+      {!noSeparator && <Separator />}
     </>
   )
 }
