@@ -79,6 +79,7 @@ export const CardDialogForm = ({
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'14px'}>
               <Section
+                action={action}
                 control={control}
                 cover={dummyCover}
                 label={'Question?'}
@@ -87,6 +88,7 @@ export const CardDialogForm = ({
                 uploadImageHandler={uploadImageHandler}
               />
               <Section
+                action={action}
                 control={control}
                 cover={dummyCover}
                 label={'Answer'}

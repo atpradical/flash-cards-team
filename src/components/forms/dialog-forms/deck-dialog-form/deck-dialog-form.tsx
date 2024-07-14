@@ -75,6 +75,7 @@ export const DeckDialogForm = ({
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'24px'}>
               <Section
+                action={action}
                 control={control}
                 cover={dummyCover}
                 label={"Deck's Name?"}
