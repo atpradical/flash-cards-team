@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
-import { DialogBody as Body, Dialog, DialogContent, Progress } from '@/components/ui/primitives'
-import { useCreateDeckMutation } from '@/services/flashcards-api'
+import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
+import { DeckResponse } from '@/services/decks/deck.types'
+import { useCreateDeckMutation, useUpdateDeckMutation } from '@/services/flashcards-api'
 import { DIALOG_ACTION } from '@/shared/enums'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -27,31 +28,41 @@ type DeckDialogFormValues = z.infer<typeof DeckDialogFormScheme>
 
 type DeckDialogFormProps = {
   action?: DIALOG_ACTION
-  deckId?: string
+  deck?: DeckResponse
   onOpenChange: (open: boolean) => void
   open: boolean
 }
 
 export const DeckDialogForm = ({
   action = DIALOG_ACTION.CREATE,
+  deck,
   onOpenChange,
   open,
 }: DeckDialogFormProps) => {
   const title = action === DIALOG_ACTION.CREATE ? 'Add New Deck' : 'Change Deck'
 
-  const [createDeck, { isLoading, isSuccess }] = useCreateDeckMutation()
+  const { id = '', isPrivate = false, name = '' } = deck ?? ({} as DeckResponse)
+
+  const [createDeck, { isLoading: isCreateLoading }] = useCreateDeckMutation()
+  const [updateDeck, { isLoading: isUpdateLoading }] = useUpdateDeckMutation()
+  const isLoading = isCreateLoading || isUpdateLoading
 
   const { control, handleSubmit, reset } = useForm<DeckDialogFormValues>({
+    defaultValues: {
+      isPrivate,
+      name,
+    },
     mode: 'onSubmit',
     resolver: zodResolver(DeckDialogFormScheme),
   })
 
   const formHandler = handleSubmit(formData => {
-    createDeck(formData)
-    if (isSuccess) {
+    if (action === DIALOG_ACTION.CREATE) {
+      createDeck(formData).then(() => cancelFormHandler())
       reset()
+    } else {
+      updateDeck({ ...formData, id }).then(() => cancelFormHandler())
     }
-    onOpenChange(false)
   })
 
   const cancelFormHandler = () => {
@@ -63,21 +74,17 @@ export const DeckDialogForm = ({
     e.preventDefault()
   }
 
-  if (isLoading) {
-    return <Progress />
-  }
-
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
-        <Header title={title} />
+        <Header load={isLoading} title={title} />
         <Body>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'24px'}>
               <Section
                 control={control}
                 cover={dummyCover}
-                label={"Deck's Name?"}
+                label={name}
                 name={'name'}
                 noSubtitle
                 placeholder={'How should we call your deck?'}

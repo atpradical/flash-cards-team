@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import { Link, generatePath, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons'
-import { CardDialogForm, DeckDialogForm, DeleteDialogForm } from '@/components/forms'
+import { CardDialogForm } from '@/components/forms'
 import { DeckTitle } from '@/components/ui/layout-components'
 import { DeckTable } from '@/components/ui/layout-components/tables'
 import { Button, TextField } from '@/components/ui/primitives'
@@ -19,52 +19,30 @@ import { EmptyDeck } from './empty-deck'
 
 export const DeckPage = () => {
   const [showCreateNewCardDialogForm, setShowCreateNewCardDialogForm] = useState(false)
-  const [showAddNewDeckDialogForm, setShowAddNewDeckDialogForm] = useState(false)
-  const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
 
-  const { deckId } = useParams()
-  const learnDeckPath = deckId ? generatePath(PATH.CARD_LEARN, { deckId }) : 'bad-deckId'
+  const { deckId = '' } = useParams()
+  const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId })
 
   const [search, setSearch] = useState('')
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const {
-    data: deck = {} as Deck,
-    error: deckError,
-    isFetching: isFetchingDeck,
-  } = useGetDeckQuery({ id: deckId ?? '' })
+  const { data: deck = {} as Deck, isFetching: isFetchingDeck } = useGetDeckQuery({
+    id: deckId,
+  })
 
   const {
     data: cardsData,
-    error: cardsError,
     isFetching: isFetchingCards,
+    isLoading: isLoadingCards,
   } = useGetCardsQuery({
     currentPage,
-    deckId: deckId ?? '',
+    deckId: deckId,
     itemsPerPage,
     question: search || undefined,
   })
 
   const { items: cards = [], pagination = {} as PaginationModel } = cardsData ?? {}
-
-  // todo: delete console.log with error during err handling task completion
-  console.log(cardsError)
-  console.log(deckError)
-  console.log('deck', deck)
-  console.log('deckId', deckId)
-
-  const editDeckHandler = () => {
-    setShowAddNewDeckDialogForm(!showAddNewDeckDialogForm)
-  }
-
-  const deleteDeckHandler = () => {
-    setShowDeleteDeckDialogForm(!showDeleteDeckDialogForm)
-  }
-
-  const createCardHandler = () => {
-    setShowCreateNewCardDialogForm(!showCreateNewCardDialogForm)
-  }
 
   const searchCardHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.currentTarget.value)
@@ -81,9 +59,8 @@ export const DeckPage = () => {
 
   const fetching = isFetchingCards || isFetchingDeck
 
-  const isEmpty = cards.length === 0 && !search
+  const isEmpty = cards.length === 0 && !search && !isLoadingCards
 
-  // todo: delete mock data from components props during relevant Routing or RTKQuery task.
   return (
     <Page load={fetching}>
       <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'} pd={'0 20px'}>
@@ -92,30 +69,24 @@ export const DeckPage = () => {
           Back to Decks List
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
-          <DeckTitle
-            cover={deck.cover}
-            learnDeckPath={learnDeckPath}
-            onDelete={deleteDeckHandler}
-            onEdit={editDeckHandler}
-            title={(deck.name ??= 'Name Deck')}
-          />
+          <DeckTitle deck={deck} learnDeckPath={learnDeckPath} />
           {!isEmpty && (
             <FlexContainer fd={'column'} gap={'20px'}>
               <Button as={Link} className={cn.cardControl} to={learnDeckPath}>
                 Learn Deck
               </Button>
               {/* todo: add check if current Deck Author is me then show Button*/}
-              <Button className={cn.cardControl} onClick={createCardHandler}>
+              <Button className={cn.cardControl} onClick={setShowCreateNewCardDialogForm}>
                 Add New Card
               </Button>
             </FlexContainer>
           )}
         </FlexContainer>
-        {isEmpty && <EmptyDeck createCardHandler={createCardHandler} />}
+        {isEmpty && <EmptyDeck onClick={setShowCreateNewCardDialogForm} />}
         {!isEmpty && (
           <>
             <TextField
-              label={'Find question'}
+              label={'Find card by question'}
               onChange={searchCardHandler}
               placeholder={'Find card'}
               value={search}
@@ -132,16 +103,9 @@ export const DeckPage = () => {
             />
           </>
         )}
-        <CardDialogForm onOpenChange={createCardHandler} open={showCreateNewCardDialogForm} />
-        <DeckDialogForm
-          onOpenChange={setShowAddNewDeckDialogForm}
-          open={showAddNewDeckDialogForm}
-        />
-        <DeleteDialogForm
-          entityId={deckId ?? ''}
-          name={deck.name}
-          onOpenChange={deleteDeckHandler}
-          open={showDeleteDeckDialogForm}
+        <CardDialogForm
+          onOpenChange={setShowCreateNewCardDialogForm}
+          open={showCreateNewCardDialogForm}
         />
       </FlexContainer>
     </Page>

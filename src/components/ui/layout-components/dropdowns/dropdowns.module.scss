@@ -8,6 +8,10 @@
   display: flex;
 }
 
+.menu {
+  min-width: 218px;
+}
+
 .option,
 .triggerIcon {
   color: var(--color-light-100);

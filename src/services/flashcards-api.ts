@@ -11,10 +11,13 @@ import {
 import {
   CreateDeckArgs,
   CreateDeckResponse,
+  DeckId,
   DeckResponse,
   DecksListResponse,
   DeleteDeckResponse,
   GetDecksArgs,
+  UpdateDeckArgs,
+  UpdateDeckResponse,
 } from '@/services/decks/deck.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -28,7 +31,7 @@ export const flashcardsApi = createApi({
   }),
   endpoints: builder => {
     return {
-      addDeckToFavorite: builder.mutation<void, { id: string }>({
+      addDeckToFavorite: builder.mutation<void, DeckId>({
         invalidatesTags: ['Decks'],
         query: ({ id }) => ({
           method: 'POST',
@@ -58,7 +61,7 @@ export const flashcardsApi = createApi({
           url: `v1/cards/${id}`,
         }),
       }),
-      deleteDeck: builder.mutation<DeleteDeckResponse, { id: string }>({
+      deleteDeck: builder.mutation<DeleteDeckResponse, DeckId>({
         invalidatesTags: ['Decks'],
         query: ({ id }) => {
           return {
@@ -81,7 +84,8 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${deckId}/cards`,
         }),
       }),
-      getDeck: builder.query<DeckResponse, { id: string }>({
+      getDeck: builder.query<DeckResponse, DeckId>({
+        providesTags: ['Deck'],
         query: ({ id }) => {
           return {
             method: 'GET',
@@ -108,17 +112,25 @@ export const flashcardsApi = createApi({
           }
         },
       }),
-      removeDeckFromFavorite: builder.mutation<void, { id: string }>({
+      removeDeckFromFavorite: builder.mutation<void, DeckId>({
         invalidatesTags: ['Decks'],
         query: ({ id }) => ({
           method: 'DELETE',
           url: `v1/decks/${id}/favorite`,
         }),
       }),
+      updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
+        invalidatesTags: ['Decks', 'Deck'],
+        query: ({ id, ...body }) => ({
+          body,
+          method: 'PATCH',
+          url: `v1/decks/${id}`,
+        }),
+      }),
     }
   },
   reducerPath: 'flashcardsApi',
-  tagTypes: ['Cards', 'Decks'],
+  tagTypes: ['Cards', 'Decks', 'Deck'],
 })
 
 export const {
@@ -132,4 +144,5 @@ export const {
   useGetDecksQuery,
   useGetRandomCardQuery,
   useRemoveDeckFromFavoriteMutation,
+  useUpdateDeckMutation,
 } = flashcardsApi
