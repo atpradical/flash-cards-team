@@ -20,6 +20,7 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
   const [deckId, setDeckId] = useState('')
   const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
+
   const sortHandler = () => {
     onSort()
   }
@@ -34,12 +35,12 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
 
     const openEditDeckHandler = (deckId: string) => {
       setDeckId(deckId)
-      setShowEditDeckDialog(!showEditDeckDialog)
+      setShowEditDeckDialog(true)
     }
 
     const openDeleteDeckHandler = (deckId: string) => {
       setDeckId(deckId)
-      setShowDeleteDeckDialog(!showDeleteDeckDialog)
+      setShowDeleteDeckDialog(true)
     }
 
     return (
@@ -55,7 +56,7 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
             onLearn={learnDeckPath}
-            // todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery
+            // todo: определять variant для actions по isAuth
             variant={VARIANT.ALL}
           />
         </PositionCell>
@@ -75,12 +76,14 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>{TableContent}</TableBody>
-      <DeckDialogForm
-        action={DIALOG_ACTION.UPDATE}
-        deckId={deckId}
-        onOpenChange={setShowEditDeckDialog}
-        open={showEditDeckDialog}
-      />
+      {showEditDeckDialog && (
+        <DeckDialogForm
+          action={DIALOG_ACTION.UPDATE}
+          deck={deckData}
+          onOpenChange={setShowEditDeckDialog}
+          open={showEditDeckDialog}
+        />
+      )}
       <DeleteDialogForm
         entity={DIALOG_ENTITY.DECK}
         entityId={deckId}

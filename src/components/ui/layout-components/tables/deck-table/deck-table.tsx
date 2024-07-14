@@ -53,7 +53,7 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
             onDelete={() => onDeleteHandler(el.id)}
             onEdit={() => onEditHandler(el.id)}
             onLearn={''}
-            // todo: определять variant для actions по типу владения карточки, сделать в во время интеграции RTKQuery
+            // todo: определять variant для actions по isAuth
             variant={VARIANT.ONLY_EDITS}
           />
         </PositionCell>
