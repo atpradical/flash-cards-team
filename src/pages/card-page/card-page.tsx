@@ -4,9 +4,12 @@ import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button, Progress } from '@/components/ui/primitives'
 import { cn } from '@/pages/card-page/card-page.styles'
-import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
-import { Deck } from '@/services/decks/deck.types'
-import { useGetDeckQuery, useGetRandomCardQuery } from '@/services/flashcards-api'
+import {
+  Deck,
+  GetRandomCardToLearnResponse,
+  useGetDeckQuery,
+  useGetRandomCardQuery,
+} from '@/services'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'

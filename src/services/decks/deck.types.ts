@@ -1,6 +1,5 @@
 import { Nullable } from '@/common/types'
-
-import { PaginationModel } from '../cards/cards.types'
+import { PaginationModel } from '@/services'
 
 export type Author = {
   id: string
@@ -19,6 +18,8 @@ export type Deck = {
   updated: string
   userId: string
 }
+
+export type DeckId = Pick<Deck, 'id'>
 
 export type DecksListResponse = {
   items: Deck[]
@@ -43,10 +44,7 @@ export type CreateDeckArgs = {
   name: string
 }
 
-export type DeckResponse = Omit<Deck, 'updated'>
-export type DeleteDeckResponse = Omit<Deck, 'author' | 'isFavorite'>
-
-export type DeckId = { id: string }
-
+export type GetDeckResponse = Omit<Deck, 'updated'>
 export type UpdateDeckResponse = DeleteDeckResponse
 export type UpdateDeckArgs = DeckId & Partial<CreateDeckArgs>
+export type DeleteDeckResponse = Omit<Deck, 'author' | 'isFavorite'>

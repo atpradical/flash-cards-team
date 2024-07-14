@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
 import { DeckDialogForm as DeckDialogFormComponent } from '@/components/forms'
-import { store } from '@/services/store'
+import { store } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
 import { action } from '@storybook/addon-actions'
 

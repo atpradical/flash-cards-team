@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom'
 
 import { EditOutline, Heart, HeartOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
 import { Button } from '@/components/ui/primitives'
-import {
-  useAddDeckToFavoriteMutation,
-  useRemoveDeckFromFavoriteMutation,
-} from '@/services/flashcards-api'
+import { useAddDeckToFavoriteMutation, useRemoveDeckFromFavoriteMutation } from '@/services'
 import { ACTIONS, VARIANT } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { getActionButtons } from '@/shared/utils/get-action-buttons.utils'
+import { getActionButtons } from '@/shared/utils'
 
 import { cn } from './actions.styles'
 

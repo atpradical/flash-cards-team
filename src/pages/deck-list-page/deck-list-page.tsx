@@ -2,10 +2,8 @@ import { ChangeEvent, useState } from 'react'
 
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
-import { Button, Typography } from '@/components/ui/primitives'
-import { Pagination } from '@/components/ui/primitives/pagination'
-import { PaginationModel } from '@/services/cards/cards.types'
-import { useGetDecksQuery } from '@/services/flashcards-api'
+import { Button, Pagination, Typography } from '@/components/ui/primitives'
+import { PaginationModel, useGetDecksQuery } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
