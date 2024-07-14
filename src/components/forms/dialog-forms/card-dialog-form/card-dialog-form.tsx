@@ -76,8 +76,6 @@ export const CardDialogForm = ({
     e.preventDefault()
   }
 
-  console.log('deckId useParams', deckId)
-
   const isLoading = isLoadingCreateCard || isLoadingUpdateCard
 
   return (

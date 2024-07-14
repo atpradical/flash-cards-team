@@ -121,20 +121,20 @@ export const flashcardsApi = createApi({
           url: `v1/decks/${id}/favorite`,
         }),
       }),
-      updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
-        invalidatesTags: ['Decks', 'Deck'],
-        query: ({ id, ...body }) => ({
-          body,
-          method: 'PATCH',
-          url: `v1/decks/${id}`,
-        }),
-      }),
       updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
         invalidatesTags: ['Cards', 'Card'],
         query: ({ id, ...body }) => ({
           body,
           method: 'PATCH',
           url: `/v1/cards/${id}`,
+        }),
+      }),
+      updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
+        invalidatesTags: ['Decks', 'Deck'],
+        query: ({ id, ...body }) => ({
+          body,
+          method: 'PATCH',
+          url: `v1/decks/${id}`,
         }),
       }),
     }
@@ -155,6 +155,6 @@ export const {
   useGetDecksQuery,
   useGetRandomCardQuery,
   useRemoveDeckFromFavoriteMutation,
-  useUpdateDeckMutation,
   useUpdateCardMutation,
+  useUpdateDeckMutation,
 } = flashcardsApi
