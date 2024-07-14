@@ -1,24 +1,32 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import myImage from '@/assets/webp/dummy-cover.webp'
-import { DeckTitle } from '@/components/ui/layout-components'
-import { action } from '@storybook/addon-actions'
+import { Provider } from 'react-redux'
+
+import { DeckTitle as DeckTitleComponent } from '@/components/ui/layout-components'
+import { DeckResponse } from '@/services/decks/deck.types'
+import { store } from '@/services/store'
 
 const meta = {
   argTypes: {},
-  component: DeckTitle,
-  title: 'Components/DeckTitle',
-} satisfies Meta<typeof DeckTitle>
+  component: DeckTitleComponent,
+  title: 'Layout Components/DeckTitle',
+} satisfies Meta<typeof DeckTitleComponent>
 
 type Story = StoryObj<typeof meta>
 export default meta
 
-export const Example: Story = {
+export const DeckTitle: Story = {
   args: {
-    cover: myImage,
+    deck: { name: "Friend's Deck" } as DeckResponse,
     learnDeckPath: '',
-    onDelete: action('onDelete was action invoked'),
-    onEdit: action('onEdit was action invoked'),
-    title: "Fried's Deck",
+  },
+  render: args => {
+    return (
+      <Provider store={store}>
+        <div style={{ width: 'fit-content' }}>
+          <DeckTitleComponent {...args} />
+        </div>
+      </Provider>
+    )
   },
 }

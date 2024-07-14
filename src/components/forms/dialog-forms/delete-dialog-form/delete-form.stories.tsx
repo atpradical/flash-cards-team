@@ -1,7 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { Provider } from 'react-redux'
 
 import { DeleteDialogForm as DeleteDialogFormComponent } from '@/components/forms'
+import { store } from '@/services/store'
 import { action } from '@storybook/addon-actions'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {
@@ -21,5 +23,12 @@ export const DeleteDialogForm: Story = {
     name: 'Some Name',
     onOpenChange: action('onOpenChange action invoked!'),
     open: true,
+  },
+  render: args => {
+    return (
+      <Provider store={store}>
+        <DeleteDialogFormComponent {...args} />
+      </Provider>
+    )
   },
 }
