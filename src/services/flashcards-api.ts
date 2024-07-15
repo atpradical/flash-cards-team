@@ -10,7 +10,7 @@ export const flashcardsApi = createApi({
   }),
   endpoints: () => ({}),
   reducerPath: 'flashcardsApi',
-  tagTypes: ['Cards', 'Decks', 'Deck'],
+  tagTypes: ['Cards', 'Decks', 'Deck', 'User'],
 })
 
 export const {} = flashcardsApi

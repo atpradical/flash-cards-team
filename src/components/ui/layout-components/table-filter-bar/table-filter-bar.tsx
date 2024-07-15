@@ -7,20 +7,23 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { cn } from './table-filter-bar.styles'
 
 type TableFilterBarProps = {
+  onFilterTabChange: (value: string) => void
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
   onSliderChange: (sliderRange: number[]) => void
   search: string
   sliderRange: number[]
 }
 export const TableFilterBar = ({
+  onFilterTabChange,
   onSearchChange,
   onSliderChange,
   search,
   sliderRange,
 }: TableFilterBarProps) => {
   const tabs: Tab[] = [
-    { title: 'My Cards', value: 'tab-value-1' },
-    { title: 'All Cards', value: 'tab-value-2' },
+    { title: 'All Decks', value: 'allDecks' },
+    { title: 'My Decks', value: 'myDecks' },
+    { title: 'Favorites', value: 'favorites' },
   ]
 
   return (
@@ -31,7 +34,12 @@ export const TableFilterBar = ({
         value={search}
         variant={'search'}
       />
-      <TabSwitcher className={cn.tabs} label={'Show decks cards'} tabs={tabs} />
+      <TabSwitcher
+        className={cn.tabs}
+        label={'Show decks cards'}
+        onFilterTabChange={onFilterTabChange}
+        tabs={tabs}
+      />
       <Slider label={'Number of cards'} onRangeChange={onSliderChange} range={sliderRange} />
       <Button className={cn.button} variant={'secondary'}>
         <TrashOutline />

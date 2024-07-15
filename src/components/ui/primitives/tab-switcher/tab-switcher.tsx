@@ -14,13 +14,14 @@ export type Tab = {
 
 type Props = {
   label?: string
+  onFilterTabChange: (value: string) => void
   tabs: Tab[]
 } & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
 type TabSwitcherRef = ElementRef<typeof RadixTabs.Trigger>
 
 export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
-  ({ className, defaultValue, label, tabs, ...rest }, ref) => {
+  ({ className, label, onFilterTabChange, tabs, ...rest }, ref) => {
     const cn = {
       label: clsx(s.label),
       root: clsx(className),
@@ -28,7 +29,7 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
       trigger: clsx(s.tabsTrigger),
     }
 
-    const firstNotDisabledTabValue = tabs.find((tab: Tab) => !tab.disabled)?.value
+    const firstNotDisabledTabValue = tabs.find((tab: Tab) => tab.title === 'All Decks')?.value
 
     const TabsTriggers = tabs.map((tab: Tab, index) => (
       <RadixTabs.Trigger
@@ -52,7 +53,8 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
       <RadixTabs.Root
         activationMode={'automatic'}
         className={cn.root}
-        defaultValue={defaultValue ?? firstNotDisabledTabValue}
+        defaultValue={firstNotDisabledTabValue}
+        onValueChange={onFilterTabChange}
         {...rest}
       >
         {label && (

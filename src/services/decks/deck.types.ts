@@ -29,6 +29,7 @@ export type DecksListResponse = {
 export type GetDecksArgs = {
   authorId?: string
   currentPage?: number
+  favoritedBy?: string
   itemsPerPage?: number
   maxCardsCount?: number
   minCardsCount?: number
@@ -48,3 +49,13 @@ export type GetDeckResponse = Omit<Deck, 'updated'>
 export type UpdateDeckResponse = DeleteDeckResponse
 export type UpdateDeckArgs = DeckId & Partial<CreateDeckArgs>
 export type DeleteDeckResponse = Omit<Deck, 'author' | 'isFavorite'>
+
+export type Me = {
+  avatar: string
+  created: string
+  email: string
+  id: string
+  isEmailVerified: boolean
+  name: string
+  updated: string
+}
