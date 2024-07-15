@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
@@ -14,13 +14,15 @@ export const DeckListPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [search, setSearch] = useState('')
   const [sliderRange, setSliderRange] = useState<number[]>([0, 100])
+  const [orderBy, setOrderBy] = useState('')
 
-  const { data, isLoading } = useGetDecksQuery({
+  const { data, isFetching } = useGetDecksQuery({
     currentPage,
     itemsPerPage: itemsPerPage,
     maxCardsCount: sliderRange[1],
     minCardsCount: sliderRange[0],
-    name: search || undefined,
+    name: search,
+    orderBy: orderBy || undefined,
   })
 
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
@@ -39,11 +41,25 @@ export const DeckListPage = () => {
   }
 
   const sliderRangeHandler = (sliderRange: number[]) => {
+    setCurrentPage(1)
     setSliderRange([...sliderRange])
   }
 
+  // todo: check with Andrey: why without useMemo don't work.
+  const tableSortHandler = useMemo(
+    () => (orderBy: string) => {
+      setOrderBy(orderBy)
+      setCurrentPage(1)
+    },
+    []
+  )
+  // const tableSortHandler = (orderBy: string) => {
+  //   // setOrderBy(orderBy)
+  //   setCurrentPage(1)
+  // }
+
   return (
-    <Page load={isLoading}>
+    <Page load={isFetching}>
       <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>
         <FlexContainer jc={'space-between'}>
           <Typography as={'h1'} variant={'h1'}>
@@ -57,8 +73,7 @@ export const DeckListPage = () => {
           search={search}
           sliderRange={sliderRange}
         />
-        {/*todo: replace mock function during sorting task*/}
-        <DeckListTable decks={decks} onSort={() => {}} />
+        <DeckListTable decks={decks} onSort={tableSortHandler} />
         <Pagination
           currentPage={currentPage}
           onPageChange={paginationCurrentPageHandler}

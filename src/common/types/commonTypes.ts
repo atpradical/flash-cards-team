@@ -1,3 +1,5 @@
+import { ORDER } from '@/shared/enums'
+
 export type Option = {
   defaultValue?: boolean
   disabled?: boolean
@@ -16,3 +18,5 @@ export type User = {
 }
 
 export type Nullable<T> = T | null
+
+export type SortCriteria = Nullable<{ id: string; order: ORDER }>
