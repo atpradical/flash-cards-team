@@ -25,8 +25,6 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
   const [sortCriteria, setSortCriteria] = useState<SortCriteria>(null)
   const [sortId, setSortId] = useState('')
 
-  console.log('render')
-
   // todo: check with Andrey: Warning: Cannot update a component (`DeckListPage`) while rendering a different component (`DeckListTable`). To locate the bad setState() call inside `DeckListTable`.
   useEffect(() => {
     onSort(getSortString(sortCriteria))
