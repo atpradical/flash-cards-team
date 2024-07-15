@@ -1,6 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
+import { SortCriteria } from '@/common/types'
 import { TableHeaderCell } from '@/components/ui/primitives'
+import { ORDER } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
@@ -10,27 +12,39 @@ import { SortButton } from '../sort-button'
 
 type Props = {
   content: string
-  onSort?: () => void
+  id?: string
+  onSort?: (sort: SortCriteria) => void
+  sortId?: string
   sortable?: boolean
 } & ComponentPropsWithoutRef<typeof TableHeaderCell>
 
 type HeaderCellRef = ElementRef<typeof TableHeaderCell>
 
 export const HeaderCell = forwardRef<HeaderCellRef, Props>(
-  ({ children, content, onSort, sortable = true, ...rest }, ref) => {
-    const [showSort, setShowSort] = useState(false)
+  ({ children, content, id, onSort, sortId, sortable = true, ...rest }, ref) => {
+    const [order, setOrder] = useState<ORDER>(ORDER.ASC)
+    const cn = clsx(sortable && s.hcell)
 
-    const cn = clsx(sortable && !showSort && s.hcell)
+    const isSortable = sortable ? id === sortId : false
 
-    const showSortHandler = () => {
-      setShowSort(true)
+    const headerHandler = () => {
+      if (id && onSort) {
+        onSort({ id, order })
+      }
+    }
+
+    const sortButtonHandler = (order: ORDER) => {
+      setOrder(order)
+      if (id && onSort) {
+        onSort({ id, order })
+      }
     }
 
     return (
-      <TableHeaderCell {...rest} className={cn} onClick={showSortHandler} ref={ref}>
+      <TableHeaderCell {...rest} className={cn} onClick={headerHandler} ref={ref}>
         <FlexContainer gap={'6px'}>
           {content} {children}
-          {showSort && sortable && <SortButton onSort={onSort} />}
+          {isSortable && <SortButton onClick={sortButtonHandler} order={order} />}
         </FlexContainer>
       </TableHeaderCell>
     )

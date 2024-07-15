@@ -81,7 +81,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
             {showPassword && <EyeOffOutline className={cn.eye} />}
           </Button>
         )}
-
         {isSearch && !!inputValue && (
           <Button onClick={clearInputHandler} variant={'icon'}>
             <CloseOutline className={cn.icon} />

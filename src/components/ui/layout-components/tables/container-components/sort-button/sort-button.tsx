@@ -1,30 +1,29 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { ArrowUp } from '@/assets/icons'
 import { Button } from '@/components/ui/primitives'
-import { SORT_ORDER } from '@/shared/enums'
+import { ORDER } from '@/shared/enums'
 import clsx from 'clsx'
 
 import s from '@/components/ui/layout-components/tables/container-components/sort-button/sort-button.module.scss'
 
 type Props = {
-  onSort: () => void
+  onClick: (order: ORDER) => void
+  order: ORDER
 } & ComponentPropsWithoutRef<typeof Button>
 
 type SortButtonRef = ElementRef<typeof Button>
 
-export const SortButton = forwardRef<SortButtonRef, Props>(({ onSort, ...rest }, ref) => {
-  const [sortOrder, setSortOrder] = useState<SORT_ORDER>(SORT_ORDER.ASC)
+export const SortButton = forwardRef<SortButtonRef, Props>(({ onClick, order, ...rest }, ref) => {
+  const cn = clsx(s.sort, order === ORDER.DESC && s.desc)
 
-  const cn = clsx(s.sort, sortOrder === SORT_ORDER.DESC && s.desc)
-
-  const sortHandler = () => {
-    if (sortOrder === SORT_ORDER.ASC) {
-      setSortOrder(SORT_ORDER.DESC)
+  const sortHandler = (e: ChangeEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    if (order === ORDER.ASC) {
+      onClick(ORDER.DESC)
     } else {
-      setSortOrder(SORT_ORDER.ASC)
+      onClick(ORDER.ASC)
     }
-    onSort()
   }
 
   return (
