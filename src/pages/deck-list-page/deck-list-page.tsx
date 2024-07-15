@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react'
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
-import { PaginationModel, useGetDecksQuery } from '@/services'
+import { PaginationModel, useGetDecksQuery, useMeQuery } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -12,18 +12,31 @@ export const DeckListPage = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
+
   const [search, setSearch] = useState('')
   const [sliderRange, setSliderRange] = useState<number[]>([0, 100])
+  const { data: me } = useMeQuery()
+  const [currentFilterTab, setCurrentFilterTab] = useState('allDecks')
+  const authorIdFilter = currentFilterTab === 'myDecks' ? me?.id : undefined
+  const favoritedByFilter = currentFilterTab === 'favorites' ? me?.id : undefined
 
   const { data, isLoading } = useGetDecksQuery({
+    authorId: authorIdFilter,
     currentPage,
+    favoritedBy: favoritedByFilter,
     itemsPerPage: itemsPerPage,
     maxCardsCount: sliderRange[1],
     minCardsCount: sliderRange[0],
     name: search || undefined,
   })
-
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
+
+  const filterTabHandler = (value: string) => {
+    setCurrentFilterTab(value)
+    setCurrentPage(1)
+  }
+
+  console.log('decks', decks)
 
   const paginationCurrentPageHandler = (currentPage: number) => {
     setCurrentPage(currentPage)
@@ -52,6 +65,7 @@ export const DeckListPage = () => {
           <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
         </FlexContainer>
         <TableFilterBar
+          onFilterTabChange={filterTabHandler}
           onSearchChange={searchDeckHandler}
           onSliderChange={sliderRangeHandler}
           search={search}

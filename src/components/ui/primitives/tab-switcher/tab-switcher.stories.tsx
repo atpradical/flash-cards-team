@@ -22,13 +22,13 @@ type Story = StoryObj<typeof meta>
 export const TabSwitcherWithLabel: Story = {
   args: {
     label: 'Tab Switcher Label',
-    onValueChange: action('Mock action invoked'),
+    onFilterTabChange: action('Mock action invoked'),
     tabs: mockTabs1,
   },
 }
 export const BaseTabSwitcher: Story = {
   args: {
-    onValueChange: action('Mock action invoked'),
+    onFilterTabChange: action('Mock action invoked'),
     tabs: mockTabs1,
   },
 }
@@ -36,20 +36,20 @@ export const BaseTabSwitcher: Story = {
 export const TabSwitcherWithDefaultValue: Story = {
   args: {
     defaultValue: mockTabs1[1].value,
-    onValueChange: action('Mock action invoked'),
+    onFilterTabChange: action('Mock action invoked'),
     tabs: mockTabs1,
   },
 }
 
 export const TabSwitcherWithSeveralDisabledTabs: Story = {
   args: {
-    onValueChange: action('Mock action invoked'),
+    onFilterTabChange: action('Mock action invoked'),
     tabs: mockTabs2,
   },
 }
 export const TabSwitcherAllDisabledTabs: Story = {
   args: {
-    onValueChange: action('Mock action invoked'),
+    onFilterTabChange: action('Mock action invoked'),
     tabs: mockTabs3,
   },
 }

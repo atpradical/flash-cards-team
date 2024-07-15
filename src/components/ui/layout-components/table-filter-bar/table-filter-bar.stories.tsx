@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>
 
 export const TableFilterBarBase: Story = {
   args: {
+    onFilterTabChange: action('filter onValueChange callback invoked'),
     onSearchChange: action('search callback invoked'),
     onSliderChange: action('slider onValueChange callback invoked'),
     search: '',
