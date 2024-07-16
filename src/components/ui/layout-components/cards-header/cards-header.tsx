@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { IncubatorLogo } from '@/assets/icons'
-import { User } from '@/common/types'
 import { UserProfile } from '@/components/ui/layout-components'
+import { User } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
 

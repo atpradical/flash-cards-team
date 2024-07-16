@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, generatePath } from 'react-router-dom'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
-import { SortCriteria } from '@/common/types'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
 import {
@@ -15,7 +14,6 @@ import {
 import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
 import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
-import { getSortString } from '@/shared/utils/get-order-by-string'
 import clsx from 'clsx'
 
 import s from './deck-list-table.module.scss'
@@ -31,23 +29,16 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
   const [deckId, setDeckId] = useState('')
   const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
-  const [sortCriteria, setSortCriteria] = useState<SortCriteria>(null)
   const [sortId, setSortId] = useState('')
 
-  // todo: check with Andrey: Warning: Cannot update a component (`DeckListPage`) while rendering a different component (`DeckListTable`). To locate the bad setState() call inside `DeckListTable`.
-  useEffect(() => {
-    onSort(getSortString(sortCriteria))
-  }, [onSort, sortCriteria])
-
-  const sortHandler = (newSortCriteria: SortCriteria) => {
-    setSortId(newSortCriteria?.id ?? '')
-    setSortCriteria(newSortCriteria)
-    onSort(getSortString(sortCriteria))
+  const sortHandler = (orderBy: string, sortId: string) => {
+    setSortId(sortId)
+    onSort(orderBy)
   }
 
   const deckData = decks.find(el => el.id === deckId) ?? ({} as Deck)
 
-  const TableContent = decks.map(el => {
+  const tableRows = decks.map(el => {
     const cover = el.cover ?? dummyCover
     const cardsCount = el.cardsCount.toString()
     const updated = convertToDDMMYYYY(el.updated)
@@ -81,7 +72,6 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
             onLearn={learnDeckPath}
-            // todo: определять variant для actions по isAuth
             variant={VARIANT.ALL}
           />
         </PositionCell>
@@ -105,7 +95,7 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
           <HeaderCell content={'Actions'} sortable={false} />
         </TableRow>
       </TableHeader>
-      <TableBody>{TableContent}</TableBody>
+      <TableBody>{tableRows}</TableBody>
       {showEditDeckDialog && (
         <DeckDialogForm
           action={DIALOG_ACTION.UPDATE}

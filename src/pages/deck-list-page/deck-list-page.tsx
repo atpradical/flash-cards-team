@@ -1,72 +1,69 @@
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
 import { PaginationModel, useGetDecksQuery, useMeQuery } from '@/services'
+import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const DeckListPage = () => {
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState(10)
-  const [search, setSearch] = useState('')
-  const [sliderRange, setSliderRange] = useState<number[]>([0, 100])
-  const [orderBy, setOrderBy] = useState('')
+  const [searchParams] = useSearchParams()
+  const updateSearchParam = useSearchParamUpdater()
+
+  const currentPage = Number(searchParams.get('currentPage') ?? 1)
+  const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? 10)
+  const min = Number(searchParams.get('min') ?? 0)
+  const max = Number(searchParams.get('max') ?? 100)
+  const search = searchParams.get('search') ?? ''
+  const orderBy = searchParams.get('orderBy') ?? ''
+  const tab = searchParams.get('tab') ?? 'allDecks'
+
   const { data: me } = useMeQuery()
-  const [currentFilterTab, setCurrentFilterTab] = useState('allDecks')
-  const authorIdFilter = currentFilterTab === 'myDecks' ? me?.id : undefined
-  const favoritedByFilter = currentFilterTab === 'favorites' ? me?.id : undefined
+  const authorId = tab === 'myDecks' ? me?.id : undefined
+  const favoritedBy = tab === 'favorites' ? me?.id : undefined
 
   const { data, isFetching } = useGetDecksQuery({
-    authorId: authorIdFilter,
+    authorId,
     currentPage,
-    favoritedBy: favoritedByFilter,
-    itemsPerPage: itemsPerPage,
-    maxCardsCount: sliderRange[1],
-    minCardsCount: sliderRange[0],
+    favoritedBy,
+    itemsPerPage,
+    maxCardsCount: max,
+    minCardsCount: min,
     name: search || undefined,
     orderBy: orderBy || undefined,
   })
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
 
-  const filterTabHandler = (value: string) => {
-    setCurrentFilterTab(value)
-    setCurrentPage(1)
+  const tabHandler = (tab: string) => {
+    updateSearchParam({ currentPage: 1, tab })
   }
 
   const paginationCurrentPageHandler = (currentPage: number) => {
-    setCurrentPage(currentPage)
+    updateSearchParam({ currentPage })
   }
 
-  const paginationPageSizeHandler = (pageSize: string) => {
-    setCurrentPage(1)
-    setItemsPerPage(Number(pageSize))
+  const paginationPageSizeHandler = (itemsPerPage: string) => {
+    updateSearchParam({ currentPage: 1, itemsPerPage })
   }
 
-  const searchDeckHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value)
+  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
-  const sliderRangeHandler = (sliderRange: number[]) => {
-    setCurrentPage(1)
-    setSliderRange([...sliderRange])
+  const sliderHandler = (range: number[]) => {
+    const [min, max] = range
+
+    updateSearchParam({ currentPage: 1, max, min })
   }
 
-  // todo: check with Andrey: why without useMemo don't work.
-  const tableSortHandler = useMemo(
-    () => (orderBy: string) => {
-      setOrderBy(orderBy)
-      setCurrentPage(1)
-    },
-    []
-  )
-  // const tableSortHandler = (orderBy: string) => {
-  //   // setOrderBy(orderBy)
-  //   setCurrentPage(1)
-  // }
+  const tableSortHandler = (orderBy: string) => {
+    updateSearchParam({ currentPage: 1, orderBy })
+  }
 
   return (
     <Page load={isFetching}>
@@ -78,11 +75,12 @@ export const DeckListPage = () => {
           <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
         </FlexContainer>
         <TableFilterBar
-          onFilterTabChange={filterTabHandler}
-          onSearchChange={searchDeckHandler}
-          onSliderChange={sliderRangeHandler}
+          max={max}
+          min={min}
+          onSearchChange={searchHandler}
+          onSliderChange={sliderHandler}
+          onTabChange={tabHandler}
           search={search}
-          sliderRange={sliderRange}
         />
         <DeckListTable decks={decks} onSort={tableSortHandler} />
         <Pagination

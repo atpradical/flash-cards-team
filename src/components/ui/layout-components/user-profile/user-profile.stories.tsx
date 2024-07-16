@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 
 import { IncubatorLogo } from '@/assets/icons'
 import avatarDefault from '@/assets/webp/avatar-default.webp'
-import { User } from '@/common/types'
+import { User } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
 

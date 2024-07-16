@@ -1,5 +1,5 @@
-import { ActionButton } from '@/components/ui/layout-components/actions'
 import { ACTIONS, VARIANT } from '@/shared/enums'
+import { ActionButton } from '@/shared/types/common'
 
 export function getActionButtons(tools: ActionButton[], showTools: VARIANT) {
   switch (showTools) {

@@ -12,17 +12,20 @@ import { HeaderCell, PositionCell } from '../container-components'
 
 type DeckTableProps = {
   cards: Card[]
-  onSort: () => void
+  onSort: (orderBy: string) => void
 }
 
 export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
+  const [cardId, setCardId] = useState('')
   const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
-  const [cardId, setCardId] = useState('')
+  const [sortId, setSortId] = useState('')
+
   const cardData = cards.find(el => el.id === cardId) ?? ({} as Card)
 
-  const sortHandler = () => {
-    onSort()
+  const sortHandler = (orderBy: string, sortId: string) => {
+    setSortId(sortId)
+    onSort(orderBy)
   }
 
   const TableContent = cards.map(el => {
@@ -52,8 +55,6 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
             id={el.id}
             onDelete={() => onDeleteHandler(el.id)}
             onEdit={() => onEditHandler(el.id)}
-            onLearn={''}
-            // todo: определять variant для actions по isAuth
             variant={VARIANT.ONLY_EDITS}
           />
         </PositionCell>
@@ -65,10 +66,15 @@ export const DeckTable = ({ cards, onSort }: DeckTableProps) => {
     <TableContainer>
       <TableHeader>
         <TableRow>
-          <HeaderCell content={'Question'} onClick={sortHandler} />
-          <HeaderCell content={'Answer'} onClick={sortHandler} />
-          <HeaderCell content={'Last Updated'} onClick={sortHandler} />
-          <HeaderCell content={'Grade'} onClick={sortHandler} />
+          <HeaderCell content={'Question'} id={'question'} onSort={sortHandler} sortId={sortId} />
+          <HeaderCell content={'Answer'} id={'answer'} onSort={sortHandler} sortId={sortId} />
+          <HeaderCell
+            content={'Last Updated'}
+            id={'updated'}
+            onSort={sortHandler}
+            sortId={sortId}
+          />
+          <HeaderCell content={'Grade'} id={'grade'} onSort={sortHandler} sortId={sortId} />
           <HeaderCell content={'Actions'} sortable={false} />
         </TableRow>
       </TableHeader>

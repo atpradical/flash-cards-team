@@ -1,37 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useState } from 'react'
-
-import { TableFilterBar } from '@/components/ui/layout-components'
-import { action } from '@storybook/addon-actions'
+import { TableFilterBar as TableFilterBarCmponent } from '@/components/ui/layout-components'
+import { fn } from '@storybook/test'
 
 const meta = {
   argTypes: {},
-  component: TableFilterBar,
-  tags: ['autodocs'],
-  title: 'Components/TableFilterBar',
-} satisfies Meta<typeof TableFilterBar>
+  component: TableFilterBarCmponent,
+  title: 'Layout Components/TableFilterBar',
+} satisfies Meta<typeof TableFilterBarCmponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const TableFilterBarBase: Story = {
+export const TableFilterBar: Story = {
   args: {
-    onFilterTabChange: action('filter onValueChange callback invoked'),
-    onSearchChange: action('search callback invoked'),
-    onSliderChange: action('slider onValueChange callback invoked'),
+    max: 100,
+    min: 0,
+    onSearchChange: fn(),
+    onSliderChange: fn(),
+    onTabChange: fn(),
     search: '',
-    sliderRange: [0, 100],
-  },
-  render: args => {
-    const [sliderRange, setSliderRange] = useState([...args.sliderRange])
-
-    const sliderRangeHandler = (newRange: number[]) => {
-      setSliderRange([...newRange])
-    }
-
-    return (
-      <TableFilterBar {...args} onSliderChange={sliderRangeHandler} sliderRange={sliderRange} />
-    )
   },
 }

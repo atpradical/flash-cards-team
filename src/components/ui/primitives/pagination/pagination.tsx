@@ -25,7 +25,7 @@ export const Pagination = (props: Props) => {
     onPageSizeChange,
     pageSize = 10,
     siblingCount = 1,
-    totalCount,
+    totalCount = 1,
   } = props
 
   const totalPageCount = Math.ceil(totalCount / pageSize)

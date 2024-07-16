@@ -1,6 +1,6 @@
-import { Option } from '@/common/types'
-
 // ----------- Radio data example -----------
+import { Option } from '@/shared/types/common'
+
 export const mockRadio: Option[] = [
   { id: '1', label: 'Default', value: '1' },
   { id: '2', label: 'Comfortable', value: '2' },

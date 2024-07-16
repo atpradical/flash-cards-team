@@ -1,36 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useState } from 'react'
-
 import { action } from '@storybook/addon-actions'
 
-import { Slider } from './slider'
+import { Slider as SliderComponent } from './slider'
 
 const meta = {
   argTypes: {
     onValueChange: action('slider onValueChange callback invoked'),
     value: { control: 'object' },
   },
-  component: Slider,
-  tags: ['autodocs'],
-  title: 'Components/Slider',
-} satisfies Meta<typeof Slider>
+  component: SliderComponent,
+  title: 'Primitives Components/Slider',
+} satisfies Meta<typeof SliderComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SliderExample: Story = {
+export const Slider: Story = {
   args: {
-    onRangeChange: action('slider onValueChange callback invoked'),
+    max: 37,
+    min: 8,
+    onRangeChange: action('slider actions!'),
     range: [0, 100],
-  },
-  render: args => {
-    const [sliderRange, setSliderRange] = useState([...args.range])
-
-    const sliderHandler = (newRange: number[]) => {
-      setSliderRange([...newRange])
-    }
-
-    return <Slider onRangeChange={sliderHandler} range={sliderRange} />
   },
 }
