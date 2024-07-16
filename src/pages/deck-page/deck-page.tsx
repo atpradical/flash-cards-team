@@ -50,18 +50,6 @@ export const DeckPage = () => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
-  const paginationPageSizeHandler = (itemsPerPage: string) => {
-    updateSearchParam({ currentPage: 1, itemsPerPage })
-  }
-
-  const paginationCurrentPageHandler = (currentPage: number) => {
-    updateSearchParam({ currentPage })
-  }
-
-  const tableSortHandler = (orderBy: string) => {
-    updateSearchParam({ currentPage: 1, orderBy })
-  }
-
   const fetching = isFetchingCards || isFetchingDeck
 
   const isEmpty = cards.length === 0 && !search && !isLoadingCards
@@ -96,12 +84,10 @@ export const DeckPage = () => {
               value={search}
               variant={'search'}
             />
-            <DeckTable cards={cards} onSort={tableSortHandler} />
+            <DeckTable cards={cards} />
             <Pagination
               className={cn.pagination}
               currentPage={currentPage}
-              onPageChange={paginationCurrentPageHandler}
-              onPageSizeChange={paginationPageSizeHandler}
               pageSize={itemsPerPage}
               totalCount={pagination.totalItems}
             />

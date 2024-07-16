@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
 import { store } from '@/services'
-import { action } from '@storybook/addon-actions'
 
 import { DeckListTable as DeckListTableComponent } from './deck-list-table'
 import { DeckListExample } from './deck-list-table.mock'
@@ -21,7 +20,6 @@ export default meta
 export const DeckListTable: Story = {
   args: {
     decks: DeckListExample,
-    onSort: action('onSort action invoked!'),
   },
   render: () => (
     <MemoryRouter>

@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/primitives'
 import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
+import { useSearchParamUpdater } from '@/shared/hooks'
 import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
 import clsx from 'clsx'
 
@@ -22,18 +23,18 @@ import { HeaderCell, PositionCell } from '../container-components'
 
 type DecksListTableProps = {
   decks: Deck[]
-  onSort: (orderBy: string) => void
 }
 
-export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
+export const DeckListTable = ({ decks }: DecksListTableProps) => {
   const [deckId, setDeckId] = useState('')
   const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
   const [sortId, setSortId] = useState('')
+  const updateSearchParam = useSearchParamUpdater()
 
   const sortHandler = (orderBy: string, sortId: string) => {
     setSortId(sortId)
-    onSort(orderBy)
+    updateSearchParam({ currentPage: 1, orderBy })
   }
 
   const deckData = decks.find(el => el.id === deckId) ?? ({} as Deck)
