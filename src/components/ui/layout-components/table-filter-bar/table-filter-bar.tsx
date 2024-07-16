@@ -33,17 +33,17 @@ export const TableFilterBar = ({
     <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>
       <TextField
         onChange={onSearchChange}
-        placeholder={'Search decks'}
+        placeholder={'Filter deck by name'}
         value={search}
         variant={'search'}
       />
       <TabSwitcher
         className={cn.tabs}
-        label={'Show decks cards'}
+        label={'Show decks'}
         onTabChange={onTabChange}
         tabs={tabs}
       />
-      <Slider label={'Number of cards'} max={max} min={min} onRangeChange={onSliderChange} />
+      <Slider label={'Cards amount'} max={max} min={min} onRangeChange={onSliderChange} />
       <Button className={cn.button} variant={'secondary'}>
         <TrashOutline />
         Clear Filter

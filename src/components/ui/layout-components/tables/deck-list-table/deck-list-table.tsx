@@ -1,10 +1,16 @@
 import { useState } from 'react'
-import { generatePath } from 'react-router-dom'
+import { Link, generatePath } from 'react-router-dom'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
-import { TableBody, TableContainer, TableHeader, TableRow } from '@/components/ui/primitives'
+import {
+  Button,
+  TableBody,
+  TableContainer,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/primitives'
 import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
 import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
@@ -33,7 +39,8 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
     const cover = el.cover ?? dummyCover
     const cardsCount = el.cardsCount.toString()
     const updated = convertToDDMMYYYY(el.updated)
-    const learnDeckPath = generatePath(PATH.DECK, { deckId: el.id })
+    const deckPath = generatePath(PATH.DECK, { deckId: el.id })
+    const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
 
     const openEditDeckHandler = (deckId: string) => {
       setDeckId(deckId)
@@ -47,7 +54,11 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
 
     return (
       <TableRow key={el.id}>
-        <PositionCell content={el.name} entity={'Deck'} image={cover} />
+        <PositionCell entity={'Deck'} image={cover}>
+          <Button as={Link} className={clsx(s.link)} to={deckPath} variant={'link'}>
+            {el.name}
+          </Button>
+        </PositionCell>
         <PositionCell content={cardsCount} />
         <PositionCell content={updated} />
         <PositionCell content={el.author.name} />
