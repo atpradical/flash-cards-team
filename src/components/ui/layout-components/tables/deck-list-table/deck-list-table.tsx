@@ -5,11 +5,11 @@ import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
 import {
+  Button,
   TableBody,
   TableContainer,
   TableHeader,
   TableRow,
-  Typography,
 } from '@/components/ui/primitives'
 import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
@@ -34,10 +34,6 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
     onSort()
   }
 
-  const cn = {
-    link: clsx(s.link),
-  }
-
   const deckData = decks.find(el => el.id === deckId) ?? ({} as Deck)
 
   const TableContent = decks.map(el => {
@@ -60,9 +56,9 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
     return (
       <TableRow key={el.id}>
         <PositionCell entity={'Deck'} image={cover}>
-          <Typography as={Link} className={cn.link} to={deckPath}>
+          <Button as={Link} className={clsx(s.link)} to={deckPath} variant={'link'}>
             {el.name}
-          </Typography>
+          </Button>
         </PositionCell>
         <PositionCell content={cardsCount} />
         <PositionCell content={updated} />
