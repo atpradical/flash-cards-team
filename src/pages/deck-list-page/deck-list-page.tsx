@@ -5,7 +5,6 @@ import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
 import { PaginationModel, useGetDecksQuery, useMeQuery } from '@/services'
-import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -13,7 +12,6 @@ export const DeckListPage = () => {
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
 
   const [searchParams] = useSearchParams()
-  const updateSearchParam = useSearchParamUpdater()
 
   const currentPage = Number(searchParams.get('currentPage') ?? 1)
   const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? 10)
@@ -39,14 +37,6 @@ export const DeckListPage = () => {
   })
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
 
-  const paginationCurrentPageHandler = (currentPage: number) => {
-    updateSearchParam({ currentPage })
-  }
-
-  const paginationPageSizeHandler = (itemsPerPage: string) => {
-    updateSearchParam({ currentPage: 1, itemsPerPage })
-  }
-
   return (
     <Page load={isFetching}>
       <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>
@@ -60,8 +50,6 @@ export const DeckListPage = () => {
         <DeckListTable decks={decks} />
         <Pagination
           currentPage={currentPage}
-          onPageChange={paginationCurrentPageHandler}
-          onPageSizeChange={paginationPageSizeHandler}
           pageSize={itemsPerPage}
           totalCount={pagination.totalItems}
         />

@@ -1,6 +1,7 @@
 import { ArrowBack } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
 import { DOTS, usePagination } from '@/components/ui/primitives/pagination/hooks/usePagination'
+import { useSearchParamUpdater } from '@/shared/hooks'
 import clsx from 'clsx'
 
 import s from './pagination.module.scss'
@@ -10,23 +11,15 @@ import { Select } from '../select'
 type Props = {
   className?: string
   currentPage: number
-  onPageChange: (page: number) => void
-  onPageSizeChange: (pageSize: string) => void
   pageSize?: number
   siblingCount?: number
   totalCount: number
 }
 
 export const Pagination = (props: Props) => {
-  const {
-    className,
-    currentPage,
-    onPageChange,
-    onPageSizeChange,
-    pageSize = 10,
-    siblingCount = 1,
-    totalCount = 1,
-  } = props
+  const { className, currentPage, pageSize = 10, siblingCount = 1, totalCount = 1 } = props
+
+  const updateSearchParam = useSearchParamUpdater()
 
   const totalPageCount = Math.ceil(totalCount / pageSize)
 
@@ -39,15 +32,19 @@ export const Pagination = (props: Props) => {
   })
 
   const nextPageHandler = () => {
-    onPageChange(currentPage + 1)
+    updateSearchParam({ currentPage: currentPage + 1 })
   }
 
   const previousPageHandler = () => {
-    onPageChange(currentPage - 1)
+    updateSearchParam({ currentPage: currentPage - 1 })
+  }
+
+  const changePageHandler = (page: number) => {
+    updateSearchParam({ currentPage: page })
   }
 
   const changeDisplayPagesHandler = (pageSize: string) => {
-    onPageSizeChange(pageSize)
+    updateSearchParam({ currentPage: 1, itemsPerPage: pageSize })
   }
 
   const isFirstPage = currentPage === 1
@@ -78,7 +75,7 @@ export const Pagination = (props: Props) => {
     }
 
     return (
-      <Button className={isOptionSelected} key={key} onClick={() => onPageChange(+el)}>
+      <Button className={isOptionSelected} key={key} onClick={() => changePageHandler(+el)}>
         <Typography as={'span'} className={clsx(s.nowrap, isOptionSelected)}>
           {el}
         </Typography>
