@@ -64,7 +64,6 @@ export const DeckListTable = ({ decks, onSort }: DecksListTableProps) => {
             {el.name}
           </Typography>
         </PositionCell>
-        {/* here */}
         <PositionCell content={cardsCount} />
         <PositionCell content={updated} />
         <PositionCell content={el.author.name} />
