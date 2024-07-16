@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
 
 import { CardDialogForm as CardDialogFormComponent } from '@/components/forms/'
 import { store } from '@/services'
@@ -25,8 +26,10 @@ export const CardDialogForm: Story = {
     open: true,
   },
   render: args => (
-    <Provider store={store}>
-      <CardDialogFormComponent {...args} />
-    </Provider>
+    <MemoryRouter>
+      <Provider store={store}>
+        <CardDialogFormComponent {...args} />
+      </Provider>
+    </MemoryRouter>
   ),
 }

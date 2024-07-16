@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import {
   mockTabs1,
   mockTabs2,
@@ -26,6 +28,13 @@ export const TabSwitcher: Story = {
     onTabChange: action('Mock action invoked'),
     tabs: mockTabs1,
   },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TabSwitcherComponent {...args} />
+      </MemoryRouter>
+    )
+  },
 }
 
 export const TabSwitcherSomeDisabledTabs: Story = {
@@ -34,10 +43,24 @@ export const TabSwitcherSomeDisabledTabs: Story = {
     onTabChange: action('Mock action invoked'),
     tabs: mockTabs2,
   },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TabSwitcherComponent {...args} />
+      </MemoryRouter>
+    )
+  },
 }
 export const TabSwitcherDisabled: Story = {
   args: {
     onTabChange: action('Mock action invoked'),
     tabs: mockTabs3,
+  },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TabSwitcherComponent {...args} />
+      </MemoryRouter>
+    )
   },
 }
