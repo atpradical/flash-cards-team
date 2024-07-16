@@ -1,50 +1,32 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useState } from 'react'
+import { MemoryRouter } from 'react-router-dom'
 
-import { action } from '@storybook/addon-actions'
-
-import { Pagination } from './pagination'
+import { Pagination as PaginationComponent } from './pagination'
 
 const meta = {
   argTypes: {},
-  component: Pagination,
-  tags: ['autodocs'],
-  title: 'Components/Pagination',
-} satisfies Meta<typeof Pagination>
+  component: PaginationComponent,
+  title: 'Primitives Components/Pagination',
+} satisfies Meta<typeof PaginationComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const PaginationBase: Story = {
+export const Pagination: Story = {
   args: {
-    currentPage: 1,
-    onPageChange: action('onPageChange invoked'),
-    onPageSizeChange: action('onPageSizeChange invoked'),
+    currentPage: 5,
     pageSize: 10,
     totalCount: 90,
   },
 
-  render: () => {
-    const [currentPage, setCurrentPage] = useState(PaginationBase.args.currentPage)
-    const [pageSize, setPageSize] = useState(PaginationBase.args.pageSize)
-
-    function pageSizeChangeHandler(value: string) {
-      setPageSize(+value)
-    }
-
-    function pageChangeHandler(value: number) {
-      setCurrentPage(value)
-    }
-
+  render: args => {
     return (
-      <Pagination
-        currentPage={currentPage}
-        onPageChange={pageChangeHandler}
-        onPageSizeChange={pageSizeChangeHandler}
-        pageSize={pageSize}
-        totalCount={PaginationBase.args.totalCount}
-      />
+      <MemoryRouter>
+        <div style={{ width: 'fit-content' }}>
+          <PaginationComponent {...args} />
+        </div>
+      </MemoryRouter>
     )
   },
 }
