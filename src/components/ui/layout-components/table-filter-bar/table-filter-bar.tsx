@@ -1,24 +1,27 @@
 import { ChangeEvent } from 'react'
 
 import { TrashOutline } from '@/assets/icons'
-import { Button, Slider, Tab, TabSwitcher, TextField } from '@/components/ui/primitives'
+import { Button, Slider, TabSwitcher, TextField } from '@/components/ui/primitives'
+import { Tab } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './table-filter-bar.styles'
 
 type TableFilterBarProps = {
-  onFilterTabChange: (value: string) => void
+  max: number
+  min: number
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
   onSliderChange: (sliderRange: number[]) => void
+  onTabChange: (tab: string) => void
   search: string
-  sliderRange: number[]
 }
 export const TableFilterBar = ({
-  onFilterTabChange,
+  max,
+  min,
   onSearchChange,
   onSliderChange,
+  onTabChange,
   search,
-  sliderRange,
 }: TableFilterBarProps) => {
   const tabs: Tab[] = [
     { title: 'All Decks', value: 'allDecks' },
@@ -37,10 +40,10 @@ export const TableFilterBar = ({
       <TabSwitcher
         className={cn.tabs}
         label={'Show decks cards'}
-        onFilterTabChange={onFilterTabChange}
+        onTabChange={onTabChange}
         tabs={tabs}
       />
-      <Slider label={'Number of cards'} onRangeChange={onSliderChange} range={sliderRange} />
+      <Slider label={'Number of cards'} max={max} min={min} onRangeChange={onSliderChange} />
       <Button className={cn.button} variant={'secondary'}>
         <TrashOutline />
         Clear Filter

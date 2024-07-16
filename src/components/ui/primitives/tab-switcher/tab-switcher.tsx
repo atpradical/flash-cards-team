@@ -1,27 +1,22 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { Typography } from '@/components/ui/primitives'
+import { Tab } from '@/shared/types/common'
 import * as RadixTabs from '@radix-ui/react-tabs'
 import clsx from 'clsx'
 
 import s from './tab-switcher.module.scss'
 
-export type Tab = {
-  disabled?: boolean
-  title: string
-  value: string
-}
-
 type Props = {
   label?: string
-  onFilterTabChange: (value: string) => void
+  onTabChange: (tab: string) => void
   tabs: Tab[]
 } & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
 type TabSwitcherRef = ElementRef<typeof RadixTabs.Trigger>
 
 export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
-  ({ className, label, onFilterTabChange, tabs, ...rest }, ref) => {
+  ({ className, label, onTabChange, tabs, ...rest }, ref) => {
     const cn = {
       label: clsx(s.label),
       root: clsx(className),
@@ -54,7 +49,7 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
         activationMode={'automatic'}
         className={cn.root}
         defaultValue={firstNotDisabledTabValue}
-        onValueChange={onFilterTabChange}
+        onValueChange={onTabChange}
         {...rest}
       >
         {label && (

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { Link, generatePath, useParams } from 'react-router-dom'
+import { Link, generatePath, useParams, useSearchParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import { CardDialogForm } from '@/components/forms'
@@ -8,6 +8,7 @@ import { Button, Pagination, TextField } from '@/components/ui/primitives'
 import { cn } from '@/pages/deck-page/deck-page.styles'
 import { Deck, PaginationModel, useGetCardsQuery, useGetDeckQuery } from '@/services'
 import { PATH } from '@/shared/enums'
+import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -19,9 +20,13 @@ export const DeckPage = () => {
   const { deckId = '' } = useParams()
   const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId })
 
-  const [search, setSearch] = useState('')
-  const [itemsPerPage, setItemsPerPage] = useState(10)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [searchParams] = useSearchParams()
+  const updateSearchParam = useSearchParamUpdater()
+
+  const search = searchParams.get('search') ?? ''
+  const currentPage = Number(searchParams.get('currentPage') ?? 1)
+  const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? 10)
+  const orderBy = searchParams.get('orderBy') ?? ''
 
   const { data: deck = {} as Deck, isFetching: isFetchingDeck } = useGetDeckQuery({
     id: deckId,
@@ -35,22 +40,26 @@ export const DeckPage = () => {
     currentPage,
     deckId: deckId,
     itemsPerPage,
+    orderBy: orderBy || undefined,
     question: search || undefined,
   })
 
   const { items: cards = [], pagination = {} as PaginationModel } = cardsData ?? {}
 
-  const searchCardHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value)
+  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
-  const paginationPageSizeHandler = (pageSize: string) => {
-    setCurrentPage(1)
-    setItemsPerPage(Number(pageSize))
+  const paginationPageSizeHandler = (itemsPerPage: string) => {
+    updateSearchParam({ currentPage: 1, itemsPerPage })
   }
 
   const paginationCurrentPageHandler = (currentPage: number) => {
-    setCurrentPage(currentPage)
+    updateSearchParam({ currentPage })
+  }
+
+  const tableSortHandler = (orderBy: string) => {
+    updateSearchParam({ currentPage: 1, orderBy })
   }
 
   const fetching = isFetchingCards || isFetchingDeck
@@ -71,7 +80,6 @@ export const DeckPage = () => {
               <Button as={Link} className={cn.cardControl} to={learnDeckPath}>
                 Learn Deck
               </Button>
-              {/* todo: add check if current Deck Author is me then show Button*/}
               <Button className={cn.cardControl} onClick={setShowCreateNewCardDialogForm}>
                 Add New Card
               </Button>
@@ -83,12 +91,12 @@ export const DeckPage = () => {
           <>
             <TextField
               label={'Find card by question'}
-              onChange={searchCardHandler}
+              onChange={searchHandler}
               placeholder={'Find card'}
               value={search}
               variant={'search'}
             />
-            <DeckTable cards={cards} onSort={() => {}} />
+            <DeckTable cards={cards} onSort={tableSortHandler} />
             <Pagination
               className={cn.pagination}
               currentPage={currentPage}

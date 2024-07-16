@@ -1,4 +1,4 @@
-import { Nullable } from '@/common/types'
+import { Nullable } from '@/shared/types/common'
 
 export type Card = {
   answer: string
