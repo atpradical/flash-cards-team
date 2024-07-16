@@ -2,7 +2,6 @@ import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, DialogContent as Content, Dialog } from '@/components/ui/primitives'
 import { Card, useCreateCardMutation, useUpdateCardMutation } from '@/services'
@@ -87,7 +86,7 @@ export const CardDialogForm = ({
               <Section
                 action={action}
                 control={control}
-                cover={dummyCover}
+                cover={card?.questionImg ?? null}
                 label={'Question?'}
                 name={'question'}
                 placeholder={'Write down the question.'}
@@ -96,7 +95,7 @@ export const CardDialogForm = ({
               <Section
                 action={action}
                 control={control}
-                cover={dummyCover}
+                cover={card?.answerImg ?? null}
                 label={'Answer'}
                 name={'answer'}
                 placeholder={'What is the correct answer to the question?'}
