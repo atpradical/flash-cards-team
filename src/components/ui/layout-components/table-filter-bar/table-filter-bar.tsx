@@ -11,19 +11,9 @@ import { cn } from './table-filter-bar.styles'
 type TableFilterBarProps = {
   max: number
   min: number
-  onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
-  onSliderChange: (sliderRange: number[]) => void
-  onTabChange: (tab: string) => void
   search: string
 }
-export const TableFilterBar = ({
-  max,
-  min,
-  onSearchChange,
-  onSliderChange,
-  onTabChange,
-  search,
-}: TableFilterBarProps) => {
+export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
   const updateSearchParam = useSearchParamUpdater()
 
   const tabs: Tab[] = [
@@ -45,10 +35,24 @@ export const TableFilterBar = ({
     })
   }
 
+  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
+  }
+
+  const sliderHandler = (range: number[]) => {
+    const [min, max] = range
+
+    updateSearchParam({ currentPage: 1, max, min })
+  }
+
+  const tabHandler = (tab: string) => {
+    updateSearchParam({ currentPage: 1, tab })
+  }
+
   return (
     <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>
       <TextField
-        onChange={onSearchChange}
+        onChange={searchHandler}
         placeholder={'Search decks'}
         value={search}
         variant={'search'}
@@ -56,10 +60,10 @@ export const TableFilterBar = ({
       <TabSwitcher
         className={cn.tabs}
         label={'Show decks cards'}
-        onTabChange={onTabChange}
+        onTabChange={tabHandler}
         tabs={tabs}
       />
-      <Slider label={'Number of cards'} max={max} min={min} onRangeChange={onSliderChange} />
+      <Slider label={'Number of cards'} max={max} min={min} onRangeChange={sliderHandler} />
       <Button className={cn.button} onClick={clearFiltersHandler} variant={'secondary'}>
         <TrashOutline />
         Clear Filter

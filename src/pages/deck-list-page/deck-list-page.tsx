@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { DeckDialogForm } from '@/components/forms'
@@ -39,30 +39,12 @@ export const DeckListPage = () => {
   })
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
 
-  const tabHandler = (tab: string) => {
-    updateSearchParam({ currentPage: 1, tab })
-  }
-
   const paginationCurrentPageHandler = (currentPage: number) => {
     updateSearchParam({ currentPage })
   }
 
   const paginationPageSizeHandler = (itemsPerPage: string) => {
     updateSearchParam({ currentPage: 1, itemsPerPage })
-  }
-
-  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
-  }
-
-  const sliderHandler = (range: number[]) => {
-    const [min, max] = range
-
-    updateSearchParam({ currentPage: 1, max, min })
-  }
-
-  const tableSortHandler = (orderBy: string) => {
-    updateSearchParam({ currentPage: 1, orderBy })
   }
 
   return (
@@ -74,15 +56,8 @@ export const DeckListPage = () => {
           </Typography>
           <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
         </FlexContainer>
-        <TableFilterBar
-          max={max}
-          min={min}
-          onSearchChange={searchHandler}
-          onSliderChange={sliderHandler}
-          onTabChange={tabHandler}
-          search={search}
-        />
-        <DeckListTable decks={decks} onSort={tableSortHandler} />
+        <TableFilterBar max={max} min={min} search={search} />
+        <DeckListTable decks={decks} />
         <Pagination
           currentPage={currentPage}
           onPageChange={paginationCurrentPageHandler}
