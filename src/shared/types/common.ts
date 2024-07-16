@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { ACTIONS, ORDER } from 'src/shared/enums'
+import { ACTIONS, ORDER } from '@/shared/enums'
 
 export type Option = {
   defaultValue?: boolean
