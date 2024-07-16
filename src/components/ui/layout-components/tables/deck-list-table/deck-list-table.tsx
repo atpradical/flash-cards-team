@@ -16,11 +16,11 @@ import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
 import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
 import { getSortString } from '@/shared/utils/get-order-by-string'
-
-import { HeaderCell, PositionCell } from '../container-components'
 import clsx from 'clsx'
 
 import s from './deck-list-table.module.scss'
+
+import { HeaderCell, PositionCell } from '../container-components'
 
 type DecksListTableProps = {
   decks: Deck[]

@@ -21,14 +21,14 @@ export const DeckListPage = () => {
   const favoritedByFilter = currentFilterTab === 'favorites' ? me?.id : undefined
 
   const { data, isFetching } = useGetDecksQuery({
-      authorId: authorIdFilter,
+    authorId: authorIdFilter,
     currentPage,
-      favoritedBy: favoritedByFilter,
+    favoritedBy: favoritedByFilter,
     itemsPerPage: itemsPerPage,
     maxCardsCount: sliderRange[1],
     minCardsCount: sliderRange[0],
     name: search || undefined,
-      orderBy: orderBy || undefined,
+    orderBy: orderBy || undefined,
   })
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
 
