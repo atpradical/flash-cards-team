@@ -1,7 +1,6 @@
 import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
-import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
 import { GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
@@ -83,7 +82,7 @@ export const DeckDialogForm = ({
               <Section
                 action={action}
                 control={control}
-                cover={dummyCover}
+                cover={deck?.cover ?? null}
                 label={name}
                 name={'name'}
                 noSubtitle
