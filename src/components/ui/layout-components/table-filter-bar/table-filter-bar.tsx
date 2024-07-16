@@ -37,12 +37,7 @@ export const TableFilterBar = ({
         value={search}
         variant={'search'}
       />
-      <TabSwitcher
-        className={cn.tabs}
-        label={'Show decks'}
-        onTabChange={onTabChange}
-        tabs={tabs}
-      />
+      <TabSwitcher className={cn.tabs} label={'Show decks'} onTabChange={onTabChange} tabs={tabs} />
       <Slider label={'Cards amount'} max={max} min={min} onRangeChange={onSliderChange} />
       <Button className={cn.button} variant={'secondary'}>
         <TrashOutline />
