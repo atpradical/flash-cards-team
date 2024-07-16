@@ -1,9 +1,9 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
-import { SortCriteria } from '@/common/types'
 import { TableHeaderCell } from '@/components/ui/primitives'
 import { ORDER } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
+import { getOrderByString } from '@/shared/utils/get-order-by-string'
 import clsx from 'clsx'
 
 import s from './header-cell.module.scss'
@@ -13,7 +13,7 @@ import { SortButton } from '../sort-button'
 type Props = {
   content: string
   id?: string
-  onSort?: (sort: SortCriteria) => void
+  onSort?: (orderBy: string, sortId: string) => void
   sortId?: string
   sortable?: boolean
 } & ComponentPropsWithoutRef<typeof TableHeaderCell>
@@ -29,14 +29,14 @@ export const HeaderCell = forwardRef<HeaderCellRef, Props>(
 
     const headerHandler = () => {
       if (id && onSort) {
-        onSort({ id, order })
+        onSort(getOrderByString({ id, order }), id)
       }
     }
 
     const sortButtonHandler = (order: ORDER) => {
       setOrder(order)
       if (id && onSort) {
-        onSort({ id, order })
+        onSort(getOrderByString({ id, order }), id)
       }
     }
 

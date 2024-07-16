@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 
 import { LogOut, PersonOutline } from '@/assets/icons'
-import { User } from '@/common/types'
 import { Arrow, Content, Root, Trigger } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
+import { User } from '@/shared/types/common'
 
 import { DropdownItem, DropdownLabel } from '../container-components'
 import { cn } from '../dropdowns.styles'

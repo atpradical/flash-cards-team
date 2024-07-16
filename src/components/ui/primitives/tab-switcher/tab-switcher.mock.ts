@@ -1,4 +1,4 @@
-import { Tab } from '@/components/ui/primitives'
+import { Tab } from '@/shared/types/common'
 
 // ---------- TabSwitcher data example ----------
 export const mockTabs1: Tab[] = [

@@ -1,21 +1,15 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { EditOutline, Heart, HeartOutline, PlayCircleOutline, TrashOutline } from '@/assets/icons'
 import { Button } from '@/components/ui/primitives'
 import { useAddDeckToFavoriteMutation, useRemoveDeckFromFavoriteMutation } from '@/services'
 import { ACTIONS, VARIANT } from '@/shared/enums'
+import { ActionButton } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { getActionButtons } from '@/shared/utils'
 
 import { cn } from './actions.styles'
-
-export type ActionButton = {
-  handler?: () => void
-  icon: ReactNode
-  label: ACTIONS
-  path?: string
-}
 
 type ActionsProps = {
   id: string
@@ -38,14 +32,6 @@ export const Actions = ({
   const [addDeckToFavorite] = useAddDeckToFavoriteMutation()
   const [removeDeckFromFavorite] = useRemoveDeckFromFavoriteMutation()
 
-  const editHandler = () => {
-    onEdit()
-  }
-
-  const deleteHandler = () => {
-    onDelete()
-  }
-
   const favoriteHandler = () => {
     if (isFavorite) {
       removeDeckFromFavorite({ id })
@@ -60,8 +46,8 @@ export const Actions = ({
       label: ACTIONS.LEARN,
       path: onLearn,
     },
-    { handler: editHandler, icon: <EditOutline className={cn.action} />, label: ACTIONS.EDIT },
-    { handler: deleteHandler, icon: <TrashOutline className={cn.action} />, label: ACTIONS.DELETE },
+    { handler: onEdit, icon: <EditOutline className={cn.action} />, label: ACTIONS.EDIT },
+    { handler: onDelete, icon: <TrashOutline className={cn.action} />, label: ACTIONS.DELETE },
     {
       handler: favoriteHandler,
       icon: isFavorite ? (

@@ -7,49 +7,37 @@ import {
 } from '@/components/ui/primitives/tab-switcher/tab-switcher.mock'
 import { action } from '@storybook/addon-actions'
 
-import { TabSwitcher } from './tab-switcher'
+import { TabSwitcher as TabSwitcherComponent } from './tab-switcher'
 
 const meta = {
   argTypes: {},
-  component: TabSwitcher,
+  component: TabSwitcherComponent,
   tags: ['autodocs'],
-  title: 'Components/TabSwitcher',
-} satisfies Meta<typeof TabSwitcher>
+  title: 'Primitives Components/TabSwitcher',
+} satisfies Meta<typeof TabSwitcherComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const TabSwitcherWithLabel: Story = {
+export const TabSwitcher: Story = {
   args: {
+    defaultValue: 'tab-value-2',
     label: 'Tab Switcher Label',
-    onFilterTabChange: action('Mock action invoked'),
-    tabs: mockTabs1,
-  },
-}
-export const BaseTabSwitcher: Story = {
-  args: {
-    onFilterTabChange: action('Mock action invoked'),
+    onTabChange: action('Mock action invoked'),
     tabs: mockTabs1,
   },
 }
 
-export const TabSwitcherWithDefaultValue: Story = {
+export const TabSwitcherSomeDisabledTabs: Story = {
   args: {
-    defaultValue: mockTabs1[1].value,
-    onFilterTabChange: action('Mock action invoked'),
-    tabs: mockTabs1,
-  },
-}
-
-export const TabSwitcherWithSeveralDisabledTabs: Story = {
-  args: {
-    onFilterTabChange: action('Mock action invoked'),
+    defaultValue: 'tab-value-3',
+    onTabChange: action('Mock action invoked'),
     tabs: mockTabs2,
   },
 }
-export const TabSwitcherAllDisabledTabs: Story = {
+export const TabSwitcherDisabled: Story = {
   args: {
-    onFilterTabChange: action('Mock action invoked'),
+    onTabChange: action('Mock action invoked'),
     tabs: mockTabs3,
   },
 }

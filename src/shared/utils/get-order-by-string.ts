@@ -1,6 +1,6 @@
-import { SortCriteria } from '@/common/types'
+import { SortCriteria } from '@/shared/types/common'
 
-export function getSortString(sortCriteria: SortCriteria) {
+export function getOrderByString(sortCriteria: SortCriteria) {
   if (sortCriteria && sortCriteria.id != null && sortCriteria.order != null) {
     return `${sortCriteria.id}-${sortCriteria.order}`
   }

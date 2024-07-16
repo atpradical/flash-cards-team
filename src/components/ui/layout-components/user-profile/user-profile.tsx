@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 
-import { User } from '@/common/types'
 import { ProfileDropdown } from '@/components/ui/layout-components'
 import { Avatar, Button, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
+import { User } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './user-profile.styles'
