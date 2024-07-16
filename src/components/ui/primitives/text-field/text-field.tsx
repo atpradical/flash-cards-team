@@ -2,6 +2,7 @@ import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'rea
 
 import { CloseOutline, EyeOffOutline, EyeOutline, SearchOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
+import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import clsx from 'clsx'
 
@@ -38,6 +39,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const [showPassword, setShowPassword] = useState(false)
   const [inputValue, setInputValue] = useState(value)
+  const updateSearchParam = useSearchParamUpdater()
 
   const isPassword = variant === 'password'
   const inputType = !showPassword && isPassword ? 'password' : 'text'
@@ -54,6 +56,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const clearInputHandler = () => {
     setInputValue('')
+    // todo: check with Andrey how to clear search on Clear Filter button
+    updateSearchParam({ search: '' })
   }
 
   return (

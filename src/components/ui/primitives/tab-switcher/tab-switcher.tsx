@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { Typography } from '@/components/ui/primitives'
 import { Tab } from '@/shared/types/common'
@@ -23,6 +24,8 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
       tabTitle: clsx(s.tabTitle),
       trigger: clsx(s.tabsTrigger),
     }
+
+    const [searchParams] = useSearchParams()
 
     const firstNotDisabledTabValue = tabs.find((tab: Tab) => tab.title === 'All Decks')?.value
 
@@ -50,6 +53,7 @@ export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
         className={cn.root}
         defaultValue={firstNotDisabledTabValue}
         onValueChange={onTabChange}
+        value={searchParams.get('tab') ?? firstNotDisabledTabValue}
         {...rest}
       >
         {label && (

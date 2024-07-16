@@ -65,6 +65,19 @@ export const DeckListPage = () => {
     updateSearchParam({ currentPage: 1, orderBy })
   }
 
+  const clearFiltersHandler = () => {
+    updateSearchParam({
+      authorId: '',
+      currentPage: 1,
+      itemsPerPage: 10,
+      max: 100,
+      min: 0,
+      orderBy: '',
+      search: '',
+      tab: 'allDecks',
+    })
+  }
+
   return (
     <Page load={isFetching}>
       <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>
@@ -77,6 +90,7 @@ export const DeckListPage = () => {
         <TableFilterBar
           max={max}
           min={min}
+          onClearFilters={clearFiltersHandler}
           onSearchChange={searchHandler}
           onSliderChange={sliderHandler}
           onTabChange={tabHandler}

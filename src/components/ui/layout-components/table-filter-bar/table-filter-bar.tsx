@@ -10,6 +10,7 @@ import { cn } from './table-filter-bar.styles'
 type TableFilterBarProps = {
   max: number
   min: number
+  onClearFilters: () => void
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
   onSliderChange: (sliderRange: number[]) => void
   onTabChange: (tab: string) => void
@@ -18,6 +19,7 @@ type TableFilterBarProps = {
 export const TableFilterBar = ({
   max,
   min,
+  onClearFilters,
   onSearchChange,
   onSliderChange,
   onTabChange,
@@ -44,7 +46,7 @@ export const TableFilterBar = ({
         tabs={tabs}
       />
       <Slider label={'Number of cards'} max={max} min={min} onRangeChange={onSliderChange} />
-      <Button className={cn.button} variant={'secondary'}>
+      <Button className={cn.button} onClick={onClearFilters} variant={'secondary'}>
         <TrashOutline />
         Clear Filter
       </Button>
