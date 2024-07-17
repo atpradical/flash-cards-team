@@ -45,10 +45,6 @@ export const DeckListPage = () => {
   })
   const { items: decks = [], pagination = {} as PaginationModel } = data ?? {}
 
-  console.log('orderBy', orderBy)
-  console.log('orderByAuthor', orderByAuthor)
-  console.log('searchParams', searchParams)
-
   return (
     <Page load={isFetching}>
       <FlexContainer fd={'column'} gap={'24px'} pd={'0 20px'}>
