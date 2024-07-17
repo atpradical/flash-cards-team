@@ -39,7 +39,7 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
-  const sliderHandler = (range: number[]) => {
+  const sliderCommitHandler = (range: number[]) => {
     const [min, max] = range
 
     updateSearchParam({ currentPage: 1, max, min })
@@ -58,7 +58,7 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
         variant={'search'}
       />
       <TabSwitcher className={cn.tabs} label={'Show decks'} onTabChange={tabHandler} tabs={tabs} />
-      <Slider label={'Cards amount'} max={max} min={min} onRangeChange={sliderHandler} />
+      <Slider label={'Cards amount'} max={max} min={min} onValueCommit={sliderCommitHandler} />
       <Button className={cn.button} onClick={clearFiltersHandler} variant={'secondary'}>
         <TrashOutline />
         Clear Filter

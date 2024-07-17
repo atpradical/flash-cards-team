@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
 import { Typography } from '@/components/ui/primitives/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -11,14 +11,18 @@ type Props = {
   label?: string
   max: number
   min: number
-  onRangeChange: (value: number[]) => void
+  onRangeChange?: (value: number[]) => void
+  onValueCommit: (value: number[]) => void
   range?: number[]
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 type SliderRef = ElementRef<typeof RadixSlider.Root>
 
 export const Slider = forwardRef<SliderRef, Props>(
-  ({ label, max, min, minStepsBetweenThumbs = 1, onRangeChange, range, ...rest }, ref) => {
+  (
+    { label, max, min, minStepsBetweenThumbs = 1, onRangeChange, onValueCommit, range, ...rest },
+    ref
+  ) => {
     const cn = {
       outputWrap: clsx(s.outputWrap),
       range: clsx(s.range),
@@ -27,7 +31,12 @@ export const Slider = forwardRef<SliderRef, Props>(
       track: clsx(s.track),
     }
 
-    const value = range ?? [min, max]
+    const [value, setValue] = useState<number[]>(range ?? [min, max])
+
+    const onRangeChangeHandler = (newValue: number[]) => {
+      setValue(newValue)
+      onRangeChange?.(newValue)
+    }
 
     return (
       <div>
@@ -39,7 +48,8 @@ export const Slider = forwardRef<SliderRef, Props>(
           <RadixSlider.Root
             className={cn.root}
             minStepsBetweenThumbs={minStepsBetweenThumbs}
-            onValueChange={onRangeChange}
+            onValueChange={onRangeChangeHandler}
+            onValueCommit={onValueCommit}
             ref={ref}
             step={1}
             value={value}
