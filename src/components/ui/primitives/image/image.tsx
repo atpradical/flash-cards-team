@@ -20,7 +20,7 @@ export const Image = forwardRef<ImageRef, ImageProps>(
   ({ alt, className, ratio, src, variant, width, ...rest }, ref) => {
     const cn = {
       container: clsx(s.container, s[variant]),
-      image: clsx(s.image),
+      image: s.image,
     }
     const containerStyles: CSSProperties = {
       width,

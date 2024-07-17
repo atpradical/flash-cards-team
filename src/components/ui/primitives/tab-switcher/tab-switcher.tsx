@@ -19,10 +19,10 @@ type TabSwitcherRef = ElementRef<typeof RadixTabs.Trigger>
 export const TabSwitcher = forwardRef<TabSwitcherRef, Props>(
   ({ className, label, onTabChange, tabs, ...rest }, ref) => {
     const cn = {
-      label: clsx(s.label),
-      root: clsx(className),
-      tabTitle: clsx(s.tabTitle),
-      trigger: clsx(s.tabsTrigger),
+      label: s.label,
+      root: className,
+      tabTitle: s.tabTitle,
+      trigger: s.tabsTrigger,
     }
 
     const [searchParams] = useSearchParams()
