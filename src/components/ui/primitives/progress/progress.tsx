@@ -13,7 +13,7 @@ export const Progress = (props: ProgressProps) => {
   const { className, color } = props
   const cn = {
     indicator: clsx(s.indicator, className),
-    root: clsx(s.root),
+    root: s.root,
   }
 
   return (

@@ -1,13 +1,12 @@
 import { CloseOutline } from '@/assets/icons'
+import { Button } from '@/components/ui/primitives'
+import { Card } from '@/components/ui/primitives/card'
+import { Typography } from '@/components/ui/primitives/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import * as Toast from '@radix-ui/react-toast'
 import clsx from 'clsx'
 
 import s from './toast.module.scss'
-
-import { Button } from '../button'
-import { Card } from '../card'
-import { Typography } from '../typography'
 
 type ToasterProps = {
   description?: string
@@ -26,7 +25,7 @@ export const Toaster = ({
 }: ToasterProps) => {
   const cn = {
     button: clsx(s.button, s[variant]),
-    container: clsx(s.container),
+    container: s.container,
     root: clsx(s.root, s[variant]),
     viewport: clsx(s.viewport),
   }
