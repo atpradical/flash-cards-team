@@ -19,7 +19,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
     indicator: clsx(s.indicator, disabled && s.disabled),
     label: clsx(s.label, disabled && s.disabled),
     root: clsx(s.root, className),
-    wrapper: clsx(s.wrapper),
+    wrapper: s.wrapper,
   }
   const generatedId = useId()
   const checkboxId = id || generatedId

@@ -3,7 +3,6 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Typography } from '@/components/ui/primitives/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import * as RadixSlider from '@radix-ui/react-slider'
-import clsx from 'clsx'
 
 import s from './slider.module.scss'
 
@@ -20,11 +19,11 @@ type SliderRef = ElementRef<typeof RadixSlider.Root>
 export const Slider = forwardRef<SliderRef, Props>(
   ({ label, max, min, minStepsBetweenThumbs = 1, onRangeChange, range, ...rest }, ref) => {
     const cn = {
-      outputWrap: clsx(s.outputWrap),
-      range: clsx(s.range),
-      root: clsx(s.root),
-      thumb: clsx(s.thumb),
-      track: clsx(s.track),
+      outputWrap: s.outputWrap,
+      range: s.range,
+      root: s.root,
+      thumb: s.thumb,
+      track: s.track,
     }
 
     const value = range ?? [min, max]

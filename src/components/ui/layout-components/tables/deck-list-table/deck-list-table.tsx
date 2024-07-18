@@ -15,7 +15,6 @@ import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
 import { useSearchParamUpdater } from '@/shared/hooks'
 import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
-import clsx from 'clsx'
 
 import s from './deck-list-table.module.scss'
 
@@ -59,7 +58,7 @@ export const DeckListTable = ({ decks }: DecksListTableProps) => {
     return (
       <TableRow key={el.id}>
         <PositionCell entity={'Deck'} image={cover}>
-          <Button as={Link} className={clsx(s.link)} to={deckPath} variant={'link'}>
+          <Button as={Link} className={s.link} to={deckPath} variant={'link'}>
             {el.name}
           </Button>
         </PositionCell>

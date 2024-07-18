@@ -51,13 +51,13 @@ export const Pagination = (props: Props) => {
   const isLastPage = currentPage === totalPageCount
 
   const cn = {
-    arrow: clsx(s.arrow),
+    arrow: s.arrow,
     arrowRight: clsx(s.arrow, s.arrowRight),
     container: clsx(s.paginationContainer, className),
     dots: clsx(s.paginationOption, s.dots),
-    nowrap: clsx(s.nowrap),
-    option: clsx(s.paginationOption),
-    select: clsx(s.selectOption),
+    nowrap: s.nowrap,
+    option: s.paginationOption,
+    select: s.selectOption,
     selectedOption: clsx(s.paginationOption, s.selected),
   }
 
