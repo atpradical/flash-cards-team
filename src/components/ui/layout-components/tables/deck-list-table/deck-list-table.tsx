@@ -92,7 +92,12 @@ export const DeckListTable = ({ decks }: DecksListTableProps) => {
             onSort={sortHandler}
             sortId={sortId}
           />
-          <HeaderCell content={'Created by'} id={'created'} onSort={sortHandler} sortId={sortId} />
+          <HeaderCell
+            content={'Created by'}
+            id={'author.name'}
+            onSort={sortHandler}
+            sortId={sortId}
+          />
           <HeaderCell content={'Actions'} sortable={false} />
         </TableRow>
       </TableHeader>
