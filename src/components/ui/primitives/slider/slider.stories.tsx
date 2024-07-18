@@ -21,8 +21,8 @@ export const Slider: Story = {
   args: {
     max: 37,
     min: 8,
+    onCommit: action('slider commit actions!'),
     onRangeChange: action('slider actions!'),
-    onValueCommit: action('slider commit actions!'),
     range: [0, 100],
   },
 }
