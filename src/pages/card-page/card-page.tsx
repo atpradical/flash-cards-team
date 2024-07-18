@@ -7,8 +7,10 @@ import { cn } from '@/pages/card-page/card-page.styles'
 import {
   Deck,
   GetRandomCardToLearnResponse,
+  Grade,
   useGetDeckQuery,
   useGetRandomCardQuery,
+  useSaveGradeCardMutation,
 } from '@/services'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -28,11 +30,29 @@ export const CardPage = () => {
     data: card = {} as GetRandomCardToLearnResponse,
     error: cardError,
     isLoading: isCardLoading,
+    refetch,
   } = useGetRandomCardQuery({ id: deckId ?? '' })
 
-  console.log(deckError, cardError)
+  const [saveGrade, { isLoading }] = useSaveGradeCardMutation()
 
-  if (isLoadingDeck || isCardLoading) {
+  const onSubmit = async (data: Grade) => {
+    await saveGrade({
+      cardId: card.id,
+      grade: Number(data.grade),
+    })
+      .unwrap()
+      .then(res => {
+        if (res.id === card.id) {
+          console.log('no cards anymore')
+        }
+        refetch()
+      })
+  }
+
+  console.log('deckError, cardError', deckError, cardError)
+  console.log('card.id', card.id)
+
+  if (isLoadingDeck || isCardLoading || isLoading) {
     return <Progress />
   }
 
@@ -44,7 +64,7 @@ export const CardPage = () => {
           Back to Deck
         </Button>
         <FlexContainer jc={'center'}>
-          <LearnCard card={card} deckName={deck.name} />
+          <LearnCard card={card} deckName={deck.name} onSubmit={onSubmit} />
         </FlexContainer>
       </FlexContainer>
     </Page>

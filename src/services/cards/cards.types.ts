@@ -65,3 +65,12 @@ export type PaginationModel = {
   totalItems: number
   totalPages: number
 }
+
+export type Grade = {
+  grade: string
+}
+
+export type SaveGradeArgs = {
+  cardId: string
+  grade: number
+}

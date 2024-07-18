@@ -1,26 +1,29 @@
 import { useState } from 'react'
 
 import { Button, Card, Typography } from '@/components/ui/primitives'
-import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
+import { GetRandomCardToLearnResponse, Grade } from '@/services/cards/cards.types'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { LearnCardAnswer as Answer, LearnCardQuestion as Question } from './container-components'
 import { cn } from './learn-card.styles'
 
-type SelfRateFormProps = {
+type LearnCardProps = {
   card: GetRandomCardToLearnResponse
   deckName: string
+  onSubmit: (data: Grade) => void
 }
 
-export const LearnCard = ({ card, deckName }: SelfRateFormProps) => {
+export const LearnCard = ({ card, deckName, onSubmit }: LearnCardProps) => {
   const { answer, answerImg, question, questionImg, shots } = card
 
   const [showAnswer, setShowAnswer] = useState(false)
 
-  const onSubmitHandler = () => {}
-
   const showAnswerHandler = () => {
     setShowAnswer(true)
+  }
+
+  const onSubmitHandler = (data: Grade) => {
+    onSubmit(data)
   }
 
   return (
