@@ -44,7 +44,7 @@ export const DeckListTable = ({ decks }: DecksListTableProps) => {
     const cardsCount = el.cardsCount.toString()
     const updated = convertToDDMMYYYY(el.updated)
     const deckPath = generatePath(PATH.DECK, { deckId: el.id })
-    // const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
+    const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
 
     const openEditDeckHandler = (deckId: string) => {
       setDeckId(deckId)
@@ -72,7 +72,7 @@ export const DeckListTable = ({ decks }: DecksListTableProps) => {
             isFavorite={el.isFavorite}
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
-            onLearn={deckPath}
+            onLearn={learnDeckPath}
             variant={VARIANT.ALL}
           />
         </PositionCell>

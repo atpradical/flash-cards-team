@@ -1,16 +1,15 @@
+import { useEffect, useState } from 'react'
 import { Link, generatePath, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
-import { Button, Progress } from '@/components/ui/primitives'
+import { Button } from '@/components/ui/primitives'
 import { cn } from '@/pages/card-page/card-page.styles'
 import {
-  Deck,
   GetRandomCardToLearnResponse,
-  Grade,
   useGetDeckQuery,
   useGetRandomCardQuery,
-  useSaveGradeCardMutation,
+  useSaveGradeOfCardMutation,
 } from '@/services'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -20,51 +19,48 @@ export const CardPage = () => {
   const { deckId } = useParams()
   const deckPagePath = deckId && generatePath(PATH.DECK, { deckId })
 
-  const {
-    data: deck = {} as Deck,
-    error: deckError,
-    isLoading: isLoadingDeck,
-  } = useGetDeckQuery({ id: deckId ?? '' })
+  const { data: deck, isFetching: isDeckFetching } = useGetDeckQuery({ id: deckId ?? '' })
+  const { data: randomCard, isLoading: isRandomCardFetching } = useGetRandomCardQuery({
+    id: deckId ?? '',
+  })
 
-  const {
-    data: card = {} as GetRandomCardToLearnResponse,
-    error: cardError,
-    isLoading: isCardLoading,
-    refetch,
-  } = useGetRandomCardQuery({ id: deckId ?? '' })
+  const [cardToLearn, setCardToLearn] = useState(randomCard)
+  const [showAnswer, setShowAnswer] = useState(false)
 
-  const [saveGrade, { isLoading }] = useSaveGradeCardMutation()
+  useEffect(() => {
+    if (randomCard) {
+      setCardToLearn(randomCard)
+    }
+  }, [randomCard])
 
-  const onSubmit = async (data: Grade) => {
-    await saveGrade({
-      cardId: card.id,
-      grade: Number(data.grade),
-    })
-      .unwrap()
-      .then(res => {
-        if (res.id === card.id) {
-          console.log('no cards anymore')
-        }
-        refetch()
-      })
+  const [saveGrade, { isLoading: isSaveGradeLoading }] = useSaveGradeOfCardMutation()
+
+  const nextQuestionHandler = async (cardId: string, grade: number) => {
+    const result = await saveGrade({ cardId, grade, id: deck?.id ?? '' })
+
+    if (result) {
+      setShowAnswer(false)
+      setCardToLearn(result.data)
+    }
   }
 
-  console.log('deckError, cardError', deckError, cardError)
-  console.log('card.id', card.id)
-
-  if (isLoadingDeck || isCardLoading || isLoading) {
-    return <Progress />
-  }
+  const isLoad = isDeckFetching || isRandomCardFetching || isSaveGradeLoading
 
   return (
-    <Page>
+    <Page load={isLoad}>
       <FlexContainer fd={'column'} gap={'36px'} jc={'left'} pd={'0 20px'}>
         <Button as={Link} className={cn.goBack} to={deckPagePath} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
           Back to Deck
         </Button>
         <FlexContainer jc={'center'}>
-          <LearnCard card={card} deckName={deck.name} onSubmit={onSubmit} />
+          <LearnCard
+            card={cardToLearn ?? ({} as GetRandomCardToLearnResponse)}
+            deckName={deck?.name ?? ''}
+            onNextQuestion={nextQuestionHandler}
+            onShowAnswer={setShowAnswer}
+            showAnswer={showAnswer}
+          />
         </FlexContainer>
       </FlexContainer>
     </Page>

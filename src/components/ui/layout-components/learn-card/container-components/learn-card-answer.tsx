@@ -2,14 +2,21 @@ import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form'
 import { cn } from '@/components/ui/layout-components/learn-card/learn-card.styles'
 import { Image, Typography } from '@/components/ui/primitives'
-import { GetRandomCardToLearnResponse, Grade } from '@/services/cards/cards.types'
+import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
 import { RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 type CardPageAnswerProps = {
-  onSubmit: (data: Grade) => void
+  cardId: string
+  onNextQuestion: (cardId: string, grade: number) => void
 } & Pick<GetRandomCardToLearnResponse, 'answer' | 'answerImg'>
-export const LearnCardAnswer = ({ answer, answerImg, onSubmit }: CardPageAnswerProps) => {
+
+export const LearnCardAnswer = ({
+  answer,
+  answerImg,
+  cardId,
+  onNextQuestion,
+}: CardPageAnswerProps) => {
   const cover = answerImg ?? dummyCover
 
   return (
@@ -23,7 +30,7 @@ export const LearnCardAnswer = ({ answer, answerImg, onSubmit }: CardPageAnswerP
         </Typography>
       </FlexContainer>
       {cover && <Image alt={'Answer image'} ratio={RATIO.L} src={cover} variant={'l'} />}
-      <SelfRateForm onSubmit={onSubmit} />
+      <SelfRateForm cardId={cardId} onNextQuestion={onNextQuestion} />
     </FlexContainer>
   )
 }

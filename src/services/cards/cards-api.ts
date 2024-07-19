@@ -55,13 +55,13 @@ export const cardsApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
-      saveGradeCard: builder.mutation<Card, SaveGradeArgs>({
+      saveGradeOfCard: builder.mutation<Card, SaveGradeArgs>({
         invalidatesTags: ['Cards'],
-        query: ({ ...body }) => {
+        query: ({ id, ...body }) => {
           return {
             body,
             method: 'POST',
-            url: `/v1/decks/${body.cardId}/learn`,
+            url: `/v1/decks/${id}/learn`,
           }
         },
       }),
@@ -83,6 +83,6 @@ export const {
   useDeleteCardMutation,
   useGetCardsQuery,
   useGetRandomCardQuery,
-  useSaveGradeCardMutation,
+  useSaveGradeOfCardMutation,
   useUpdateCardMutation,
 } = cardsApi

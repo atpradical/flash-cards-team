@@ -1,5 +1,7 @@
 import { Nullable } from '@/shared/types/common'
 
+import { DeckId } from '../decks'
+
 export type Card = {
   answer: string
   answerImg?: Nullable<string>
@@ -73,4 +75,4 @@ export type Grade = {
 export type SaveGradeArgs = {
   cardId: string
   grade: number
-}
+} & DeckId
