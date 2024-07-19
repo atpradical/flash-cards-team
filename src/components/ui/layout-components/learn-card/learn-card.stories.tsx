@@ -1,21 +1,23 @@
-import { LearnCard } from '@/components/ui/layout-components'
+import { LearnCard as LearnCardComponent } from '@/components/ui/layout-components'
 import { learnCardData } from '@/components/ui/layout-components/learn-card/learn-card.mock'
 import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: LearnCard,
+  component: LearnCardComponent,
   title: 'Components/LearnCard',
-} satisfies Meta<typeof LearnCard>
+} satisfies Meta<typeof LearnCardComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const LearnCardBase: Story = {
+export const LearnCard: Story = {
   args: {
     card: learnCardData,
     deckName: 'Deck Name',
-    onSubmit: action('onSubmit action invoked!'),
+    onNextQuestion: action('onNextQuestion action invoked!'),
+    onShowAnswer: action('onShowAnswer action invoked!'),
+    showAnswer: true,
   },
 }
