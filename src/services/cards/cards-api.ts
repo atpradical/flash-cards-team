@@ -8,6 +8,7 @@ import {
   GetCardsArgs,
   GetRandomCardToLearnArgs,
   GetRandomCardToLearnResponse,
+  SaveGradeArgs,
   UpdateCardArgs,
   UpdateCardResponse,
 } from '@/services/cards/cards.types'
@@ -54,6 +55,16 @@ export const cardsApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
+      saveGradeOfCard: builder.mutation<Card, SaveGradeArgs>({
+        invalidatesTags: ['Cards'],
+        query: ({ id, ...body }) => {
+          return {
+            body,
+            method: 'POST',
+            url: `/v1/decks/${id}/learn`,
+          }
+        },
+      }),
       updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
         invalidatesTags: ['Cards'],
         query: ({ id, ...body }) => ({
@@ -72,5 +83,6 @@ export const {
   useDeleteCardMutation,
   useGetCardsQuery,
   useGetRandomCardQuery,
+  useSaveGradeOfCardMutation,
   useUpdateCardMutation,
 } = cardsApi

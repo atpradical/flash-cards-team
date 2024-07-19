@@ -1,1 +1,1 @@
-export * from './self-rate-form.stories'
+export * from './self-rate-form'

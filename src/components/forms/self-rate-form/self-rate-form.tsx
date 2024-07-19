@@ -8,33 +8,38 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledRadio } from '@/shared/ui/form-components/controlled-radio'
 import { z } from 'zod'
 
-const SelfRateScheme = z.object({ radio: radioScheme })
+const SelfRateScheme = z.object({ grade: radioScheme })
 
 type SelfRateFormValues = z.infer<typeof SelfRateScheme>
 
 type SelfRateFormProps = {
-  onSubmit: (data: SelfRateFormValues) => void
+  cardId: string
+  onNextQuestion: (cardId: string, grade: number) => void
 }
 
-export const SelfRateForm = ({ onSubmit }: SelfRateFormProps) => {
+const SelfRateOptions: Option[] = [
+  { id: '1', label: 'Did not know', value: '1' },
+  { id: '2', label: 'Forgot', value: '2' },
+  { id: '3', label: 'A lot of thought', value: '3' },
+  { id: '4', label: 'Confused', value: '4' },
+  { id: '5', label: 'Knew the answer', value: '5' },
+]
+
+export const SelfRateForm = ({ cardId, onNextQuestion }: SelfRateFormProps) => {
   const { control, handleSubmit } = useForm<SelfRateFormValues>({
+    defaultValues: { grade: '1' },
     mode: 'onSubmit',
   })
-  const formHandler = handleSubmit(data => onSubmit(data))
 
-  const SelfRateOptions: Option[] = [
-    { id: '1', label: 'Did not know', value: '1' },
-    { id: '2', label: 'Forgot', value: '2' },
-    { id: '3', label: 'A lot of thought', value: '3' },
-    { id: '4', label: 'Confused', value: '4' },
-    { id: '5', label: 'Knew the answer', value: '5' },
-  ]
+  const formHandler = handleSubmit(data => {
+    onNextQuestion(cardId, Number(data.grade))
+  })
 
   return (
     <form className={cn.form} onSubmit={formHandler}>
       <FlexContainer ai={'flex-start'} fd={'column'} gap={'12px'}>
         <Typography variant={'subtitle1'}>Rate yourself:</Typography>
-        <ControlledRadio control={control} name={'radio'} options={SelfRateOptions} />
+        <ControlledRadio control={control} name={'grade'} options={SelfRateOptions} />
         <Button className={cn.button} fullWidth>
           Next Question
         </Button>

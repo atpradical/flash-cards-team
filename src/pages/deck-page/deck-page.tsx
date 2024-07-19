@@ -50,12 +50,12 @@ export const DeckPage = () => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
-  const fetching = isFetchingCards || isFetchingDeck
+  const isLoad = isFetchingCards || isFetchingDeck
 
   const isEmpty = cards.length === 0 && !search && !isLoadingCards
 
   return (
-    <Page load={fetching}>
+    <Page load={isLoad}>
       <FlexContainer fd={'column'} gap={'24px'} jc={'space-between'} pd={'0 20px'}>
         <Button as={Link} className={cn.goBack} to={PATH.DECK_LIST} variant={'link'}>
           <ArrowBackOutline className={cn.icon} />
