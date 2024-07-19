@@ -1,7 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { Link } from 'react-router-dom'
 
 import { IncubatorLogo } from '@/assets/icons'
 import { UserProfile } from '@/components/ui/layout-components'
+import { PATH } from '@/shared/enums'
 import { User } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Header } from '@/shared/ui/header'
@@ -27,7 +29,9 @@ export const CardsHeader = ({
   return (
     <Header {...propsHeader}>
       <FlexContainer jc={'space-between'} pd={'0 20px'}>
-        <IncubatorLogo />
+        <Link to={PATH.DECK_LIST}>
+          <IncubatorLogo />
+        </Link>
         <UserProfile isAuthorized={isAuthorized} userData={mockUser} />
       </FlexContainer>
     </Header>

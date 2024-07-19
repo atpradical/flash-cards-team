@@ -2,7 +2,6 @@ import { ComponentPropsWithoutRef } from 'react'
 
 import { Star, StarOutline } from '@/assets/icons'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import clsx from 'clsx'
 
 import s from './grade.module.scss'
 
@@ -13,7 +12,7 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof FlexContainer>
 
 export const Grade = ({ stars = 0, ...rest }: Props) => {
-  const cn = clsx(s.star)
+  const cn = s.star
 
   const starElements = Array.from({ length: STARS_MAX }, (_, index) => {
     return index < stars ? (
