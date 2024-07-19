@@ -58,6 +58,13 @@ export const decksApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
+      getMinMax: builder.query<any, void>({
+        keepUnusedDataFor: 1,
+        query: () => ({
+          method: 'GET',
+          url: 'v2/decks/min-max-cards',
+        }),
+      }),
       me: builder.query<Me, void>({
         // для демонстрации
         providesTags: ['User'],
@@ -92,6 +99,7 @@ export const {
   useDeleteDeckMutation,
   useGetDeckQuery,
   useGetDecksQuery,
+  useGetMinMaxQuery,
   useMeQuery,
   useRemoveDeckFromFavoriteMutation,
   useUpdateDeckMutation,

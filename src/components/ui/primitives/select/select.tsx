@@ -35,12 +35,12 @@ export const Select = forwardRef<SelectRef, SelectProps>(
     ref
   ) => {
     const cn = {
-      disabled: clsx(s.disabled),
-      dropdownArrow: clsx(s.dropdownArrow),
+      disabled: s.disabled,
+      dropdownArrow: s.dropdownArrow,
       label: clsx(s.label, disabled && s.disabled),
-      placeholder: clsx(s.placeholder),
-      selectContent: clsx(s.selectContent),
-      selectOption: clsx(s.selectItem),
+      placeholder: s.placeholder,
+      selectContent: s.selectContent,
+      selectOption: s.selectItem,
       selectTrigger: clsx(s.selectTrigger, className),
     }
 

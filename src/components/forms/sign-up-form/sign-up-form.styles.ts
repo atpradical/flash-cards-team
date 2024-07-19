@@ -1,10 +1,8 @@
-import clsx from 'clsx'
-
 import s from './sign-up-form.module.scss'
 
 export const cn = {
-  button: clsx(s.button),
-  container: clsx(s.container),
-  form: clsx(s.form),
-  reminder: clsx(s.reminder),
+  button: s.button,
+  container: s.container,
+  form: s.form,
+  reminder: s.reminder,
 }
