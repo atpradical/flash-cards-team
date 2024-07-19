@@ -4,4 +4,20 @@
     color: var(--color-warning-100);
     background-color: var(--color-dark-300);
   }
+
+  &:active {
+    color: var(--color-warning-500);
+  }
+}
+
+.sort {
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  transition: transform var(--transition-duration-default) ease-in-out;
+}
+
+.desc {
+  transform: rotate(var(--180-deg));
+  transition: transform var(--transition-duration-default) ease-in-out;
 }

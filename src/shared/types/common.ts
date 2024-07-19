@@ -21,6 +21,7 @@ export type ActionButton = {
   icon: ReactNode
   label: ACTIONS
   path?: string
+  title?: string
 }
 
 export type User = {
