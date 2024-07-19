@@ -1,10 +1,7 @@
 .sort {
-  transform: rotate(var(--minus-180-deg));
-
   width: 20px;
   height: 20px;
   padding: 2px;
-
   transition: transform var(--transition-duration-default) ease-in-out;
 
   &:hover {
@@ -19,6 +16,6 @@
 }
 
 .desc {
-  transform: rotate(var(--minus-360-deg));
+  transform: rotate(var(--minus-180-deg));
   transition: transform var(--transition-duration-default) ease-in-out;
 }
