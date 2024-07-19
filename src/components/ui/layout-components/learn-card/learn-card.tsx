@@ -1,26 +1,29 @@
-import { useState } from 'react'
-
 import { Button, Card, Typography } from '@/components/ui/primitives'
-import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
+import { GetRandomCardToLearnResponse } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { LearnCardAnswer as Answer, LearnCardQuestion as Question } from './container-components'
 import { cn } from './learn-card.styles'
 
-type SelfRateFormProps = {
+type LearnCardProps = {
   card: GetRandomCardToLearnResponse
   deckName: string
+  onNextQuestion: (cardId: string, grade: number) => void
+  onShowAnswer: (show: boolean) => void
+  showAnswer: boolean
 }
 
-export const LearnCard = ({ card, deckName }: SelfRateFormProps) => {
-  const { answer, answerImg, question, questionImg, shots } = card
-
-  const [showAnswer, setShowAnswer] = useState(false)
-
-  const onSubmitHandler = () => {}
+export const LearnCard = ({
+  card,
+  deckName,
+  onNextQuestion,
+  onShowAnswer,
+  showAnswer,
+}: LearnCardProps) => {
+  const { answer, answerImg, id: cardId, question, questionImg, shots } = card
 
   const showAnswerHandler = () => {
-    setShowAnswer(true)
+    onShowAnswer(true)
   }
 
   return (
@@ -31,7 +34,12 @@ export const LearnCard = ({ card, deckName }: SelfRateFormProps) => {
         </Typography>
         <Question question={question} questionImg={questionImg} shots={shots} />
         {showAnswer ? (
-          <Answer answer={answer} answerImg={answerImg} onSubmit={onSubmitHandler} />
+          <Answer
+            answer={answer}
+            answerImg={answerImg}
+            cardId={cardId}
+            onNextQuestion={onNextQuestion}
+          />
         ) : (
           <Button className={cn.button} fullWidth onClick={showAnswerHandler}>
             Show Answer
