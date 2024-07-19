@@ -21,7 +21,9 @@ export const SettingsDropdown = ({ learnDeckPath, onDelete, onEdit }: DropdownSe
 
   return (
     <Root>
-      <Trigger className={cn.trigger}>{trigger}</Trigger>
+      <Trigger className={cn.trigger} title={'Deck settings'}>
+        {trigger}
+      </Trigger>
       <Content>
         <Arrow />
         <DropdownItem icon={icons.play} path={learnDeckPath} title={'Learn'} />

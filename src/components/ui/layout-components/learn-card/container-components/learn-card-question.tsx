@@ -1,4 +1,3 @@
-import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { cn } from '@/components/ui/layout-components/learn-card/learn-card.styles'
 import { Image, Typography } from '@/components/ui/primitives'
 import { GetRandomCardToLearnResponse } from '@/services/cards/cards.types'
@@ -11,8 +10,6 @@ type CardPageQuestionProps = Pick<
 >
 
 export const LearnCardQuestion = ({ question, questionImg, shots }: CardPageQuestionProps) => {
-  const cover = questionImg ?? dummyCover
-
   return (
     <FlexContainer fd={'column'} gap={'18px'}>
       <FlexContainer>
@@ -23,7 +20,7 @@ export const LearnCardQuestion = ({ question, questionImg, shots }: CardPageQues
           </Typography>
         </Typography>
       </FlexContainer>
-      {cover && <Image alt={'Question image'} ratio={RATIO.L} src={cover} variant={'l'} />}
+      {questionImg && <Image alt={'Question'} ratio={RATIO.L} src={questionImg} variant={'l'} />}
       <FlexContainer>
         <Typography as={'span'} className={cn.triesText} gray variant={'body2'}>
           Количество попыток ответов на вопрос:&nbsp;

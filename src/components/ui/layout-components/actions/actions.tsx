@@ -45,9 +45,20 @@ export const Actions = ({
       icon: <PlayCircleOutline className={cn.action} />,
       label: ACTIONS.LEARN,
       path: onLearn,
+      title: 'Learn deck',
     },
-    { handler: onEdit, icon: <EditOutline className={cn.action} />, label: ACTIONS.EDIT },
-    { handler: onDelete, icon: <TrashOutline className={cn.action} />, label: ACTIONS.DELETE },
+    {
+      handler: onEdit,
+      icon: <EditOutline className={cn.action} />,
+      label: ACTIONS.EDIT,
+      title: 'Edit deck',
+    },
+    {
+      handler: onDelete,
+      icon: <TrashOutline className={cn.action} />,
+      label: ACTIONS.DELETE,
+      title: 'Delete deck',
+    },
     {
       handler: favoriteHandler,
       icon: isFavorite ? (
@@ -56,6 +67,7 @@ export const Actions = ({
         <HeartOutline className={cn.favorite} />
       ),
       label: ACTIONS.FAVORITE,
+      title: 'Add deck to favorite',
     },
   ]
 
@@ -67,6 +79,7 @@ export const Actions = ({
           className={cn.button}
           key={el.label}
           onClick={el.handler}
+          title={el.title}
           to={el.path}
           variant={'link'}
         >
