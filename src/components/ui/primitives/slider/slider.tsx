@@ -50,8 +50,8 @@ export const Slider = forwardRef<SliderRef, Props>(
             <RadixSlider.Track className={cn.track}>
               <RadixSlider.Range className={cn.range} />
             </RadixSlider.Track>
-            <RadixSlider.Thumb aria-label={'Start Thumb'} className={cn.thumb} />
-            <RadixSlider.Thumb aria-label={'End Thumb'} className={cn.thumb} />
+            <RadixSlider.Thumb aria-label={'Start Thumb'} className={cn.thumb} title={'Min'} />
+            <RadixSlider.Thumb aria-label={'End Thumb'} className={cn.thumb} title={'Max'} />
           </RadixSlider.Root>
           <Typography className={cn.outputWrap} variant={'body1'}>
             {range[1]}

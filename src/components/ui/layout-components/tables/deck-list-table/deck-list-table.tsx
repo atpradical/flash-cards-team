@@ -58,7 +58,13 @@ export const DeckListTable = ({ decks }: DecksListTableProps) => {
     return (
       <TableRow key={el.id}>
         <PositionCell entity={'Deck'} image={cover}>
-          <Button as={Link} className={s.link} to={deckPath} variant={'link'}>
+          <Button
+            as={Link}
+            className={s.link}
+            title={'Go to deck cards'}
+            to={deckPath}
+            variant={'link'}
+          >
             {el.name}
           </Button>
         </PositionCell>

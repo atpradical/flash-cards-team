@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
+import { ArrowUp } from '@/assets/icons'
 import { TableHeaderCell } from '@/components/ui/primitives'
 import { ORDER } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -7,8 +8,6 @@ import { getOrderByString } from '@/shared/utils/get-order-by-string'
 import clsx from 'clsx'
 
 import s from './header-cell.module.scss'
-
-import { SortButton } from '../sort-button'
 
 type Props = {
   content: string
@@ -27,24 +26,22 @@ export const HeaderCell = forwardRef<HeaderCellRef, Props>(
 
     const isSortable = sortable ? id === sortId : false
 
-    const headerHandler = () => {
+    const sortHandler = () => {
       if (id && onSort) {
-        onSort(getOrderByString({ id, order }), id)
-      }
-    }
-
-    const sortButtonHandler = (order: ORDER) => {
-      setOrder(order)
-      if (id && onSort) {
+        if (order === ORDER.ASC) {
+          setOrder(ORDER.DESC)
+        } else {
+          setOrder(ORDER.ASC)
+        }
         onSort(getOrderByString({ id, order }), id)
       }
     }
 
     return (
-      <TableHeaderCell {...rest} className={cn} onClick={headerHandler} ref={ref}>
+      <TableHeaderCell {...rest} className={cn} onClick={sortHandler} ref={ref}>
         <FlexContainer gap={'6px'}>
           {content} {children}
-          {isSortable && <SortButton onClick={sortButtonHandler} order={order} />}
+          {isSortable && <ArrowUp className={clsx(s.sort, order === ORDER.DESC && s.desc)} />}
         </FlexContainer>
       </TableHeaderCell>
     )

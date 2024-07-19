@@ -1,4 +1,3 @@
-import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { SelfRateForm } from '@/components/forms/self-rate-form'
 import { cn } from '@/components/ui/layout-components/learn-card/learn-card.styles'
 import { Image, Typography } from '@/components/ui/primitives'
@@ -17,8 +16,6 @@ export const LearnCardAnswer = ({
   cardId,
   onNextQuestion,
 }: CardPageAnswerProps) => {
-  const cover = answerImg ?? dummyCover
-
   return (
     <FlexContainer fd={'column'} gap={'18px'}>
       <FlexContainer>
@@ -29,7 +26,7 @@ export const LearnCardAnswer = ({
           </Typography>
         </Typography>
       </FlexContainer>
-      {cover && <Image alt={'Answer image'} ratio={RATIO.L} src={cover} variant={'l'} />}
+      {answerImg && <Image alt={'Answer'} ratio={RATIO.L} src={answerImg} variant={'l'} />}
       <SelfRateForm cardId={cardId} onNextQuestion={onNextQuestion} />
     </FlexContainer>
   )
