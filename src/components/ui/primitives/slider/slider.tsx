@@ -10,14 +10,15 @@ type Props = {
   label?: string
   max: number
   min: number
-  onRangeChange: (value: number[]) => void
-  range?: number[]
+  onCommit: (newRange: number[]) => void
+  onRangeChange: (newRange: number[]) => void
+  range: number[]
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 type SliderRef = ElementRef<typeof RadixSlider.Root>
 
 export const Slider = forwardRef<SliderRef, Props>(
-  ({ label, max, min, minStepsBetweenThumbs = 1, onRangeChange, range, ...rest }, ref) => {
+  ({ label, max = 22, min = 0, onCommit, onRangeChange, range, ...rest }, ref) => {
     const cn = {
       outputWrap: s.outputWrap,
       range: s.range,
@@ -26,22 +27,24 @@ export const Slider = forwardRef<SliderRef, Props>(
       track: s.track,
     }
 
-    const value = range ?? [min, max]
-
     return (
       <div>
         {label && <Typography as={'label'}>{label}</Typography>}
         <FlexContainer>
           <Typography className={cn.outputWrap} variant={'body1'}>
-            {value[0]}
+            {range[0]}
           </Typography>
           <RadixSlider.Root
             className={cn.root}
-            minStepsBetweenThumbs={minStepsBetweenThumbs}
+            defaultValue={range}
+            max={max}
+            min={min}
+            minStepsBetweenThumbs={1}
             onValueChange={onRangeChange}
+            onValueCommit={onCommit}
             ref={ref}
             step={1}
-            value={value}
+            value={range}
             {...rest}
           >
             <RadixSlider.Track className={cn.track}>
@@ -51,7 +54,7 @@ export const Slider = forwardRef<SliderRef, Props>(
             <RadixSlider.Thumb aria-label={'End Thumb'} className={cn.thumb} />
           </RadixSlider.Root>
           <Typography className={cn.outputWrap} variant={'body1'}>
-            {value[1]}
+            {range[1]}
           </Typography>
         </FlexContainer>
       </div>
