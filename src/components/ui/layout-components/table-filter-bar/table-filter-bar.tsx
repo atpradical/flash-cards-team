@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { TrashOutline } from '@/assets/icons'
 import { Button, Slider, TabSwitcher, TextField } from '@/components/ui/primitives'
@@ -13,22 +13,34 @@ type TableFilterBarProps = {
   min: number
   search: string
 }
+
+const tabs: Tab[] = [
+  { title: 'All Decks', value: 'allDecks' },
+  { title: 'My Decks', value: 'myDecks' },
+  { title: 'Favorites', value: 'favorites' },
+]
+
 export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
   const updateSearchParam = useSearchParamUpdater()
 
-  const tabs: Tab[] = [
-    { title: 'All Decks', value: 'allDecks' },
-    { title: 'My Decks', value: 'myDecks' },
-    { title: 'Favorites', value: 'favorites' },
-  ]
+  const [sliderState, setSliderState] = useState([min, max])
+
+  const sliderRangeChangeHandler = (newRange: number[]) => {
+    setSliderState(newRange)
+  }
+  const sliderValueCommitHandler = (newRange: number[]) => {
+    setSliderState(newRange)
+    updateSearchParam({ currentPage: 1, max: newRange[1], min: newRange[0] })
+  }
 
   const clearFiltersHandler = () => {
+    setSliderState([min, max])
     updateSearchParam({
       authorId: '',
       currentPage: 1,
       itemsPerPage: 10,
-      max: 100,
-      min: 0,
+      max: max,
+      min: min,
       orderBy: '',
       search: '',
       tab: 'allDecks',
@@ -37,12 +49,6 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
-  }
-
-  const sliderHandler = (range: number[]) => {
-    const [min, max] = range
-
-    updateSearchParam({ currentPage: 1, max, min })
   }
 
   const tabHandler = (tab: string) => {
@@ -58,7 +64,14 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
         variant={'search'}
       />
       <TabSwitcher className={cn.tabs} label={'Show decks'} onTabChange={tabHandler} tabs={tabs} />
-      <Slider label={'Cards amount'} max={max} min={min} onRangeChange={sliderHandler} />
+      <Slider
+        label={'Cards amount'}
+        max={max}
+        min={min}
+        onCommit={sliderValueCommitHandler}
+        onRangeChange={sliderRangeChangeHandler}
+        range={sliderState}
+      />
       <Button className={cn.button} onClick={clearFiltersHandler} variant={'secondary'}>
         <TrashOutline />
         Clear Filter

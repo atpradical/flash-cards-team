@@ -7,6 +7,7 @@ import { Slider as SliderComponent } from './slider'
 const meta = {
   argTypes: {
     onValueChange: action('slider onValueChange callback invoked'),
+    onValueCommit: action('slider onValueCommit callback invoked'),
     value: { control: 'object' },
   },
   component: SliderComponent,
@@ -20,6 +21,7 @@ export const Slider: Story = {
   args: {
     max: 37,
     min: 8,
+    onCommit: action('slider commit actions!'),
     onRangeChange: action('slider actions!'),
     range: [0, 100],
   },
