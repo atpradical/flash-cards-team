@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
@@ -6,15 +6,17 @@ import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primi
 import { GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
+import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
+import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import {
   DialogFormFooter as Footer,
   DialogFromHeader as Header,
-  DialogFormSection as Section,
+  DialogFormUploadImage as UploadImage,
 } from '../container-components'
 
 const DeckDialogFormScheme = z.object({
@@ -37,9 +39,35 @@ export const DeckDialogForm = ({
   onOpenChange,
   open,
 }: DeckDialogFormProps) => {
-  const title = action === DIALOG_ACTION.CREATE ? 'Add New Deck' : 'Change Deck'
+  const {
+    cover: deckCover,
+    id = '',
+    isPrivate = false,
+    name = '',
+  } = deck ?? ({} as GetDeckResponse)
 
-  const { id = '', isPrivate = false, name = '' } = deck ?? ({} as GetDeckResponse)
+  const [cover, setCover] = useState<Nullable<File | string>>(null)
+  const [preview, setPreview] = useState<Nullable<string>>(deckCover)
+
+  useEffect(() => {
+    if (cover && typeof cover !== 'string') {
+      // create link to file
+      const newPreview = URL.createObjectURL(cover)
+
+      // clear old preview to clear memory
+      if (preview) {
+        URL.revokeObjectURL(preview)
+      }
+      setPreview(newPreview)
+
+      // clear new preview to clear memory
+      return () => URL.revokeObjectURL(newPreview)
+    }
+    // 'preview' mustn't be added to avoid cyclical dependence
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cover])
+
+  const title = action === DIALOG_ACTION.CREATE ? 'Add New Deck' : 'Change Deck'
 
   const [createDeck, { isLoading: isCreateLoading }] = useCreateDeckMutation()
   const [updateDeck, { isLoading: isUpdateLoading }] = useUpdateDeckMutation()
@@ -56,10 +84,22 @@ export const DeckDialogForm = ({
 
   const formHandler = handleSubmit(formData => {
     if (action === DIALOG_ACTION.CREATE) {
-      createDeck(formData).then(() => cancelFormHandler())
-      reset()
+      // createDeck({ ...formData, cover }).then(() => {
+      createDeck({
+        ...formData,
+        ...(typeof cover === 'string' ? {} : { cover }),
+      }).then(() => {
+        setCover(null)
+        cancelFormHandler()
+        reset()
+      })
     } else {
-      updateDeck({ ...formData, id }).then(() => cancelFormHandler())
+      // updateDeck({...formData, cover, id}).then(() => {
+      updateDeck({ ...formData, ...(typeof cover === 'string' ? {} : { cover }), id }).then(() => {
+        setCover(null)
+        cancelFormHandler()
+        reset()
+      })
     }
   })
 
@@ -68,8 +108,16 @@ export const DeckDialogForm = ({
     onOpenChange(false)
   }
 
-  const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+  const uploadImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      setCover(file)
+    }
+  }
+
+  const deleteImageHandler = () => {
+    setCover(null)
   }
 
   return (
@@ -79,15 +127,17 @@ export const DeckDialogForm = ({
         <Body>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'24px'}>
-              <Section
-                action={action}
+              <ControlledTextField
                 control={control}
-                cover={deck?.cover ?? null}
                 label={name}
                 name={'name'}
-                noSubtitle
                 placeholder={'How should we call your deck?'}
-                uploadImageHandler={uploadImageHandler}
+              />
+              <UploadImage
+                action={action}
+                onDelete={deleteImageHandler}
+                onUpload={uploadImageHandler}
+                preview={preview}
               />
               <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
             </FlexContainer>

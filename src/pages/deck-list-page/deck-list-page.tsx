@@ -36,6 +36,8 @@ export const DeckListPage = () => {
 
       setSkip(false)
     }
+    // 'updateSearchParam' mustn't be added to avoid cyclical dependence
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minMax])
 
   const { data, isFetching } = useGetDecksQuery(

@@ -5,7 +5,7 @@ import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { Button, Typography } from '@/components/ui/primitives'
 
 type Props = {
-  onClick: (deleteFlag: boolean) => void
+  onClick: () => void
 } & Omit<ComponentPropsWithoutRef<typeof Button>, 'onClick'>
 
 export const DialogImageDelete = ({ onClick, ...args }: Props) => {
@@ -16,7 +16,7 @@ export const DialogImageDelete = ({ onClick, ...args }: Props) => {
     const flag = !deleteFlag
 
     setDeleteFlag(flag)
-    onClick(flag)
+    onClick()
   }
 
   return (
