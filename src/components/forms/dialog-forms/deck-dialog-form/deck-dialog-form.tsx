@@ -85,7 +85,7 @@ export const DeckDialogForm = ({
   const formHandler = handleSubmit(formData => {
     const finalFormData = {
       ...formData,
-      ...(typeof cover === 'string' ? {} : { cover: cover }),
+      ...(typeof cover === 'string' ? {} : { cover }),
     }
 
     if (action === DIALOG_ACTION.CREATE) {
