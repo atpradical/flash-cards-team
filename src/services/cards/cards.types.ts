@@ -42,11 +42,11 @@ export type CreateCardResponse = Card
 
 export type CreateCardArgs = {
   answer?: string
-  answerImg?: string
+  answerImg?: Nullable<File>
   answerVideo?: string
   deckId: string
   question?: string
-  questionImg?: string
+  questionImg?: Nullable<File>
   questionVideo?: string
 }
 
