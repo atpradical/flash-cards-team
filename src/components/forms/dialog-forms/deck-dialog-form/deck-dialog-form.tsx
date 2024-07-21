@@ -46,7 +46,7 @@ export const DeckDialogForm = ({
     name = '',
   } = deck ?? ({} as GetDeckResponse)
 
-  const [cover, setCover] = useState<Nullable<File | string>>(null)
+  const [cover, setCover] = useState<Nullable<File | string>>(deckCover ?? null)
   const [preview, setPreview] = useState<Nullable<string>>(deckCover)
 
   useEffect(() => {
@@ -83,19 +83,21 @@ export const DeckDialogForm = ({
   })
 
   const formHandler = handleSubmit(formData => {
+    const finalFormData = {
+      ...formData,
+      ...(typeof cover === 'string' ? {} : { cover: cover }),
+    }
+
     if (action === DIALOG_ACTION.CREATE) {
-      // createDeck({ ...formData, cover }).then(() => {
       createDeck({
-        ...formData,
-        ...(typeof cover === 'string' ? {} : { cover }),
+        ...finalFormData,
       }).then(() => {
         setCover(null)
         cancelFormHandler()
         reset()
       })
     } else {
-      // updateDeck({...formData, cover, id}).then(() => {
-      updateDeck({ ...formData, ...(typeof cover === 'string' ? {} : { cover }), id }).then(() => {
+      updateDeck({ ...finalFormData, id }).then(() => {
         setCover(null)
         cancelFormHandler()
         reset()
