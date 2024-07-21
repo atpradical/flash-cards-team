@@ -1,20 +1,27 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
-import { DialogBody as Body, DialogContent as Content, Dialog } from '@/components/ui/primitives'
+import {
+  DialogBody as Body,
+  DialogContent as Content,
+  Dialog,
+  Typography,
+} from '@/components/ui/primitives'
 import { Card, useCreateCardMutation, useUpdateCardMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
+import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
+import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import {
   DialogFormFooter as Footer,
   DialogFromHeader as Header,
-  DialogFormSection as Section,
+  DialogFormUploadImage as UploadImage,
 } from '../container-components'
 
 const CardDialogFormScheme = z.object({
@@ -37,31 +44,87 @@ export const CardDialogForm = ({
   onOpenChange,
   open,
 }: CardDialogFormProps) => {
-  const title = action === DIALOG_ACTION.CREATE ? 'Add New Card' : 'Change Card'
+  const [questionCover, setQuestionCover] = useState<Nullable<File | string>>(
+    card?.questionImg ?? null
+  )
+  const [answerCover, setAnswerCover] = useState<Nullable<File | string>>(card?.answerImg ?? null)
+  const [questionPreview, setQuestionPreview] = useState<Nullable<string>>(card?.questionImg ?? '')
+  const [answerPreview, setAnswerPreview] = useState<Nullable<string>>(card?.answerImg ?? '')
+
+  useEffect(() => {
+    if (questionCover && typeof questionCover !== 'string') {
+      const newPreview = URL.createObjectURL(questionCover)
+
+      if (questionPreview) {
+        URL.revokeObjectURL(questionPreview)
+      }
+      setQuestionPreview(newPreview)
+
+      return () => URL.revokeObjectURL(newPreview)
+    }
+
+    // 'previews' mustn't be added to avoid cyclical dependence
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionCover])
+
+  useEffect(() => {
+    if (answerCover && typeof answerCover !== 'string') {
+      const newPreview = URL.createObjectURL(answerCover)
+
+      if (answerPreview) {
+        URL.revokeObjectURL(answerPreview)
+      }
+      setAnswerPreview(newPreview)
+
+      return () => URL.revokeObjectURL(newPreview)
+    }
+    // 'previews' mustn't be added to avoid cyclical dependence
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answerCover])
+
+  const title = action === DIALOG_ACTION.CREATE ? 'Create Card' : 'Change Card'
 
   const { deckId } = useParams()
 
   const [createCard, { isLoading: isLoadingCreateCard }] = useCreateCardMutation()
   const [updateCard, { isLoading: isLoadingUpdateCard }] = useUpdateCardMutation()
 
-  const { answer = '', id = '', question = '' } = card ?? ({} as Card)
-
   const { control, handleSubmit, reset } = useForm<CardDialogFormValues>({
     defaultValues: {
-      answer,
-      question,
+      answer: card?.answer,
+      question: card?.question,
     },
     mode: 'onSubmit',
     resolver: zodResolver(CardDialogFormScheme),
   })
 
   const formHandler = handleSubmit(formData => {
+    const finalFormData = {
+      ...formData,
+      ...(typeof answerCover === 'string' ? {} : { answerImg: answerCover }),
+      ...(typeof questionCover === 'string' ? {} : { questionImg: questionCover }),
+    }
+
     if (action === 'CREATE') {
-      createCard({ ...formData, deckId: deckId ?? '' }).then(() => cancelFormHandler())
-      reset()
+      createCard({
+        ...finalFormData,
+        deckId: deckId ?? '',
+      }).then(() => {
+        setQuestionCover(null)
+        setAnswerCover(null)
+        cancelFormHandler()
+        reset()
+      })
     } else {
-      updateCard({ ...formData, id }).then(() => cancelFormHandler())
-      reset()
+      updateCard({
+        ...finalFormData,
+        id: card?.id ?? '',
+      }).then(() => {
+        setQuestionCover(null)
+        setAnswerCover(null)
+        cancelFormHandler()
+        reset()
+      })
     }
   })
 
@@ -70,8 +133,28 @@ export const CardDialogForm = ({
     onOpenChange(false)
   }
 
-  const uploadImageHandler = (e: ChangeEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+  const uploadQuestionImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      setQuestionCover(file)
+    }
+  }
+
+  const deleteQuestionImageHandler = () => {
+    setQuestionCover(null)
+  }
+
+  const uploadAnswerImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      setAnswerCover(file)
+    }
+  }
+
+  const deleteAnswerImageHandler = () => {
+    setAnswerCover(null)
   }
 
   const isLoading = isLoadingCreateCard || isLoadingUpdateCard
@@ -83,23 +166,31 @@ export const CardDialogForm = ({
         <Body>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'14px'}>
-              <Section
-                action={action}
+              <Typography variant={'subtitle1'}>{`Question:`}</Typography>
+              <ControlledTextField
                 control={control}
-                cover={card?.questionImg ?? null}
                 label={'Question?'}
                 name={'question'}
-                placeholder={'Write down the question.'}
-                uploadImageHandler={uploadImageHandler}
+                placeholder={'Write down the question'}
               />
-              <Section
+              <UploadImage
                 action={action}
+                onDelete={deleteQuestionImageHandler}
+                onUpload={uploadQuestionImageHandler}
+                preview={questionPreview}
+              />
+              <Typography variant={'subtitle1'}>{`Answer:`}</Typography>
+              <ControlledTextField
                 control={control}
-                cover={card?.answerImg ?? null}
                 label={'Answer'}
                 name={'answer'}
                 placeholder={'What is the correct answer to the question?'}
-                uploadImageHandler={uploadImageHandler}
+              />
+              <UploadImage
+                action={action}
+                onDelete={deleteAnswerImageHandler}
+                onUpload={uploadAnswerImageHandler}
+                preview={answerPreview}
               />
             </FlexContainer>
           </form>
