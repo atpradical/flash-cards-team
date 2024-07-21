@@ -22,9 +22,9 @@ export const DeckListPage = () => {
   const orderBy = searchParams.get('orderBy') ?? ''
   const tab = searchParams.get('tab') ?? 'allDecks'
 
-  const { data: me } = useMeQuery()
-  const authorId = tab === 'myDecks' ? me?.id : undefined
-  const favoritedBy = tab === 'favorites' ? me?.id : undefined
+  const { data: user } = useMeQuery()
+  const authorId = tab === 'myDecks' ? user?.id : undefined
+  const favoritedBy = tab === 'favorites' ? user?.id : undefined
 
   const { data: minMax, isFetching: isFetchingMin } = useGetMinMaxQuery()
 
@@ -40,7 +40,7 @@ export const DeckListPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minMax])
 
-  const { data, isFetching } = useGetDecksQuery(
+  const { data: decks, isFetching } = useGetDecksQuery(
     {
       authorId,
       currentPage,
@@ -53,7 +53,10 @@ export const DeckListPage = () => {
     },
     { skip }
   )
-  const { items: decks = [], pagination = {} as PaginationModel } = (data && data) ?? {}
+
+  if (!decks || !user) {
+    return
+  }
 
   return (
     <Page load={isFetching}>
@@ -66,11 +69,11 @@ export const DeckListPage = () => {
             <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
           </FlexContainer>
           <TableFilterBar max={minMax?.max} min={minMax?.min} search={search} />
-          <DeckListTable decks={decks} />
+          <DeckListTable decks={decks.items} user={user} />
           <Pagination
             currentPage={currentPage}
             pageSize={itemsPerPage}
-            totalCount={pagination.totalItems}
+            totalCount={decks.pagination.totalItems}
           />
           <DeckDialogForm onOpenChange={setShowAddDeckDialog} open={showAddDeckDialog} />
         </FlexContainer>

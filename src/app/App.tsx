@@ -9,7 +9,7 @@ export function App() {
   return (
     <Provider store={store}>
       <Layout>
-        <CardsHeader isAuthorized />
+        <CardsHeader />
         <Outlet />
       </Layout>
     </Provider>
