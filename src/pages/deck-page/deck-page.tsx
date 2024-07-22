@@ -6,7 +6,7 @@ import { CardDialogForm } from '@/components/forms'
 import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Pagination, TextField } from '@/components/ui/primitives'
 import { cn } from '@/pages/deck-page/deck-page.styles'
-import { Deck, PaginationModel, useGetCardsQuery, useGetDeckQuery } from '@/services'
+import { PaginationModel, useGetCardsQuery, useGetDeckQuery, useMeQuery } from '@/services'
 import { PATH } from '@/shared/enums'
 import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -28,7 +28,9 @@ export const DeckPage = () => {
   const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? 10)
   const orderBy = searchParams.get('orderBy') ?? ''
 
-  const { data: deck = {} as Deck, isFetching: isFetchingDeck } = useGetDeckQuery({
+  const { data: user } = useMeQuery()
+
+  const { data: deck, isFetching: isFetchingDeck } = useGetDeckQuery({
     id: deckId,
   })
 
@@ -50,6 +52,14 @@ export const DeckPage = () => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
+  let isAuthor = false
+
+  if (!deck) {
+    return
+  } else if (user && deck) {
+    isAuthor = user.id === deck.userId
+  }
+
   const isLoad = isFetchingCards || isFetchingDeck
 
   const isEmpty = cards.length === 0 && !search && !isLoadingCards
@@ -65,16 +75,19 @@ export const DeckPage = () => {
           <DeckTitle deck={deck} learnDeckPath={learnDeckPath} />
           {!isEmpty && (
             <FlexContainer fd={'column'} gap={'20px'}>
-              <Button as={Link} className={cn.cardControl} to={learnDeckPath}>
-                Learn Deck
-              </Button>
-              <Button className={cn.cardControl} onClick={setShowCreateNewCardDialogForm}>
-                Add New Card
-              </Button>
+              {isAuthor ? (
+                <Button className={cn.cardControl} onClick={setShowCreateNewCardDialogForm}>
+                  Add New Card
+                </Button>
+              ) : (
+                <Button as={Link} className={cn.cardControl} to={learnDeckPath}>
+                  Learn Deck
+                </Button>
+              )}
             </FlexContainer>
           )}
         </FlexContainer>
-        {isEmpty && <EmptyDeck onClick={setShowCreateNewCardDialogForm} />}
+        {isEmpty && <EmptyDeck isAuthor={isAuthor} onClick={setShowCreateNewCardDialogForm} />}
         {!isEmpty && (
           <>
             <TextField
@@ -84,7 +97,7 @@ export const DeckPage = () => {
               value={search}
               variant={'search'}
             />
-            <DeckTable cards={cards} />
+            <DeckTable cards={cards} isAuthor={isAuthor} />
             <Pagination
               className={cn.pagination}
               currentPage={currentPage}

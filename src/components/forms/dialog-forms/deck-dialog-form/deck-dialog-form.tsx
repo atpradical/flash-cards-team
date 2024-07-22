@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
-import { GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
+import { Deck, GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { Nullable } from '@/shared/types/common'
@@ -28,7 +28,7 @@ type DeckDialogFormValues = z.infer<typeof DeckDialogFormScheme>
 
 type DeckDialogFormProps = {
   action?: DIALOG_ACTION
-  deck?: GetDeckResponse
+  deck?: Omit<Deck, 'author'>
   onOpenChange: (open: boolean) => void
   open: boolean
 }

@@ -20,6 +20,7 @@ export default meta
 export const DeckTable: Story = {
   args: {
     cards: CardListExample,
+    isAuthor: true,
   },
   render: () => (
     <MemoryRouter>
