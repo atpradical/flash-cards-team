@@ -6,7 +6,6 @@ import {
   DeleteDeckResponse,
   GetDeckResponse,
   GetDecksArgs,
-  Me,
   UpdateDeckArgs,
   UpdateDeckResponse,
 } from '@/services/decks/deck.types'
@@ -80,14 +79,6 @@ export const decksApi = flashcardsApi.injectEndpoints({
           url: 'v2/decks/min-max-cards',
         }),
       }),
-      me: builder.query<Me, void>({
-        // для демонстрации
-        providesTags: ['User'],
-        query: () => ({
-          method: 'GET',
-          url: `v1/auth/me`,
-        }),
-      }),
       removeDeckFromFavorite: builder.mutation<void, DeckId>({
         invalidatesTags: ['Decks'],
         query: ({ id }) => ({
@@ -133,7 +124,6 @@ export const {
   useGetDeckQuery,
   useGetDecksQuery,
   useGetMinMaxQuery,
-  useMeQuery,
   useRemoveDeckFromFavoriteMutation,
   useUpdateDeckMutation,
 } = decksApi

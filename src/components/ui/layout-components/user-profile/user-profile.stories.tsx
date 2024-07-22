@@ -2,70 +2,29 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import { IncubatorLogo } from '@/assets/icons'
-import avatarDefault from '@/assets/webp/avatar-default.webp'
-import { User } from '@/shared/types/common'
-import { FlexContainer } from '@/shared/ui/flex-container'
-import { Header } from '@/shared/ui/header'
+import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
 
-import { UserProfile } from './user-profile'
+import { UserProfile as UserProfileComponent } from './user-profile'
 
 const meta = {
   argTypes: {
-    isAuthorized: {
-      control: 'boolean',
-    },
-    userData: {
-      control: 'object',
-    },
+    isAuth: { control: 'boolean' },
   },
-  component: UserProfile,
-  tags: ['autodocs'],
-  title: 'Components/UserProfile',
-} satisfies Meta<typeof UserProfile>
+  component: UserProfileComponent,
+  title: 'Layout Components/Dropdowns/UserProfile',
+} satisfies Meta<typeof UserProfileComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const mockUser: User = {
-  email: 'j&johnson@gmail.com',
-  name: 'Ivan',
-  photo: {
-    alt: 'Avatar',
-    src: avatarDefault,
-  },
-}
-
-export const UserIsLoggedIn: Story = {
+export const UserProfile: Story = {
   args: {
-    isAuthorized: true,
+    isAuth: true,
     userData: mockUser,
   },
   render: args => (
     <MemoryRouter>
-      <Header>
-        <FlexContainer jc={'space-between'}>
-          <IncubatorLogo />
-          <UserProfile {...args} />
-        </FlexContainer>
-      </Header>
-    </MemoryRouter>
-  ),
-}
-
-export const UserIsLoggedOut: Story = {
-  args: {
-    isAuthorized: false,
-    userData: mockUser,
-  },
-  render: args => (
-    <MemoryRouter>
-      <Header>
-        <FlexContainer jc={'space-between'}>
-          <IncubatorLogo />
-          <UserProfile {...args} />
-        </FlexContainer>
-      </Header>
+      <UserProfileComponent {...args} />
     </MemoryRouter>
   ),
 }

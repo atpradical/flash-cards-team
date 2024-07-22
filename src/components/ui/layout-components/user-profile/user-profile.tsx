@@ -2,19 +2,19 @@ import { Link } from 'react-router-dom'
 
 import { ProfileDropdown } from '@/components/ui/layout-components'
 import { Avatar, Button, Typography } from '@/components/ui/primitives'
+import { User } from '@/services'
 import { PATH } from '@/shared/enums'
-import { User } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './user-profile.styles'
 
 type Props = {
-  isAuthorized: boolean
-  userData: User
+  isAuth: boolean
+  userData?: User
 }
 
-export const UserProfile = ({ isAuthorized, userData: { email, name, photo } }: Props) => {
-  if (!isAuthorized) {
+export const UserProfile = ({ isAuth, userData }: Props) => {
+  if (!isAuth || !userData) {
     return (
       <Button as={Link} to={PATH.SIGN_IN} variant={'secondary'}>
         Sign In
@@ -25,11 +25,18 @@ export const UserProfile = ({ isAuthorized, userData: { email, name, photo } }: 
   const trigger = (
     <FlexContainer gap={'14px'}>
       <Typography className={cn} variant={'subtitle1'}>
-        {name}
+        {userData.name}
       </Typography>
-      <Avatar size={'s'} src={photo.src} title={photo.alt} />
+      <Avatar name={userData.name} size={'s'} src={userData.avatar} />
     </FlexContainer>
   )
 
-  return <ProfileDropdown email={email} name={name} photo={photo} trigger={trigger} />
+  return (
+    <ProfileDropdown
+      avatar={userData.avatar}
+      email={userData.email}
+      name={userData.name}
+      trigger={trigger}
+    />
+  )
 }

@@ -13,9 +13,10 @@ import { HeaderCell, PositionCell } from '../container-components'
 
 type DeckTableProps = {
   cards: Card[]
+  isAuthor: boolean
 }
 
-export const DeckTable = ({ cards }: DeckTableProps) => {
+export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
   const [cardId, setCardId] = useState('')
   const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
   const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
@@ -51,14 +52,16 @@ export const DeckTable = ({ cards }: DeckTableProps) => {
         <PositionCell>
           <Grade stars={el.grade} />
         </PositionCell>
-        <PositionCell>
-          <Actions
-            id={el.id}
-            onDelete={() => onDeleteHandler(el.id)}
-            onEdit={() => onEditHandler(el.id)}
-            variant={VARIANT.ONLY_EDITS}
-          />
-        </PositionCell>
+        {isAuthor && (
+          <PositionCell>
+            <Actions
+              id={el.id}
+              onDelete={() => onDeleteHandler(el.id)}
+              onEdit={() => onEditHandler(el.id)}
+              variant={VARIANT.ONLY_EDITS}
+            />
+          </PositionCell>
+        )}
       </TableRow>
     )
   })
@@ -76,7 +79,7 @@ export const DeckTable = ({ cards }: DeckTableProps) => {
             sortId={sortId}
           />
           <HeaderCell content={'Grade'} id={'grade'} onSort={sortHandler} sortId={sortId} />
-          <HeaderCell content={'Actions'} sortable={false} />
+          {isAuthor && <HeaderCell content={'Actions'} sortable={false} />}
         </TableRow>
       </TableHeader>
       <TableBody>{TableContent}</TableBody>

@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/primitives'
+import { User } from '@/services'
 import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
 import { useSearchParamUpdater } from '@/shared/hooks'
@@ -22,9 +23,10 @@ import { HeaderCell, PositionCell } from '../container-components'
 
 type DecksListTableProps = {
   decks: Deck[]
+  user: User
 }
 
-export const DeckListTable = ({ decks }: DecksListTableProps) => {
+export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
   const [deckId, setDeckId] = useState('')
   const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
@@ -44,6 +46,8 @@ export const DeckListTable = ({ decks }: DecksListTableProps) => {
     const updated = convertToDDMMYYYY(el.updated)
     const deckPath = generatePath(PATH.DECK, { deckId: el.id })
     const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
+
+    const isAuthor = el.userId === user.id
 
     const openEditDeckHandler = (deckId: string) => {
       setDeckId(deckId)
@@ -78,7 +82,7 @@ export const DeckListTable = ({ decks }: DecksListTableProps) => {
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}
             onLearn={learnDeckPath}
-            variant={VARIANT.ALL}
+            variant={isAuthor ? VARIANT.ALL : VARIANT.ONLY_LEARN}
           />
         </PositionCell>
       </TableRow>

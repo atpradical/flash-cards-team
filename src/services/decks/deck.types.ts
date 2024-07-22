@@ -45,17 +45,17 @@ export type CreateDeckArgs = {
   name: string
 }
 
-export type GetDeckResponse = Omit<Deck, 'updated'>
+export type GetDeckResponse = {
+  cardsCount: number
+  cover: string
+  created: string
+  id: string
+  isFavorite: boolean
+  isPrivate: boolean
+  name: string
+  updated: string
+  userId: string
+}
 export type UpdateDeckResponse = DeleteDeckResponse
 export type UpdateDeckArgs = DeckId & Partial<CreateDeckArgs>
 export type DeleteDeckResponse = Omit<Deck, 'author' | 'isFavorite'>
-
-export type Me = {
-  avatar: string
-  created: string
-  email: string
-  id: string
-  isEmailVerified: boolean
-  name: string
-  updated: string
-}

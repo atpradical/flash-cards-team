@@ -1,19 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CreateNewPasswordForm } from '@/components/forms'
+import { MemoryRouter } from 'react-router-dom'
+
+import { CreateNewPasswordForm as CreateNewPasswordFormComponent } from '@/components/forms'
 import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {},
-  component: CreateNewPasswordForm,
+  component: CreateNewPasswordFormComponent,
   title: 'Forms/CreateNewPasswordForm',
-} satisfies Meta<typeof CreateNewPasswordForm>
+} satisfies Meta<typeof CreateNewPasswordFormComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CreateNewPasswordFormBase: Story = {
+export const CreateNewPasswordForm: Story = {
   args: {
     onSubmit: action('onSubmit action invoked!'),
+  },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <CreateNewPasswordFormComponent {...args} />
+      </MemoryRouter>
+    )
   },
 }
