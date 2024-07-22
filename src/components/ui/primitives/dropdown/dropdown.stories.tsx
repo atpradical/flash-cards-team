@@ -1,7 +1,5 @@
 import type { Meta } from '@storybook/react'
 
-import { MemoryRouter } from 'react-router-dom'
-
 import {
   EditOutline,
   LogOut,
@@ -20,7 +18,6 @@ import {
   Trigger,
 } from '@/components/ui/primitives/dropdown/dropdown'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
-import { FlexContainer } from '@/shared/ui/flex-container'
 
 const meta = {
   component: Root,
@@ -35,12 +32,12 @@ export const DropdownWithUserAvatar = {
     return (
       <Root>
         <Trigger style={{ cursor: 'pointer', display: 'flex' }}>
-          <Avatar size={'s'} src={mockUser.photo.src} title={mockUser.photo.alt} />
+          <Avatar name={mockUser.name} size={'s'} src={mockUser.avatar} />
         </Trigger>
         <Content style={{ minWidth: '218px' }}>
           <Arrow />
           <Label>
-            <Avatar size={'s'} src={mockUser.photo.src} title={'Photo'} />
+            <Avatar name={mockUser.name} size={'s'} src={mockUser.avatar} />
             <div>
               <Typography
                 style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
@@ -119,59 +116,6 @@ export const DropdownWithSettings = {
           </Item>
         </Content>
       </Root>
-    )
-  },
-}
-
-export const DropdownWithUserAvatarLeftBottomSided = {
-  render: () => {
-    return (
-      <MemoryRouter>
-        <FlexContainer jc={'end'} mt={'800px'}>
-          <Root>
-            <Trigger style={{ cursor: 'pointer', display: 'flex' }}>
-              <Avatar size={'s'} src={mockUser.photo.src} title={mockUser.photo.alt} />
-            </Trigger>
-            <Content style={{ minWidth: '218px' }}>
-              <Arrow />
-              <Label>
-                <Avatar size={'s'} src={mockUser.photo.src} title={'Photo'} />
-                <div>
-                  <Typography
-                    style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
-                    variant={'subtitle2'}
-                  >
-                    {mockUser.name}
-                  </Typography>
-                  <Typography gray variant={'caption'}>
-                    {mockUser.email}
-                  </Typography>
-                </div>
-              </Label>
-              <Separator />
-              <Item>
-                <Typography
-                  style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
-                  variant={'caption'}
-                >
-                  <PersonOutline style={{ width: '16px' }} />
-                  My Profile
-                </Typography>
-              </Item>
-              <Separator />
-              <Item>
-                <Typography
-                  style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
-                  variant={'caption'}
-                >
-                  <LogOut style={{ width: '16px' }} />
-                  Sign Out
-                </Typography>
-              </Item>
-            </Content>
-          </Root>
-        </FlexContainer>
-      </MemoryRouter>
     )
   },
 }

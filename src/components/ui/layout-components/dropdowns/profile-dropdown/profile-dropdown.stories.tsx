@@ -19,10 +19,10 @@ type Story = StoryObj<typeof meta>
 
 export const ProfileDropdown: Story = {
   args: {
+    avatar: dummyImage,
     email: 'test@test.com',
     name: 'User',
-    photo: { alt: 'User', src: dummyImage },
-    trigger: <Avatar size={'s'} src={dummyImage} title={'User'} />,
+    trigger: <Avatar name={'User'} size={'s'} src={dummyImage} />,
   },
   render: args => {
     return (
