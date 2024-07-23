@@ -28,7 +28,7 @@ const SignUpScheme = z
 type SignUpFormValues = z.infer<typeof SignUpScheme>
 
 type SignUpFormProps = {
-  onSubmit: (data: SignUpFormValues) => void
+  onSubmit: (formData: SignUpFormValues) => void
 }
 
 export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {

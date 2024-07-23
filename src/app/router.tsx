@@ -1,4 +1,10 @@
-import { Navigate, RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {
+  Navigate,
+  Outlet,
+  RouteObject,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom'
 
 import { CardPage } from '@/pages/card-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
@@ -11,6 +17,7 @@ import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
 import { PATH } from '@/shared/enums'
+import { useAuthContext } from '@/shared/hooks'
 
 import { App } from './App'
 
@@ -64,9 +71,30 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
+const PrivateRoutes = () => {
+  const { isAuth } = useAuthContext()
+
+  return isAuth ? <Outlet /> : <Navigate to={PATH.SIGN_IN} />
+}
+
+const PublicRoutes = () => {
+  const { isAuth } = useAuthContext()
+
+  return isAuth ? <Navigate to={PATH.DECK_LIST} /> : <Outlet />
+}
+
 export const router = createBrowserRouter([
   {
-    children: [...privateRoutes, ...publicRoutes],
+    children: [
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      {
+        children: publicRoutes,
+        element: <PublicRoutes />,
+      },
+    ],
     element: <App />,
     errorElement: <Navigate to={PATH.ERROR_404} />,
     path: PATH.ROOT,

@@ -45,7 +45,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const inputType = !showPassword && isPassword ? 'password' : 'text'
   const isSearch = variant === 'search'
 
-  const showPasswordHandler = () => {
+  const showPasswordHandler = (e: ChangeEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     setShowPassword(prev => !prev)
   }
 

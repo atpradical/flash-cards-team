@@ -7,10 +7,6 @@ export const passwordSchema = z
   .regex(/^\S*$/, 'Whitespace characters are not allowed.')
   .min(3, "Password length can't be less than 3 characters")
   .max(30, "Password length can't be more than 30 characters")
-  .regex(
-    /^(?=.*\d)(?=.*[a-zA-Z]).*$/,
-    'Please add at least 1 digit and 1 letter character to your password.'
-  )
 
 export const rememberMeSchema = z.boolean().optional().default(false)
 export const entityIdScheme = z.string().default('')
