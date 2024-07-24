@@ -1,15 +1,29 @@
+import { useNavigate } from 'react-router-dom'
+
 import { SignInForm } from '@/components/forms'
+import { useLoginMutation } from '@/services'
+import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const SignInPage = () => {
-  const signInHandler = (value: any) => {
-    console.log(value)
-    console.log('send sign-in request to server!')
+  const [login, { data: tokens, isLoading }] = useLoginMutation()
+  // const { data: user } = useMeQuery()
+  const navigate = useNavigate()
+
+  const signInHandler = async (value: any) => {
+    await login(value)
+    navigate(PATH.DECK_LIST)
+    console.log('signInHandler value', value)
   }
+  // if (user) {
+  //   navigate(PATH.DECK_LIST)
+  // }
+
+  console.log('tokens', tokens)
 
   return (
-    <Page>
+    <Page load={isLoading}>
       <FlexContainer jc={'center'} pd={'0 20px'}>
         <SignInForm onSubmit={signInHandler} />
       </FlexContainer>

@@ -12,7 +12,7 @@ import { Header } from '@/shared/ui/header'
 type CardsHeaderProps = Omit<ComponentPropsWithoutRef<typeof Header>, 'load'>
 
 export const CardsHeader = ({ ...propsHeader }: CardsHeaderProps) => {
-  const { data, isError, isFetching } = useMeQuery()
+  const { data, isError, isFetching } = useMeQuery() //?
   const isAuth = !isError
 
   return (

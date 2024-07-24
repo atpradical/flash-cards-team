@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
-import { useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
+import { User, useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
+import { PATH } from '@/shared/enums'
 import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -13,6 +14,7 @@ export const DeckListPage = () => {
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
   const [searchParams] = useSearchParams()
   const [skip, setSkip] = useState(true)
+  const navigate = useNavigate()
 
   const currentPage = Number(searchParams.get('currentPage') ?? 1)
   const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? 10)
@@ -31,11 +33,18 @@ export const DeckListPage = () => {
   const updateSearchParam = useSearchParamUpdater()
 
   useEffect(() => {
-    if (minMax) {
-      updateSearchParam({ max: minMax?.max, min: minMax.min })
+    if (user) {
+      //??
+      // предотвр запрос на minMax до me
+      if (minMax) {
+        updateSearchParam({ max: minMax?.max, min: minMax.min })
 
-      setSkip(false)
+        setSkip(false)
+      } else {
+        navigate(PATH.SIGN_IN)
+      }
     }
+
     // 'updateSearchParam' mustn't be added to avoid cyclical dependence
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minMax])
@@ -54,9 +63,8 @@ export const DeckListPage = () => {
     { skip }
   )
 
-  if (!decks || !user) {
-    return
-  }
+  const deckItems = decks?.items || []
+  const totalItems = decks?.pagination?.totalItems || 0
 
   return (
     <Page load={isFetching}>
@@ -69,12 +77,8 @@ export const DeckListPage = () => {
             <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
           </FlexContainer>
           <TableFilterBar max={minMax?.max} min={minMax?.min} search={search} />
-          <DeckListTable decks={decks.items} user={user} />
-          <Pagination
-            currentPage={currentPage}
-            pageSize={itemsPerPage}
-            totalCount={decks.pagination.totalItems}
-          />
+          <DeckListTable decks={deckItems} user={user || ({} as User)} />
+          <Pagination currentPage={currentPage} pageSize={itemsPerPage} totalCount={totalItems} />
           <DeckDialogForm onOpenChange={setShowAddDeckDialog} open={showAddDeckDialog} />
         </FlexContainer>
       )}
