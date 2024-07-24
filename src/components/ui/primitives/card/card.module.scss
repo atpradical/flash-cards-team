@@ -11,4 +11,8 @@
   border: var(--border-width-s) solid var(--color-dark-500);
   border-radius: var(--border-radius-xs);
   box-shadow: var(--shadow-s) rgb(0 0 0 / 10%);
+
+  @media screen and (width <= 480px) {
+    padding: 16px 18px 12px;
+  }
 }

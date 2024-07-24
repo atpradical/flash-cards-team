@@ -1,9 +1,8 @@
 .container {
   display: flex;
-  flex-direction: column;
 
   width: 100%;
-  max-width: var(--max-width-l);
+  max-width: var(--max-width-desktop);
   height: 100%;
   margin: 0 auto;
   padding: 0;
