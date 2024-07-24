@@ -42,7 +42,7 @@ type TableRowRef = ElementRef<'tr'>
 
 const TableRow = forwardRef<TableRowRef, TableRowProps>((props, ref) => {
   const { children, className, ...rest } = props
-  const cn = clsx(className)
+  const cn = clsx(s.tableRow, className)
 
   return (
     <tr className={cn} ref={ref} {...rest}>

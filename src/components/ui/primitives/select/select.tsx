@@ -35,6 +35,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
     ref
   ) => {
     const cn = {
+      container: s.container,
       disabled: s.disabled,
       dropdownArrow: s.dropdownArrow,
       label: clsx(s.label, disabled && s.disabled),
@@ -60,7 +61,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
         value={value}
         {...rest}
       >
-        <FlexContainer ai={'flex-start'} fd={'column'}>
+        <div className={cn.container}>
           {label && (
             <Typography as={'label'} className={cn.label}>
               {label}
@@ -74,7 +75,7 @@ export const Select = forwardRef<SelectRef, SelectProps>(
               </RadixSelect.Icon>
             </FlexContainer>
           </RadixSelect.Trigger>
-        </FlexContainer>
+        </div>
         <RadixSelect.Portal>
           <RadixSelect.Content className={cn.selectContent} position={'popper'}>
             <RadixSelect.Viewport>

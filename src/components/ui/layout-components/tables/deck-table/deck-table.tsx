@@ -9,6 +9,8 @@ import { DIALOG_ACTION, DIALOG_ENTITY, VARIANT } from '@/shared/enums'
 import { useSearchParamUpdater } from '@/shared/hooks'
 import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
 
+import s from './deck-table.module.scss'
+
 import { HeaderCell, PositionCell } from '../container-components'
 
 type DeckTableProps = {
@@ -70,16 +72,35 @@ export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
     <TableContainer>
       <TableHeader>
         <TableRow>
-          <HeaderCell content={'Question'} id={'question'} onSort={sortHandler} sortId={sortId} />
-          <HeaderCell content={'Answer'} id={'answer'} onSort={sortHandler} sortId={sortId} />
           <HeaderCell
+            className={s.column1}
+            content={'Question'}
+            id={'question'}
+            onSort={sortHandler}
+            sortId={sortId}
+          />
+          <HeaderCell
+            className={s.column2}
+            content={'Answer'}
+            id={'answer'}
+            onSort={sortHandler}
+            sortId={sortId}
+          />
+          <HeaderCell
+            className={s.column3}
             content={'Last Updated'}
             id={'updated'}
             onSort={sortHandler}
             sortId={sortId}
           />
-          <HeaderCell content={'Grade'} id={'grade'} onSort={sortHandler} sortId={sortId} />
-          {isAuthor && <HeaderCell content={'Actions'} sortable={false} />}
+          <HeaderCell
+            className={s.column4}
+            content={'Grade'}
+            id={'grade'}
+            onSort={sortHandler}
+            sortId={sortId}
+          />
+          {isAuthor && <HeaderCell className={s.column5} content={'Actions'} sortable={false} />}
         </TableRow>
       </TableHeader>
       <TableBody>{TableContent}</TableBody>
