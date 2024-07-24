@@ -1,12 +1,12 @@
 import { Provider } from 'react-redux'
 
+import { Router } from '@/app/router'
 import { store } from '@/services'
-import { Layout } from '@/shared/ui/layout'
 
 export function App() {
   return (
     <Provider store={store}>
-      <Layout />
+      <Router />
     </Provider>
   )
 }
