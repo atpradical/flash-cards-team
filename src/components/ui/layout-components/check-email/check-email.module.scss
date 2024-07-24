@@ -5,6 +5,12 @@
 
 .title {
   margin-bottom: 26px;
+  text-align: center;
+
+  @media screen and (width <= 320px) {
+    width: fit-content;
+    margin-bottom: 12px;
+  }
 }
 
 .reminder {
@@ -15,8 +21,20 @@
   white-space: pre-wrap;
 
   opacity: 0.5;
+
+  @media screen and (width <= 320px) {
+    margin: 10px 0 24px;
+  }
 }
 
 .button {
   margin-bottom: 20px;
+}
+
+.icon {
+  width: 100%;
+
+  @media screen and (width <= 320px) {
+    width: 66px;
+  }
 }

@@ -18,7 +18,7 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
         <Typography as={'h1'} className={cn.title} variant={'h1'}>
           Check Email
         </Typography>
-        <CheckEmailIcon />
+        <CheckEmailIcon className={cn.icon} />
         <Typography
           className={cn.reminder}
         >{`We've sent an Email with instructions to \n${email}`}</Typography>
