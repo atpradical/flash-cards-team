@@ -20,9 +20,9 @@ type Props = {
 type HeaderCellRef = ElementRef<typeof TableHeaderCell>
 
 export const HeaderCell = forwardRef<HeaderCellRef, Props>(
-  ({ children, content, id, onSort, sortId, sortable = true, ...rest }, ref) => {
+  ({ children, className, content, id, onSort, sortId, sortable = true, ...rest }, ref) => {
     const [order, setOrder] = useState<ORDER>(ORDER.ASC)
-    const cn = clsx(sortable && s.hcell)
+    const cn = clsx(sortable && s.hcell, className)
 
     const isSortable = sortable ? id === sortId : false
 

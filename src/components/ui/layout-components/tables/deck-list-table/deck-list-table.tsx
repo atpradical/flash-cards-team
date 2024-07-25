@@ -90,24 +90,38 @@ export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
   })
 
   return (
-    <TableContainer>
+    <TableContainer style={{ maxWidth: '1280px' }}>
       <TableHeader>
         <TableRow>
-          <HeaderCell content={'Name'} id={'name'} onSort={sortHandler} sortId={sortId} />
-          <HeaderCell content={'Cards'} id={'cardsCount'} onSort={sortHandler} sortId={sortId} />
           <HeaderCell
+            className={s.column1}
+            content={'Name'}
+            id={'name'}
+            onSort={sortHandler}
+            sortId={sortId}
+          />
+          <HeaderCell
+            className={s.column2}
+            content={'Cards'}
+            id={'cardsCount'}
+            onSort={sortHandler}
+            sortId={sortId}
+          />
+          <HeaderCell
+            className={s.column3}
             content={'Last Updated'}
             id={'updated'}
             onSort={sortHandler}
             sortId={sortId}
           />
           <HeaderCell
+            className={s.column4}
             content={'Created by'}
             id={'author.name'}
             onSort={sortHandler}
             sortId={sortId}
           />
-          <HeaderCell content={'Actions'} sortable={false} />
+          <HeaderCell className={s.column5} content={'Actions'} sortable={false} />
         </TableRow>
       </TableHeader>
       <TableBody>{tableRows}</TableBody>
