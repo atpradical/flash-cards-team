@@ -12,17 +12,19 @@ import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
 import { PATH } from '@/shared/enums'
 
-import { App } from './App'
+import { App } from '../app'
+import { PrivateRoutes, PublicRoutes } from './protectedRoutes'
 
 const publicRoutes: RouteObject[] = [
-  {
-    element: <SignInPage />,
-    path: PATH.SIGN_IN,
-  },
   {
     element: <SignUpPage />,
     path: PATH.SIGN_UP,
   },
+  {
+    element: <SignInPage />,
+    path: PATH.SIGN_IN,
+  },
+
   {
     element: <PasswordRecoveryPage />,
     path: PATH.PWD_RECOVERY,
@@ -66,7 +68,16 @@ const privateRoutes: RouteObject[] = [
 
 export const router = createBrowserRouter([
   {
-    children: [...privateRoutes, ...publicRoutes],
+    children: [
+      {
+        children: publicRoutes,
+        element: <PublicRoutes />,
+      },
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+    ],
     element: <App />,
     errorElement: <Navigate to={PATH.ERROR_404} />,
     path: PATH.ROOT,

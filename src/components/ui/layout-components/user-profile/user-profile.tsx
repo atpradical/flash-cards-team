@@ -21,22 +21,16 @@ export const UserProfile = ({ isAuth, userData }: Props) => {
       </Button>
     )
   }
+  const { avatar, email, name } = userData
 
   const trigger = (
     <FlexContainer gap={'14px'}>
       <Typography className={cn} variant={'subtitle1'}>
-        {userData.name}
+        {name}
       </Typography>
-      <Avatar name={userData.name} size={'s'} src={userData.avatar} />
+      <Avatar name={name} size={'s'} src={avatar} />
     </FlexContainer>
   )
 
-  return (
-    <ProfileDropdown
-      avatar={userData.avatar}
-      email={userData.email}
-      name={userData.name}
-      trigger={trigger}
-    />
-  )
+  return <ProfileDropdown avatar={avatar} email={email} name={name} trigger={trigger} />
 }

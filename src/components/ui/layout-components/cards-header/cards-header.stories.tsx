@@ -2,12 +2,19 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
+import { mockUser } from '../../primitives/dropdown/dropdown.mock'
 import { CardsHeader } from './cards-header'
 
 const meta = {
   argTypes: {
-    isAuthorized: {
+    isAuth: {
       control: { type: 'boolean' },
+    },
+    isFetching: {
+      control: { type: 'boolean' },
+    },
+    userData: {
+      control: { type: 'object' },
     },
   },
   component: CardsHeader,
@@ -20,12 +27,14 @@ type Story = StoryObj<typeof meta>
 
 export const CardsHeaderisAuthorizedTrue: Story = {
   args: {
-    isAuthorized: true,
+    isAuth: true,
+    isFetching: false,
+    userData: mockUser,
   },
   render: args => {
     return (
       <MemoryRouter>
-        <CardsHeader isAuthorized={args.isAuthorized} />
+        <CardsHeader {...args} />
       </MemoryRouter>
     )
   },

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
 import { User, useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
-import { PATH } from '@/shared/enums'
 import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -14,7 +13,6 @@ export const DeckListPage = () => {
   const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
   const [searchParams] = useSearchParams()
   const [skip, setSkip] = useState(true)
-  const navigate = useNavigate()
 
   const currentPage = Number(searchParams.get('currentPage') ?? 1)
   const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? 10)
@@ -33,16 +31,10 @@ export const DeckListPage = () => {
   const updateSearchParam = useSearchParamUpdater()
 
   useEffect(() => {
-    if (user) {
-      //??
-      // предотвр запрос на minMax до me
-      if (minMax) {
-        updateSearchParam({ max: minMax?.max, min: minMax.min })
+    if (minMax) {
+      updateSearchParam({ max: minMax?.max, min: minMax.min })
 
-        setSkip(false)
-      } else {
-        navigate(PATH.SIGN_IN)
-      }
+      setSkip(false)
     }
 
     // 'updateSearchParam' mustn't be added to avoid cyclical dependence

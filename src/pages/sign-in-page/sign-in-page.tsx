@@ -8,17 +8,12 @@ import { Page } from '@/shared/ui/page'
 
 export const SignInPage = () => {
   const [login, { data: tokens, isLoading }] = useLoginMutation()
-  // const { data: user } = useMeQuery()
   const navigate = useNavigate()
 
   const signInHandler = async (value: any) => {
     await login(value)
     navigate(PATH.DECK_LIST)
-    console.log('signInHandler value', value)
   }
-  // if (user) {
-  //   navigate(PATH.DECK_LIST)
-  // }
 
   console.log('tokens', tokens)
 
