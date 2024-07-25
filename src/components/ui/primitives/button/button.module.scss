@@ -41,6 +41,11 @@
     color: var(--color-light-900);
     background-color: var(--color-accent-900);
   }
+
+  @media screen and (width <= 320px) {
+    padding: 6px 14px;
+    font-size: var(--font-size-xs);
+  }
 }
 
 .secondary {

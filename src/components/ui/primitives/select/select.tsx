@@ -60,19 +60,21 @@ export const Select = forwardRef<SelectRef, SelectProps>(
         value={value}
         {...rest}
       >
-        {label && (
-          <Typography as={'label'} className={cn.label}>
-            {label}
-          </Typography>
-        )}
-        <RadixSelect.Trigger className={cn.selectTrigger} ref={ref}>
-          <FlexContainer gap={'5px'} jc={'space-between'}>
-            <RadixSelect.Value placeholder={placeholder ?? '...'} />
-            <RadixSelect.Icon asChild className={cn.dropdownArrow}>
-              <ArrowForward />
-            </RadixSelect.Icon>
-          </FlexContainer>
-        </RadixSelect.Trigger>
+        <FlexContainer ai={'flex-start'} fd={'column'}>
+          {label && (
+            <Typography as={'label'} className={cn.label}>
+              {label}
+            </Typography>
+          )}
+          <RadixSelect.Trigger className={cn.selectTrigger} ref={ref}>
+            <FlexContainer gap={'5px'} jc={'space-between'}>
+              <RadixSelect.Value placeholder={placeholder ?? '...'} />
+              <RadixSelect.Icon asChild className={cn.dropdownArrow}>
+                <ArrowForward />
+              </RadixSelect.Icon>
+            </FlexContainer>
+          </RadixSelect.Trigger>
+        </FlexContainer>
         <RadixSelect.Portal>
           <RadixSelect.Content className={cn.selectContent} position={'popper'}>
             <RadixSelect.Viewport>

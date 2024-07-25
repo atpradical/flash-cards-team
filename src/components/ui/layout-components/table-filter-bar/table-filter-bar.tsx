@@ -2,7 +2,8 @@ import { ChangeEvent, useState } from 'react'
 
 import { TrashOutline } from '@/assets/icons'
 import { Button, Slider, TabSwitcher, TextField } from '@/components/ui/primitives'
-import { useSearchParamUpdater } from '@/shared/hooks'
+import { SCREEN_SIZE } from '@/shared/enums'
+import { useCurrentScreenWidth, useSearchParamUpdater } from '@/shared/hooks'
 import { Tab } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
@@ -21,6 +22,11 @@ const tabs: Tab[] = [
 ]
 
 export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
+  const currentScreenWidth = useCurrentScreenWidth()
+  const breakpoint = SCREEN_SIZE.TABLET
+
+  const isTablet = currentScreenWidth <= breakpoint
+
   const updateSearchParam = useSearchParamUpdater()
 
   const [sliderState, setSliderState] = useState([min, max])
@@ -56,7 +62,7 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
   }
 
   return (
-    <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>
+    <FlexContainer ai={'flex-end'} fd={'row'} fw={isTablet ? 'wrap' : 'nowrap'} gap={'24px'}>
       <TextField
         onChange={searchHandler}
         placeholder={'Filter deck by name'}
