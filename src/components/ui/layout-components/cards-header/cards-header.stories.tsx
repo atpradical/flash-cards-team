@@ -2,30 +2,25 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import { CardsHeader } from './cards-header'
+import { CardsHeader as CardsHeaderComponent } from './cards-header'
 
 const meta = {
-  argTypes: {
-    isAuthorized: {
-      control: { type: 'boolean' },
-    },
-  },
-  component: CardsHeader,
-  tags: ['autodocs'],
-  title: 'Cards/Header',
-} satisfies Meta<typeof CardsHeader>
+  argTypes: {},
+  component: CardsHeaderComponent,
+  title: 'Layout Components',
+} satisfies Meta<typeof CardsHeaderComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CardsHeaderisAuthorizedTrue: Story = {
+export const CardsHeader: Story = {
   args: {
-    isAuthorized: true,
+    isAuth: true,
   },
   render: args => {
     return (
       <MemoryRouter>
-        <CardsHeader isAuthorized={args.isAuthorized} />
+        <CardsHeaderComponent {...args} />
       </MemoryRouter>
     )
   },

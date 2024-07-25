@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 type SignInFormProps = {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (data: LoginFormValues) => void
 }
 
 const SignInFormSchema = z.object({
@@ -21,10 +21,10 @@ const SignInFormSchema = z.object({
   rememberMe: rememberMeSchema,
 })
 
-type FormValues = z.infer<typeof SignInFormSchema>
+export type LoginFormValues = z.infer<typeof SignInFormSchema>
 
 export const SignInForm = ({ onSubmit }: SignInFormProps) => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<LoginFormValues>({
     defaultValues: {
       email: '',
       password: '',

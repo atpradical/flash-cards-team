@@ -1,18 +1,24 @@
-import { Navigate, RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {
+  Navigate,
+  Outlet,
+  RouteObject,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom'
 
+import { Error404Page } from '@/pages'
 import { CardPage } from '@/pages/card-page'
 import { CheckEmailPage } from '@/pages/check-email-page'
 import { DeckListPage } from '@/pages/deck-list-page'
 import { DeckPage } from '@/pages/deck-page'
-import { Error404Page } from '@/pages/error-404-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
 import { ResetPassword } from '@/pages/password-reset'
 import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
 import { PATH } from '@/shared/enums'
-
-import { App } from './App'
+import { useAuthContext } from '@/shared/hooks'
+import { Layout } from '@/shared/ui/layout'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -64,10 +70,22 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
+const PrivateRoutes = () => {
+  const { isAuth } = useAuthContext()
+
+  return isAuth ? <Outlet /> : <Navigate to={PATH.SIGN_IN} />
+}
+
 export const router = createBrowserRouter([
   {
-    children: [...privateRoutes, ...publicRoutes],
-    element: <App />,
+    children: [
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      ...publicRoutes,
+    ],
+    element: <Layout />,
     errorElement: <Navigate to={PATH.ERROR_404} />,
     path: PATH.ROOT,
   },
