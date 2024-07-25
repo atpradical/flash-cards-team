@@ -8,15 +8,24 @@
   border-width: 0 var(--border-width-s) var(--border-width-s);
 }
 
+.tableRow {
+  display: table-row;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--color-dark-700);
+  }
+}
+
 .headerCell,
 .tableCell {
   padding: 6px 24px;
-
   text-align: left;
-  text-wrap: auto;
-  vertical-align: center;
-
   border-bottom: var(--border-width-s) solid var(--color-dark-500);
+
+  @media screen and (width <= 920px) {
+    padding: 6px 12px;
+  }
 }
 
 .headerCell {

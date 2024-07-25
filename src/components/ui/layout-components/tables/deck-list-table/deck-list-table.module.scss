@@ -2,3 +2,31 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-light-100);
 }
+
+.column1 {
+  width: 600px;
+
+  @media screen and (width <= 980px) {
+    width: 500px;
+  }
+}
+
+.column2 {
+  width: 120px;
+}
+
+.column3 {
+  width: 170px;
+}
+
+.column4 {
+  width: 200px;
+}
+
+.column5 {
+  width: 100px;
+}
+
+.alignRight {
+  text-align: right;
+}
