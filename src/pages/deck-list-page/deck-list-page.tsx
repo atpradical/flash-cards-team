@@ -55,7 +55,7 @@ export const DeckListPage = () => {
   )
 
   if (!decks || !user) {
-    return
+    return <Page />
   }
 
   return (
