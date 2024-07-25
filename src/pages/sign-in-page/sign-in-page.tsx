@@ -8,14 +8,10 @@ import { Page } from '@/shared/ui/page'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
-  const [login, { isLoading, isSuccess }] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation()
 
   const signInHandler = (formData: LoginFormValues) => {
-    login(formData)
-  }
-
-  if (isSuccess) {
-    navigate(PATH.ROOT)
+    login(formData).then(() => navigate(PATH.ROOT))
   }
 
   return (
