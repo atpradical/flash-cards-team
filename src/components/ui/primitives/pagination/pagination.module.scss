@@ -3,6 +3,10 @@
   gap: var(--gap-l);
   align-items: center;
   align-self: start;
+
+  @media screen and (width <= 1024px) {
+    flex-wrap: wrap;
+  }
 }
 
 .paginationOption {

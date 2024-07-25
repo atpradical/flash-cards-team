@@ -63,6 +63,11 @@
   &.password {
     padding: var(--padding-xs) var(--padding-xl) var(--padding-xs) var(--padding-s);
   }
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-s);
+  }
 }
 
 /* Chrome, Edge и Safari,

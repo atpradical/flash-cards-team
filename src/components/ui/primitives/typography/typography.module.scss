@@ -20,16 +20,31 @@
 .h1 {
   font-size: var(--font-size-xxl);
   line-height: var(--line-height-l);
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-l);
+    line-height: var(--line-height-m);
+  }
 }
 
 .h2 {
   font-size: var(--font-size-xl);
   line-height: var(--line-height-l);
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-m);
+    line-height: var(--line-height-m);
+  }
 }
 
 .h3 {
   font-size: var(--font-size-l);
   line-height: var(--line-height-m);
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-m);
+  }
 }
 
 .body1,
@@ -37,6 +52,11 @@
 .h4 {
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-s);
+  }
 }
 
 .caption,
@@ -49,6 +69,10 @@
 
 .subtitle1 {
   line-height: var(--line-height-m);
+
+  @media screen and (width <= 320px) {
+    line-height: var(--line-height-s);
+  }
 }
 
 .body2,
@@ -56,6 +80,11 @@
 .link1 {
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-s);
+  }
 }
 
 .caption,
@@ -63,6 +92,11 @@
 .link2 {
   font-size: var(--font-size-xs);
   line-height: var(--line-height-s);
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-xxs);
+    line-height: var(--line-height-s);
+  }
 }
 
 .link1,
@@ -78,6 +112,10 @@
 .error {
   font-size: var(--font-size-s);
   color: var(--color-danger-500);
+
+  @media screen and (width <= 320px) {
+    font-size: var(--font-size-xs);
+  }
 }
 
 .gray {

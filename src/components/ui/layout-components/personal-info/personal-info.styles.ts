@@ -7,5 +7,6 @@ export const cn = {
   editAvatar: s.editAvatar,
   hint: s.hint,
   icon: s.icon,
+  title: s.title,
   wrapper: s.wrapper,
 }

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 
 import { cn } from '@/components/forms/sign-in-form/sign-in-form.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
-import { PATH } from '@/shared/enums'
+import { PATH, SCREEN_SIZE } from '@/shared/enums'
+import { useCurrentScreenWidth } from '@/shared/hooks'
 import { emailSchema, passwordSchema, rememberMeSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
@@ -38,6 +39,11 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
     onSubmit(data)
   })
 
+  const currentScreenWidth = useCurrentScreenWidth()
+  const breakpoint = SCREEN_SIZE.MOBILE_TINY
+  const isTinyScreen = currentScreenWidth <= breakpoint
+  const gap = isTinyScreen ? '12px' : '24px'
+
   return (
     <Card className={cn.container}>
       <FlexContainer fd={'column'}>
@@ -45,7 +51,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
           Sign In
         </Typography>
         <form className={cn.form} onSubmit={formHandler}>
-          <FlexContainer ai={'left'} fd={'column'} gap={'24px'}>
+          <FlexContainer ai={'left'} fd={'column'} gap={gap}>
             <ControlledTextField
               control={control}
               label={'Email'}
