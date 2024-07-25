@@ -60,7 +60,6 @@ export const baseQueryWithReauth: BaseQueryFn<
           /* and retry the initial query */
           result = await baseQuery(args, api, extraOptions)
         } else {
-          /* otherwise redirect to login page */
           localStorage.removeItem('accessToken')
           localStorage.removeItem('refreshToken')
         }
