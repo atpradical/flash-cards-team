@@ -1,21 +1,18 @@
-import avatarDefault from '@/assets/webp/avatar-default.webp'
-import { PersonalInfo } from '@/components/ui/layout-components'
+import { PersonalInfo as PersonalInfoComponent } from '@/components/ui/layout-components'
+import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: PersonalInfo,
-  tags: ['autodocs'],
-  title: 'Components/PersonalInfo',
-} satisfies Meta<typeof PersonalInfo>
+  component: PersonalInfoComponent,
+  title: 'Layout Components/PersonalInfo',
+} satisfies Meta<typeof PersonalInfoComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const PersonalInfoBase: Story = {
+export const PersonalInfo: Story = {
   args: {
-    name: 'Ivan',
-    photoDesc: 'name',
-    src: avatarDefault,
+    userData: mockUser,
   },
 }
