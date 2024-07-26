@@ -5,11 +5,11 @@ import { PATH } from '@/shared/enums'
 export const PrivateRoutes = () => {
   const { isAuth } = useOutletContext<{ isAuth: boolean }>()
 
-  return isAuth ? <Outlet /> : <Navigate to={PATH.SIGN_IN} />
-}
+  if (isAuth) {
+    return <Outlet />
+  }
 
-export const PublicRoutes = () => {
-  const { isAuth } = useOutletContext<{ isAuth: boolean }>()
-
-  return isAuth ? <Navigate to={PATH.DECK_LIST} /> : <Outlet />
+  if (!isAuth) {
+    return <Navigate to={PATH.SIGN_IN} />
+  }
 }

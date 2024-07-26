@@ -64,7 +64,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
               Forgot Password?
             </Typography>
           </FlexContainer>
-          <Button fullWidth variant={'primary'}>
+          <Button fullWidth type={'submit'} variant={'primary'}>
             Sign In
           </Button>
         </form>

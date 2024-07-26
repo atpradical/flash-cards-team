@@ -1,4 +1,3 @@
-import { router } from '@/app'
 import {
   type BaseQueryFn,
   type FetchArgs,
@@ -63,7 +62,9 @@ export const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
-          router.navigate('/sign-in')
+          // localStorage.removeItem('accessToken')
+          // localStorage.removeItem('refreshToken')
+          // router.navigate(PATH.SIGN_IN) // ломает редирект
         }
       } finally {
         // release must be called once the mutex should be released again.

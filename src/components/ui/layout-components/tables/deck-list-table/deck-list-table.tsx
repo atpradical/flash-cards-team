@@ -23,7 +23,7 @@ import { HeaderCell, PositionCell } from '../container-components'
 
 type DecksListTableProps = {
   decks: Deck[]
-  user: User
+  user?: User
 }
 
 export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
@@ -47,7 +47,7 @@ export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
     const deckPath = generatePath(PATH.DECK, { deckId: el.id })
     const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
 
-    const isAuthor = el.userId === user.id
+    const isAuthor = el.userId === user?.id
 
     const openEditDeckHandler = (deckId: string) => {
       setDeckId(deckId)

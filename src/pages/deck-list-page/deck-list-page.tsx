@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { DeckDialogForm } from '@/components/forms'
 import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
-import { User, useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
+import { useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
 import { useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -69,7 +69,7 @@ export const DeckListPage = () => {
             <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
           </FlexContainer>
           <TableFilterBar max={minMax?.max} min={minMax?.min} search={search} />
-          <DeckListTable decks={deckItems} user={user || ({} as User)} />
+          <DeckListTable decks={deckItems} user={user} />
           <Pagination currentPage={currentPage} pageSize={itemsPerPage} totalCount={totalItems} />
           <DeckDialogForm onOpenChange={setShowAddDeckDialog} open={showAddDeckDialog} />
         </FlexContainer>

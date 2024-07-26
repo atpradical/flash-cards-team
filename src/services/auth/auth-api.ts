@@ -5,6 +5,7 @@ export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<LoginResponse, LoginArgs>({
+        invalidatesTags: ['Me'],
         async onQueryStarted(_, { queryFulfilled }) {
           const { data } = await queryFulfilled
 
@@ -21,8 +22,9 @@ export const authApi = flashcardsApi.injectEndpoints({
           url: `v1/auth/login`,
         }),
       }),
+
       me: builder.query<User, void>({
-        // providesTags: ['Me'],
+        providesTags: ['Me'],
         query: () => ({
           method: 'GET',
           url: `v1/auth/me`,

@@ -13,7 +13,7 @@ import { SignUpPage } from '@/pages/sign-up-page'
 import { PATH } from '@/shared/enums'
 
 import { App } from '../app'
-import { PrivateRoutes, PublicRoutes } from './protectedRoutes'
+import { PrivateRoutes } from './protectedRoutes'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -36,10 +36,6 @@ const publicRoutes: RouteObject[] = [
   {
     element: <CheckEmailPage />,
     path: PATH.CHECK_EMAIL,
-  },
-  {
-    element: <Error404Page />,
-    path: PATH.ERROR_404,
   },
 ]
 
@@ -66,13 +62,18 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
+const errorRouters: RouteObject[] = [
+  {
+    element: <Error404Page />,
+    path: PATH.ERROR_404,
+  },
+]
+
 export const router = createBrowserRouter([
   {
     children: [
-      {
-        children: publicRoutes,
-        element: <PublicRoutes />,
-      },
+      ...publicRoutes,
+      ...errorRouters,
       {
         children: privateRoutes,
         element: <PrivateRoutes />,
