@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Link, generatePath } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
 import {
@@ -13,9 +12,8 @@ import {
 } from '@/components/ui/primitives'
 import { User } from '@/services'
 import { Deck } from '@/services/decks/deck.types'
-import { DIALOG_ACTION, DIALOG_ENTITY, PATH, VARIANT } from '@/shared/enums'
-import { useSearchParamUpdater } from '@/shared/hooks'
-import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
+import { DIALOG_ACTION, DIALOG_ENTITY, VARIANT } from '@/shared/enums'
+import { useDeckData, useSearchParamUpdater } from '@/shared/hooks'
 
 import s from './deck-list-table.module.scss'
 
@@ -27,37 +25,28 @@ type DecksListTableProps = {
 }
 
 export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
-  const [deckId, setDeckId] = useState('')
-  const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
-  const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
   const [sortId, setSortId] = useState('')
   const updateSearchParam = useSearchParamUpdater()
+
+  const {
+    deckData,
+    deckId,
+    openDeleteDeckHandler,
+    openEditDeckHandler,
+    processDeckData,
+    setShowDeleteDeckDialog,
+    setShowEditDeckDialog,
+    showDeleteDeckDialog,
+    showEditDeckDialog,
+  } = useDeckData(decks, user)
 
   const sortHandler = (orderBy: string, sortId: string) => {
     setSortId(sortId)
     updateSearchParam({ currentPage: 1, orderBy })
   }
 
-  const deckData = decks.find(el => el.id === deckId) ?? ({} as Deck)
-
   const tableRows = decks.map(el => {
-    const cover = el.cover ?? dummyCover
-    const cardsCount = el.cardsCount.toString()
-    const updated = convertToDDMMYYYY(el.updated)
-    const deckPath = generatePath(PATH.DECK, { deckId: el.id })
-    const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
-
-    const isAuthor = el.userId === user.id
-
-    const openEditDeckHandler = (deckId: string) => {
-      setDeckId(deckId)
-      setShowEditDeckDialog(true)
-    }
-
-    const openDeleteDeckHandler = (deckId: string) => {
-      setDeckId(deckId)
-      setShowDeleteDeckDialog(true)
-    }
+    const { cardsCount, cover, deckPath, isAuthor, learnDeckPath, updated } = processDeckData(el)
 
     return (
       <TableRow key={el.id}>

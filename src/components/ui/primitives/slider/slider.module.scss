@@ -73,3 +73,9 @@
     cursor: grabbing;
   }
 }
+
+.container {
+  @media screen and (width <= 300px) {
+    display: none;
+  }
+}
