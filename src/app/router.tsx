@@ -8,7 +8,6 @@ import {
 
 import { Error404Page } from '@/pages'
 import { CardPage } from '@/pages/card-page'
-import { CheckEmailPage } from '@/pages/check-email-page'
 import { DeckListPage } from '@/pages/deck-list-page'
 import { DeckPage } from '@/pages/deck-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
@@ -39,10 +38,6 @@ const publicRoutes: RouteObject[] = [
   {
     element: <ResetPassword />,
     path: PATH.PWD_RESET,
-  },
-  {
-    element: <CheckEmailPage />,
-    path: PATH.CHECK_EMAIL,
   },
   {
     element: <Error404Page />,

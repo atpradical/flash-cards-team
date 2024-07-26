@@ -1,5 +1,4 @@
 export * from './card-page'
-export * from './check-email-page'
 export * from './deck-list-page'
 export * from './deck-page'
 export * from './error-404-page'
