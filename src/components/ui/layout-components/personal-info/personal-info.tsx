@@ -29,8 +29,13 @@ export const PersonalInfo = ({ userData }: PersonalInfoProps) => {
           Personal Information
         </Typography>
         <FlexContainer className={cn.wrapper}>
-          <Avatar className={cn.avatar} size={isTinyScreen ? 'm' : 'l'} src={userData?.avatar} />
-          <Button className={cn.editAvatar} variant={'secondary'}>
+          <Avatar
+            className={cn.avatar}
+            name={userData?.name}
+            size={isTinyScreen ? 'm' : 'l'}
+            src={userData?.avatar}
+          />
+          <Button className={cn.editAvatar} title={'Edit Avatar'} variant={'secondary'}>
             <EditOutline className={cn.icon} />
           </Button>
         </FlexContainer>
@@ -38,7 +43,7 @@ export const PersonalInfo = ({ userData }: PersonalInfoProps) => {
           <Typography as={'h2'} variant={'h2'}>
             {userData?.name}
           </Typography>
-          <Button variant={'icon'}>
+          <Button title={'Edit profile'} variant={'icon'}>
             <EditOutline className={cn.icon} />
           </Button>
         </FlexContainer>
