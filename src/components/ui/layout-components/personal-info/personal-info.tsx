@@ -33,7 +33,7 @@ export const PersonalInfo = ({ user }: PersonalInfoProps) => {
           </Button>
         </FlexContainer>
         <Typography className={cn.hint} gray>
-          j&johnson@gmail.com
+          {user.email}
         </Typography>
         <Button className={cn.bottom} onClick={() => logout()} variant={'secondary'}>
           <LogOut className={cn.icon} />
