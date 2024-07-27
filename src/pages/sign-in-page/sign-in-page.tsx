@@ -12,8 +12,12 @@ export const SignInPage = () => {
   const navigate = useNavigate()
 
   const signInHandler = async (value: LoginArgs) => {
-    await login(value)
-    navigate(PATH.DECK_LIST)
+    try {
+      await login(value).unwrap()
+      navigate(PATH.DECK_LIST)
+    } catch (e: any) {
+      console.error('e', e)
+    }
   }
 
   console.log('tokens', tokens)

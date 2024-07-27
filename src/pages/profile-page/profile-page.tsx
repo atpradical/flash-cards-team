@@ -1,13 +1,19 @@
-import src from '@/assets/webp/avatar-default.webp'
 import { PersonalInfo } from '@/components/ui/layout-components'
+import { useMeQuery } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const ProfilePage = () => {
+  const { data: user, isLoading } = useMeQuery()
+
+  if (!user) {
+    return
+  }
+
   return (
-    <Page>
+    <Page load={isLoading}>
       <FlexContainer jc={'center'} pd={'0 20px'}>
-        <PersonalInfo name={'Ivan'} photoDesc={'avatar'} src={src} />
+        <PersonalInfo user={user} />
       </FlexContainer>
     </Page>
   )

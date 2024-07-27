@@ -34,8 +34,7 @@ export const authApi = flashcardsApi.injectEndpoints({
         }),
       }),
       login: builder.mutation<LoginResponse, LoginArgs>({
-        invalidatesTags: ['Me'],
-        async onQueryStarted(_, { queryFulfilled }) {
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
           const { data } = await queryFulfilled
 
           if (!data) {
@@ -44,6 +43,8 @@ export const authApi = flashcardsApi.injectEndpoints({
 
           localStorage.setItem('accessToken', data.accessToken)
           localStorage.setItem('refreshToken', data.refreshToken)
+
+          dispatch(authApi.util.invalidateTags(['Me']))
         },
         query: body => ({
           body,

@@ -1,6 +1,7 @@
-import avatarDefault from '@/assets/webp/avatar-default.webp'
 import { PersonalInfo } from '@/components/ui/layout-components'
 import { Meta, StoryObj } from '@storybook/react'
+
+import { mockUser } from '../../primitives/dropdown/dropdown.mock'
 
 const meta = {
   argTypes: {},
@@ -14,8 +15,6 @@ type Story = StoryObj<typeof meta>
 
 export const PersonalInfoBase: Story = {
   args: {
-    name: 'Ivan',
-    photoDesc: 'name',
-    src: avatarDefault,
+    user: mockUser,
   },
 }
