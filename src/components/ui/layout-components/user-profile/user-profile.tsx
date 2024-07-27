@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { ProfileDropdown } from '@/components/ui/layout-components'
 import { Avatar, Button, Typography } from '@/components/ui/primitives'
-import { useLogOutMutation, User } from '@/services'
+import { User, useLogOutMutation } from '@/services'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
@@ -14,6 +14,8 @@ type Props = {
 }
 
 export const UserProfile = ({ isAuth, userData }: Props) => {
+  const [logout] = useLogOutMutation()
+
   if (!isAuth || !userData) {
     return (
       <Button as={Link} to={PATH.SIGN_IN} variant={'secondary'}>
@@ -22,8 +24,6 @@ export const UserProfile = ({ isAuth, userData }: Props) => {
     )
   }
   const { avatar, email, name } = userData
-
-  const [logout] = useLogOutMutation()
 
   const trigger = (
     <FlexContainer gap={'14px'}>
@@ -35,6 +35,12 @@ export const UserProfile = ({ isAuth, userData }: Props) => {
   )
 
   return (
-    <ProfileDropdown avatar={avatar} email={email} name={name} trigger={trigger} logout={logout} />
+    <ProfileDropdown
+      avatar={avatar}
+      email={email}
+      logout={() => logout()}
+      name={name}
+      trigger={trigger}
+    />
   )
 }

@@ -1,4 +1,5 @@
 import { flashcardsApi } from '@/services/flashcards-api'
+
 import { UserArgs } from './user.types'
 
 export const userApi = flashcardsApi.injectEndpoints({

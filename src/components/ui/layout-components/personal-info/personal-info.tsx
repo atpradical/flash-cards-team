@@ -1,9 +1,9 @@
 import { EditOutline, LogOut } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
+import { useLogOutMutation } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './personal-info.styles'
-import { useLogOutMutation } from '@/services'
 
 type PersonalInfoProps = {
   name: string
@@ -37,7 +37,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
         <Typography className={cn.hint} gray>
           j&johnson@gmail.com
         </Typography>
-        <Button className={cn.bottom} variant={'secondary'} onClick={() => logout()}>
+        <Button className={cn.bottom} onClick={() => logout()} variant={'secondary'}>
           <LogOut className={cn.icon} />
           <Typography variant={'subtitle2'}>Logout</Typography>
         </Button>

@@ -7,6 +7,7 @@ import dummyImage from '@/assets/webp/avatar-default.webp'
 import { ProfileDropdown as ProfileDropdownComponent } from '@/components/ui/layout-components'
 import { Avatar } from '@/components/ui/primitives'
 import { store } from '@/services'
+import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {},
@@ -21,6 +22,7 @@ export const ProfileDropdown: Story = {
   args: {
     avatar: dummyImage,
     email: 'test@test.com',
+    logout: action('logout button was invoked'),
     name: 'User',
     trigger: <Avatar name={'User'} size={'s'} src={dummyImage} />,
   },

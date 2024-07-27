@@ -9,8 +9,8 @@ import { DropdownItem, DropdownLabel } from '../container-components'
 import { cn } from '../dropdowns.styles'
 
 type Props = {
-  trigger: ReactNode
   logout: () => void
+  trigger: ReactNode
 } & Pick<User, 'avatar' | 'email' | 'name'>
 
 const icons = {
@@ -19,7 +19,7 @@ const icons = {
 }
 
 export const ProfileDropdown = (props: Props) => {
-  const { avatar, email, name, trigger, logout } = props
+  const { avatar, email, logout, name, trigger } = props
 
   return (
     <Root>
@@ -31,9 +31,9 @@ export const ProfileDropdown = (props: Props) => {
         <DropdownItem
           icon={icons.logout}
           noSeparator
+          onClick={logout}
           path={PATH.SIGN_IN}
           title={'Sign Out'}
-          onClick={logout}
         />
       </Content>
     </Root>

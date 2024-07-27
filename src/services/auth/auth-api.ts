@@ -4,6 +4,23 @@ import { flashcardsApi } from '@/services/flashcards-api'
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
+      logOut: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            await queryFulfilled
+          } finally {
+            localStorage.removeItem('accessToken')
+            localStorage.removeItem('refreshToken')
+            dispatch(authApi.util.invalidateTags(['Me', 'User']))
+          }
+        },
+
+        query: () => ({
+          method: 'POST',
+          url: `/v2/auth/logout`,
+        }),
+      }),
       login: builder.mutation<LoginResponse, LoginArgs>({
         invalidatesTags: ['Me'],
         async onQueryStarted(_, { queryFulfilled }) {
@@ -22,23 +39,6 @@ export const authApi = flashcardsApi.injectEndpoints({
           url: `v1/auth/login`,
         }),
       }),
-      logOut: builder.mutation<void, void>({
-        invalidatesTags: ['Me'],
-        async onQueryStarted(_, { dispatch, queryFulfilled }) {
-          try {
-            await queryFulfilled
-          } finally {
-            localStorage.removeItem('accessToken')
-            localStorage.removeItem('refreshToken')
-            dispatch(authApi.util.invalidateTags(['Me', 'User']))
-          }
-        },
-
-        query: () => ({
-          method: 'POST',
-          url: `/v2/auth/logout`,
-        }),
-      }),
       me: builder.query<User, void>({
         providesTags: ['Me'],
         query: () => ({
@@ -51,4 +51,4 @@ export const authApi = flashcardsApi.injectEndpoints({
   overrideExisting: false,
 })
 
-export const { useLoginMutation, useMeQuery, useLogOutMutation } = authApi
+export const { useLogOutMutation, useLoginMutation, useMeQuery } = authApi
