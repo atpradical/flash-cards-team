@@ -24,6 +24,7 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
   const updateSearchParam = useSearchParamUpdater()
 
   const [sliderState, setSliderState] = useState([min, max])
+  const [searchState, setSearchState] = useState(search)
 
   const sliderRangeChangeHandler = (newRange: number[]) => {
     setSliderState(newRange)
@@ -35,6 +36,7 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
 
   const clearFiltersHandler = () => {
     setSliderState([min, max])
+    setSearchState('')
     updateSearchParam({
       authorId: '',
       currentPage: 1,
@@ -48,6 +50,7 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
   }
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchState(e.currentTarget.value)
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
@@ -55,12 +58,15 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
     updateSearchParam({ currentPage: 1, tab })
   }
 
+  console.log('search', search.length)
+  console.log('searchState', searchState.length)
+
   return (
     <FlexContainer ai={'flex-end'} fd={'row'} gap={'24px'}>
       <TextField
         onChange={searchHandler}
         placeholder={'Filter deck by name'}
-        value={search}
+        value={searchState}
         variant={'search'}
       />
       <TabSwitcher className={cn.tabs} label={'Show decks'} onTabChange={tabHandler} tabs={tabs} />

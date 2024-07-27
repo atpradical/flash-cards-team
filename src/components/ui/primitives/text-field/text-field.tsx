@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react'
 
 import { CloseOutline, EyeOffOutline, EyeOutline, SearchOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
@@ -44,6 +44,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const isPassword = variant === 'password'
   const inputType = !showPassword && isPassword ? 'password' : 'text'
   const isSearch = variant === 'search'
+
+  useEffect(() => {
+    setInputValue(value)
+  }, [value])
 
   const showPasswordHandler = () => {
     setShowPassword(prev => !prev)
