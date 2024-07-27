@@ -20,7 +20,7 @@ import { PATH } from '@/shared/enums'
 import { useAuthContext } from '@/shared/hooks'
 import { Layout } from '@/shared/ui/layout'
 
-const publicRoutes: RouteObject[] = [
+const authRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
     path: PATH.SIGN_IN,
@@ -29,6 +29,9 @@ const publicRoutes: RouteObject[] = [
     element: <SignUpPage />,
     path: PATH.SIGN_UP,
   },
+]
+
+const publicRoutes: RouteObject[] = [
   {
     element: <PasswordRecoveryPage />,
     path: PATH.PWD_RECOVERY,
@@ -76,12 +79,22 @@ const PrivateRoutes = () => {
   return isAuth ? <Outlet /> : <Navigate to={PATH.SIGN_IN} />
 }
 
+const AuthRoutes = () => {
+  const { isAuth } = useAuthContext()
+
+  return !isAuth ? <Outlet /> : <Navigate to={PATH.ROOT} />
+}
+
 export const router = createBrowserRouter([
   {
     children: [
       {
         children: privateRoutes,
         element: <PrivateRoutes />,
+      },
+      {
+        children: authRoutes,
+        element: <AuthRoutes />,
       },
       ...publicRoutes,
     ],

@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import { LogOut, PersonOutline } from '@/assets/icons'
 import { Arrow, Content, Root, Trigger } from '@/components/ui/primitives'
-import { User } from '@/services'
+import { User, useLogoutMutation } from '@/services'
 import { PATH } from '@/shared/enums'
 
 import { DropdownItem, DropdownLabel } from '../container-components'
@@ -19,6 +19,11 @@ const icons = {
 
 export const ProfileDropdown = (props: Props) => {
   const { avatar, email, name, trigger } = props
+  const [logout] = useLogoutMutation()
+
+  const logoutHandler = () => {
+    logout()
+  }
 
   return (
     <Root>
@@ -27,7 +32,7 @@ export const ProfileDropdown = (props: Props) => {
         <Arrow />
         <DropdownLabel email={email} name={name} photo={avatar} />
         <DropdownItem icon={icons.profile} path={PATH.PROFILE} title={'My Profile'} />
-        <DropdownItem icon={icons.logout} noSeparator path={PATH.SIGN_IN} title={'Sign Out'} />
+        <DropdownItem icon={icons.logout} noSeparator onClick={logoutHandler} title={'Sign Out'} />
       </Content>
     </Root>
   )
