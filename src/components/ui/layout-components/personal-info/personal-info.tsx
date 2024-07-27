@@ -1,5 +1,6 @@
 import { EditOutline, LogOut } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
+import { useLogoutMutation } from '@/services'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -16,6 +17,12 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
   const isTinyScreen = currentScreenWidth <= breakpoint
+
+  const [logout] = useLogoutMutation()
+
+  const logoutHandler = () => {
+    logout()
+  }
 
   return (
     <Card className={cn.container}>
@@ -45,7 +52,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
         <Typography className={cn.hint} gray>
           j&johnson@gmail.com
         </Typography>
-        <Button className={cn.bottom} variant={'secondary'}>
+        <Button className={cn.bottom} onClick={logoutHandler} variant={'secondary'}>
           <LogOut className={cn.icon} />
           <Typography variant={'subtitle2'}>Logout</Typography>
         </Button>
