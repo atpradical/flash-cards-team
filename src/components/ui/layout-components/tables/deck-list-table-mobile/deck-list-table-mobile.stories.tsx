@@ -18,7 +18,7 @@ const meta = {
 type Story = StoryObj<typeof meta>
 export default meta
 
-export const DeckListTable: Story = {
+export const DeckListTableMobile: Story = {
   args: {
     decks: DeckListExample,
     user: mockUser,
@@ -26,7 +26,9 @@ export const DeckListTable: Story = {
   render: args => (
     <MemoryRouter>
       <Provider store={store}>
-        <DeckListTableMobileComponent {...args} />
+        <div style={{ width: '600px' }}>
+          <DeckListTableMobileComponent {...args} />
+        </div>
       </Provider>
     </MemoryRouter>
   ),

@@ -1,13 +1,11 @@
 import { useState } from 'react'
 
-import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { CardDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { Grade, TableBody, TableContainer, TableHeader, TableRow } from '@/components/ui/primitives'
 import { Card } from '@/services/cards/cards.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, VARIANT } from '@/shared/enums'
-import { useSearchParamUpdater } from '@/shared/hooks'
-import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
+import { useDeckTableData, useSearchParamUpdater } from '@/shared/hooks'
 
 import s from './deck-table.module.scss'
 
@@ -19,32 +17,28 @@ type DeckTableProps = {
 }
 
 export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
-  const [cardId, setCardId] = useState('')
-  const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
-  const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
   const [sortId, setSortId] = useState('')
   const updateSearchParam = useSearchParamUpdater()
-
-  const cardData = cards.find(el => el.id === cardId) ?? ({} as Card)
 
   const sortHandler = (orderBy: string, sortId: string) => {
     setSortId(sortId)
     updateSearchParam({ currentPage: 1, orderBy })
   }
 
-  const TableContent = cards.map(el => {
-    const questionCover = el.questionImg ?? dummyCover
-    const answerCover = el.answerImg ?? dummyCover
-    const updated = convertToDDMMYYYY(el.updated)
+  const {
+    cardData,
+    cardId,
+    onDeleteHandler,
+    onEditHandler,
+    processCardData,
+    setShowDeleteCardDialogForm,
+    setShowUpdateCardDialogForm,
+    showDeleteCardDialogForm,
+    showUpdateCardDialogForm,
+  } = useDeckTableData(cards)
 
-    const onEditHandler = (cardId: string) => {
-      setCardId(cardId)
-      setShowUpdateCardDialogForm(true)
-    }
-    const onDeleteHandler = (cardId: string) => {
-      setCardId(cardId)
-      setShowDeleteCardDialogForm(true)
-    }
+  const TableContent = cards.map(el => {
+    const { answerCover, questionCover, updated } = processCardData(el)
 
     return (
       <TableRow key={el.id}>

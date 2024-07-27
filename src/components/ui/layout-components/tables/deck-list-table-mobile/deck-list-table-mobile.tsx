@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components'
-import { Button, Image, TableContainer, TableHeader, TableRow } from '@/components/ui/primitives'
+import { Button, TableContainer, TableHeader, TableRow } from '@/components/ui/primitives'
 import { Deck, User } from '@/services'
-import { DIALOG_ACTION, DIALOG_ENTITY, RATIO, VARIANT } from '@/shared/enums'
-import { useDeckData } from '@/shared/hooks'
+import { DIALOG_ACTION, DIALOG_ENTITY, VARIANT } from '@/shared/enums'
+import { useDeckListData } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import s from './deck-list-table-mobile.module.scss'
@@ -27,7 +27,7 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
     setShowEditDeckDialog,
     showDeleteDeckDialog,
     showEditDeckDialog,
-  } = useDeckData(decks, user)
+  } = useDeckListData(decks, user)
 
   return (
     <TableContainer className={s.tableContainer}>
@@ -40,10 +40,7 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
             <div className={s.tableItem} key={el.id}>
               <TableHeader>
                 <TableRow>
-                  <HeaderCell className={s.headerCell} content={''} sortable={false}>
-                    <Image alt={'deck cover'} ratio={RATIO.S} src={cover} variant={'s'} />
-                  </HeaderCell>
-                  {/*<PositionCell className={s.positionCell} image={cover} />*/}
+                  <PositionCell className={s.positionCell} image={cover} />
                   <PositionCell className={s.positionCell} jc={'end'}>
                     <Button as={Link} title={'Go to deck cards'} to={deckPath} variant={'link'}>
                       {el.name}

@@ -13,7 +13,7 @@ import {
 import { User } from '@/services'
 import { Deck } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, DIALOG_ENTITY, VARIANT } from '@/shared/enums'
-import { useDeckData, useSearchParamUpdater } from '@/shared/hooks'
+import { useDeckListData, useSearchParamUpdater } from '@/shared/hooks'
 
 import s from './deck-list-table.module.scss'
 
@@ -38,7 +38,7 @@ export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
     setShowEditDeckDialog,
     showDeleteDeckDialog,
     showEditDeckDialog,
-  } = useDeckData(decks, user)
+  } = useDeckListData(decks, user)
 
   const sortHandler = (orderBy: string, sortId: string) => {
     setSortId(sortId)

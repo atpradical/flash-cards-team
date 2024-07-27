@@ -1,55 +1,47 @@
 import { useState } from 'react'
-import { generatePath } from 'react-router-dom'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
-import { Deck, User } from '@/services'
-import { PATH } from '@/shared/enums'
+import { Card } from '@/services'
 import { convertToDDMMYYYY } from '@/shared/utils/convert-date-ddmmyyyy'
 
-export const useDeckData = (decks: Deck[], user: User) => {
-  const [deckId, setDeckId] = useState('')
-  const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
-  const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
+export const useDeckTableData = (cards: Card[]) => {
+  const [cardId, setCardId] = useState('')
+  const [showUpdateCardDialogForm, setShowUpdateCardDialogForm] = useState(false)
+  const [showDeleteCardDialogForm, setShowDeleteCardDialogForm] = useState(false)
 
-  const deckData = decks.find(el => el.id === deckId) ?? ({} as Deck)
+  const cardData = cards.find(el => el.id === cardId) ?? ({} as Card)
 
-  const processDeckData = (el: Deck) => {
-    const cover = el.cover ?? dummyCover
-    const cardsCount = el.cardsCount.toString()
+  const processCardData = (el: Card) => {
+    const questionCover = el.questionImg ?? dummyCover
+    const answerCover = el.answerImg ?? dummyCover
     const updated = convertToDDMMYYYY(el.updated)
-    const deckPath = generatePath(PATH.DECK, { deckId: el.id })
-    const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
-    const isAuthor = el.userId === user.id
 
     return {
-      cardsCount,
-      cover,
-      deckPath,
-      isAuthor,
-      learnDeckPath,
+      answerCover,
+      questionCover,
       updated,
     }
   }
 
-  const openEditDeckHandler = (deckId: string) => {
-    setDeckId(deckId)
-    setShowEditDeckDialog(true)
+  const onEditHandler = (cardId: string) => {
+    setCardId(cardId)
+    setShowUpdateCardDialogForm(true)
   }
 
-  const openDeleteDeckHandler = (deckId: string) => {
-    setDeckId(deckId)
-    setShowDeleteDeckDialog(true)
+  const onDeleteHandler = (cardId: string) => {
+    setCardId(cardId)
+    setShowDeleteCardDialogForm(true)
   }
 
   return {
-    deckData,
-    deckId,
-    openDeleteDeckHandler,
-    openEditDeckHandler,
-    processDeckData,
-    setShowDeleteDeckDialog,
-    setShowEditDeckDialog,
-    showDeleteDeckDialog,
-    showEditDeckDialog,
+    cardData,
+    cardId,
+    onDeleteHandler,
+    onEditHandler,
+    processCardData,
+    setShowDeleteCardDialogForm,
+    setShowUpdateCardDialogForm,
+    showDeleteCardDialogForm,
+    showUpdateCardDialogForm,
   }
 }

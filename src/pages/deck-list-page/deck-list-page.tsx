@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { DeckDialogForm } from '@/components/forms'
-import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
-import { DeckListTableMobile } from '@/components/ui/layout-components/tables/deck-list-table-mobile'
+import {
+  DeckListTable,
+  DeckListTableMobile,
+  TableFilterBar,
+} from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
 import { useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
 import { SCREEN_SIZE } from '@/shared/enums'
