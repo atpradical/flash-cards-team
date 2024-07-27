@@ -1,5 +1,17 @@
-import { LoginArgs, LoginResponse, User } from '@/services/auth/auth.types'
+import {
+  LoginArgs,
+  LoginResponse,
+  SignUpArgs,
+  SignUpResponse,
+  User,
+} from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
+
+const formatSignUpData = (data: SignUpArgs) => {
+  const { confirmPassword, ...rest } = data
+
+  return rest
+}
 
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -39,6 +51,7 @@ export const authApi = flashcardsApi.injectEndpoints({
           url: `v1/auth/login`,
         }),
       }),
+
       me: builder.query<User, void>({
         providesTags: ['Me'],
         query: () => ({
@@ -46,9 +59,18 @@ export const authApi = flashcardsApi.injectEndpoints({
           url: `v1/auth/me`,
         }),
       }),
+
+      signUp: builder.mutation<SignUpResponse, SignUpArgs>({
+        invalidatesTags: ['User', 'Me'],
+        query: body => ({
+          body: formatSignUpData(body),
+          method: 'POST',
+          url: '/v1/auth/sign-up',
+        }),
+      }),
     }
   },
   overrideExisting: false,
 })
 
-export const { useLogOutMutation, useLoginMutation, useMeQuery } = authApi
+export const { useLogOutMutation, useLoginMutation, useMeQuery, useSignUpMutation } = authApi
