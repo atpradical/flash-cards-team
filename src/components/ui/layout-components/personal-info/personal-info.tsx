@@ -3,6 +3,7 @@ import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './personal-info.styles'
+import { useLogOutMutation } from '@/services'
 
 type PersonalInfoProps = {
   name: string
@@ -11,6 +12,8 @@ type PersonalInfoProps = {
 }
 
 export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
+  const [logout] = useLogOutMutation()
+
   return (
     <Card className={cn.container}>
       <FlexContainer fd={'column'} gap={'6px'}>
@@ -34,7 +37,7 @@ export const PersonalInfo = ({ name, photoDesc, src }: PersonalInfoProps) => {
         <Typography className={cn.hint} gray>
           j&johnson@gmail.com
         </Typography>
-        <Button className={cn.bottom} variant={'secondary'}>
+        <Button className={cn.bottom} variant={'secondary'} onClick={() => logout()}>
           <LogOut className={cn.icon} />
           <Typography variant={'subtitle2'}>Logout</Typography>
         </Button>

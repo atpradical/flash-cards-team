@@ -10,6 +10,7 @@ import { cn } from '../dropdowns.styles'
 
 type Props = {
   trigger: ReactNode
+  logout: () => void
 } & Pick<User, 'avatar' | 'email' | 'name'>
 
 const icons = {
@@ -18,7 +19,7 @@ const icons = {
 }
 
 export const ProfileDropdown = (props: Props) => {
-  const { avatar, email, name, trigger } = props
+  const { avatar, email, name, trigger, logout } = props
 
   return (
     <Root>
@@ -27,7 +28,13 @@ export const ProfileDropdown = (props: Props) => {
         <Arrow />
         <DropdownLabel email={email} name={name} photo={avatar} />
         <DropdownItem icon={icons.profile} path={PATH.PROFILE} title={'My Profile'} />
-        <DropdownItem icon={icons.logout} noSeparator path={PATH.SIGN_IN} title={'Sign Out'} />
+        <DropdownItem
+          icon={icons.logout}
+          noSeparator
+          path={PATH.SIGN_IN}
+          title={'Sign Out'}
+          onClick={logout}
+        />
       </Content>
     </Root>
   )

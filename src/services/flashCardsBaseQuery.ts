@@ -62,8 +62,6 @@ export const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
-          // localStorage.removeItem('accessToken')
-          // localStorage.removeItem('refreshToken')
           // router.navigate(PATH.SIGN_IN) // ломает редирект
         }
       } finally {
