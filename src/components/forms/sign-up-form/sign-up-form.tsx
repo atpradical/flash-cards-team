@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { cn } from '@/components/forms/sign-up-form/sign-up-form.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
-import { emailSchema, passwordSchema } from '@/shared/schemes'
+import { emailSchema, nameScheme, passwordSchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,6 +14,7 @@ const SignUpScheme = z
   .object({
     confirmPassword: passwordSchema,
     email: emailSchema,
+    name: nameScheme,
     password: passwordSchema,
   })
   .refine(val => val.password !== val.email, {
@@ -25,7 +26,7 @@ const SignUpScheme = z
     path: ['confirmPassword'],
   })
 
-type SignUpFormValues = z.infer<typeof SignUpScheme>
+export type SignUpFormValues = z.infer<typeof SignUpScheme>
 
 type SignUpFormProps = {
   onSubmit: (formData: SignUpFormValues) => void
@@ -49,6 +50,12 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
         </Typography>
         <form className={cn.form} onSubmit={formHandler}>
           <FlexContainer fd={'column'} gap={'24px'}>
+            <ControlledTextField
+              control={control}
+              label={'Name'}
+              name={'name'}
+              placeholder={'Enter your name'}
+            />
             <ControlledTextField
               control={control}
               label={'Email'}
