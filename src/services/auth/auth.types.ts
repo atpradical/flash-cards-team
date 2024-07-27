@@ -17,3 +17,14 @@ export type LoginArgs = {
   password: string
   rememberMe: boolean
 }
+
+export type CreateUserArgs = {
+  email: string
+  html?: string
+  name?: string
+  password: string
+  sendConfirmationEmail?: boolean
+  subject?: string
+}
+
+export type CreateUserResponse = User

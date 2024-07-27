@@ -15,7 +15,7 @@ export const DropdownLabel = (props: Props) => {
   return (
     <>
       <Label {...rest}>
-        <Avatar size={'s'} src={photo} title={name} />
+        <Avatar name={name} size={'s'} src={photo} title={name} />
         <div>
           <Typography variant={'subtitle2'}>{name}</Typography>
           <Typography gray variant={'caption'}>

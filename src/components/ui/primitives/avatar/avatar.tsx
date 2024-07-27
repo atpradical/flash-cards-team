@@ -15,15 +15,17 @@ export const Avatar = (props: Props) => {
   const { className, name, size = 'm', src, ...rest } = props
 
   const cn = {
-    fallBack: clsx(s.avatarFallback),
+    fallBack: clsx(s.avatarFallback, size === 'l' && s.bigLetter),
     image: clsx(s.avatarImage),
     root: clsx(s.avatarRoot, s[size], className),
   }
 
+  const fallBack = name?.[0].toUpperCase()
+
   return (
     <RadixAvatar.Root className={cn.root} {...rest}>
       <RadixAvatar.Image alt={'user avatar'} className={cn.image} src={src} />
-      <RadixAvatar.Fallback className={cn.fallBack}>{name}</RadixAvatar.Fallback>
+      <RadixAvatar.Fallback className={cn.fallBack}>{fallBack}</RadixAvatar.Fallback>
     </RadixAvatar.Root>
   )
 }

@@ -1,17 +1,24 @@
-import { SignUpForm } from '@/components/forms'
+import { useState } from 'react'
+
+import { SignUpForm, SignUpFormValues } from '@/components/forms'
+import { CheckEmail } from '@/components/ui/layout-components'
+import { useCreateUserMutation } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const SignUpPage = () => {
-  const signUpHandler = (value: any) => {
-    console.log(value)
-    console.log('send sign-in request to server!')
+  const [createUser, { isLoading, isSuccess }] = useCreateUserMutation()
+  const [email, setEmail] = useState('')
+
+  const signUpFormHandler = (formData: SignUpFormValues) => {
+    createUser(formData)
+    setEmail(formData.email)
   }
 
   return (
-    <Page>
+    <Page load={isLoading}>
       <FlexContainer jc={'center'} pd={'0 20px'}>
-        <SignUpForm onSubmit={signUpHandler} />
+        {isSuccess ? <CheckEmail email={email} /> : <SignUpForm onSubmit={signUpFormHandler} />}
       </FlexContainer>
     </Page>
   )

@@ -1,5 +1,10 @@
 import { z } from 'zod'
 
+export const nameScheme = z
+  .string()
+  .min(3, "Name length can't be less than 3 characters")
+  .max(30, "Name length can't be more than 30 characters")
+
 export const emailSchema = z.string().email('Please enter a valid email address.').toLowerCase()
 
 export const passwordSchema = z
