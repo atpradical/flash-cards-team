@@ -1,7 +1,12 @@
 import { ChangeEvent, useState } from 'react'
 
 import { PersonalInfoFromValues } from '@/components/forms'
-import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services'
+import {
+  useDeleteUserMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useUpdateUserMutation,
+} from '@/services'
 import { combineLoadingStates } from '@/shared/utils'
 
 export const useProfile = () => {
@@ -10,8 +15,14 @@ export const useProfile = () => {
   const { data, isLoading } = useMeQuery()
   const [updateUser, { isLoading: isUpdateUserLoading }] = useUpdateUserMutation()
   const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation()
+  const [deleteUser, { isLoading: isDeleteUserLoading }] = useDeleteUserMutation()
 
-  const isLoadingData = combineLoadingStates(isLoading, isUpdateUserLoading, isLogoutLoading)
+  const isLoadingData = combineLoadingStates(
+    isLoading,
+    isUpdateUserLoading,
+    isLogoutLoading,
+    isDeleteUserLoading
+  )
 
   const changeModeHandler = () => {
     setEditMode(true)
@@ -44,12 +55,17 @@ export const useProfile = () => {
     setEditMode(false)
   }
 
+  const deleteUserAccountHandler = () => {
+    deleteUser()
+  }
+
   return {
     cancelHandler,
     changeModeHandler,
     changeNickNameHandler,
     data,
     deleteAvatarHandler,
+    deleteUserAccountHandler,
     editMode,
     isLoadingData,
     logoutHandler,

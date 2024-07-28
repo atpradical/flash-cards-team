@@ -11,6 +11,7 @@ export const ProfilePage = () => {
     changeNickNameHandler,
     data,
     deleteAvatarHandler,
+    deleteUserAccountHandler,
     editMode,
     isLoadingData,
     logoutHandler,
@@ -34,6 +35,7 @@ export const ProfilePage = () => {
         ) : (
           <PersonalInfo
             avatar={data.avatar ?? null}
+            delAccount={deleteUserAccountHandler}
             delAvatar={deleteAvatarHandler}
             email={data.email}
             name={data.name}
