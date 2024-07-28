@@ -14,9 +14,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const ConfirmEmail: Story = {
-  args: {
-    email: 'test@email.com',
-  },
+  args: {},
   render: args => (
     <MemoryRouter>
       <ConfirmEmailComponent {...args} />

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import { ExpiredLink as ExpiredLinkComponent } from './expired-link'
 
 const meta = {
@@ -11,4 +13,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ExpiredLink: Story = {}
+export const ExpiredLink: Story = {
+  render: () => (
+    <MemoryRouter>
+      <ExpiredLinkComponent />
+    </MemoryRouter>
+  ),
+}
