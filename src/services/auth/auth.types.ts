@@ -53,3 +53,8 @@ export type PWDRecoverArgs = {
   html?: string
   subject?: string
 }
+
+export type PWDResetArgs = {
+  password: string
+  token: string
+}
