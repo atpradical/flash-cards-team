@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import { EditOutline, LogOut, Trash, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
@@ -38,9 +38,16 @@ export const PersonalInfo = ({
   updAvatar,
   userId,
 }: PersonalInfoProps) => {
+  const [resendState, setResendState] = useState(false)
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
   const isTinyScreen = currentScreenWidth <= breakpoint
+
+  useEffect(() => {
+    if (isResendSuccess) {
+      setResendState(true)
+    }
+  }, [isResendSuccess])
 
   return (
     <Card className={cn.container}>
@@ -74,14 +81,14 @@ export const PersonalInfo = ({
         {!isEmailVerified && (
           <div className={cn.verifyEmail}>
             <Typography variant={'error'}>Email is not verified!</Typography>
-            {isResendSuccess ? (
-              <Typography>
-                Confirmation request sent. <br /> Please check your mail
-              </Typography>
-            ) : (
+            {!resendState ? (
               <Button onClick={() => onEmailVerify(userId)} variant={'link'}>
                 Resend request
               </Button>
+            ) : (
+              <Typography>
+                Confirmation request sent. <br /> Please check your mail
+              </Typography>
             )}
           </div>
         )}

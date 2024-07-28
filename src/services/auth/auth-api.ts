@@ -77,6 +77,7 @@ export const authApi = flashcardsApi.injectEndpoints({
         query: () => `v1/auth/me`,
       }),
       resendVerificationEmail: builder.mutation<void, ResendVerificationEmailArgs>({
+        invalidatesTags: ['Me'],
         query: body => ({
           body: { html: emailBodyHTML, subject: emailSubjectHTML, ...body },
           method: 'POST',
