@@ -20,6 +20,7 @@ type SliderRef = ElementRef<typeof RadixSlider.Root>
 export const Slider = forwardRef<SliderRef, Props>(
   ({ label, max = 22, min = 0, onCommit, onRangeChange, range, ...rest }, ref) => {
     const cn = {
+      container: s.container,
       outputWrap: s.outputWrap,
       range: s.range,
       root: s.root,
@@ -28,7 +29,7 @@ export const Slider = forwardRef<SliderRef, Props>(
     }
 
     return (
-      <div>
+      <div className={s.container}>
         {label && <Typography as={'label'}>{label}</Typography>}
         <FlexContainer>
           <Typography className={cn.outputWrap} variant={'body1'}>

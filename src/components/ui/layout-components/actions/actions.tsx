@@ -9,11 +9,13 @@ import { ActionButton } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { getActionButtons } from '@/shared/utils'
 
+import { PositionCell } from '../tables/container-components'
 import { cn } from './actions.styles'
 
 type ActionsProps = {
   id: string
   isFavorite?: boolean
+  isMobile?: boolean
   onDelete: () => void
   onEdit: () => void
   onLearn?: string
@@ -23,6 +25,7 @@ type ActionsProps = {
 export const Actions = ({
   id,
   isFavorite,
+  isMobile = false,
   onDelete,
   onEdit,
   onLearn,
@@ -42,36 +45,55 @@ export const Actions = ({
 
   const actionButtons: ActionButton[] = [
     {
-      icon: <PlayCircleOutline className={cn.action} />,
+      icon: <PlayCircleOutline className={isMobile ? cn.mobile : cn.action} />,
       label: ACTIONS.LEARN,
       path: onLearn,
       title: 'Learn deck',
     },
     {
       handler: onEdit,
-      icon: <EditOutline className={cn.action} />,
+      icon: <EditOutline className={isMobile ? cn.mobile : cn.action} />,
       label: ACTIONS.EDIT,
       title: 'Edit deck',
     },
     {
       handler: onDelete,
-      icon: <TrashOutline className={cn.action} />,
+      icon: <TrashOutline className={isMobile ? cn.mobile : cn.action} />,
       label: ACTIONS.DELETE,
       title: 'Delete deck',
     },
     {
       handler: favoriteHandler,
       icon: isFavorite ? (
-        <Heart className={cn.favorite} />
+        <Heart className={isMobile ? cn.favoriteMobile : cn.favorite} />
       ) : (
-        <HeartOutline className={cn.favorite} />
+        <HeartOutline className={isMobile ? cn.favoriteMobile : cn.favorite} />
       ),
       label: ACTIONS.FAVORITE,
       title: 'Add deck to favorite',
     },
   ]
 
-  return (
+  return isMobile ? (
+    <FlexContainer fw={'wrap'}>
+      {getActionButtons(actionButtons, variant).map(el => (
+        <PositionCell className={cn.tableCell} key={el.label}>
+          <Button
+            as={el.path ? Link : 'button'}
+            className={cn.buttonMobile}
+            fullWidth
+            key={el.label}
+            onClick={el.handler}
+            title={el.title}
+            to={el.path}
+            variant={'link'}
+          >
+            {el.icon}
+          </Button>
+        </PositionCell>
+      ))}
+    </FlexContainer>
+  ) : (
     <FlexContainer gap={'10px'} {...restFlexContainer}>
       {getActionButtons(actionButtons, variant).map(el => (
         <Button

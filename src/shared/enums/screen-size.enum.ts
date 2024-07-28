@@ -2,4 +2,5 @@ export enum SCREEN_SIZE {
   MOBILE = 480,
   MOBILE_TINY = 320,
   TABLET = 1024,
+  TABLET_TINY = 800,
 }

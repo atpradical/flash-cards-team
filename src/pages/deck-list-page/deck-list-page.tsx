@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { DeckDialogForm } from '@/components/forms'
-import { DeckListTable, TableFilterBar } from '@/components/ui/layout-components'
+import {
+  DeckListTable,
+  DeckListTableMobile,
+  TableFilterBar,
+} from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
 import { useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
-import { useSearchParamUpdater } from '@/shared/hooks'
+import { SCREEN_SIZE } from '@/shared/enums'
+import { useCurrentScreenWidth, useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -54,6 +59,10 @@ export const DeckListPage = () => {
     { skip }
   )
 
+  const currentScreenWidth = useCurrentScreenWidth()
+  const breakpoint = SCREEN_SIZE.TABLET_TINY
+  const isTinyScreen = currentScreenWidth <= breakpoint
+
   if (!decks || !user) {
     return <Page />
   }
@@ -69,7 +78,11 @@ export const DeckListPage = () => {
             <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
           </FlexContainer>
           <TableFilterBar max={minMax?.max} min={minMax?.min} search={search} />
-          <DeckListTable decks={decks.items} user={user} />
+          {isTinyScreen ? (
+            <DeckListTableMobile decks={decks.items} user={user} />
+          ) : (
+            <DeckListTable decks={decks.items} user={user} />
+          )}
           <Pagination
             currentPage={currentPage}
             pageSize={itemsPerPage}

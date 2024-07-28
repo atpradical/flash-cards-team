@@ -3,12 +3,12 @@ import { Link, generatePath, useParams, useSearchParams } from 'react-router-dom
 
 import { ArrowBackOutline } from '@/assets/icons'
 import { CardDialogForm } from '@/components/forms'
-import { DeckTable, DeckTitle } from '@/components/ui/layout-components'
+import { DeckTable, DeckTableMobile, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Pagination, TextField } from '@/components/ui/primitives'
 import { cn } from '@/pages/deck-page/deck-page.styles'
 import { PaginationModel, useGetCardsQuery, useGetDeckQuery, useMeQuery } from '@/services'
-import { PATH } from '@/shared/enums'
-import { useSearchParamUpdater } from '@/shared/hooks'
+import { PATH, SCREEN_SIZE } from '@/shared/enums'
+import { useCurrentScreenWidth, useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -51,6 +51,10 @@ export const DeckPage = () => {
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
+
+  const currentScreenWidth = useCurrentScreenWidth()
+  const breakpoint = SCREEN_SIZE.TABLET_TINY
+  const isTinyScreen = currentScreenWidth <= breakpoint
 
   let isAuthor = false
 
@@ -97,7 +101,11 @@ export const DeckPage = () => {
               value={search}
               variant={'search'}
             />
-            <DeckTable cards={cards} isAuthor={isAuthor} />
+            {isTinyScreen ? (
+              <DeckTableMobile cards={cards} isAuthor={isAuthor} />
+            ) : (
+              <DeckTable cards={cards} isAuthor={isAuthor} />
+            )}
             <Pagination
               className={cn.pagination}
               currentPage={currentPage}
