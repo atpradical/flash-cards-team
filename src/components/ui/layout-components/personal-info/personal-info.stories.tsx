@@ -18,9 +18,13 @@ export const PersonalInfo: Story = {
     delAccount: action('updAvatar action invoked!'),
     delAvatar: action('onEdit action invoked!'),
     email: mockUser.email,
+    isEmailVerified: false,
+    isResendSuccess: false,
     name: mockUser.name,
     onEdit: action('onEdit action invoked!'),
+    onEmailVerify: action('onEmailVerify action invoked!'),
     onLogout: action('onLogout action invoked!'),
     updAvatar: action('updAvatar action invoked!'),
+    userId: 'someId',
   },
 }

@@ -5,6 +5,7 @@ import {
   useDeleteUserMutation,
   useLogoutMutation,
   useMeQuery,
+  useResendVerificationEmailMutation,
   useUpdateUserMutation,
 } from '@/services'
 import { combineLoadingStates } from '@/shared/utils'
@@ -16,12 +17,15 @@ export const useProfile = () => {
   const [updateUser, { isLoading: isUpdateUserLoading }] = useUpdateUserMutation()
   const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation()
   const [deleteUser, { isLoading: isDeleteUserLoading }] = useDeleteUserMutation()
+  const [resendVerification, { isLoading: isResendLoading, isSuccess: isResendSuccess }] =
+    useResendVerificationEmailMutation()
 
   const isLoadingData = combineLoadingStates(
     isLoading,
     isUpdateUserLoading,
     isLogoutLoading,
-    isDeleteUserLoading
+    isDeleteUserLoading,
+    isResendLoading
   )
 
   const changeModeHandler = () => {
@@ -59,6 +63,10 @@ export const useProfile = () => {
     deleteUser()
   }
 
+  const resendEmailConfirmationRequestHandler = (userId: string) => {
+    resendVerification({ userId })
+  }
+
   return {
     cancelHandler,
     changeModeHandler,
@@ -68,7 +76,9 @@ export const useProfile = () => {
     deleteUserAccountHandler,
     editMode,
     isLoadingData,
+    isResendSuccess,
     logoutHandler,
+    resendEmailConfirmationRequestHandler,
     updateAvatarHandler,
   }
 }

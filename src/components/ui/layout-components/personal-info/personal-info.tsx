@@ -14,10 +14,14 @@ type PersonalInfoProps = {
   delAccount: () => void
   delAvatar: () => void
   email: string
+  isEmailVerified: boolean
+  isResendSuccess: boolean
   name: string
   onEdit: () => void
+  onEmailVerify: (userId: string) => void
   onLogout: () => void
   updAvatar: (e: ChangeEvent<HTMLInputElement>) => void
+  userId: string
 }
 
 export const PersonalInfo = ({
@@ -25,10 +29,14 @@ export const PersonalInfo = ({
   delAccount,
   delAvatar,
   email,
+  isEmailVerified,
+  isResendSuccess,
   name,
   onEdit,
+  onEmailVerify,
   onLogout,
   updAvatar,
+  userId,
 }: PersonalInfoProps) => {
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
@@ -63,6 +71,20 @@ export const PersonalInfo = ({
             <EditOutline className={cn.accent} />
           </Button>
         </FlexContainer>
+        {!isEmailVerified && (
+          <div className={cn.verifyEmail}>
+            <Typography variant={'error'}>Email is not verified!</Typography>
+            {isResendSuccess ? (
+              <Typography>
+                Confirmation request sent. <br /> Please check your mail
+              </Typography>
+            ) : (
+              <Button onClick={() => onEmailVerify(userId)} variant={'link'}>
+                Resend request
+              </Button>
+            )}
+          </div>
+        )}
         <Typography className={cn.hint} gray>
           {email}
         </Typography>
