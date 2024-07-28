@@ -39,6 +39,10 @@
       border: var(--border-width-s) solid var(--color-accent-500);
     }
   }
+
+  @media screen and (width <= 430px) {
+    padding: 6px 12px;
+  }
 }
 
 .label,
