@@ -80,9 +80,13 @@ export const PersonalInfo = ({
         </FlexContainer>
         {!isEmailVerified && (
           <div className={cn.verifyEmail}>
-            <Typography variant={'error'}>Email is not verified!</Typography>
+            <Typography>Email is not verified!</Typography>
             {!resendState ? (
-              <Button onClick={() => onEmailVerify(userId)} variant={'link'}>
+              <Button
+                className={cn.verifyButton}
+                onClick={() => onEmailVerify(userId)}
+                variant={'link'}
+              >
                 Resend request
               </Button>
             ) : (

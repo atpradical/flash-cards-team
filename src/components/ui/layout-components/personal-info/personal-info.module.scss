@@ -68,8 +68,20 @@
 }
 
 .verifyEmail {
-  padding: 10px;
+  padding: 10px 20px;
   text-align: center;
-  border: 1px solid var(--color-danger-300);
+  border: 1px solid var(--color-warning-300);
   border-radius: var(--border-radius-l);
+}
+
+.verifyButton {
+  color: var(--color-warning-100);
+
+  &:hover {
+    color: var(--color-warning-300);
+  }
+
+  &:active {
+    color: var(--color-warning-500);
+  }
 }

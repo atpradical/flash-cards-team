@@ -12,6 +12,7 @@ export const cn = {
   hint: s.hint,
   icon: s.icon,
   title: s.title,
+  verifyButton: s.verifyButton,
   verifyEmail: s.verifyEmail,
   wrapper: s.wrapper,
 }
