@@ -1,24 +1,24 @@
 import { MemoryRouter } from 'react-router-dom'
 
-import { CheckEmail } from '@/components/ui/layout-components/check-email/check-email'
+import { CheckEmail as CheckEmailComponent } from '@/components/ui/layout-components/check-email/check-email'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: CheckEmail,
-  title: 'Components/CheckEmail',
-} satisfies Meta<typeof CheckEmail>
+  component: CheckEmailComponent,
+  title: 'layout Components/Check Email',
+} satisfies Meta<typeof CheckEmailComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CheckEmailExample: Story = {
+export const CheckEmail: Story = {
   args: {
     email: 'test@email.com',
   },
-  render: () => (
+  render: args => (
     <MemoryRouter>
-      <CheckEmail {...CheckEmailExample.args} />
+      <CheckEmailComponent {...args} />
     </MemoryRouter>
   ),
 }
