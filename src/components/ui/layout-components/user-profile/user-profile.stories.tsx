@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
+import { store } from '@/services'
 
 import { UserProfile as UserProfileComponent } from './user-profile'
 
@@ -24,7 +26,9 @@ export const UserProfile: Story = {
   },
   render: args => (
     <MemoryRouter>
-      <UserProfileComponent {...args} />
+      <Provider store={store}>
+        <UserProfileComponent {...args} />
+      </Provider>
     </MemoryRouter>
   ),
 }

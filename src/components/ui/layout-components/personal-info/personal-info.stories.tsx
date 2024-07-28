@@ -1,5 +1,6 @@
 import { PersonalInfo as PersonalInfoComponent } from '@/components/ui/layout-components'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
+import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -13,6 +14,12 @@ type Story = StoryObj<typeof meta>
 
 export const PersonalInfo: Story = {
   args: {
-    userData: mockUser,
+    avatar: mockUser.avatar ?? '',
+    delAvatar: action('onEdit action invoked!'),
+    email: mockUser.email,
+    name: mockUser.name,
+    onEdit: action('onEdit action invoked!'),
+    onLogout: action('onLogout action invoked!'),
+    updAvatar: action('updAvatar action invoked!'),
   },
 }

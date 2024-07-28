@@ -15,18 +15,32 @@
   position: relative;
 }
 
-.editAvatar {
+.delete,
+.edit {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+  padding: 0;
+}
+
+.edit {
   position: absolute;
   top: 90px;
   left: 76px;
 
-  width: var(--icon-size-xl);
-  height: var(--icon-size-xl);
-  padding: 0;
-
   @media screen and (width <= 320px) {
     top: 64px;
     left: 56px;
+  }
+}
+
+.delete {
+  position: absolute;
+  top: 90px;
+  left: 106px;
+
+  @media screen and (width <= 320px) {
+    top: 64px;
+    left: 86px;
   }
 }
 
@@ -37,6 +51,14 @@
 .icon {
   width: var(--icon-size-s);
   height: var(--icon-size-s);
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-500);
+  }
 }
 
 .title {

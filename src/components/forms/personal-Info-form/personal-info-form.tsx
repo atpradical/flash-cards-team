@@ -1,8 +1,10 @@
+import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { cn } from '@/components/forms/personal-Info-form/personal-info-form.styles'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { nicknameScheme } from '@/shared/schemes'
+import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,20 +19,25 @@ const PersonalInfoFormScheme = z
     path: ['nickname'],
   })
 
-type PersonalInfoFromValues = z.infer<typeof PersonalInfoFormScheme>
+export type PersonalInfoFromValues = z.infer<typeof PersonalInfoFormScheme>
 
 type PersonalInfoFormProps = {
-  onSubmit: (data: PersonalInfoFromValues) => void
-  src: string
+  avatar: Nullable<string>
+  name: string
+  onCancel: (e: ChangeEvent<HTMLButtonElement>) => void
+  onSubmit: (formData: PersonalInfoFromValues) => void
 }
 
-export const PersonalInfoForm = ({ onSubmit, src }: PersonalInfoFormProps) => {
+export const PersonalInfoForm = ({ avatar, name, onCancel, onSubmit }: PersonalInfoFormProps) => {
   const { control, handleSubmit } = useForm<PersonalInfoFromValues>({
+    defaultValues: {
+      nickname: name,
+    },
     mode: 'onSubmit',
     resolver: zodResolver(PersonalInfoFormScheme),
   })
 
-  const formHandler = handleSubmit(data => onSubmit(data))
+  const formHandler = handleSubmit(formData => onSubmit(formData))
 
   return (
     <Card className={cn.container}>
@@ -38,7 +45,7 @@ export const PersonalInfoForm = ({ onSubmit, src }: PersonalInfoFormProps) => {
         <Typography as={'h1'} variant={'h1'}>
           Personal Information
         </Typography>
-        <Avatar className={cn.avatar} size={'l'} src={src} />
+        <Avatar className={cn.avatar} name={name} size={'l'} src={avatar} />
         <form className={cn.form} onSubmit={formHandler}>
           <FlexContainer fd={'column'} gap={'36px'}>
             <ControlledTextField
@@ -47,9 +54,14 @@ export const PersonalInfoForm = ({ onSubmit, src }: PersonalInfoFormProps) => {
               name={'nickname'}
               placeholder={'what name should we call you by?'}
             />
-            <Button className={cn.button} fullWidth>
-              Save Changes
-            </Button>
+            <FlexContainer fw={'wrap'} gap={'10px'}>
+              <Button fullWidth onSubmit={formHandler}>
+                Change Name
+              </Button>
+              <Button fullWidth onClick={onCancel} variant={'secondary'}>
+                Cancel
+              </Button>
+            </FlexContainer>
           </FlexContainer>
         </form>
       </FlexContainer>

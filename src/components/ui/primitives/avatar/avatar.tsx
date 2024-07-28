@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { Nullable } from '@/shared/types/common'
 import * as RadixAvatar from '@radix-ui/react-avatar'
 import clsx from 'clsx'
 
@@ -8,7 +9,7 @@ import s from './avatar.module.scss'
 type Props = {
   name?: string
   size?: 'l' | 'm' | 's'
-  src?: string
+  src?: Nullable<string>
 } & ComponentPropsWithoutRef<typeof RadixAvatar.Root>
 
 export const Avatar = (props: Props) => {
@@ -24,7 +25,7 @@ export const Avatar = (props: Props) => {
 
   return (
     <RadixAvatar.Root className={cn.root} {...rest}>
-      <RadixAvatar.Image alt={'user avatar'} className={cn.image} src={src} />
+      <RadixAvatar.Image alt={'user avatar'} className={cn.image} src={src ?? ''} />
       <RadixAvatar.Fallback className={cn.fallBack}>{fallBack}</RadixAvatar.Fallback>
     </RadixAvatar.Root>
   )
