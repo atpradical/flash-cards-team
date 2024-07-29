@@ -1,26 +1,36 @@
-import { EditOutline, LogOut } from '@/assets/icons'
+import { ChangeEvent } from 'react'
+
+import { EditOutline, LogOut, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
-import { User, useLogoutMutation } from '@/services'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks'
+import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
 import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
-  userData?: User
+  avatar: Nullable<string>
+  email: string
+  name: string
+  onDelete: () => void
+  onEdit: () => void
+  onLogout: () => void
+  onUpdate: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const PersonalInfo = ({ userData }: PersonalInfoProps) => {
+export const PersonalInfo = ({
+  avatar,
+  email,
+  name,
+  onDelete,
+  onEdit,
+  onLogout,
+  onUpdate,
+}: PersonalInfoProps) => {
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
   const isTinyScreen = currentScreenWidth <= breakpoint
-
-  const [logout] = useLogoutMutation()
-
-  const logoutHandler = () => {
-    logout()
-  }
 
   return (
     <Card className={cn.container}>
@@ -29,28 +39,32 @@ export const PersonalInfo = ({ userData }: PersonalInfoProps) => {
           Personal Information
         </Typography>
         <FlexContainer className={cn.wrapper}>
-          <Avatar
-            className={cn.avatar}
-            name={userData?.name}
-            size={isTinyScreen ? 'm' : 'l'}
-            src={userData?.avatar}
-          />
-          <Button className={cn.editAvatar} title={'Edit Avatar'} variant={'secondary'}>
+          <Avatar className={cn.avatar} name={name} size={isTinyScreen ? 'm' : 'l'} src={avatar} />
+          <Button as={'label'} className={cn.edit} title={'Edit Avatar'} variant={'secondary'}>
+            <input accept={'image/*'} hidden onChange={onUpdate} type={'file'} />
             <EditOutline className={cn.icon} />
+          </Button>
+          <Button
+            className={cn.delete}
+            onClick={onDelete}
+            title={'Delete Avatar'}
+            variant={'secondary'}
+          >
+            <TrashOutline className={cn.icon} />
           </Button>
         </FlexContainer>
         <FlexContainer gap={'12px'} jc={'center'}>
           <Typography as={'h2'} variant={'h2'}>
-            {userData?.name}
+            {name}
           </Typography>
-          <Button title={'Edit profile'} variant={'icon'}>
+          <Button onClick={onEdit} title={'Change name'} variant={'icon'}>
             <EditOutline className={cn.icon} />
           </Button>
         </FlexContainer>
         <Typography className={cn.hint} gray>
-          {userData?.email}
+          {email}
         </Typography>
-        <Button className={cn.bottom} onClick={logoutHandler} variant={'secondary'}>
+        <Button className={cn.bottom} onClick={onLogout} variant={'secondary'}>
           <LogOut className={cn.icon} />
           <Typography variant={'subtitle2'}>Logout</Typography>
         </Button>

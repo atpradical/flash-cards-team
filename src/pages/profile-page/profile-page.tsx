@@ -1,15 +1,47 @@
+import { PersonalInfoForm } from '@/components/forms'
 import { PersonalInfo } from '@/components/ui/layout-components'
-import { useMeQuery } from '@/services'
+import { useProfile } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const ProfilePage = () => {
-  const { data, isFetching } = useMeQuery()
+  const {
+    cancelHandler,
+    changeModeHandler,
+    changeNickNameHandler,
+    data,
+    deleteAvatarHandler,
+    editMode,
+    isLoadingData,
+    logoutHandler,
+    updateAvatarHandler,
+  } = useProfile()
+
+  if (!data) {
+    return <Page />
+  }
 
   return (
-    <Page load={isFetching}>
+    <Page load={isLoadingData}>
       <FlexContainer jc={'center'} pd={'0 20px'}>
-        <PersonalInfo userData={data} />
+        {editMode ? (
+          <PersonalInfoForm
+            avatar={data.avatar ?? null}
+            name={data.name}
+            onCancel={cancelHandler}
+            onSubmit={changeNickNameHandler}
+          />
+        ) : (
+          <PersonalInfo
+            avatar={data.avatar ?? null}
+            email={data.email}
+            name={data.name}
+            onDelete={deleteAvatarHandler}
+            onEdit={changeModeHandler}
+            onLogout={logoutHandler}
+            onUpdate={updateAvatarHandler}
+          />
+        )}
       </FlexContainer>
     </Page>
   )

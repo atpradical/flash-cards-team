@@ -30,7 +30,7 @@ export const ProfileDropdown = (props: Props) => {
       <Trigger className={cn.trigger}>{trigger}</Trigger>
       <Content className={cn.menu}>
         <Arrow />
-        <DropdownLabel email={email} name={name} photo={avatar} />
+        <DropdownLabel email={email} name={name} photo={avatar ?? ''} />
         <DropdownItem icon={icons.profile} path={PATH.PROFILE} title={'My Profile'} />
         <DropdownItem icon={icons.logout} noSeparator onClick={logoutHandler} title={'Sign Out'} />
       </Content>
