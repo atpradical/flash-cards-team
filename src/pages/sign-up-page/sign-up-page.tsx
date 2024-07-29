@@ -7,12 +7,12 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const SignUpPage = () => {
-  const [createUser, { isLoading, isSuccess }] = useCreateUserMutation()
   const [email, setEmail] = useState('')
+  const [createUser, { isLoading, isSuccess }] = useCreateUserMutation()
 
   const signUpFormHandler = (formData: SignUpFormValues) => {
-    createUser(formData)
     setEmail(formData.email)
+    createUser(formData)
   }
 
   return (

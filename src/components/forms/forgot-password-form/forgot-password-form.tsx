@@ -14,10 +14,10 @@ const ForgotPasswordScheme = z.object({
   email: emailSchema,
 })
 
-type ForgotPasswordFormValues = z.infer<typeof ForgotPasswordScheme>
+export type ForgotPasswordFormValues = z.infer<typeof ForgotPasswordScheme>
 
 type ForgotPasswordFormProps = {
-  onSubmit: (data: ForgotPasswordFormValues) => void
+  onSubmit: (formData: ForgotPasswordFormValues) => void
 }
 
 export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
@@ -25,9 +25,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
     mode: 'onSubmit',
     resolver: zodResolver(ForgotPasswordScheme),
   })
-  const formHandler = handleSubmit(data => {
-    onSubmit(data)
-  })
+  const formHandler = handleSubmit(formData => onSubmit(formData))
 
   return (
     <Card className={cn.container}>
