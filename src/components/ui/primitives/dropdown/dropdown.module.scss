@@ -14,9 +14,6 @@
 
 .menu {
   z-index: 3;
-
-  padding: 12px;
-
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
   border-radius: var(--border-radius-s);
@@ -71,8 +68,17 @@
 }
 
 .item {
+  padding: 12px;
+  color: var(--color-light-100);
+
   &:hover {
     cursor: pointer;
+    color: var(--color-accent-300);
+    background-color: var(--color-dark-500);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
   }
 
   &:focus-visible {
@@ -89,12 +95,12 @@
 .separator {
   width: 100%;
   height: 1px;
-  margin: 12px 0;
   background-color: var(--color-dark-500);
 }
 
 .label {
   cursor: default;
+  padding: 12px;
 }
 
 .item,
