@@ -11,6 +11,7 @@ import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
   avatar: Nullable<string>
+  delAccount: () => void
   email: string
   name: string
   onDelete: () => void
@@ -21,6 +22,7 @@ type PersonalInfoProps = {
 
 export const PersonalInfo = ({
   avatar,
+  delAccount,
   email,
   name,
   onDelete,
