@@ -12,10 +12,11 @@ import { cn } from './deck-title.styles'
 
 type DeckTitleProps = {
   deck: GetDeckResponse
+  isAuthor: boolean
   learnDeckPath: string
 }
 
-export const DeckTitle = ({ deck, learnDeckPath }: DeckTitleProps) => {
+export const DeckTitle = ({ deck, isAuthor, learnDeckPath }: DeckTitleProps) => {
   const [showUpdateDeckDialogForm, setShowUpdateDeckDialogForm] = useState(false)
   const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
 
@@ -35,11 +36,13 @@ export const DeckTitle = ({ deck, learnDeckPath }: DeckTitleProps) => {
         <Typography as={'h1'} variant={'h1'}>
           {name}
         </Typography>
-        <SettingsDropdown
-          learnDeckPath={learnDeckPath}
-          onDelete={deleteHandler}
-          onEdit={editHandler}
-        />
+        {isAuthor && (
+          <SettingsDropdown
+            learnDeckPath={learnDeckPath}
+            onDelete={deleteHandler}
+            onEdit={editHandler}
+          />
+        )}
       </FlexContainer>
       <Image alt={'Deck cover image'} ratio={RATIO.M} src={cover ?? dummyCover} variant={'m'} />
       {showUpdateDeckDialogForm && (
