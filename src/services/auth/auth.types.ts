@@ -41,3 +41,9 @@ export type UpdateUserResponse = User
 export type ConfirmEmailArgs = {
   code: string
 }
+
+export type ResendVerificationEmailArgs = {
+  html?: string
+  subject?: string
+  userId: string
+}

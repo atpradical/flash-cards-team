@@ -14,7 +14,9 @@ export const ProfilePage = () => {
     deleteUserAccountHandler,
     editMode,
     isLoadingData,
+    isResendSuccess,
     logoutHandler,
+    resendEmailConfirmationRequestHandler,
     updateAvatarHandler,
   } = useProfile()
 
@@ -37,11 +39,15 @@ export const ProfilePage = () => {
             avatar={data.avatar ?? null}
             delAccount={deleteUserAccountHandler}
             email={data.email}
+            isEmailVerified={data.isEmailVerified}
+            isResendSuccess={isResendSuccess}
             name={data.name}
             onDelete={deleteAvatarHandler}
             onEdit={changeModeHandler}
+            onEmailVerify={resendEmailConfirmationRequestHandler}
             onLogout={logoutHandler}
             onUpdate={updateAvatarHandler}
+            userId={data.id}
           />
         )}
       </FlexContainer>

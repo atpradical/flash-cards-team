@@ -15,8 +15,8 @@ export const ConfirmEmail = () => {
           Email Confirmed
         </Typography>
         <CheckEmailIcon className={cn.icon} variant={'success'} />
-        <Button as={Link} className={cn.button} fullWidth to={PATH.SIGN_IN}>
-          Go to Sign In
+        <Button as={Link} className={cn.button} fullWidth to={PATH.ROOT}>
+          Back to application
         </Button>
       </FlexContainer>
     </Card>
