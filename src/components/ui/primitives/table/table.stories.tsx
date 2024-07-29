@@ -51,7 +51,7 @@ const meta = {
   argTypes: {},
   component: TableContainer,
   tags: ['autodocs'],
-  title: 'Components/Table',
+  title: 'Primitives/Table',
 } satisfies Meta<typeof TableContainer>
 
 type Story = StoryObj<typeof meta>

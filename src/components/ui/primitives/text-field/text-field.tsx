@@ -61,7 +61,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const clearInputHandler = () => {
     setInputValue('')
-    // todo: check with Andrey how to clear search on Clear Filter button
     updateSearchParam({ search: '' })
   }
 

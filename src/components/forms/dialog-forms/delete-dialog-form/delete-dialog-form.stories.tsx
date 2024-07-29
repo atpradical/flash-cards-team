@@ -11,7 +11,7 @@ const meta = {
     open: { control: 'boolean' },
   },
   component: DeleteDialogFormComponent,
-  title: 'Forms/DeleteDialogForm',
+  title: 'Forms/Delete Dialog Form',
 } satisfies Meta<typeof DeleteDialogFormComponent>
 
 export default meta

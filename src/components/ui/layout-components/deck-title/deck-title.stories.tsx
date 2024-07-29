@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
 
 import { DeckTitle as DeckTitleComponent } from '@/components/ui/layout-components'
 import { store } from '@/services'
@@ -9,7 +10,7 @@ import { GetDeckResponse } from '@/services/decks/deck.types'
 const meta = {
   argTypes: {},
   component: DeckTitleComponent,
-  title: 'Layout Components/DeckTitle',
+  title: 'Layout Components',
 } satisfies Meta<typeof DeckTitleComponent>
 
 type Story = StoryObj<typeof meta>
@@ -23,11 +24,13 @@ export const DeckTitle: Story = {
   },
   render: args => {
     return (
-      <Provider store={store}>
-        <div style={{ width: 'fit-content' }}>
-          <DeckTitleComponent {...args} />
-        </div>
-      </Provider>
+      <MemoryRouter>
+        <Provider store={store}>
+          <div style={{ width: 'fit-content' }}>
+            <DeckTitleComponent {...args} />
+          </div>
+        </Provider>
+      </MemoryRouter>
     )
   },
 }

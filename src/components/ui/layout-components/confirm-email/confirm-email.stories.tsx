@@ -7,7 +7,7 @@ import { ConfirmEmail as ConfirmEmailComponent } from './confirm-email'
 const meta = {
   argTypes: {},
   component: ConfirmEmailComponent,
-  title: 'Layout Components/Confirm Email',
+  title: 'Layout Components',
 } satisfies Meta<typeof ConfirmEmailComponent>
 
 export default meta

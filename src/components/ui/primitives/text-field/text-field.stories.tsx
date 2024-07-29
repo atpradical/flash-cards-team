@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import { TextField } from './text-field'
 
 const meta = {
@@ -18,7 +20,7 @@ const meta = {
   },
   component: TextField,
   tags: ['autodocs'],
-  title: 'Components/TextField',
+  title: 'Primitives/TextField',
 } satisfies Meta<typeof TextField>
 
 export default meta
@@ -30,6 +32,13 @@ export const Text: Story = {
     placeholder: 'Enter text...',
     variant: 'text',
   },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TextField {...args} />
+      </MemoryRouter>
+    )
+  },
 }
 
 export const Password: Story = {
@@ -38,12 +47,26 @@ export const Password: Story = {
     placeholder: 'Enter password...',
     variant: 'password',
   },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TextField {...args} />
+      </MemoryRouter>
+    )
+  },
 }
 
 export const Search: Story = {
   args: {
     placeholder: 'Search',
     variant: 'search',
+  },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TextField {...args} />
+      </MemoryRouter>
+    )
   },
 }
 
@@ -52,6 +75,13 @@ export const Disabled: Story = {
     disabled: true,
     placeholder: 'Disabled',
   },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TextField {...args} />
+      </MemoryRouter>
+    )
+  },
 }
 
 export const Error: Story = {
@@ -59,5 +89,12 @@ export const Error: Story = {
     error: true,
     helperText: 'Error',
     placeholder: 'Enter text...',
+  },
+  render: args => {
+    return (
+      <MemoryRouter>
+        <TextField {...args} />
+      </MemoryRouter>
+    )
   },
 }

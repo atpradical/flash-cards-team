@@ -19,7 +19,7 @@ const meta = {
     open: { control: 'boolean' },
   },
   component: DeckDialogFormComponent,
-  title: 'Forms/DeckDialogForm',
+  title: 'Forms/Deck Dialog Form',
 } satisfies Meta<typeof DeckDialogFormComponent>
 
 export default meta

@@ -10,6 +10,7 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: Actions,
+  tags: ['autodocs'],
   title: 'Layout Components/Actions',
 } satisfies Meta<typeof Actions>
 

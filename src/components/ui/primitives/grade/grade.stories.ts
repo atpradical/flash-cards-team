@@ -8,7 +8,7 @@ const meta = {
   },
   component: Grade,
   tags: ['autodocs'],
-  title: 'Components/Grade',
+  title: 'Primitives/Grade',
 } satisfies Meta<typeof Grade>
 
 export default meta

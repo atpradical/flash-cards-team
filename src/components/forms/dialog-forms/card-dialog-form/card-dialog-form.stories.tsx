@@ -13,7 +13,7 @@ const meta = {
     open: { control: 'boolean' },
   },
   component: CardDialogFormComponent,
-  title: 'Forms/CardDialogForm',
+  title: 'Forms/Card Dialog Form',
 } satisfies Meta<typeof CardDialogFormComponent>
 
 export default meta

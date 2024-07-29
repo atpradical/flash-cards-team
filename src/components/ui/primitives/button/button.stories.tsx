@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ArrowBackOutline, Heart } from '@/assets/icons'
+import { ArrowBackOutline, Heart, HeartOutline } from '@/assets/icons'
 import { Button } from '@/components/ui/primitives'
 import { action } from '@storybook/addon-actions'
 
@@ -13,7 +13,7 @@ const meta = {
   },
   component: Button,
   tags: ['autodocs'],
-  title: 'Components/Button',
+  title: 'Primitives/Button',
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -39,7 +39,7 @@ export const Secondary: Story = {
 
 export const Danger: Story = {
   args: {
-    children: 'Secondary Button',
+    children: 'Danger Button',
     disabled: false,
     onClick: action('action on button click invoked'),
     variant: 'danger',
@@ -62,7 +62,7 @@ export const ButtonWithIcon: Story = {
 
 export const Icon: Story = {
   args: {
-    children: <Heart />,
+    children: <HeartOutline />,
     disabled: false,
     onClick: action('action on button click invoked'),
     variant: 'icon',

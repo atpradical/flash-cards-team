@@ -15,7 +15,7 @@ const meta = {
   argTypes: {},
   component: TabSwitcherComponent,
   tags: ['autodocs'],
-  title: 'Primitives Components/TabSwitcher',
+  title: 'Primitives/TabSwitcher',
 } satisfies Meta<typeof TabSwitcherComponent>
 
 export default meta
