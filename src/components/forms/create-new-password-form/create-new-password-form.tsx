@@ -9,17 +9,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 type CreateNewPasswordFormProps = {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (formData: CreateNewPasswordFormValues) => void
 }
 
 const CreateNewPasswordSchema = z.object({
   password: passwordSchema,
 })
 
-type FormValues = z.infer<typeof CreateNewPasswordSchema>
+export type CreateNewPasswordFormValues = z.infer<typeof CreateNewPasswordSchema>
 
 export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<CreateNewPasswordFormValues>({
     defaultValues: {
       password: '',
     },

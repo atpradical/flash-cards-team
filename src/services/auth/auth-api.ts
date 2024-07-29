@@ -5,6 +5,7 @@ import {
   LoginArgs,
   LoginResponse,
   PWDRecoverArgs,
+  PWDResetArgs,
   ResendVerificationEmailArgs,
   UpdateUserArgs,
   UpdateUserResponse,
@@ -93,6 +94,13 @@ export const authApi = flashcardsApi.injectEndpoints({
           url: '/v1/auth/recover-password',
         }),
       }),
+      pwdReset: builder.mutation<void, PWDResetArgs>({
+        query: ({ token, ...body }) => ({
+          body,
+          method: 'POST',
+          url: `/v1/auth/reset-password/${token}`,
+        }),
+      }),
       resendVerificationEmail: builder.mutation<void, ResendVerificationEmailArgs>({
         invalidatesTags: ['Me'],
         query: body => ({
@@ -141,6 +149,7 @@ export const {
   useLogoutMutation,
   useMeQuery,
   usePwdRecoverMutation,
+  usePwdResetMutation,
   useResendVerificationEmailMutation,
   useUpdateUserMutation,
 } = authApi

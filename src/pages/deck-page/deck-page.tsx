@@ -76,7 +76,7 @@ export const DeckPage = () => {
           Back to Decks List
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
-          <DeckTitle deck={deck} learnDeckPath={learnDeckPath} />
+          <DeckTitle deck={deck} isAuthor={isAuthor} learnDeckPath={learnDeckPath} />
           {!isEmpty && (
             <FlexContainer fd={'column'} gap={'20px'}>
               {isAuthor ? (

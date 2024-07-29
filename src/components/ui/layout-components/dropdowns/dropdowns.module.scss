@@ -15,14 +15,6 @@
 .option,
 .triggerIcon {
   color: var(--color-light-100);
-
-  &:hover {
-    color: var(--color-accent-300);
-  }
-
-  &:active {
-    color: var(--color-accent-700);
-  }
 }
 
 .option {
