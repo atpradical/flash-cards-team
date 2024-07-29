@@ -6,6 +6,10 @@ import { Page } from '@/shared/ui/page'
 export const ProfilePage = () => {
   const { data, isFetching } = useMeQuery()
 
+  if (!data) {
+    return <Page />
+  }
+
   return (
     <Page load={isFetching}>
       <FlexContainer jc={'center'} pd={'0 20px'}>
