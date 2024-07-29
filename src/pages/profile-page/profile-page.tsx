@@ -34,12 +34,12 @@ export const ProfilePage = () => {
         ) : (
           <PersonalInfo
             avatar={data.avatar ?? null}
-            delAvatar={deleteAvatarHandler}
             email={data.email}
             name={data.name}
+            onDelete={deleteAvatarHandler}
             onEdit={changeModeHandler}
             onLogout={logoutHandler}
-            updAvatar={updateAvatarHandler}
+            onUpdate={updateAvatarHandler}
           />
         )}
       </FlexContainer>

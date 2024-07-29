@@ -11,22 +11,22 @@ import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
   avatar: Nullable<string>
-  delAvatar: () => void
   email: string
   name: string
+  onDelete: () => void
   onEdit: () => void
   onLogout: () => void
-  updAvatar: (e: ChangeEvent<HTMLInputElement>) => void
+  onUpdate: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const PersonalInfo = ({
   avatar,
-  delAvatar,
   email,
   name,
+  onDelete,
   onEdit,
   onLogout,
-  updAvatar,
+  onUpdate,
 }: PersonalInfoProps) => {
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
@@ -41,12 +41,12 @@ export const PersonalInfo = ({
         <FlexContainer className={cn.wrapper}>
           <Avatar className={cn.avatar} name={name} size={isTinyScreen ? 'm' : 'l'} src={avatar} />
           <Button as={'label'} className={cn.edit} title={'Edit Avatar'} variant={'secondary'}>
-            <input accept={'image/*'} hidden onChange={updAvatar} type={'file'} />
+            <input accept={'image/*'} hidden onChange={onUpdate} type={'file'} />
             <EditOutline className={cn.icon} />
           </Button>
           <Button
             className={cn.delete}
-            onClick={delAvatar}
+            onClick={onDelete}
             title={'Delete Avatar'}
             variant={'secondary'}
           >
