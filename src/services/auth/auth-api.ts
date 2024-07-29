@@ -3,6 +3,8 @@ import {
   CreateUserResponse,
   LoginArgs,
   LoginResponse,
+  UpdateUserArgs,
+  UpdateUserResponse,
   User,
 } from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
@@ -58,9 +60,38 @@ export const authApi = flashcardsApi.injectEndpoints({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
+      updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
+        invalidatesTags: ['Me'],
+        query: args => {
+          const { avatar, name } = args
+          const formData = new FormData()
+
+          if (name) {
+            formData.append('name', name)
+          }
+
+          if (avatar) {
+            formData.append('avatar', avatar)
+          } else if (avatar === null) {
+            formData.append('avatar', '')
+          }
+
+          return {
+            body: formData,
+            method: 'PATCH',
+            url: '/v1/auth/me',
+          }
+        },
+      }),
     }
   },
   overrideExisting: false,
 })
 
-export const { useCreateUserMutation, useLoginMutation, useLogoutMutation, useMeQuery } = authApi
+export const {
+  useCreateUserMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useUpdateUserMutation,
+} = authApi
