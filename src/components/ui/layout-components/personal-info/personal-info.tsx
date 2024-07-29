@@ -12,30 +12,30 @@ import { cn } from './personal-info.styles'
 type PersonalInfoProps = {
   avatar: Nullable<string>
   delAccount: () => void
-  delAvatar: () => void
   email: string
   isEmailVerified: boolean
   isResendSuccess: boolean
   name: string
+  onDelete: () => void
   onEdit: () => void
   onEmailVerify: (userId: string) => void
   onLogout: () => void
-  updAvatar: (e: ChangeEvent<HTMLInputElement>) => void
+  onUpdate: (e: ChangeEvent<HTMLInputElement>) => void
   userId: string
 }
 
 export const PersonalInfo = ({
   avatar,
   delAccount,
-  delAvatar,
   email,
   isEmailVerified,
   isResendSuccess,
   name,
+  onDelete,
   onEdit,
   onEmailVerify,
   onLogout,
-  updAvatar,
+  onUpdate,
   userId,
 }: PersonalInfoProps) => {
   const [resendState, setResendState] = useState(false)
@@ -58,12 +58,12 @@ export const PersonalInfo = ({
         <FlexContainer className={cn.wrapper}>
           <Avatar className={cn.avatar} name={name} size={isTinyScreen ? 'm' : 'l'} src={avatar} />
           <Button as={'label'} className={cn.edit} title={'Edit Avatar'} variant={'secondary'}>
-            <input accept={'image/*'} hidden onChange={updAvatar} type={'file'} />
+            <input accept={'image/*'} hidden onChange={onUpdate} type={'file'} />
             <EditOutline className={cn.accent} />
           </Button>
           <Button
             className={cn.delete}
-            onClick={delAvatar}
+            onClick={onDelete}
             title={'Delete Avatar'}
             variant={'secondary'}
           >
