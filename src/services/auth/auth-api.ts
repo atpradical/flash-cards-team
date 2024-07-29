@@ -1,10 +1,4 @@
-import {
-  LoginArgs,
-  LoginResponse,
-  SignUpArgs,
-  SignUpResponse,
-  User,
-} from '@/services/auth/auth.types'
+import { LoginArgs, LoginResponse, SignUpArgs, User } from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
 
 const formatSignUpData = (data: SignUpArgs) => {
@@ -61,7 +55,7 @@ export const authApi = flashcardsApi.injectEndpoints({
         }),
       }),
 
-      signUp: builder.mutation<SignUpResponse, SignUpArgs>({
+      signUp: builder.mutation<User, SignUpArgs>({
         invalidatesTags: ['User', 'Me'],
         query: body => ({
           body: formatSignUpData(body),

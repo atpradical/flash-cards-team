@@ -19,13 +19,11 @@ export type LoginArgs = {
   rememberMe: boolean
 }
 
-export type SignUpResponse = {
+export type SignUpArgs = {
   email: string
-  html: string
-  name: string
+  html?: string
+  name?: string
   password: string
-  sendConfirmationEmail: boolean
-  subject: string
-}
-
-export type SignUpArgs = { confirmPassword?: string } & Pick<SignUpResponse, 'email' | 'name'>
+  sendConfirmationEmail?: boolean
+  subject?: string
+} & { confirmPassword?: string }
