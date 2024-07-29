@@ -80,7 +80,7 @@ export const PersonalInfo = ({
         </FlexContainer>
         {!isEmailVerified && (
           <div className={cn.verifyEmail}>
-            <Typography>Email is not verified!</Typography>
+            <Typography className={cn.verifyReminder}>Email is not verified!</Typography>
             {!resendState ? (
               <Button
                 className={cn.verifyButton}

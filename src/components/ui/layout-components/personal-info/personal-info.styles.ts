@@ -14,5 +14,6 @@ export const cn = {
   title: s.title,
   verifyButton: s.verifyButton,
   verifyEmail: s.verifyEmail,
+  verifyReminder: s.verifyReminder,
   wrapper: s.wrapper,
 }

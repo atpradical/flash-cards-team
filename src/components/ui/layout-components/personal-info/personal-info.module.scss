@@ -70,7 +70,7 @@
 .verifyEmail {
   padding: 10px 20px;
   text-align: center;
-  border: 1px solid var(--color-warning-300);
+  border: 1px solid var(--color-warning-500);
   border-radius: var(--border-radius-l);
 }
 
@@ -84,4 +84,8 @@
   &:active {
     color: var(--color-warning-500);
   }
+}
+
+.verifyReminder {
+  color: var(--color-warning-500);
 }
