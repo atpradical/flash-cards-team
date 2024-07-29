@@ -1,4 +1,5 @@
 import {
+  ConfirmEmailArgs,
   CreateUserArgs,
   CreateUserResponse,
   LoginArgs,
@@ -14,6 +15,13 @@ import { createUserHTML } from './auth-templates'
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
+      confirmEmail: builder.mutation<void, ConfirmEmailArgs>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: '/v1/auth/verify-email',
+        }),
+      }),
       createUser: builder.mutation<CreateUserResponse, CreateUserArgs>({
         query: args => {
           const { email, name, password } = args
@@ -96,6 +104,7 @@ export const authApi = flashcardsApi.injectEndpoints({
 })
 
 export const {
+  useConfirmEmailMutation,
   useCreateUserMutation,
   useDeleteUserMutation,
   useLoginMutation,

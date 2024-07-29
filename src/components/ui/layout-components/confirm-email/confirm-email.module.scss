@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  max-width: var(--max-width-s);
+  padding: 34px 36px;
+}
+
+.title {
+  text-align: center;
+
+  @media screen and (width <= 320px) {
+    width: fit-content;
+    margin-bottom: 12px;
+  }
+}
+
+.button {
+  margin-bottom: 20px;
+}
+
+.icon {
+  width: 100%;
+
+  @media screen and (width <= 320px) {
+    width: 66px;
+  }
+}
