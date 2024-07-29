@@ -47,3 +47,9 @@ export type ResendVerificationEmailArgs = {
   subject?: string
   userId: string
 }
+
+export type PWDRecoverArgs = {
+  email: string
+  html?: string
+  subject?: string
+}

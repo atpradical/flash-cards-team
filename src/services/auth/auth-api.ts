@@ -4,6 +4,7 @@ import {
   CreateUserResponse,
   LoginArgs,
   LoginResponse,
+  PWDRecoverArgs,
   ResendVerificationEmailArgs,
   UpdateUserArgs,
   UpdateUserResponse,
@@ -11,7 +12,12 @@ import {
 } from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
 
-import { emailBodyHTML, emailSubjectHTML } from './auth-templates'
+import {
+  emailConfirmationBodyHTML,
+  emailConfirmationRequestSubjectHTML,
+  pwdRecoverRequestBodyHTML,
+  pwdRecoverRequestSubjectHTML,
+} from './auth-templates'
 
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -30,7 +36,7 @@ export const authApi = flashcardsApi.injectEndpoints({
           const sendConfirmationEmail = true
 
           return {
-            body: { email, html: emailBodyHTML, name, password, sendConfirmationEmail },
+            body: { email, html: emailConfirmationBodyHTML, name, password, sendConfirmationEmail },
             method: 'POST',
             url: '/v1/auth/sign-up',
           }
@@ -76,10 +82,25 @@ export const authApi = flashcardsApi.injectEndpoints({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
+      pwdRecover: builder.mutation<void, PWDRecoverArgs>({
+        query: body => ({
+          body: {
+            html: pwdRecoverRequestBodyHTML,
+            subject: pwdRecoverRequestSubjectHTML,
+            ...body,
+          },
+          method: 'POST',
+          url: '/v1/auth/recover-password',
+        }),
+      }),
       resendVerificationEmail: builder.mutation<void, ResendVerificationEmailArgs>({
         invalidatesTags: ['Me'],
         query: body => ({
-          body: { html: emailBodyHTML, subject: emailSubjectHTML, ...body },
+          body: {
+            html: emailConfirmationBodyHTML,
+            subject: emailConfirmationRequestSubjectHTML,
+            ...body,
+          },
           method: 'POST',
           url: '/v1/auth/resend-verification-email',
         }),
@@ -119,6 +140,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  usePwdRecoverMutation,
   useResendVerificationEmailMutation,
   useUpdateUserMutation,
 } = authApi

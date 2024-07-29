@@ -6,7 +6,7 @@ export enum PATH {
   ERROR_404 = '/404',
   PROFILE = '/profile',
   PWD_RECOVERY = '/password-recovery',
-  PWD_RESET = '/reset-password',
+  PWD_RESET = '/reset-password/:token',
   ROOT = '/',
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
