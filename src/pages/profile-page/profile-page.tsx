@@ -38,15 +38,15 @@ export const ProfilePage = () => {
           <PersonalInfo
             avatar={data.avatar ?? null}
             delAccount={deleteUserAccountHandler}
-            delAvatar={deleteAvatarHandler}
             email={data.email}
             isEmailVerified={data.isEmailVerified}
             isResendSuccess={isResendSuccess}
             name={data.name}
+            onDelete={deleteAvatarHandler}
             onEdit={changeModeHandler}
             onEmailVerify={resendEmailConfirmationRequestHandler}
             onLogout={logoutHandler}
-            updAvatar={updateAvatarHandler}
+            onUpdate={updateAvatarHandler}
             userId={data.id}
           />
         )}
