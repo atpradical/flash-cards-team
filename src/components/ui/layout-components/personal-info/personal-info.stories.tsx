@@ -15,12 +15,11 @@ type Story = StoryObj<typeof meta>
 export const PersonalInfo: Story = {
   args: {
     avatar: mockUser.avatar ?? '',
-    delAccount: action('updAvatar action invoked!'),
-    delAvatar: action('onEdit action invoked!'),
     email: mockUser.email,
     name: mockUser.name,
+    onDelete: action('onDelete action invoked!'),
     onEdit: action('onEdit action invoked!'),
     onLogout: action('onLogout action invoked!'),
-    updAvatar: action('updAvatar action invoked!'),
+    onUpdate: action('onUpdate action invoked!'),
   },
 }
