@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 
-import { EditOutline, LogOut, TrashOutline } from '@/assets/icons'
+import { EditOutline, LogOut, Trash, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks'
@@ -11,6 +11,7 @@ import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
   avatar: Nullable<string>
+  delAccount: () => void
   email: string
   name: string
   onDelete: () => void
@@ -21,6 +22,7 @@ type PersonalInfoProps = {
 
 export const PersonalInfo = ({
   avatar,
+  delAccount,
   email,
   name,
   onDelete,
@@ -42,7 +44,7 @@ export const PersonalInfo = ({
           <Avatar className={cn.avatar} name={name} size={isTinyScreen ? 'm' : 'l'} src={avatar} />
           <Button as={'label'} className={cn.edit} title={'Edit Avatar'} variant={'secondary'}>
             <input accept={'image/*'} hidden onChange={onUpdate} type={'file'} />
-            <EditOutline className={cn.icon} />
+            <EditOutline className={cn.accent} />
           </Button>
           <Button
             className={cn.delete}
@@ -50,7 +52,7 @@ export const PersonalInfo = ({
             title={'Delete Avatar'}
             variant={'secondary'}
           >
-            <TrashOutline className={cn.icon} />
+            <TrashOutline className={cn.accent} />
           </Button>
         </FlexContainer>
         <FlexContainer gap={'12px'} jc={'center'}>
@@ -58,16 +60,22 @@ export const PersonalInfo = ({
             {name}
           </Typography>
           <Button onClick={onEdit} title={'Change name'} variant={'icon'}>
-            <EditOutline className={cn.icon} />
+            <EditOutline className={cn.accent} />
           </Button>
         </FlexContainer>
         <Typography className={cn.hint} gray>
           {email}
         </Typography>
-        <Button className={cn.bottom} onClick={onLogout} variant={'secondary'}>
-          <LogOut className={cn.icon} />
-          <Typography variant={'subtitle2'}>Logout</Typography>
-        </Button>
+        <FlexContainer fw={'wrap'} jc={'space-around'}>
+          <Button className={cn.bottom} onClick={delAccount} variant={'danger'}>
+            <Trash className={cn.icon} />
+            Delete Account
+          </Button>
+          <Button className={cn.bottom} onClick={onLogout} variant={'secondary'}>
+            <LogOut className={cn.icon} />
+            Logout
+          </Button>
+        </FlexContainer>
       </FlexContainer>
     </Card>
   )
