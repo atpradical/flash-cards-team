@@ -37,3 +37,7 @@ export type UpdateUserArgs = {
 }
 
 export type UpdateUserResponse = User
+
+export type ConfirmEmailArgs = {
+  code: string
+}
