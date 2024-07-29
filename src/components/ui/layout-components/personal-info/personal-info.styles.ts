@@ -12,5 +12,6 @@ export const cn = {
   hint: s.hint,
   icon: s.icon,
   title: s.title,
+  verifyEmail: s.verifyEmail,
   wrapper: s.wrapper,
 }

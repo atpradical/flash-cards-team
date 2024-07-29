@@ -4,13 +4,14 @@ import {
   CreateUserResponse,
   LoginArgs,
   LoginResponse,
+  ResendVerificationEmailArgs,
   UpdateUserArgs,
   UpdateUserResponse,
   User,
 } from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
 
-import { createUserHTML } from './auth-templates'
+import { emailBodyHTML, emailSubjectHTML } from './auth-templates'
 
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -29,7 +30,7 @@ export const authApi = flashcardsApi.injectEndpoints({
           const sendConfirmationEmail = true
 
           return {
-            body: { email, html: createUserHTML, name, password, sendConfirmationEmail },
+            body: { email, html: emailBodyHTML, name, password, sendConfirmationEmail },
             method: 'POST',
             url: '/v1/auth/sign-up',
           }
@@ -75,6 +76,14 @@ export const authApi = flashcardsApi.injectEndpoints({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
+      resendVerificationEmail: builder.mutation<void, ResendVerificationEmailArgs>({
+        invalidatesTags: ['Me'],
+        query: body => ({
+          body: { html: emailBodyHTML, subject: emailSubjectHTML, ...body },
+          method: 'POST',
+          url: '/v1/auth/resend-verification-email',
+        }),
+      }),
       updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
         invalidatesTags: ['Me'],
         query: args => {
@@ -110,5 +119,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  useResendVerificationEmailMutation,
   useUpdateUserMutation,
 } = authApi

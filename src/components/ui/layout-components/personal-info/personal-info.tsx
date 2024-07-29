@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import { EditOutline, LogOut, Trash, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
@@ -13,26 +13,41 @@ type PersonalInfoProps = {
   avatar: Nullable<string>
   delAccount: () => void
   email: string
+  isEmailVerified: boolean
+  isResendSuccess: boolean
   name: string
   onDelete: () => void
   onEdit: () => void
+  onEmailVerify: (userId: string) => void
   onLogout: () => void
   onUpdate: (e: ChangeEvent<HTMLInputElement>) => void
+  userId: string
 }
 
 export const PersonalInfo = ({
   avatar,
   delAccount,
   email,
+  isEmailVerified,
+  isResendSuccess,
   name,
   onDelete,
   onEdit,
+  onEmailVerify,
   onLogout,
   onUpdate,
+  userId,
 }: PersonalInfoProps) => {
+  const [resendState, setResendState] = useState(false)
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
   const isTinyScreen = currentScreenWidth <= breakpoint
+
+  useEffect(() => {
+    if (isResendSuccess) {
+      setResendState(true)
+    }
+  }, [isResendSuccess])
 
   return (
     <Card className={cn.container}>
@@ -63,6 +78,20 @@ export const PersonalInfo = ({
             <EditOutline className={cn.accent} />
           </Button>
         </FlexContainer>
+        {!isEmailVerified && (
+          <div className={cn.verifyEmail}>
+            <Typography variant={'error'}>Email is not verified!</Typography>
+            {!resendState ? (
+              <Button onClick={() => onEmailVerify(userId)} variant={'link'}>
+                Resend request
+              </Button>
+            ) : (
+              <Typography>
+                Confirmation request sent. <br /> Please check your mail
+              </Typography>
+            )}
+          </div>
+        )}
         <Typography className={cn.hint} gray>
           {email}
         </Typography>
