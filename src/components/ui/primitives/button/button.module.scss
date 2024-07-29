@@ -64,6 +64,34 @@
     color: var(--color-light-900);
     background-color: var(--color-dark-300);
   }
+
+  @media screen and (width <= 320px) {
+    padding: 6px 14px;
+    font-size: var(--font-size-xs);
+  }
+}
+
+.danger {
+  background-color: var(--color-danger-300);
+  box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
+
+  &:hover {
+    background-color: var(--color-danger-100);
+  }
+
+  &:active {
+    background-color: var(--color-danger-500);
+  }
+
+  &:disabled {
+    color: var(--color-light-900);
+    background-color: var(--color-danger-900);
+  }
+
+  @media screen and (width <= 320px) {
+    padding: 6px 14px;
+    font-size: var(--font-size-xs);
+  }
 }
 
 .link {

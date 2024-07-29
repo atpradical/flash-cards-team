@@ -51,7 +51,9 @@
 .icon {
   width: var(--icon-size-s);
   height: var(--icon-size-s);
+}
 
+.accent {
   &:hover {
     color: var(--color-accent-300);
   }
@@ -61,6 +63,6 @@
   }
 }
 
-.title {
+.action .title {
   text-align: center;
 }

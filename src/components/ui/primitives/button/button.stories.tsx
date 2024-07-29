@@ -37,6 +37,15 @@ export const Secondary: Story = {
   },
 }
 
+export const Danger: Story = {
+  args: {
+    children: 'Secondary Button',
+    disabled: false,
+    onClick: action('action on button click invoked'),
+    variant: 'danger',
+  },
+}
+
 export const ButtonWithIcon: Story = {
   args: {
     children: (
