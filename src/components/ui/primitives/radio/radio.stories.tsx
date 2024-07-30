@@ -9,7 +9,7 @@ const meta = {
   },
   component: Radio,
   tags: ['autodocs'],
-  title: 'Components/RadioGroup',
+  title: 'Primitives/RadioGroup',
 } satisfies Meta<typeof Radio>
 
 export default meta

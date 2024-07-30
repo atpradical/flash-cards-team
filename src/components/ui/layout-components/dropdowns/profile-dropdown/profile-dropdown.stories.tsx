@@ -11,7 +11,7 @@ import { store } from '@/services'
 const meta = {
   argTypes: {},
   component: ProfileDropdownComponent,
-  title: 'Layout Components/Dropdowns/ProfileDropdown',
+  title: 'Layout Components/Dropdowns',
 } satisfies Meta<typeof ProfileDropdownComponent>
 
 export default meta

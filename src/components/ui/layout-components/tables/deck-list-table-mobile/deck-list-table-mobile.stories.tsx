@@ -12,7 +12,7 @@ import { DeckListTableMobile as DeckListTableMobileComponent } from './deck-list
 const meta = {
   argTypes: {},
   component: DeckListTableMobileComponent,
-  title: 'Layout Components/Tables/Deck List Table Mobile',
+  title: 'Layout Components/Tables',
 } satisfies Meta<typeof DeckListTableMobileComponent>
 
 type Story = StoryObj<typeof meta>
@@ -26,9 +26,7 @@ export const DeckListTableMobile: Story = {
   render: args => (
     <MemoryRouter>
       <Provider store={store}>
-        <div style={{ width: '600px' }}>
-          <DeckListTableMobileComponent {...args} />
-        </div>
+        <DeckListTableMobileComponent {...args} />
       </Provider>
     </MemoryRouter>
   ),

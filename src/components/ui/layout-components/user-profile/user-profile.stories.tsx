@@ -13,7 +13,7 @@ const meta = {
     isAuth: { control: 'boolean' },
   },
   component: UserProfileComponent,
-  title: 'Layout Components/Dropdowns/UserProfile',
+  title: 'Layout Components/Dropdowns',
 } satisfies Meta<typeof UserProfileComponent>
 
 export default meta

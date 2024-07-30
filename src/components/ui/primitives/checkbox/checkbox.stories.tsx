@@ -9,7 +9,7 @@ const meta = {
   },
   component: Checkbox,
   tags: ['autodocs'],
-  title: 'Components/Checkbox',
+  title: 'Primitives/Checkbox',
 } satisfies Meta<typeof Checkbox>
 
 export default meta

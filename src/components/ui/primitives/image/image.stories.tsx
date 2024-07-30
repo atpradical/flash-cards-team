@@ -1,13 +1,13 @@
 import type { Meta } from '@storybook/react'
 
 import myImage from '@/assets/webp/dummy-cover.webp'
-import { Image } from '@/components/ui/primitives/image/image'
+import { Image } from '@/components/ui/primitives'
 import { RATIO } from '@/shared/enums'
 
 const meta = {
   component: Image,
   tags: ['autodocs'],
-  title: 'Components/Image',
+  title: 'Primitives/Image',
 } satisfies Meta<typeof Image>
 
 export default meta

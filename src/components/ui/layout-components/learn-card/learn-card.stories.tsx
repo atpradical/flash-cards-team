@@ -6,7 +6,7 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: LearnCardComponent,
-  title: 'Components/LearnCard',
+  title: 'Layout Components',
 } satisfies Meta<typeof LearnCardComponent>
 
 export default meta

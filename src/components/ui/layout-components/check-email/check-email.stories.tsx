@@ -6,7 +6,7 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: CheckEmailComponent,
-  title: 'layout Components/Check Email',
+  title: 'layout Components',
 } satisfies Meta<typeof CheckEmailComponent>
 
 export default meta

@@ -1,25 +1,15 @@
-import { useEffect, useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Progress } from '@/components/ui/primitives/progress/progress'
-import { Meta } from '@storybook/react'
+import { Progress as ProgressComponent } from './progress'
 
 const meta = {
   argTypes: {},
-  component: Progress,
+  component: ProgressComponent,
   tags: ['autodocs'],
-  title: 'Components/Progress',
-} satisfies Meta<typeof Progress>
+  title: 'Primitives/Progress',
+} satisfies Meta<typeof ProgressComponent>
 
 export default meta
+type Story = StoryObj<typeof meta>
 
-export const ProgressBase = () => {
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(100), 500)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  return <Progress value={progress} />
-}
+export const Progress: Story = {}

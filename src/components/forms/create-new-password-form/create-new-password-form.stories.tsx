@@ -8,7 +8,7 @@ import { action } from '@storybook/addon-actions'
 const meta = {
   argTypes: {},
   component: CreateNewPasswordFormComponent,
-  title: 'Forms/CreateNewPasswordForm',
+  title: 'Forms/Create New Password Form',
 } satisfies Meta<typeof CreateNewPasswordFormComponent>
 
 export default meta

@@ -12,7 +12,7 @@ import { DeckListExample } from './deck-list-table.mock'
 const meta = {
   argTypes: {},
   component: DeckListTableComponent,
-  title: 'Layout Components/Tables/Deck List Table',
+  title: 'Layout Components/Tables',
 } satisfies Meta<typeof DeckListTableComponent>
 
 type Story = StoryObj<typeof meta>
