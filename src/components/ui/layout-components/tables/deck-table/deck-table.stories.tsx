@@ -11,7 +11,7 @@ import { CardListExample } from './deck-table.mock'
 const meta = {
   argTypes: {},
   component: DeckTableComponent,
-  title: 'Layout Components/Tables/Deck Table',
+  title: 'Layout Components/Tables',
 } satisfies Meta<typeof DeckTableComponent>
 
 type Story = StoryObj<typeof meta>

@@ -13,7 +13,7 @@ const meta = {
   },
   component: Avatar,
   tags: ['autodocs'],
-  title: 'Components/Avatar',
+  title: 'Primitives/Avatar',
 } satisfies Meta<typeof Avatar>
 
 export default meta
@@ -25,43 +25,43 @@ export const All: Story = {
 
 export const Small: Story = {
   args: {
+    name: 'Ivan',
     size: 's',
     src: avatarDefault,
-    title: 'JD',
   },
 }
 
 export const Medium: Story = {
   args: {
+    name: 'Ivan',
     size: 'm',
     src: avatarDefault,
-    title: 'JD',
   },
 }
 
 export const Large: Story = {
   args: {
+    name: 'Ivan',
     size: 'm',
     src: avatarDefault,
-    title: 'JD',
   },
 }
 
 export const Fallback: Story = {
   args: {
-    title: 'JD',
+    name: 'Ivan',
   },
 }
 
 function AllAvatars() {
   return (
     <div style={{ display: 'flex', gap: '1rem' }}>
-      <Avatar size={'s'} title={'JD'} />
-      <Avatar size={'s'} src={avatarDefault} title={'JD'} />
-      <Avatar title={'JD'} />
-      <Avatar src={avatarDefault} title={'JD'} />
-      <Avatar size={'l'} title={'JD'} />
-      <Avatar size={'l'} src={avatarDefault} title={'JD'} />
+      <Avatar name={'Ivan'} size={'s'} />
+      <Avatar name={'Ivan'} size={'s'} src={avatarDefault} />
+      <Avatar name={'Ivan'} />
+      <Avatar name={'Ivan'} src={avatarDefault} />
+      <Avatar name={'Ivan'} size={'l'} />
+      <Avatar name={'Ivan'} size={'l'} src={avatarDefault} />
     </div>
   )
 }

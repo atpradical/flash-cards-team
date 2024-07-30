@@ -7,7 +7,7 @@ import { ExpiredLink as ExpiredLinkComponent } from './expired-link'
 const meta = {
   argTypes: {},
   component: ExpiredLinkComponent,
-  title: 'Layout Components/ExpiredLink',
+  title: 'Layout Components',
 } satisfies Meta<typeof ExpiredLinkComponent>
 
 export default meta

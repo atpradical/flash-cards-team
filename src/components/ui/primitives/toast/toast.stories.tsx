@@ -14,7 +14,8 @@ const meta = {
     stacked: { control: 'boolean' },
   },
   component: ToastComponent,
-  title: 'Primitive Components/Toast',
+  tags: ['autodocs'],
+  title: 'Primitives/Toast',
 } satisfies Meta<typeof ToastComponent>
 
 export default meta

@@ -10,7 +10,7 @@ import { DeckTableMobile as DeckTableMobileComponent } from './deck-table-mobile
 const meta = {
   argTypes: {},
   component: DeckTableMobileComponent,
-  title: 'Layout Components/Tables/Deck Table Mobile',
+  title: 'Layout Components/Tables',
 } satisfies Meta<typeof DeckTableMobileComponent>
 
 type Story = StoryObj<typeof meta>
