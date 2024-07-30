@@ -6,7 +6,7 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: PersonalInfoComponent,
-  title: 'Layout Components/PersonalInfo',
+  title: 'Layout Components/Personal Info',
 } satisfies Meta<typeof PersonalInfoComponent>
 
 export default meta

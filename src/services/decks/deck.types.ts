@@ -34,7 +34,7 @@ export type GetDecksArgs = {
   maxCardsCount?: number
   minCardsCount?: number
   name?: string
-  orderBy?: string // todo: recheck type for 'orderBy?: string' property during sort table task
+  orderBy?: string
 }
 
 export type CreateDeckResponse = Deck
