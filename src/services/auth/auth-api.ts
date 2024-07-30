@@ -27,20 +27,6 @@ export const authApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
-      updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
-        invalidatesTags: ['Me'],
-        query: ({ name, avatar }) => {
-          const formData = new FormData()
-          name && formData.append('name', name)
-          avatar && formData.append('avatar', avatar)
-
-          return {
-            body: formData,
-            method: 'PATCH',
-            url: '/v1/auth/me',
-          }
-        },
-      }),
       login: builder.mutation<LoginResponse, LoginArgs>({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
           const { data } = await queryFulfilled
@@ -73,6 +59,25 @@ export const authApi = flashcardsApi.injectEndpoints({
       me: builder.query<User, void>({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
+      }),
+      updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
+        invalidatesTags: ['Me'],
+        query: ({ avatar, name }) => {
+          const formData = new FormData()
+
+          if (name) {
+            formData.append('name', name)
+          }
+          if (avatar) {
+            formData.append('avatar', avatar)
+          }
+
+          return {
+            body: formData,
+            method: 'PATCH',
+            url: '/v1/auth/me',
+          }
+        },
       }),
     }
   },

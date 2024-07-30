@@ -1,6 +1,6 @@
 import { Nullable } from '@/shared/types/common'
 export type User = {
-  avatar: Nullable<string>
+  avatar?: Nullable<File | string>
   created: string
   email: string
   id: string
@@ -32,7 +32,4 @@ export type CreateUserResponse = User
 
 export type UpdateUserResponse = User
 
-export type UpdateUserArgs = {
-  name?: string
-  avatar: Nullable<File>
-}
+export type UpdateUserArgs = Partial<User>

@@ -6,7 +6,7 @@ type Props = {
   email: string
   name: string
   noSep?: boolean
-  photo: string
+  photo?: string
 } & ComponentPropsWithoutRef<typeof Label>
 
 export const DropdownLabel = (props: Props) => {

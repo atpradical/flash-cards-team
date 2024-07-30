@@ -15,18 +15,32 @@
   position: relative;
 }
 
-.editAvatar {
+.avatarButton {
   position: absolute;
   top: 90px;
-  left: 76px;
 
   width: var(--icon-size-xl);
   height: var(--icon-size-xl);
   padding: 0;
 
+  &.editAvatar {
+    left: 76px;
+  }
+
+  &.deleteAvatar {
+    left: 106px;
+  }
+
   @media screen and (width <= 320px) {
     top: 64px;
-    left: 56px;
+
+    &.editAvatar {
+      left: 56px;
+    }
+
+    &.deleteAvatar {
+      left: 86px;
+    }
   }
 }
 

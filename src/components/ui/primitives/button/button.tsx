@@ -11,7 +11,7 @@ type InferType<T> = T extends ElementType<infer U> ? U : never
 type Props<T extends ElementType = 'button'> = {
   as?: T
   fullWidth?: boolean
-  variant?: 'icon' | 'link' | 'primary' | 'secondary'
+  variant?: 'danger' | 'icon' | 'link' | 'primary' | 'secondary'
 } & ComponentPropsWithoutRef<T>
 
 export const Button = forwardRef(
