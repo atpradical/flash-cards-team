@@ -15,6 +15,7 @@ import {
 import { performOptimisticCardUpdate } from '@/services/cards/utils'
 import { createCardsFormData } from '@/services/cards/utils/create-cards-form-data'
 import { flashcardsApi } from '@/services/flashcards-api'
+import { revokeImageUrl } from '@/shared/utils'
 
 export const cardsApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -82,12 +83,8 @@ export const cardsApi = flashcardsApi.injectEndpoints({
 
           try {
             await queryFulfilled
-            if (answerImg) {
-              URL.revokeObjectURL(answerImg)
-            }
-            if (questionImg) {
-              URL.revokeObjectURL(questionImg)
-            }
+            revokeImageUrl(answerImg)
+            revokeImageUrl(questionImg)
           } catch (e) {
             patchCardsResults.forEach(patchResult => {
               patchResult.undo()

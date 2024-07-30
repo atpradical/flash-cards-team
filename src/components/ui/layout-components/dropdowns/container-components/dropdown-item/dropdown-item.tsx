@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Item, Separator, Typography } from '@/components/ui/primitives'
+import { Button, Item, Separator } from '@/components/ui/primitives'
 
 import { cn } from '../../dropdowns.styles'
 
@@ -17,9 +17,15 @@ export const DropdownItem = (props: Props) => {
   return (
     <>
       <Item onClick={onClick} {...rest}>
-        <Typography as={path ? Link : 'span'} className={cn.option} to={path} variant={'caption'}>
+        <Button
+          as={path ? Link : 'span'}
+          className={cn.option}
+          fullWidth
+          to={path}
+          variant={'link'}
+        >
           {icon} {title}
-        </Typography>
+        </Button>
       </Item>
       {!noSeparator && <Separator />}
     </>

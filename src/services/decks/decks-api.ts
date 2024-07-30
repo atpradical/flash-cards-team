@@ -10,6 +10,7 @@ import {
   UpdateDeckResponse,
 } from '@/services/decks/deck.types'
 import { flashcardsApi } from '@/services/flashcards-api'
+import { revokeImageUrl } from '@/shared/utils'
 
 import {
   createFormData,
@@ -125,10 +126,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
 
           try {
             await queryFulfilled
-
-            if (coverImg) {
-              URL.revokeObjectURL(coverImg)
-            }
+            revokeImageUrl(coverImg)
           } catch (e) {
             patchDecksResults.forEach(patchResult => {
               patchResult.undo()

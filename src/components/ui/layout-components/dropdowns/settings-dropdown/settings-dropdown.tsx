@@ -17,7 +17,7 @@ const icons = {
 }
 
 export const SettingsDropdown = ({ learnDeckPath, onDelete, onEdit }: DropdownSettingsProps) => {
-  const trigger = <MoreVerticalOutline className={cn.triggerIcon} />
+  const trigger = <MoreVerticalOutline />
 
   return (
     <Root>

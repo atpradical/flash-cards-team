@@ -12,13 +12,9 @@
   min-width: 218px;
 }
 
-.option,
-.triggerIcon {
-  color: var(--color-light-100);
-}
-
 .option {
-  display: flex;
-  gap: 6px;
-  text-decoration: none;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-light-100);
 }
