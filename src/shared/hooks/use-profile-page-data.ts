@@ -1,16 +1,13 @@
 import { ChangeEvent, useState } from 'react'
 
-import { User, useLogoutMutation, useUpdateUserMutation } from '@/services'
+import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services'
 
-import { Nullable } from '../types/common'
-
-export const usePersonalInfoData = (userData: User) => {
-  const [avatar, setAvatar] = useState<Nullable<File | string>>(userData.avatar ?? null)
+export const useProfilePageData = () => {
+  const { data: user, isFetching } = useMeQuery()
   const [isEditMode, setIsEditMode] = useState(false)
-  const [name, setName] = useState(userData.name || '')
 
-  const [logout] = useLogoutMutation()
-  const [updateUser] = useUpdateUserMutation()
+  const [logout, { isLoading: isLoadingLogOut }] = useLogoutMutation()
+  const [updateUser, { isLoading: isLoadingUpdateUser }] = useUpdateUserMutation()
 
   const logoutHandler = () => {
     logout()
@@ -20,8 +17,7 @@ export const usePersonalInfoData = (userData: User) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
-      setAvatar(file)
-      await updateUser({ avatar: file, name })
+      await updateUser({ avatar: file })
     }
   }
 
@@ -29,30 +25,32 @@ export const usePersonalInfoData = (userData: User) => {
     setIsEditMode(true)
   }
 
-  const deleteAvatarHandler = async () => {
-    setAvatar('')
-    await updateUser({ avatar: null, name })
+  const deleteAvatarHandler = () => {
+    updateUser({ avatar: '' })
   }
 
   const saveNameHandler = async (data: { nickname: string }) => {
     const { nickname } = data
 
-    await updateUser({ avatar, name: nickname })
-    setName(nickname)
+    await updateUser({ avatar: user?.avatar || '', name: nickname })
     setIsEditMode(false)
   }
 
-  const cancelPersonalInfoHandler = () => {
+  const cancelPersonalInfoHandler = (e: ChangeEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     setIsEditMode(false)
   }
+  const isLoading = isLoadingUpdateUser || isFetching || isLoadingLogOut
 
   return {
     cancelPersonalInfoHandler,
     deleteAvatarHandler,
     editNameHandler,
     isEditMode,
+    isLoading,
     logoutHandler,
     saveNameHandler,
     uploadHandler,
+    user,
   }
 }

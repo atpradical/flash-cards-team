@@ -4,7 +4,6 @@ import { LogOut, PersonOutline } from '@/assets/icons'
 import { Arrow, Content, Root, Trigger } from '@/components/ui/primitives'
 import { User, useLogoutMutation } from '@/services'
 import { PATH } from '@/shared/enums'
-import { convertToString } from '@/shared/utils/convert-avatar-toString'
 
 import { DropdownItem, DropdownLabel } from '../container-components'
 import { cn } from '../dropdowns.styles'
@@ -31,7 +30,7 @@ export const ProfileDropdown = (props: Props) => {
       <Trigger className={cn.trigger}>{trigger}</Trigger>
       <Content className={cn.menu}>
         <Arrow />
-        <DropdownLabel email={email} name={name} photo={convertToString(avatar)} />
+        <DropdownLabel email={email} name={name} photo={avatar ?? undefined} />
         <DropdownItem icon={icons.profile} path={PATH.PROFILE} title={'My Profile'} />
         <DropdownItem icon={icons.logout} noSeparator onClick={logoutHandler} title={'Sign Out'} />
       </Content>

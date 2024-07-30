@@ -68,9 +68,8 @@ export const authApi = flashcardsApi.injectEndpoints({
           if (name) {
             formData.append('name', name)
           }
-          if (avatar) {
-            formData.append('avatar', avatar)
-          }
+
+          formData.append('avatar', avatar ?? '')
 
           return {
             body: formData,

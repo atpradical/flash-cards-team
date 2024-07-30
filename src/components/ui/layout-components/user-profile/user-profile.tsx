@@ -5,7 +5,6 @@ import { Avatar, Button, Typography } from '@/components/ui/primitives'
 import { User } from '@/services'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { convertToString } from '@/shared/utils/convert-avatar-toString'
 
 import { cn } from './user-profile.styles'
 
@@ -28,7 +27,7 @@ export const UserProfile = ({ isAuth, userData }: Props) => {
       <Typography className={cn} variant={'subtitle1'}>
         {userData.name}
       </Typography>
-      <Avatar name={userData.name} size={'s'} src={convertToString(userData.avatar)} />
+      <Avatar name={userData.name} size={'s'} src={userData.avatar ?? undefined} />
     </FlexContainer>
   )
 

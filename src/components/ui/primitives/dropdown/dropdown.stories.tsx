@@ -18,7 +18,6 @@ import {
   Trigger,
 } from '@/components/ui/primitives/dropdown/dropdown'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
-import { convertToString } from '@/shared/utils/convert-avatar-toString'
 
 const meta = {
   component: Root,
@@ -33,12 +32,12 @@ export const DropdownWithUserAvatar = {
     return (
       <Root>
         <Trigger style={{ cursor: 'pointer', display: 'flex' }}>
-          <Avatar name={mockUser.name} size={'s'} src={convertToString(mockUser.avatar)} />
+          <Avatar name={mockUser.name} size={'s'} src={mockUser.avatar ?? ''} />
         </Trigger>
         <Content style={{ minWidth: '218px' }}>
           <Arrow />
           <Label>
-            <Avatar name={mockUser.name} size={'s'} src={convertToString(mockUser.avatar)} />
+            <Avatar name={mockUser.name} size={'s'} src={mockUser.avatar ?? ''} />
             <div>
               <Typography
                 style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
