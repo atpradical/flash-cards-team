@@ -1,18 +1,18 @@
 import { AppDispatch, AppGetState, decksApi } from '@/services'
 
-type UpdateDeckFavoriteStatus = {
+type PerformOptimisticFavoriteStatusUpdate = {
   dispatch: AppDispatch
   getState: AppGetState
   id: string
   isFavorite: boolean
 }
 
-export function changeDeckFavoriteStatus({
+export function performOptimisticFavoriteStatusUpdate({
   dispatch,
   getState,
   id,
   isFavorite,
-}: UpdateDeckFavoriteStatus) {
+}: PerformOptimisticFavoriteStatusUpdate) {
   const cachedDecksArgsForQuery = decksApi.util.selectCachedArgsForQuery(getState(), 'getDecks')
   const patchDecksResults: any[] = []
 

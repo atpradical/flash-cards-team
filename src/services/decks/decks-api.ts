@@ -10,7 +10,10 @@ import {
   UpdateDeckResponse,
 } from '@/services/decks/deck.types'
 import { flashcardsApi } from '@/services/flashcards-api'
-import { changeDeckFavoriteStatus } from '@/services/utils'
+import {
+  performOptimisticDeckUpdate,
+  performOptimisticFavoriteStatusUpdate,
+} from '@/services/utils'
 
 export const decksApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -19,7 +22,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
         invalidatesTags: ['Decks'],
 
         async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
-          const patchDecksResults = changeDeckFavoriteStatus({
+          const patchDecksResults = performOptimisticFavoriteStatusUpdate({
             dispatch,
             getState,
             id,
@@ -101,7 +104,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
       removeDeckFromFavorite: builder.mutation<void, DeckId>({
         invalidatesTags: ['Decks'],
         async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
-          const patchDecksResults = changeDeckFavoriteStatus({
+          const patchDecksResults = performOptimisticFavoriteStatusUpdate({
             dispatch,
             getState,
             id,
@@ -124,51 +127,12 @@ export const decksApi = flashcardsApi.injectEndpoints({
       }),
       updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
         invalidatesTags: ['Decks', 'Deck'],
-        async onQueryStarted({ id, ...args }, { dispatch, getState, queryFulfilled }) {
-          const cachedDecksArgsForQuery = decksApi.util.selectCachedArgsForQuery(
-            getState(),
-            'getDecks'
-          )
-          // todo: check if need to be typed (any)
-          const patchDecksResults: any[] = []
-          const coverImg = args.cover && URL.createObjectURL(args.cover)
-
-          cachedDecksArgsForQuery.forEach(cachedArgs => {
-            patchDecksResults.push(
-              dispatch(
-                decksApi.util.updateQueryData('getDecks', cachedArgs, draft => {
-                  const itemToUpdateIndex = draft.items.findIndex(deck => deck.id === id)
-
-                  if (itemToUpdateIndex === -1) {
-                    return
-                  }
-
-                  draft.items[itemToUpdateIndex] = {
-                    ...draft.items[itemToUpdateIndex],
-                    ...args,
-                    cover: coverImg !== undefined ? coverImg : draft.items[itemToUpdateIndex].cover,
-                  }
-                })
-              )
-            )
+        async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
+          const { coverImg, patchDeckResult, patchDecksResults } = performOptimisticDeckUpdate({
+            args,
+            dispatch,
+            getState,
           })
-
-          // check if deck with relevant id exist in cache, if true update it as well
-          const cachedDeck = decksApi.endpoints.getDeck.select({ id })(getState())
-          // todo: check if need to be typed (any)
-          let patchDeckResult: any = null
-
-          if (cachedDeck.data) {
-            patchDeckResult = dispatch(
-              decksApi.util.updateQueryData('getDeck', { id }, draft => {
-                Object.assign(draft, {
-                  ...draft,
-                  ...args,
-                  cover: coverImg !== undefined ? coverImg : draft.cover,
-                })
-              })
-            )
-          }
 
           try {
             await queryFulfilled
