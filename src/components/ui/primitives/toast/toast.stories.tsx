@@ -1,68 +1,40 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useState } from 'react'
+import { toast } from 'react-toastify'
 
-import { action } from '@storybook/addon-actions'
+import { FlexContainer } from '@/shared/ui/flex-container'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 import { Button } from '../button'
-import { Toaster } from './toast'
+import { Toast as ToastComponent } from './toast'
 
 const meta = {
   argTypes: {
-    onOpenChange: {
-      action: action('onOpenChange button was clicked'),
-    },
-    open: {
-      control: 'boolean',
-    },
-    variant: {
-      control: 'select',
-      options: ['error', 'warning', 'success'],
-    },
+    stacked: { control: 'boolean' },
   },
-  component: Toaster,
-  tags: ['autodocs'],
-  title: 'Components/Toaster',
-} satisfies Meta<typeof Toaster>
+  component: ToastComponent,
+  title: 'Primitive Components/Toast',
+} satisfies Meta<typeof ToastComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const storyCreator = (
-  title: string,
-  description: string,
-  variant: 'error' | 'success' | 'warning'
-): Story => ({
-  args: {
-    description,
-    onOpenChange: () => {},
-    open: false,
-    title,
-    variant,
-  },
-  render: ({ description, onOpenChange, open, title, variant }) => {
-    const [isOpen, setIsOpen] = useState(open)
-
-    const handleOpenChange = (newOpen: boolean) => {
-      setIsOpen(newOpen)
-      onOpenChange(newOpen)
-    }
+export const Toast: Story = {
+  render: args => {
+    const notifyInfoHandler = () => toast.info('Informational toast')
+    const notifySuccessHandler = () => toast.success('Success toast')
+    const notifyWarningHandler = () => toast.warning('Warning toast')
+    const notifyErrorHandler = () => toast.error('Error toast')
 
     return (
-      <>
-        <Button onClick={() => setIsOpen(!isOpen)}>Show Toast</Button>
-        <Toaster
-          description={description}
-          onOpenChange={handleOpenChange}
-          open={isOpen}
-          title={title}
-          variant={variant}
-        />
-      </>
+      <FlexContainer fw={'wrap'} gap={'10px'}>
+        <Button onClick={notifyInfoHandler}>Info</Button>
+        <Button onClick={notifySuccessHandler}>Success</Button>
+        <Button onClick={notifyWarningHandler}>Warning</Button>
+        <Button onClick={notifyErrorHandler}>Error</Button>
+        <ToastComponent {...args} />
+      </FlexContainer>
     )
   },
-})
-
-export const ToastError = storyCreator('Error', 'An error occurred', 'error')
-export const ToastWarning = storyCreator('Warning', 'A warning occurred', 'warning')
-export const ToastSuccess = storyCreator('Success', 'An action was successful', 'success')
+}
