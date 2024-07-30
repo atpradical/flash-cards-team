@@ -12,6 +12,8 @@ import {
   UpdateCardArgs,
   UpdateCardResponse,
 } from '@/services/cards/cards.types'
+import { performOptimisticCardUpdate } from '@/services/cards/utils'
+import { createCardsFormData } from '@/services/cards/utils/create-cards-form-data'
 import { flashcardsApi } from '@/services/flashcards-api'
 
 export const cardsApi = flashcardsApi.injectEndpoints({
@@ -19,21 +21,8 @@ export const cardsApi = flashcardsApi.injectEndpoints({
     return {
       createCard: builder.mutation<CreateCardResponse, CreateCardArgs>({
         invalidatesTags: ['Cards'],
-        query: ({ answer, answerImg, deckId, question, questionImg }) => {
-          const formData = new FormData()
-
-          if (answer) {
-            formData.append('answer', answer)
-          }
-          if (answerImg) {
-            formData.append('answerImg', answerImg)
-          }
-          if (question) {
-            formData.append('question', question)
-          }
-          if (questionImg) {
-            formData.append('questionImg', questionImg)
-          }
+        query: ({ deckId, ...args }) => {
+          const formData = createCardsFormData(args)
 
           return {
             body: formData,
@@ -84,25 +73,29 @@ export const cardsApi = flashcardsApi.injectEndpoints({
       }),
       updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
         invalidatesTags: ['Cards'],
-        query: ({ answer, answerImg, id, question, questionImg }) => {
-          const formData = new FormData()
+        async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
+          const { answerImg, patchCardsResults, questionImg } = performOptimisticCardUpdate({
+            args,
+            dispatch,
+            getState,
+          })
 
-          if (answer) {
-            formData.append('answer', answer)
+          try {
+            await queryFulfilled
+            if (answerImg) {
+              URL.revokeObjectURL(answerImg)
+            }
+            if (questionImg) {
+              URL.revokeObjectURL(questionImg)
+            }
+          } catch (e) {
+            patchCardsResults.forEach(patchResult => {
+              patchResult.undo()
+            })
           }
-          if (answerImg) {
-            formData.append('answerImg', answerImg)
-          } else if (answerImg === null) {
-            formData.append('answerImg', '')
-          }
-          if (question) {
-            formData.append('question', question)
-          }
-          if (questionImg) {
-            formData.append('questionImg', questionImg)
-          } else if (questionImg === null) {
-            formData.append('questionImg', '')
-          }
+        },
+        query: ({ id, ...args }) => {
+          const formData = createCardsFormData(args)
 
           return {
             body: formData,
