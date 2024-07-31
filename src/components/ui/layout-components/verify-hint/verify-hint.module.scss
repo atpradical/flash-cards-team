@@ -1,0 +1,10 @@
+.container {
+  margin-bottom: 15px;
+  padding: var(--padding-s);
+  border: var(--border-width-s) solid var(--color-warning-500);
+  border-radius: var(--border-radius-m);
+}
+
+.button {
+  color: var(--color-warning-500);
+}

@@ -2,11 +2,14 @@ import { ChangeEvent } from 'react'
 
 import { EditOutline, LogOut, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
-import { User } from '@/services'
+import { User, useResendVerifyEmailMutation } from '@/services'
+import { createUserHTML } from '@/services/auth/auth-templates'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
+import { CheckEmail } from '../check-email'
+import { VerifyHint } from '../verify-hint'
 import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
@@ -24,9 +27,22 @@ export const PersonalInfo = ({
   uploadAvatar,
   userData,
 }: PersonalInfoProps) => {
+  const { avatar, email, id, isEmailVerified, name } = userData
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
   const isTinyScreen = currentScreenWidth <= breakpoint
+
+  const [resendVerifyEmail, { data, isSuccess }] = useResendVerifyEmailMutation()
+
+  console.log('verifyEmail data', data)
+
+  const resendVerifyEmailHandler = () => {
+    resendVerifyEmail({ html: createUserHTML, subject: 'vefiry', userId: id })
+  }
+
+  if (isSuccess) {
+    return <CheckEmail email={email} name={name} />
+  }
 
   return (
     <Card className={cn.container}>
@@ -37,9 +53,9 @@ export const PersonalInfo = ({
         <FlexContainer className={cn.wrapper}>
           <Avatar
             className={cn.avatar}
-            name={userData.name}
+            name={name}
             size={isTinyScreen ? 'm' : 'l'}
-            src={userData.avatar ?? undefined}
+            src={avatar ?? undefined}
           />
           <Button
             as={'label'}
@@ -61,15 +77,17 @@ export const PersonalInfo = ({
         </FlexContainer>
         <FlexContainer gap={'12px'} jc={'center'}>
           <Typography as={'h2'} variant={'h2'}>
-            {userData.name}
+            {name}
           </Typography>
           <Button onClick={editName} title={'Edit profile'} variant={'icon'}>
             <EditOutline className={cn.icon} />
           </Button>
         </FlexContainer>
         <Typography className={cn.hint} gray>
-          {userData?.email}
+          {email}
         </Typography>
+
+        {!isEmailVerified && <VerifyHint verify={resendVerifyEmailHandler} />}
         <Button className={cn.bottom} onClick={logout} variant={'secondary'}>
           <LogOut className={cn.icon} />
           <Typography variant={'subtitle2'}>Logout</Typography>

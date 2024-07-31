@@ -3,6 +3,7 @@ import {
   CreateUserResponse,
   LoginArgs,
   LoginResponse,
+  ResendVerifyEmailArgs,
   UpdateUserArgs,
   UpdateUserResponse,
   User,
@@ -60,6 +61,16 @@ export const authApi = flashcardsApi.injectEndpoints({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
+      resendVerifyEmail: builder.mutation<void, ResendVerifyEmailArgs>({
+        invalidatesTags: ['Me'],
+        query: body => {
+          return {
+            body,
+            method: 'POST',
+            url: '/v1/auth/resend-verification-email',
+          }
+        },
+      }),
       updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
         invalidatesTags: ['Me'],
         query: ({ avatar, name }) => {
@@ -78,6 +89,15 @@ export const authApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
+      verifyEmail: builder.mutation<any, { code: string }>({
+        query: body => {
+          return {
+            body,
+            method: 'POST',
+            url: '/v1/auth/verify-email',
+          }
+        },
+      }),
     }
   },
   overrideExisting: false,
@@ -88,5 +108,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  useResendVerifyEmailMutation,
   useUpdateUserMutation,
+  useVerifyEmailMutation,
 } = authApi

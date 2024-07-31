@@ -33,7 +33,11 @@ export type CreateUserResponse = User
 
 export type UpdateUserResponse = User
 
+export type VerifyUserResponse = CreateUserArgs
+
 export type UpdateUserArgs = {
-  avatar?: Nullable<File | string>
+  avatar?: File | string
   name?: string
 }
+
+export type ResendVerifyEmailArgs = { userId: string } & Pick<CreateUserArgs, 'html' | 'subject'>

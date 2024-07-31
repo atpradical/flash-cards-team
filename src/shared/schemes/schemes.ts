@@ -40,3 +40,9 @@ export const cardQuestionScheme = z
   .trim()
   .min(3, "Question length can't be less than 3 characters.")
   .max(500, "Question length can't be more than 30 characters.")
+
+const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export const codeVerifySchema = z.string().regex(uuidRegex, {
+  message: 'Invalid verification code format. Please enter the correct code.',
+})

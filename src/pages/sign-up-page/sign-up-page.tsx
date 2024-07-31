@@ -1,24 +1,26 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { SignUpForm, SignUpFormValues } from '@/components/forms'
-import { CheckEmail } from '@/components/ui/layout-components'
 import { useCreateUserMutation } from '@/services'
+import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const SignUpPage = () => {
-  const [createUser, { isLoading, isSuccess }] = useCreateUserMutation()
-  const [email, setEmail] = useState('')
+  const [createUser, { isLoading }] = useCreateUserMutation()
 
-  const signUpFormHandler = (formData: SignUpFormValues) => {
-    createUser(formData)
-    setEmail(formData.email)
+  const navigate = useNavigate()
+
+  const signUpFormHandler = async (formData: SignUpFormValues) => {
+    await createUser(formData)
+      .unwrap()
+      .then(() => navigate(PATH.SIGN_IN))
   }
 
   return (
     <Page load={isLoading}>
       <FlexContainer jc={'center'} pd={'0 20px'}>
-        {isSuccess ? <CheckEmail email={email} /> : <SignUpForm onSubmit={signUpFormHandler} />}
+        <SignUpForm onSubmit={signUpFormHandler} />
       </FlexContainer>
     </Page>
   )
