@@ -26,6 +26,7 @@ export const DeckListPage = () => {
   const search = searchParams.get('search') ?? ''
   const orderBy = searchParams.get('orderBy') ?? ''
   const tab = searchParams.get('tab') ?? 'allDecks'
+  const [sliderState, setSliderState] = useState<number[]>([])
 
   const { data: user } = useMeQuery()
   const authorId = tab === 'myDecks' ? user?.id : undefined
@@ -37,8 +38,8 @@ export const DeckListPage = () => {
 
   useEffect(() => {
     if (minMax) {
-      updateSearchParam({ max: minMax?.max, min: minMax.min })
-
+      updateSearchParam({ max: minMax.max, min: minMax.min })
+      setSliderState([minMax.min, minMax.max])
       setSkip(false)
     }
     // 'updateSearchParam' mustn't be added to avoid cyclical dependence
@@ -67,6 +68,28 @@ export const DeckListPage = () => {
     return <Page />
   }
 
+  const sliderRangeChangeHandler = (newRange: number[]) => {
+    setSliderState(newRange)
+  }
+  const sliderValueCommitHandler = (newRange: number[]) => {
+    setSliderState(newRange)
+    updateSearchParam({ currentPage: 1, max: newRange[1], min: newRange[0] })
+  }
+
+  const clearFiltersHandler = () => {
+    debugger
+    setSliderState([minMax.min, minMax.max])
+    updateSearchParam({
+      currentPage: 1,
+      itemsPerPage: 10,
+      max: minMax.max,
+      min: minMax.min,
+      orderBy: '',
+      search: '',
+      tab: 'allDecks',
+    })
+  }
+
   return (
     <Page load={isFetching}>
       {!isFetchingMin && (
@@ -77,7 +100,15 @@ export const DeckListPage = () => {
             </Typography>
             <Button onClick={setShowAddDeckDialog}>Add New Deck</Button>
           </FlexContainer>
-          <TableFilterBar max={minMax?.max} min={minMax?.min} search={search} />
+          <TableFilterBar
+            max={minMax?.max}
+            min={minMax?.min}
+            onClearFilters={clearFiltersHandler}
+            onSliderChange={sliderRangeChangeHandler}
+            onSliderCommit={sliderValueCommitHandler}
+            search={search}
+            sliderRange={sliderState}
+          />
           {isTinyScreen ? (
             <DeckListTableMobile decks={decks.items} user={user} />
           ) : (
