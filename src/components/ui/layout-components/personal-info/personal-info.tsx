@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 
-import { EditOutline, LogOut, Trash, TrashOutline } from '@/assets/icons'
+import { Checked, EditOutline, LogOut, Trash, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks'
@@ -96,9 +96,16 @@ export const PersonalInfo = ({
             )}
           </div>
         )}
-        <Typography className={cn.hint} gray>
-          {email}
-        </Typography>
+        <FlexContainer gap={'4px'} jc={'center'}>
+          <Typography className={cn.hint} gray>
+            {email}
+          </Typography>
+          {isEmailVerified && (
+            <span title={'email verified'}>
+              <Checked className={cn.checked} />
+            </span>
+          )}
+        </FlexContainer>
         <FlexContainer fw={'wrap'} jc={'space-around'}>
           <Button className={cn.bottom} onClick={delAccount} variant={'danger'}>
             <Trash className={cn.icon} />

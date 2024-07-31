@@ -89,3 +89,9 @@
 .verifyReminder {
   color: var(--color-warning-500);
 }
+
+.checked {
+  width: var(--icon-size-m);
+  height: var(--icon-size-m);
+  color: var(--color-success-300);
+}
