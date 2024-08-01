@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-
 import { DeckDialogForm } from '@/components/forms'
 import {
   DeckListTable,
@@ -8,57 +5,28 @@ import {
   TableFilterBar,
 } from '@/components/ui/layout-components'
 import { Button, Pagination, Typography } from '@/components/ui/primitives'
-import { useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
 import { SCREEN_SIZE } from '@/shared/enums'
-import { useCurrentScreenWidth, useSearchParamUpdater } from '@/shared/hooks'
+import { useCurrentScreenWidth, useDeckListPageData } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const DeckListPage = () => {
-  const [showAddDeckDialog, setShowAddDeckDialog] = useState(false)
-  const [searchParams] = useSearchParams()
-  const [skip, setSkip] = useState(true)
-
-  const currentPage = Number(searchParams.get('currentPage') ?? 1)
-  const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? 10)
-  const min = Number(searchParams.get('min'))
-  const max = Number(searchParams.get('max'))
-  const search = searchParams.get('search') ?? ''
-  const orderBy = searchParams.get('orderBy') ?? ''
-  const tab = searchParams.get('tab') ?? 'allDecks'
-  const [sliderState, setSliderState] = useState<number[]>([])
-
-  const { data: user } = useMeQuery()
-  const authorId = tab === 'myDecks' ? user?.id : undefined
-  const favoritedBy = tab === 'favorites' ? user?.id : undefined
-
-  const { data: minMax, isFetching: isFetchingMin } = useGetMinMaxQuery()
-
-  const updateSearchParam = useSearchParamUpdater()
-
-  useEffect(() => {
-    if (minMax) {
-      updateSearchParam({ max: minMax.max, min: minMax.min })
-      setSliderState([minMax.min, minMax.max])
-      setSkip(false)
-    }
-    // 'updateSearchParam' mustn't be added to avoid cyclical dependence
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [minMax])
-
-  const { data: decks, isFetching } = useGetDecksQuery(
-    {
-      authorId,
-      currentPage,
-      favoritedBy,
-      itemsPerPage,
-      maxCardsCount: max,
-      minCardsCount: min,
-      name: search || undefined,
-      orderBy: orderBy || undefined,
-    },
-    { skip }
-  )
+  const {
+    clearFiltersHandler,
+    currentPage,
+    decks,
+    isFetching,
+    isFetchingMin,
+    itemsPerPage,
+    minMax,
+    search,
+    setShowAddDeckDialog,
+    showAddDeckDialog,
+    sliderRangeChangeHandler,
+    sliderState,
+    sliderValueCommitHandler,
+    user,
+  } = useDeckListPageData()
 
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.TABLET_TINY
@@ -66,28 +34,6 @@ export const DeckListPage = () => {
 
   if (!decks || !user) {
     return <Page />
-  }
-
-  const sliderRangeChangeHandler = (newRange: number[]) => {
-    setSliderState(newRange)
-  }
-  const sliderValueCommitHandler = (newRange: number[]) => {
-    setSliderState(newRange)
-    updateSearchParam({ currentPage: 1, max: newRange[1], min: newRange[0] })
-  }
-
-  const clearFiltersHandler = () => {
-    debugger
-    setSliderState([minMax.min, minMax.max])
-    updateSearchParam({
-      currentPage: 1,
-      itemsPerPage: 10,
-      max: minMax.max,
-      min: minMax.min,
-      orderBy: '',
-      search: '',
-      tab: 'allDecks',
-    })
   }
 
   return (
@@ -119,7 +65,11 @@ export const DeckListPage = () => {
             pageSize={itemsPerPage}
             totalCount={decks.pagination.totalItems}
           />
-          <DeckDialogForm onOpenChange={setShowAddDeckDialog} open={showAddDeckDialog} />
+          <DeckDialogForm
+            clearFilters={clearFiltersHandler}
+            onOpenChange={setShowAddDeckDialog}
+            open={showAddDeckDialog}
+          />
         </FlexContainer>
       )}
     </Page>

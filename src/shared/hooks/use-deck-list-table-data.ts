@@ -11,7 +11,7 @@ export const useDeckListData = (decks: Deck[], user: User) => {
   const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
 
-  const deckData = decks.find(el => el.id === deckId) ?? ({} as Deck)
+  const deckData = decks.find(el => el.id === deckId)
 
   const processDeckData = (el: Deck) => {
     const cover = el.cover ?? dummyCover

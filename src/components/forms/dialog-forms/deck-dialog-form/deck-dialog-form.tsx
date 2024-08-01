@@ -29,6 +29,7 @@ type DeckDialogFormValues = z.infer<typeof DeckDialogFormScheme>
 
 type DeckDialogFormProps = {
   action?: DIALOG_ACTION
+  clearFilters?: () => void
   deck?: Omit<Deck, 'author'>
   onOpenChange: (open: boolean) => void
   open: boolean
@@ -36,6 +37,7 @@ type DeckDialogFormProps = {
 
 export const DeckDialogForm = ({
   action = DIALOG_ACTION.CREATE,
+  clearFilters,
   deck,
   onOpenChange,
   open,
@@ -52,15 +54,11 @@ export const DeckDialogForm = ({
 
   useEffect(() => {
     if (cover && typeof cover !== 'string') {
-      // create link to file
       const newPreview = URL.createObjectURL(cover)
 
-      // clear old preview to clear memory
       revokeImageUrl(preview)
-
       setPreview(newPreview)
 
-      // clear new preview to clear memory
       return () => URL.revokeObjectURL(newPreview)
     }
     // 'preview' mustn't be added to avoid cyclical dependence
@@ -81,7 +79,12 @@ export const DeckDialogForm = ({
     mode: 'onSubmit',
     resolver: zodResolver(DeckDialogFormScheme),
   })
-
+  const onOpenChangeHandler = (open: boolean) => {
+    onOpenChange(open)
+    if (!open) {
+      reset()
+    }
+  }
   const formHandler = handleSubmit(formData => {
     const finalFormData = {
       ...formData,
@@ -92,6 +95,7 @@ export const DeckDialogForm = ({
       createDeck({
         ...finalFormData,
       }).then(() => {
+        clearFilters?.()
         setCover(null)
         cancelFormHandler()
         reset()
@@ -123,7 +127,7 @@ export const DeckDialogForm = ({
   }
 
   return (
-    <Dialog modal onOpenChange={onOpenChange} open={open}>
+    <Dialog modal onOpenChange={onOpenChangeHandler} open={open}>
       <DialogContent className={cn.container}>
         <Header load={isLoading} title={title} />
         <Body>

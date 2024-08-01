@@ -44,10 +44,6 @@ const publicRoutes: RouteObject[] = [
     element: <ConfirmEmailPage />,
     path: PATH.CONFIRM_EMAIL,
   },
-  {
-    element: <Error404Page />,
-    path: PATH.ERROR_404,
-  },
 ]
 
 const privateRoutes: RouteObject[] = [
@@ -99,7 +95,7 @@ export const router = createBrowserRouter([
       ...publicRoutes,
     ],
     element: <Layout />,
-    errorElement: <Navigate to={PATH.ERROR_404} />,
+    errorElement: <Error404Page />,
     path: PATH.ROOT,
   },
 ])

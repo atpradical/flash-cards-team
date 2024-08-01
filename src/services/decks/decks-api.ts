@@ -46,6 +46,30 @@ export const decksApi = flashcardsApi.injectEndpoints({
       }),
       createDeck: builder.mutation<CreateDeckResponse, CreateDeckArgs>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+          const cachedArgsForQuery = decksApi.util.selectCachedArgsForQuery(
+            getState(),
+            'getDecks'
+          ) as GetDecksArgs[]
+
+          try {
+            const { data } = await queryFulfilled
+
+            cachedArgsForQuery.forEach(cachedArgs => {
+              dispatch(
+                decksApi.util.updateQueryData('getDecks', cachedArgs, draft => {
+                  if (cachedArgs.currentPage !== 1) {
+                    return
+                  }
+                  draft.items.unshift(data)
+                  draft.items.pop()
+                })
+              )
+            })
+          } catch (e) {
+            console.warn(JSON.stringify(e))
+          }
+        },
         query: args => {
           const formData = createFormData(args)
 
@@ -136,7 +160,6 @@ export const decksApi = flashcardsApi.injectEndpoints({
             }
           }
         },
-
         query: ({ id, ...args }) => {
           const formData = createFormData(args)
 
