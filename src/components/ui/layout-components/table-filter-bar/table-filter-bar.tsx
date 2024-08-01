@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 
 import { TrashOutline } from '@/assets/icons'
 import { Button, Slider, TabSwitcher, TextField } from '@/components/ui/primitives'
@@ -12,7 +12,11 @@ import { cn } from './table-filter-bar.styles'
 type TableFilterBarProps = {
   max: number
   min: number
+  onClearFilters: () => void
+  onSliderChange: (newRange: number[]) => void
+  onSliderCommit: (newRange: number[]) => void
   search: string
+  sliderRange: number[]
 }
 
 const tabs: Tab[] = [
@@ -21,37 +25,20 @@ const tabs: Tab[] = [
   { title: 'Favorites', value: 'favorites' },
 ]
 
-export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
+export const TableFilterBar = ({
+  max,
+  min,
+  onClearFilters,
+  onSliderChange,
+  onSliderCommit,
+  search,
+  sliderRange,
+}: TableFilterBarProps) => {
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.TABLET
-
   const isTablet = currentScreenWidth <= breakpoint
 
   const updateSearchParam = useSearchParamUpdater()
-
-  const [sliderState, setSliderState] = useState([min, max])
-
-  const sliderRangeChangeHandler = (newRange: number[]) => {
-    setSliderState(newRange)
-  }
-  const sliderValueCommitHandler = (newRange: number[]) => {
-    setSliderState(newRange)
-    updateSearchParam({ currentPage: 1, max: newRange[1], min: newRange[0] })
-  }
-
-  const clearFiltersHandler = () => {
-    setSliderState([min, max])
-    updateSearchParam({
-      authorId: '',
-      currentPage: 1,
-      itemsPerPage: 10,
-      max: max,
-      min: min,
-      orderBy: '',
-      search: '',
-      tab: 'allDecks',
-    })
-  }
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
@@ -74,11 +61,11 @@ export const TableFilterBar = ({ max, min, search }: TableFilterBarProps) => {
         label={'Cards amount'}
         max={max}
         min={min}
-        onCommit={sliderValueCommitHandler}
-        onRangeChange={sliderRangeChangeHandler}
-        range={sliderState}
+        onCommit={onSliderCommit}
+        onRangeChange={onSliderChange}
+        range={sliderRange}
       />
-      <Button className={cn.button} onClick={clearFiltersHandler} variant={'secondary'}>
+      <Button className={cn.button} onClick={onClearFilters} variant={'secondary'}>
         <TrashOutline />
         Clear Filter
       </Button>

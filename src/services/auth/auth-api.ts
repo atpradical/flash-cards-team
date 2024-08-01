@@ -11,6 +11,7 @@ import {
   UpdateUserResponse,
   User,
 } from '@/services/auth/auth.types'
+import { performOptimisticUserUpdate } from '@/services/auth/utils/perform-optimistic-user-update'
 import { flashcardsApi } from '@/services/flashcards-api'
 
 import {
@@ -19,6 +20,7 @@ import {
   pwdRecoverRequestBodyHTML,
   pwdRecoverRequestSubjectHTML,
 } from './auth-templates'
+import { createUserFormData } from './utils'
 
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -114,20 +116,23 @@ export const authApi = flashcardsApi.injectEndpoints({
         }),
       }),
       updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
-        invalidatesTags: ['Me'],
+        async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
+          const { patchUserResults } = performOptimisticUserUpdate({
+            args,
+            dispatch,
+            getState,
+          })
+
+          try {
+            await queryFulfilled
+          } catch (e) {
+            patchUserResults.forEach(patchResult => {
+              patchResult.undo()
+            })
+          }
+        },
         query: args => {
-          const { avatar, name } = args
-          const formData = new FormData()
-
-          if (name) {
-            formData.append('name', name)
-          }
-
-          if (avatar) {
-            formData.append('avatar', avatar)
-          } else if (avatar === null) {
-            formData.append('avatar', '')
-          }
+          const formData = createUserFormData(args)
 
           return {
             body: formData,

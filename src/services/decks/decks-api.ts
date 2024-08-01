@@ -10,12 +10,35 @@ import {
   UpdateDeckResponse,
 } from '@/services/decks/deck.types'
 import { flashcardsApi } from '@/services/flashcards-api'
+import { revokeImageUrl } from '@/shared/utils'
+
+import {
+  createFormData,
+  performOptimisticDeckUpdate,
+  performOptimisticFavoriteStatusUpdate,
+} from './utils'
 
 export const decksApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       addDeckToFavorite: builder.mutation<void, DeckId>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+          const patchDecksResults = performOptimisticFavoriteStatusUpdate({
+            dispatch,
+            getState,
+            id,
+            isFavorite: true,
+          })
+
+          try {
+            await queryFulfilled
+          } catch (e) {
+            patchDecksResults.forEach(patchResult => {
+              patchResult.undo()
+            })
+          }
+        },
         query: ({ id }) => ({
           method: 'POST',
           url: `v1/decks/${id}/favorite`,
@@ -24,18 +47,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
       createDeck: builder.mutation<CreateDeckResponse, CreateDeckArgs>({
         invalidatesTags: ['Decks'],
         query: args => {
-          const { cover, isPrivate, name } = args
-          const formData = new FormData()
-
-          formData.append('name', name)
-
-          if (cover) {
-            formData.append('cover', cover)
-          }
-
-          if (isPrivate) {
-            formData.append('isPrivate', isPrivate.toString())
-          }
+          const formData = createFormData(args)
 
           return {
             body: formData,
@@ -81,6 +93,23 @@ export const decksApi = flashcardsApi.injectEndpoints({
       }),
       removeDeckFromFavorite: builder.mutation<void, DeckId>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+          const patchDecksResults = performOptimisticFavoriteStatusUpdate({
+            dispatch,
+            getState,
+            id,
+            isFavorite: false,
+          })
+
+          try {
+            await queryFulfilled
+          } catch (e) {
+            patchDecksResults.forEach(patchResult => {
+              patchResult.undo()
+            })
+          }
+        },
+
         query: ({ id }) => ({
           method: 'DELETE',
           url: `v1/decks/${id}/favorite`,
@@ -88,22 +117,28 @@ export const decksApi = flashcardsApi.injectEndpoints({
       }),
       updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
         invalidatesTags: ['Decks', 'Deck'],
-        query: ({ cover, id, isPrivate, name }) => {
-          const formData = new FormData()
+        async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
+          const { coverImg, patchDeckResult, patchDecksResults } = performOptimisticDeckUpdate({
+            args,
+            dispatch,
+            getState,
+          })
 
-          if (name) {
-            formData.append('name', name)
+          try {
+            await queryFulfilled
+            revokeImageUrl(coverImg)
+          } catch (e) {
+            patchDecksResults.forEach(patchResult => {
+              patchResult.undo()
+            })
+            if (patchDeckResult) {
+              patchDeckResult.undo()
+            }
           }
+        },
 
-          if (cover) {
-            formData.append('cover', cover)
-          } else if (cover === null) {
-            formData.append('cover', '')
-          }
-
-          if (isPrivate) {
-            formData.append('isPrivate', isPrivate.toString())
-          }
+        query: ({ id, ...args }) => {
+          const formData = createFormData(args)
 
           return {
             body: formData,
