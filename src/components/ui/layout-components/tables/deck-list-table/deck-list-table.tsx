@@ -67,6 +67,7 @@ export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
         <PositionCell>
           <Actions
             id={el.id}
+            isEmptyDeck={el.cardsCount === 0}
             isFavorite={el.isFavorite}
             onDelete={() => openDeleteDeckHandler(el.id)}
             onEdit={() => openEditDeckHandler(el.id)}

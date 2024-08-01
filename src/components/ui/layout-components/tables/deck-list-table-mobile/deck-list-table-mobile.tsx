@@ -62,6 +62,7 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
               </TableHeader>
               <Actions
                 id={el.id}
+                isEmptyDeck={el.cardsCount === 0}
                 isFavorite={el.isFavorite}
                 isMobile
                 onDelete={() => openDeleteDeckHandler(el.id)}
