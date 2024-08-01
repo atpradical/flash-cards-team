@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 
-import { EditOutline, LogOut, TrashOutline } from '@/assets/icons'
+import { EditOutline, EmailOk, LogOut, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { User, useResendVerifyEmailMutation } from '@/services'
 import { createUserHTML } from '@/services/auth/auth-templates'
@@ -37,7 +37,7 @@ export const PersonalInfo = ({
   console.log('verifyEmail data', data)
 
   const resendVerifyEmailHandler = () => {
-    resendVerifyEmail({ html: createUserHTML, subject: 'vefiry', userId: id })
+    resendVerifyEmail({ html: createUserHTML, subject: 'resend verify', userId: id })
   }
 
   if (isSuccess) {
@@ -46,7 +46,7 @@ export const PersonalInfo = ({
 
   return (
     <Card className={cn.container}>
-      <FlexContainer fd={'column'} gap={'6px'}>
+      <FlexContainer fd={'column'} gap={'12px'}>
         <Typography as={'h1'} className={cn.title} variant={'h1'}>
           Personal Information
         </Typography>
@@ -83,10 +83,10 @@ export const PersonalInfo = ({
             <EditOutline className={cn.icon} />
           </Button>
         </FlexContainer>
-        <Typography className={cn.hint} gray>
-          {email}
-        </Typography>
-
+        <FlexContainer gap={'10px'} jc={'center'}>
+          <Typography gray>{email}</Typography>
+          {isEmailVerified && <EmailOk />}
+        </FlexContainer>
         {!isEmailVerified && <VerifyHint verify={resendVerifyEmailHandler} />}
         <Button className={cn.bottom} onClick={logout} variant={'secondary'}>
           <LogOut className={cn.icon} />

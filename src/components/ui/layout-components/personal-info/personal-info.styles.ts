@@ -8,7 +8,6 @@ export const cn = {
   container: s.container,
   deleteAvatar: clsx(s.avatarButton, s.deleteAvatar),
   editAvatar: clsx(s.avatarButton, s.editAvatar),
-  hint: s.hint,
   icon: s.icon,
   title: s.title,
   wrapper: s.wrapper,

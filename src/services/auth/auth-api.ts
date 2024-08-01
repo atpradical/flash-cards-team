@@ -62,7 +62,7 @@ export const authApi = flashcardsApi.injectEndpoints({
         query: () => `v1/auth/me`,
       }),
       resendVerifyEmail: builder.mutation<void, ResendVerifyEmailArgs>({
-        invalidatesTags: ['Me'],
+        // invalidatesTags: ['Me'],
         query: body => {
           return {
             body,
@@ -90,6 +90,7 @@ export const authApi = flashcardsApi.injectEndpoints({
         },
       }),
       verifyEmail: builder.mutation<any, { code: string }>({
+        invalidatesTags: ['Me'],
         query: body => {
           return {
             body,

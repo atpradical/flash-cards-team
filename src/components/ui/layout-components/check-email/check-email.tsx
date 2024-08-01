@@ -30,10 +30,10 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
 
   const navigate = useNavigate()
 
-  const [resendVerifyEmail, { isSuccess }] = useVerifyEmailMutation()
+  const [verifyEmail, { isSuccess }] = useVerifyEmailMutation()
 
   const formHandler = handleSubmit(data => {
-    resendVerifyEmail(data)
+    verifyEmail(data)
       .unwrap()
       .then(() => console.log('Verification was successly'))
       .catch(error => console.error('Verification failed', error.status))
@@ -60,7 +60,7 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
             name={'code'}
             placeholder={'Enter your code'}
           />
-          <Button className={cn.confirm} fullWidth>
+          <Button className={cn.confirm} fullWidth variant={'secondary'}>
             Confirm
           </Button>
         </form>
