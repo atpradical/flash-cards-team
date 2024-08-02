@@ -15,7 +15,7 @@ const PersonalInfoFormScheme = z
     nickname: nicknameScheme,
   })
   .refine(val => val.nickname.length, {
-    message: "Dude... nickname can't be just spaces",
+    message: 'Ensure that the nickname field does not consist solely of spaces.',
     path: ['nickname'],
   })
 

@@ -38,12 +38,13 @@ export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
   } = useDeckTableData(cards)
 
   const TableContent = cards.map(el => {
-    const { answerCover, questionCover, updated } = processCardData(el)
+    const { answerCover, questionCover, truncatedAnswer, truncatedQuestion, updated } =
+      processCardData(el)
 
     return (
       <TableRow key={el.id}>
-        <PositionCell content={el.question} entity={'Question'} image={questionCover} />
-        <PositionCell content={el.answer} entity={'Answer'} image={answerCover} />
+        <PositionCell content={truncatedQuestion} entity={'Question'} image={questionCover} />
+        <PositionCell content={truncatedAnswer} entity={'Answer'} image={answerCover} />
         <PositionCell content={updated} />
         <PositionCell>
           <Grade stars={el.grade} />
@@ -98,18 +99,17 @@ export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>{TableContent}</TableBody>
-      {showUpdateCardDialogForm && (
-        <CardDialogForm
-          action={DIALOG_ACTION.UPDATE}
-          card={cardData}
-          onOpenChange={setShowUpdateCardDialogForm}
-          open={showUpdateCardDialogForm}
-        />
-      )}
+      <CardDialogForm
+        action={DIALOG_ACTION.UPDATE}
+        card={cardData}
+        key={cardData?.id}
+        onOpenChange={setShowUpdateCardDialogForm}
+        open={showUpdateCardDialogForm}
+      />
       <DeleteDialogForm
         entity={DIALOG_ENTITY.CARD}
         entityId={cardId}
-        name={cardData.question ?? ''}
+        name={cardData?.question ?? ''}
         onOpenChange={setShowDeleteCardDialogForm}
         open={showDeleteCardDialogForm}
       />

@@ -34,7 +34,8 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
     <TableContainer className={s.tableContainer}>
       <FlexContainer fw={'wrap'} gap={'24px'} jc={'space-around'}>
         {cards.map(el => {
-          const { answerCover, questionCover, updated } = processCardData(el)
+          const { answerCover, questionCover, truncatedAnswer, truncatedQuestion, updated } =
+            processCardData(el)
 
           return (
             <div className={s.tableItem} key={el.id}>
@@ -43,7 +44,7 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
                   <PositionCell className={s.positionCell} image={questionCover} />
                   <PositionCell
                     className={s.positionCell}
-                    content={el.question}
+                    content={truncatedQuestion}
                     entity={'Question'}
                     jc={'end'}
                   />
@@ -52,7 +53,7 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
                   <PositionCell className={s.positionCell} image={answerCover} />
                   <PositionCell
                     className={s.positionCell}
-                    content={el.answer}
+                    content={truncatedAnswer}
                     entity={'Answer'}
                     jc={'end'}
                   />
@@ -81,18 +82,17 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
           )
         })}
       </FlexContainer>
-      {showUpdateCardDialogForm && (
-        <CardDialogForm
-          action={DIALOG_ACTION.UPDATE}
-          card={cardData}
-          onOpenChange={setShowUpdateCardDialogForm}
-          open={showUpdateCardDialogForm}
-        />
-      )}
+      <CardDialogForm
+        action={DIALOG_ACTION.UPDATE}
+        card={cardData}
+        key={cardData?.id}
+        onOpenChange={setShowUpdateCardDialogForm}
+        open={showUpdateCardDialogForm}
+      />
       <DeleteDialogForm
         entity={DIALOG_ENTITY.CARD}
         entityId={cardId}
-        name={cardData.question ?? ''}
+        name={cardData?.question ?? ''}
         onOpenChange={setShowDeleteCardDialogForm}
         open={showDeleteCardDialogForm}
       />
