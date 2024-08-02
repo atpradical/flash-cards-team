@@ -36,6 +36,7 @@ type CardDialogFormProps = {
   action?: DIALOG_ACTION
   card?: Card
   onOpenChange: (open: boolean) => void
+  onSearchClear?: () => void
   open: boolean
 }
 
@@ -43,6 +44,7 @@ export const CardDialogForm = ({
   action = DIALOG_ACTION.CREATE,
   card,
   onOpenChange,
+  onSearchClear,
   open,
 }: CardDialogFormProps) => {
   const [questionCover, setQuestionCover] = useState<Nullable<File | string>>(
@@ -107,6 +109,7 @@ export const CardDialogForm = ({
         ...finalFormData,
         deckId: deckId ?? '',
       }).then(() => {
+        onSearchClear?.()
         setQuestionCover(null)
         setAnswerCover(null)
         cancelFormHandler()

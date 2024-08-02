@@ -14,6 +14,7 @@ import { cn } from './actions.styles'
 
 type ActionsProps = {
   id: string
+  isEmptyDeck?: boolean
   isFavorite?: boolean
   isMobile?: boolean
   onDelete: () => void
@@ -24,6 +25,7 @@ type ActionsProps = {
 
 export const Actions = ({
   id,
+  isEmptyDeck = false,
   isFavorite,
   isMobile = false,
   onDelete,
@@ -76,12 +78,40 @@ export const Actions = ({
 
   return isMobile ? (
     <FlexContainer fw={'wrap'}>
-      {getActionButtons(actionButtons, variant).map(el => (
-        <PositionCell className={cn.tableCell} key={el.label}>
+      {getActionButtons(actionButtons, variant).map(el => {
+        if (isEmptyDeck && el.label === ACTIONS.LEARN) {
+          return null
+        }
+
+        return (
+          <PositionCell className={cn.tableCell} key={el.label}>
+            <Button
+              as={el.path ? Link : 'button'}
+              className={cn.buttonMobile}
+              fullWidth
+              key={el.label}
+              onClick={el.handler}
+              title={el.title}
+              to={el.path}
+              variant={'link'}
+            >
+              {el.icon}
+            </Button>
+          </PositionCell>
+        )
+      })}
+    </FlexContainer>
+  ) : (
+    <FlexContainer gap={'10px'} {...restFlexContainer}>
+      {getActionButtons(actionButtons, variant).map(el => {
+        if (isEmptyDeck && el.label === ACTIONS.LEARN) {
+          return null
+        }
+
+        return (
           <Button
             as={el.path ? Link : 'button'}
-            className={cn.buttonMobile}
-            fullWidth
+            className={cn.button}
             key={el.label}
             onClick={el.handler}
             title={el.title}
@@ -90,24 +120,8 @@ export const Actions = ({
           >
             {el.icon}
           </Button>
-        </PositionCell>
-      ))}
-    </FlexContainer>
-  ) : (
-    <FlexContainer gap={'10px'} {...restFlexContainer}>
-      {getActionButtons(actionButtons, variant).map(el => (
-        <Button
-          as={el.path ? Link : 'button'}
-          className={cn.button}
-          key={el.label}
-          onClick={el.handler}
-          title={el.title}
-          to={el.path}
-          variant={'link'}
-        >
-          {el.icon}
-        </Button>
-      ))}
+        )
+      })}
     </FlexContainer>
   )
 }

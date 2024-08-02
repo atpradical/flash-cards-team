@@ -6,7 +6,7 @@ import { CardDialogForm } from '@/components/forms'
 import { DeckTable, DeckTableMobile, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Pagination, TextField } from '@/components/ui/primitives'
 import { cn } from '@/pages/deck-page/deck-page.styles'
-import { PaginationModel, useGetCardsQuery, useGetDeckQuery, useMeQuery } from '@/services'
+import { useGetCardsQuery, useGetDeckQuery, useMeQuery } from '@/services'
 import { PATH, SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth, useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -15,6 +15,10 @@ import { Page } from '@/shared/ui/page'
 import { EmptyDeck } from './empty-deck'
 
 export const DeckPage = () => {
+  const currentScreenWidth = useCurrentScreenWidth()
+  const breakpoint = SCREEN_SIZE.TABLET_TINY
+  const isTinyScreen = currentScreenWidth <= breakpoint
+
   const [showCreateNewCardDialogForm, setShowCreateNewCardDialogForm] = useState(false)
 
   const { deckId = '' } = useParams()
@@ -35,7 +39,8 @@ export const DeckPage = () => {
   })
 
   const {
-    data: cardsData,
+    currentData,
+    data,
     isFetching: isFetchingCards,
     isLoading: isLoadingCards,
   } = useGetCardsQuery({
@@ -46,21 +51,24 @@ export const DeckPage = () => {
     question: search || undefined,
   })
 
-  const { items: cards = [], pagination = {} as PaginationModel } = cardsData ?? {}
+  if (!currentData || !data || !deck) {
+    return null
+  }
+  const cards = currentData.items ?? data.items
+  const pagination = currentData.pagination ?? data.pagination
 
+  // const { items: cards = [], pagination = {} as PaginationModel } = cardsData ?? {}
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     updateSearchParam({ currentPage: 1, search: e.currentTarget.value })
   }
 
-  const currentScreenWidth = useCurrentScreenWidth()
-  const breakpoint = SCREEN_SIZE.TABLET_TINY
-  const isTinyScreen = currentScreenWidth <= breakpoint
+  const clearSearchHandler = () => {
+    updateSearchParam({ currentPage: 1, search: undefined })
+  }
 
   let isAuthor = false
 
-  if (!deck) {
-    return
-  } else if (user && deck) {
+  if (user && deck) {
     isAuthor = user.id === deck.userId
   }
 
@@ -116,6 +124,7 @@ export const DeckPage = () => {
         )}
         <CardDialogForm
           onOpenChange={setShowCreateNewCardDialogForm}
+          onSearchClear={clearSearchHandler}
           open={showCreateNewCardDialogForm}
         />
       </FlexContainer>

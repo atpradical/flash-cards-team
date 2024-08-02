@@ -15,7 +15,7 @@ export function performOptimisticUserUpdate({
 
   debugger
   const patchUserResults: any[] = []
-  const avatarImg = args.avatar && URL.createObjectURL(args.avatar)
+  const avatarImg = args.avatarURL
 
   cachedUserArgsForQuery.forEach(cachedArgs => {
     patchUserResults.push(
