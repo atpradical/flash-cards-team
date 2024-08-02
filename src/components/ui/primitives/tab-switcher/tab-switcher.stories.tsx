@@ -2,11 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import {
-  mockTabs1,
-  mockTabs2,
-  mockTabs3,
-} from '@/components/ui/primitives/tab-switcher/tab-switcher.mock'
+import { mockTabs1, mockTabs3 } from '@/components/ui/primitives/tab-switcher/tab-switcher.mock'
 import { action } from '@storybook/addon-actions'
 
 import { TabSwitcher as TabSwitcherComponent } from './tab-switcher'
@@ -37,20 +33,6 @@ export const TabSwitcher: Story = {
   },
 }
 
-export const TabSwitcherSomeDisabledTabs: Story = {
-  args: {
-    defaultValue: 'tab-value-3',
-    onTabChange: action('Mock action invoked'),
-    tabs: mockTabs2,
-  },
-  render: args => {
-    return (
-      <MemoryRouter>
-        <TabSwitcherComponent {...args} />
-      </MemoryRouter>
-    )
-  },
-}
 export const TabSwitcherDisabled: Story = {
   args: {
     onTabChange: action('Mock action invoked'),

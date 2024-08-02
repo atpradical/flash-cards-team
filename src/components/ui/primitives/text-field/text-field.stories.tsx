@@ -1,6 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
+
+import { store } from '@/services'
+
 import { TextField } from './text-field'
+
+const withProviders = (StoryComponent: any) => (
+  <MemoryRouter>
+    <Provider store={store}>
+      <StoryComponent />
+    </Provider>
+  </MemoryRouter>
+)
 
 const meta = {
   argTypes: {
@@ -17,6 +30,7 @@ const meta = {
     },
   },
   component: TextField,
+  decorators: [withProviders],
   tags: ['autodocs'],
   title: 'Components/TextField',
 } satisfies Meta<typeof TextField>

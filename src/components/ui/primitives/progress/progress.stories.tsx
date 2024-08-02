@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
-
-import { Progress } from '@/components/ui/primitives/progress/progress'
+import { Progress } from '@/components/ui/primitives/progress'
 import { Meta } from '@storybook/react'
 
 const meta = {
@@ -13,13 +11,5 @@ const meta = {
 export default meta
 
 export const ProgressBase = () => {
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(100), 500)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  return <Progress value={progress} />
+  return <Progress />
 }

@@ -32,7 +32,7 @@ export const useProfilePageData = () => {
   const saveNameHandler = async (data: { nickname: string }) => {
     const { nickname } = data
 
-    await updateUser({ avatar: user?.avatar || '', name: nickname })
+    await updateUser({ name: nickname })
     setIsEditMode(false)
   }
 

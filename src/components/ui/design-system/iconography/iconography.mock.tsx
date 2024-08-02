@@ -7,6 +7,7 @@ import {
   ArrowUp,
   CloseOutline,
   EditOutline,
+  EmailOk,
   EyeOffOutline,
   EyeOutline,
   Funnel,
@@ -33,6 +34,7 @@ export type Icon = {
 }
 
 export const iconList: Icon[] = [
+  { component: <EmailOk className={cn.icon} />, name: 'email ok' },
   { component: <PersonOutline className={cn.icon} />, name: 'person outline' },
   { component: <LogOut className={cn.icon} />, name: 'log out' },
   { component: <ArrowBackOutline className={cn.icon} />, name: 'arrow back outline' },

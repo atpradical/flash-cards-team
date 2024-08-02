@@ -63,9 +63,13 @@ export const authApi = flashcardsApi.injectEndpoints({
       }),
       resendVerifyEmail: builder.mutation<void, ResendVerifyEmailArgs>({
         // invalidatesTags: ['Me'],
-        query: body => {
+        query: ({ userId }) => {
           return {
-            body,
+            body: {
+              html: createUserHTML,
+              subject: 'resend verify',
+              userId,
+            },
             method: 'POST',
             url: '/v1/auth/resend-verification-email',
           }

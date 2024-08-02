@@ -42,7 +42,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const updateSearchParam = useSearchParamUpdater()
 
   useEffect(() => {
-    setInputValue(value as any)
+    setInputValue(value)
   }, [value])
 
   const isPassword = variant === 'password'

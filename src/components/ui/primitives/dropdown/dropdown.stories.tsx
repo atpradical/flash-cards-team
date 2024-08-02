@@ -9,14 +9,7 @@ import {
   TrashOutline,
 } from '@/assets/icons'
 import { Avatar, Label, Typography } from '@/components/ui/primitives'
-import {
-  Arrow,
-  Content,
-  Item,
-  Root,
-  Separator,
-  Trigger,
-} from '@/components/ui/primitives/dropdown/dropdown'
+import { Arrow, Content, Item, Root, Separator, Trigger } from '@/components/ui/primitives/dropdown'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
 
 const meta = {
@@ -27,26 +20,28 @@ const meta = {
 
 export default meta
 
+const { avatar, email, name } = mockUser
+
 export const DropdownWithUserAvatar = {
   render: () => {
     return (
       <Root>
         <Trigger style={{ cursor: 'pointer', display: 'flex' }}>
-          <Avatar name={mockUser.name} size={'s'} src={mockUser.avatar ?? ''} />
+          <Avatar name={name} size={'s'} src={avatar ?? ''} />
         </Trigger>
         <Content style={{ minWidth: '218px' }}>
           <Arrow />
           <Label>
-            <Avatar name={mockUser.name} size={'s'} src={mockUser.avatar ?? ''} />
+            <Avatar name={name} size={'s'} src={avatar ?? ''} />
             <div>
               <Typography
                 style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
                 variant={'subtitle2'}
               >
-                {mockUser.name}
+                {name}
               </Typography>
               <Typography gray variant={'caption'}>
-                {mockUser.email}
+                {email}
               </Typography>
             </div>
           </Label>

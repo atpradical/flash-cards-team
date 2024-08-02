@@ -3,7 +3,6 @@ import { ChangeEvent } from 'react'
 import { EditOutline, EmailOk, LogOut, TrashOutline } from '@/assets/icons'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { User, useResendVerifyEmailMutation } from '@/services'
-import { createUserHTML } from '@/services/auth/auth-templates'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -32,12 +31,10 @@ export const PersonalInfo = ({
   const breakpoint = SCREEN_SIZE.MOBILE_TINY
   const isTinyScreen = currentScreenWidth <= breakpoint
 
-  const [resendVerifyEmail, { data, isSuccess }] = useResendVerifyEmailMutation()
-
-  console.log('verifyEmail data', data)
+  const [resendVerifyEmail, { isSuccess }] = useResendVerifyEmailMutation()
 
   const resendVerifyEmailHandler = () => {
-    resendVerifyEmail({ html: createUserHTML, subject: 'resend verify', userId: id })
+    resendVerifyEmail({ userId: id })
   }
 
   if (isSuccess) {

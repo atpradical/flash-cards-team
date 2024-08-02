@@ -40,4 +40,4 @@ export type UpdateUserArgs = {
   name?: string
 }
 
-export type ResendVerifyEmailArgs = { userId: string } & Pick<CreateUserArgs, 'html' | 'subject'>
+export type ResendVerifyEmailArgs = { userId: string }

@@ -1,6 +1,8 @@
+import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
 import { CheckEmail } from '@/components/ui/layout-components/check-email/check-email'
+import { store } from '@/services'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { mockUser } from '../../primitives/dropdown/dropdown.mock'
@@ -21,7 +23,9 @@ export const CheckEmailExample: Story = {
   },
   render: () => (
     <MemoryRouter>
-      <CheckEmail {...CheckEmailExample.args} />
+      <Provider store={store}>
+        <CheckEmail {...CheckEmailExample.args} />
+      </Provider>
     </MemoryRouter>
   ),
 }

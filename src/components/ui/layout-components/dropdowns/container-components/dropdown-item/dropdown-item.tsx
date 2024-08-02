@@ -12,11 +12,11 @@ type Props = {
   title: string
 } & ComponentPropsWithoutRef<typeof Item>
 export const DropdownItem = (props: Props) => {
-  const { icon, noSeparator = false, onClick, path, title, ...rest } = props
+  const { icon, noSeparator = false, path, title, ...rest } = props
 
   return (
     <>
-      <Item onClick={onClick} {...rest}>
+      <Item {...rest}>
         <Typography as={path ? Link : 'span'} className={cn.option} to={path} variant={'caption'}>
           {icon} {title}
         </Typography>

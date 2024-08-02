@@ -8,7 +8,6 @@ import {
 
 import { Error404Page } from '@/pages'
 import { CardPage } from '@/pages/card-page'
-import { CheckEmailPage } from '@/pages/check-email-page/check-email-page'
 import { DeckListPage } from '@/pages/deck-list-page'
 import { DeckPage } from '@/pages/deck-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
@@ -28,10 +27,6 @@ const authRoutes: RouteObject[] = [
   {
     element: <SignUpPage />,
     path: PATH.SIGN_UP,
-  },
-  {
-    element: <CheckEmailPage />,
-    path: PATH.CHECK_EMAIL,
   },
 ]
 
