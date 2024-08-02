@@ -33,6 +33,7 @@ export type CreateUserResponse = User
 
 export type UpdateUserArgs = {
   avatar?: Nullable<File>
+  avatarURL?: Nullable<string>
   name?: string
 }
 

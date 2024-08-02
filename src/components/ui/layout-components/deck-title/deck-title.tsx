@@ -45,14 +45,13 @@ export const DeckTitle = ({ deck, isAuthor, learnDeckPath }: DeckTitleProps) => 
         )}
       </FlexContainer>
       <Image alt={'Deck cover image'} ratio={RATIO.M} src={cover ?? dummyCover} variant={'m'} />
-      {showUpdateDeckDialogForm && (
-        <DeckDialogForm
-          action={DIALOG_ACTION.UPDATE}
-          deck={deck}
-          onOpenChange={setShowUpdateDeckDialogForm}
-          open={showUpdateDeckDialogForm}
-        />
-      )}
+      <DeckDialogForm
+        action={DIALOG_ACTION.UPDATE}
+        deck={deck}
+        key={deck.id}
+        onOpenChange={setShowUpdateDeckDialogForm}
+        open={showUpdateDeckDialogForm}
+      />
       <DeleteDialogForm
         entityId={id}
         name={name}

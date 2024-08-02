@@ -62,6 +62,7 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
               </TableHeader>
               <Actions
                 id={el.id}
+                isEmptyDeck={el.cardsCount === 0}
                 isFavorite={el.isFavorite}
                 isMobile
                 onDelete={() => openDeleteDeckHandler(el.id)}
@@ -73,18 +74,17 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
           )
         })}
       </FlexContainer>
-      {showEditDeckDialog && (
-        <DeckDialogForm
-          action={DIALOG_ACTION.UPDATE}
-          deck={deckData}
-          onOpenChange={setShowEditDeckDialog}
-          open={showEditDeckDialog}
-        />
-      )}
+      <DeckDialogForm
+        action={DIALOG_ACTION.UPDATE}
+        deck={deckData}
+        key={deckData?.id}
+        onOpenChange={setShowEditDeckDialog}
+        open={showEditDeckDialog}
+      />
       <DeleteDialogForm
         entity={DIALOG_ENTITY.DECK}
         entityId={deckId}
-        name={deckData.name ?? 'Deck name'}
+        name={deckData?.name ?? 'Deck name'}
         onOpenChange={setShowDeleteDeckDialog}
         open={showDeleteDeckDialog}
       />

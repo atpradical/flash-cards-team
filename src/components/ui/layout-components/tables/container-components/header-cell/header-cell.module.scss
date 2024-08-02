@@ -11,13 +11,16 @@
 }
 
 .sort {
+  transform: rotate(180deg);
+
   width: 20px;
   height: 20px;
   padding: 2px;
+
   transition: transform var(--transition-duration-default) ease-in-out;
 }
 
 .desc {
-  transform: rotate(var(--180-deg));
+  transform: rotate(0);
   transition: transform var(--transition-duration-default) ease-in-out;
 }
