@@ -18,6 +18,7 @@ import { SignUpPage } from '@/pages/sign-up-page'
 import { PATH } from '@/shared/enums'
 import { useAuthContext } from '@/shared/hooks'
 import { Layout } from '@/shared/ui/layout'
+import { ConfirmEmailPage } from '@/pages/confirm-email-page'
 
 const authRoutes: RouteObject[] = [
   {
@@ -65,6 +66,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <ProfilePage />,
     path: PATH.PROFILE,
+  },
+  {
+    element: <ConfirmEmailPage />,
+    path: PATH.CONFIRM_EMAIL,
   },
 ]
 

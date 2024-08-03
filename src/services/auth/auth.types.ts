@@ -41,3 +41,4 @@ export type UpdateUserArgs = {
 }
 
 export type ResendVerifyEmailArgs = { userId: string }
+export type VerifyArgs = { code: string }

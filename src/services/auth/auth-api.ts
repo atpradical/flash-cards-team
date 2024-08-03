@@ -7,6 +7,7 @@ import {
   UpdateUserArgs,
   UpdateUserResponse,
   User,
+  VerifyArgs,
 } from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
 
@@ -71,6 +72,7 @@ export const authApi = flashcardsApi.injectEndpoints({
         query: () => `v1/auth/me`,
       }),
       resendVerifyEmail: builder.mutation<void, ResendVerifyEmailArgs>({
+        // invalidatesTags: ['Me'],?
         query: ({ userId }) => {
           return {
             body: {
@@ -101,7 +103,7 @@ export const authApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
-      verifyEmail: builder.mutation<any, { code: string }>({
+      verifyEmail: builder.mutation<any, VerifyArgs>({
         invalidatesTags: ['Me'],
         query: body => {
           return {

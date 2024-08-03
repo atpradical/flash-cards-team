@@ -88,11 +88,11 @@ export const PersonalInfo = ({
         </FlexContainer>
         {!isEmailVerified && <VerifyHint verify={resendVerifyEmailHandler} />}
         <FlexContainer gap={'10px'} jc={'center'}>
-          <Button className={cn.bottom} onClick={deleteUser} variant={'danger'}>
+          <Button className={cn.bottom} onClick={deleteUser} variant={'danger'} fullWidth>
             <TrashOutline className={cn.icon} />
             <Typography variant={'subtitle2'}>Delete user</Typography>
           </Button>
-          <Button className={cn.bottom} onClick={logout} variant={'secondary'}>
+          <Button className={cn.bottom} onClick={logout} variant={'secondary'} fullWidth>
             <LogOut className={cn.icon} />
             <Typography variant={'subtitle2'}>Logout</Typography>
           </Button>
