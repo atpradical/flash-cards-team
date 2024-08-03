@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { CardsHeader } from '@/components/ui/layout-components'
 import { Progress } from '@/components/ui/primitives'
 import { useMeQuery } from '@/services'
-import { AuthContext } from '@/shared/hooks/use-auth-context'
+import { AuthContext } from '@/shared/hooks'
 
 import s from './layout.module.scss'
 

@@ -4,6 +4,7 @@ import { CardDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
 import { Grade, TableBody, TableContainer, TableHeader, TableRow } from '@/components/ui/primitives'
 import { Card } from '@/services/cards/cards.types'
+import { DEFAULT_CURRENT_PAGE } from '@/shared/constants'
 import { DIALOG_ACTION, DIALOG_ENTITY, VARIANT } from '@/shared/enums'
 import { useDeckTableData, useSearchParamUpdater } from '@/shared/hooks'
 
@@ -22,7 +23,7 @@ export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
 
   const sortHandler = (orderBy: string, sortId: string) => {
     setSortId(sortId)
-    updateSearchParam({ currentPage: 1, orderBy })
+    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, orderBy })
   }
 
   const {
