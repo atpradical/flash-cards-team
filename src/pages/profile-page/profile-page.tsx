@@ -8,6 +8,7 @@ export const ProfilePage = () => {
   const {
     cancelPersonalInfoHandler,
     deleteAvatarHandler,
+    deleteUserHandler,
     editNameHandler,
     isEditMode,
     isLoading,
@@ -33,6 +34,7 @@ export const ProfilePage = () => {
         ) : (
           <PersonalInfo
             deleteAvatar={deleteAvatarHandler}
+            deleteUser={deleteUserHandler}
             editName={editNameHandler}
             logout={logoutHandler}
             uploadAvatar={uploadHandler}

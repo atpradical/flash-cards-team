@@ -28,6 +28,15 @@ export const authApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
+      deleteUser: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        query: () => {
+          return {
+            method: 'DELETE',
+            url: '/v1/auth/me',
+          }
+        },
+      }),
       login: builder.mutation<LoginResponse, LoginArgs>({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
           const { data } = await queryFulfilled
@@ -62,7 +71,6 @@ export const authApi = flashcardsApi.injectEndpoints({
         query: () => `v1/auth/me`,
       }),
       resendVerifyEmail: builder.mutation<void, ResendVerifyEmailArgs>({
-        // invalidatesTags: ['Me'],
         query: ({ userId }) => {
           return {
             body: {
@@ -110,6 +118,7 @@ export const authApi = flashcardsApi.injectEndpoints({
 
 export const {
   useCreateUserMutation,
+  useDeleteUserMutation,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,

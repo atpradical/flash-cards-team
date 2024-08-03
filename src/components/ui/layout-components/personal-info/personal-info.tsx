@@ -13,6 +13,7 @@ import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
   deleteAvatar: () => void
+  deleteUser: () => void
   editName: () => void
   logout: () => void
   uploadAvatar: (e: ChangeEvent<HTMLInputElement>) => Promise<void>
@@ -21,6 +22,7 @@ type PersonalInfoProps = {
 
 export const PersonalInfo = ({
   deleteAvatar,
+  deleteUser,
   editName,
   logout,
   uploadAvatar,
@@ -85,10 +87,16 @@ export const PersonalInfo = ({
           {isEmailVerified && <EmailOk />}
         </FlexContainer>
         {!isEmailVerified && <VerifyHint verify={resendVerifyEmailHandler} />}
-        <Button className={cn.bottom} onClick={logout} variant={'secondary'}>
-          <LogOut className={cn.icon} />
-          <Typography variant={'subtitle2'}>Logout</Typography>
-        </Button>
+        <FlexContainer gap={'10px'} jc={'center'}>
+          <Button className={cn.bottom} onClick={deleteUser} variant={'danger'}>
+            <TrashOutline className={cn.icon} />
+            <Typography variant={'subtitle2'}>Delete user</Typography>
+          </Button>
+          <Button className={cn.bottom} onClick={logout} variant={'secondary'}>
+            <LogOut className={cn.icon} />
+            <Typography variant={'subtitle2'}>Logout</Typography>
+          </Button>
+        </FlexContainer>
       </FlexContainer>
     </Card>
   )

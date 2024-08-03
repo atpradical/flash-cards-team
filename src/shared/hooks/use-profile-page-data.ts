@@ -1,6 +1,14 @@
 import { ChangeEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services'
+import {
+  useDeleteUserMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useUpdateUserMutation,
+} from '@/services'
+
+import { PATH } from '../enums'
 
 export const useProfilePageData = () => {
   const { data: user, isFetching } = useMeQuery()
@@ -8,6 +16,9 @@ export const useProfilePageData = () => {
 
   const [logout, { isLoading: isLoadingLogOut }] = useLogoutMutation()
   const [updateUser, { isLoading: isLoadingUpdateUser }] = useUpdateUserMutation()
+  const [deleteUser, { isLoading: isLoadingDeleteUser }] = useDeleteUserMutation()
+
+  const navigate = useNavigate()
 
   const logoutHandler = () => {
     logout()
@@ -40,11 +51,21 @@ export const useProfilePageData = () => {
     e.preventDefault()
     setIsEditMode(false)
   }
-  const isLoading = isLoadingUpdateUser || isFetching || isLoadingLogOut
+
+  const deleteUserHandler = async () => {
+    await deleteUser()
+      .then(() => navigate(PATH.SIGN_IN))
+      .catch(e => {
+        console.log(`User wasn't deleted, ${e}`)
+      })
+  }
+
+  const isLoading = isLoadingUpdateUser || isFetching || isLoadingLogOut || isLoadingDeleteUser
 
   return {
     cancelPersonalInfoHandler,
     deleteAvatarHandler,
+    deleteUserHandler,
     editNameHandler,
     isEditMode,
     isLoading,

@@ -1,8 +1,10 @@
+import { ChangeEvent } from 'react'
 import { Provider } from 'react-redux'
 
 import { PersonalInfo as PersonalInfoComponent } from '@/components/ui/layout-components'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
 import { store } from '@/services'
+import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -17,10 +19,15 @@ type Story = StoryObj<typeof meta>
 
 export const PersonalInfo: Story = {
   args: {
-    deleteAvatar: () => alert('Delete Avatar'),
-    editName: () => alert('Edit Name'),
-    logout: () => alert('Logout'),
-    uploadAvatar: async (e: any) => alert(e),
+    deleteAvatar: action('Delete Avatar'),
+    deleteUser: action('Delete user'),
+    editName: action('Edit Name'),
+    logout: action('Logout'),
+    uploadAvatar: (e: ChangeEvent<HTMLInputElement>) => {
+      action('upload avatar')(e)
+
+      return Promise.resolve()
+    },
     userData: mockUser,
   },
   render: args => (
