@@ -14,28 +14,30 @@ export const useDeckListPageData = () => {
 
   const currentPage = Number(searchParams.get('currentPage') ?? DEFAULT_CURRENT_PAGE)
   const itemsPerPage = Number(searchParams.get('itemsPerPage') ?? DEFAULT_ITEMS_PER_PAGE)
-  const min = Number(searchParams.get('min'))
-  const max = Number(searchParams.get('max'))
+
   const search = searchParams.get('search') ?? ''
   const orderBy = searchParams.get('orderBy') ?? ''
   const tab = searchParams.get('tab') ?? DEFAULT_TAB
-  const [sliderState, setSliderState] = useState<number[]>([min, max])
 
   const { data: user } = useMeQuery()
   const authorId = tab === TABS.MY ? user?.id : undefined
   const favoritedBy = tab === TABS.FAVORITE ? user?.id : undefined
 
   const { data: minMax, isFetching: isFetchingMin } = useGetMinMaxQuery()
+  const min = Number(searchParams.get('min')) ?? minMax.min
+  const max = Number(searchParams.get('max')) ?? minMax.max
+  const [sliderState, setSliderState] = useState<number[]>([min, max])
 
   const updateSearchParam = useSearchParamUpdater()
 
   useEffect(() => {
     if (minMax) {
-      updateSearchParam({ max: minMax.max, min: minMax.min })
-      setSliderState([minMax.min, minMax.max])
+      if (sliderState[0] === 0 && sliderState[1] === 0) {
+        setSliderState([minMax.min, minMax.max])
+      }
       setSkip(false)
     }
-    // 'updateSearchParam' mustn't be added to avoid cyclical dependence
+    // 'setSliderState' mustn't be added to avoid cyclical dependence
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minMax])
 

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { mockTableData } from '@/components/ui/primitives/table/table.mock'
+
 import {
   TableBody,
   TableCell,
@@ -8,44 +10,6 @@ import {
   TableHeaderCell,
   TableRow,
 } from './table'
-
-const mockTableData = [
-  {
-    cards: '33',
-    createdBy: 'Alice Johnson',
-    id: '1',
-    lastUpdated: '01.01.2023',
-    name: 'Как надоела верстка и CSS',
-  },
-  {
-    cards: '41',
-    createdBy: 'Bob Smith',
-    id: '2',
-    lastUpdated: '15.07.2022',
-    name: 'JavaScript для чайников',
-  },
-  {
-    cards: '52',
-    createdBy: 'Diana Prince',
-    id: '3',
-    lastUpdated: '30.03.2021',
-    name: 'О да, снова эти баги',
-  },
-  {
-    cards: '27',
-    createdBy: 'Charlie Brown',
-    id: '4',
-    lastUpdated: '10.12.2020',
-    name: 'Когда ты фулл-стек и спишь 2 часа',
-  },
-  {
-    cards: '11',
-    createdBy: 'Antonio Banderas',
-    id: '5',
-    lastUpdated: '05.05.2019',
-    name: 'Бывает же такой legacy код',
-  },
-]
 
 const meta = {
   argTypes: {},
@@ -57,7 +21,7 @@ const meta = {
 type Story = StoryObj<typeof meta>
 export default meta
 
-export const Example: Story = {
+export const Table: Story = {
   args: {},
   render: () => {
     return (

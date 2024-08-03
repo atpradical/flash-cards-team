@@ -23,8 +23,8 @@ export const Grade = ({ stars = 0, ...rest }: Props) => {
   })
 
   return (
-    <FlexContainer gap={'12px'} {...rest}>
+    <div className={s.container} {...rest}>
       {starElements}
-    </FlexContainer>
+    </div>
   )
 }
