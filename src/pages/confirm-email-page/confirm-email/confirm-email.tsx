@@ -1,32 +1,32 @@
+import { Link } from 'react-router-dom'
+
 import { EmailOk } from '@/assets/icons'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { Link } from 'react-router-dom'
+
 import { cn } from './confirm-email.styles'
 
 type ConfirmEmailProps = {
-  title: string
-  description?: boolean
   buttonText: string
+  description?: boolean
   icon?: boolean
   path: string
-  verifyEmail?: () => void
+  title: string
 }
 
 export const ConfirmEmail = ({
-  title,
-  icon = true,
-  description = true,
   buttonText,
+  description = true,
+  icon = true,
   path,
-  verifyEmail,
+  title,
 }: ConfirmEmailProps) => {
   return (
-    <FlexContainer jc={'center'} gap={'20px'}>
+    <FlexContainer gap={'20px'} jc={'center'}>
       <Card className={cn.container}>
-        <FlexContainer gap={'10px'} pd={'0 0 20px 0'} jc={'center'} fd={'column'}>
+        <FlexContainer fd={'column'} gap={'10px'} jc={'center'} pd={'0 0 20px 0'}>
           <FlexContainer gap={'10px'} jc={'center'}>
-            <Typography variant="h3">{title}</Typography>
+            <Typography variant={'h3'}>{title}</Typography>
             {icon && <EmailOk />}
           </FlexContainer>
           {description && (
@@ -36,7 +36,7 @@ export const ConfirmEmail = ({
             </Typography>
           )}
         </FlexContainer>
-        <Button as={Link} to={path} onClick={verifyEmail}>
+        <Button as={Link} to={path}>
           {buttonText}
         </Button>
       </Card>

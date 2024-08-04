@@ -1,17 +1,18 @@
-import { Page } from '@/shared/ui/page'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useVerifyEmailMutation } from '@/services'
+import { PATH } from '@/shared/enums'
+import { Page } from '@/shared/ui/page'
 
 import { ConfirmEmail } from './confirm-email'
-import { PATH } from '@/shared/enums'
 
 export const ConfirmEmailPage = () => {
   const { token } = useParams()
 
-  const [verifyEmail, { isLoading, isSuccess, isError }] = useVerifyEmailMutation()
+  const [verifyEmail, { isError, isLoading, isSuccess }] = useVerifyEmailMutation()
 
-  const verifyEmailHandler = () => {
+  useEffect(() => {
     if (token) {
       verifyEmail({ code: token })
         .unwrap()
@@ -25,26 +26,24 @@ export const ConfirmEmailPage = () => {
           }
         })
     }
-  }
-  console.log('isSuccess', isSuccess)
-  console.log('isError', isError)
-  console.log('token', token)
+  }, [token])
+
   return (
     <Page load={isLoading}>
-      {isSuccess ? (
+      {isSuccess && (
         <ConfirmEmail
-          path={PATH.SIGN_IN}
-          title={'You confirmed your email successfully'}
           buttonText={'Back to home page'}
           description={false}
+          path={PATH.SIGN_IN}
+          title={'You confirmed your email successfully'}
         />
-      ) : (
+      )}
+      {isError && (
         <ConfirmEmail
-          path={PATH.ROOT}
-          title={'Link expired'}
-          verifyEmail={verifyEmailHandler}
-          buttonText={'Send email'}
+          buttonText={'Back to profile'}
           icon={false}
+          path={PATH.PROFILE}
+          title={'Link expired'}
         />
       )}
     </Page>

@@ -8,6 +8,7 @@ import {
 
 import { Error404Page } from '@/pages'
 import { CardPage } from '@/pages/card-page'
+import { ConfirmEmailPage } from '@/pages/confirm-email-page'
 import { DeckListPage } from '@/pages/deck-list-page'
 import { DeckPage } from '@/pages/deck-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
@@ -18,7 +19,6 @@ import { SignUpPage } from '@/pages/sign-up-page'
 import { PATH } from '@/shared/enums'
 import { useAuthContext } from '@/shared/hooks'
 import { Layout } from '@/shared/ui/layout'
-import { ConfirmEmailPage } from '@/pages/confirm-email-page'
 
 const authRoutes: RouteObject[] = [
   {
