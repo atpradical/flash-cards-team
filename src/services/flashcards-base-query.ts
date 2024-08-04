@@ -1,3 +1,7 @@
+import { toast } from 'react-toastify'
+
+import { ERROR_STATUS } from '@/shared/enums'
+import { getErrorMessage } from '@/shared/utils'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
@@ -34,43 +38,51 @@ export const baseQueryWithReauth: BaseQueryFn<
   /* Send request and get request result */
   let result = await baseQuery(args, api, extraOptions)
 
-  if (result.error && result.error.status === 401) {
+  if (result.error) {
     // checking whether the mutex is locked
-    if (!mutex.isLocked()) {
-      const release = await mutex.acquire()
+    if (result.error.status === ERROR_STATUS.UNAUTHORIZED) {
+      if (!mutex.isLocked()) {
+        const release = await mutex.acquire()
 
-      try {
-        const refreshToken = localStorage.getItem('refreshToken')
+        try {
+          const refreshToken = localStorage.getItem('refreshToken')
 
-        /* Send refreshToken request */
-        const refreshResult = (await baseQuery(
-          {
-            headers: { Authorization: `Bearer ${refreshToken}` },
-            method: 'POST',
-            url: '/v2/auth/refresh-token',
-          },
-          api,
-          extraOptions
-        )) as any
+          /* Send refreshToken request */
+          const refreshResult = (await baseQuery(
+            {
+              headers: { Authorization: `Bearer ${refreshToken}` },
+              method: 'POST',
+              url: '/v2/auth/refresh-token',
+            },
+            api,
+            extraOptions
+          )) as any
 
-        if (refreshResult.data) {
-          /* success case -> save new accessToken and refreshToken for further use in requests */
-          localStorage.setItem('accessToken', refreshResult.data.accessToken.trim())
-          localStorage.setItem('refreshToken', refreshResult.data.refreshToken.trim())
-          /* and retry the initial query */
-          result = await baseQuery(args, api, extraOptions)
-        } else {
-          localStorage.removeItem('accessToken')
-          localStorage.removeItem('refreshToken')
+          if (refreshResult.data) {
+            /* success case -> save new accessToken and refreshToken for further use in requests */
+            localStorage.setItem('accessToken', refreshResult.data.accessToken.trim())
+            localStorage.setItem('refreshToken', refreshResult.data.refreshToken.trim())
+            /* and retry the initial query */
+            result = await baseQuery(args, api, extraOptions)
+          } else {
+            localStorage.removeItem('accessToken')
+            localStorage.removeItem('refreshToken')
+          }
+        } finally {
+          // release must be called once the mutex should be released again.
+          release()
         }
-      } finally {
-        // release must be called once the mutex should be released again.
-        release()
+      } else {
+        // wait until the mutex is available without locking it
+        await mutex.waitForUnlock()
+        result = await baseQuery(args, api, extraOptions)
       }
-    } else {
-      // wait until the mutex is available without locking it
-      await mutex.waitForUnlock()
-      result = await baseQuery(args, api, extraOptions)
+    } else if (result.error.status in ERROR_STATUS) {
+      const errorMessage = getErrorMessage(result.error)
+
+      if (errorMessage) {
+        toast.error(errorMessage)
+      }
     }
   }
 

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { SignUpForm, SignUpFormValues } from '@/components/forms'
 import { CheckEmail } from '@/components/ui/layout-components'
@@ -14,6 +15,12 @@ export const SignUpPage = () => {
     setEmail(formData.email)
     createUser(formData)
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.warning(`Verification request sent to ${email}`)
+    }
+  }, [isSuccess, email])
 
   return (
     <Page load={isLoading}>
