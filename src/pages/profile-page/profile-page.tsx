@@ -1,6 +1,6 @@
 import { PersonalInfoForm } from '@/components/forms'
 import { PersonalInfo } from '@/components/ui/layout-components'
-import { useProfile } from '@/shared/hooks'
+import { useProfileData } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
@@ -18,7 +18,7 @@ export const ProfilePage = () => {
     logoutHandler,
     resendEmailConfirmationRequestHandler,
     updateAvatarHandler,
-  } = useProfile()
+  } = useProfileData()
 
   if (!data) {
     return <Page />

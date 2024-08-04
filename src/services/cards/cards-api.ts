@@ -87,7 +87,21 @@ export const cardsApi = flashcardsApi.injectEndpoints({
         },
       }),
       saveGradeOfCard: builder.mutation<Card, SaveGradeArgs>({
-        invalidatesTags: ['Cards'],
+        async onQueryStarted(args, { dispatch, queryFulfilled }) {
+          try {
+            const res = await queryFulfilled
+
+            if (res.data) {
+              dispatch(
+                cardsApi.util.updateQueryData('getRandomCard', { id: args.id }, draft => {
+                  Object.assign(draft, res.data)
+                })
+              )
+            }
+          } catch (e) {
+            console.warn(e)
+          }
+        },
         query: ({ id, ...body }) => {
           return {
             body,

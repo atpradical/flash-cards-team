@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, generatePath, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import { LearnCard } from '@/components/ui/layout-components'
 import { Button } from '@/components/ui/primitives'
 import { cn } from '@/pages/card-page/card-page.styles'
-import {
-  GetRandomCardToLearnResponse,
-  useGetDeckQuery,
-  useGetRandomCardQuery,
-  useSaveGradeOfCardMutation,
-} from '@/services'
+import { useGetDeckQuery, useGetRandomCardQuery, useSaveGradeOfCardMutation } from '@/services'
 import { PATH } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -24,14 +19,7 @@ export const CardPage = () => {
     id: deckId ?? '',
   })
 
-  const [cardToLearn, setCardToLearn] = useState(randomCard)
   const [showAnswer, setShowAnswer] = useState(false)
-
-  useEffect(() => {
-    if (randomCard) {
-      setCardToLearn(randomCard)
-    }
-  }, [randomCard])
 
   const [saveGrade, { isLoading: isSaveGradeLoading }] = useSaveGradeOfCardMutation()
 
@@ -40,7 +28,6 @@ export const CardPage = () => {
 
     if (result) {
       setShowAnswer(false)
-      setCardToLearn(result.data)
     }
   }
 
@@ -55,8 +42,8 @@ export const CardPage = () => {
         </Button>
         <FlexContainer jc={'center'}>
           <LearnCard
-            card={cardToLearn ?? ({} as GetRandomCardToLearnResponse)}
-            deckName={deck?.name ?? ''}
+            card={randomCard}
+            deckName={deck?.name}
             onNextQuestion={nextQuestionHandler}
             onShowAnswer={setShowAnswer}
             showAnswer={showAnswer}

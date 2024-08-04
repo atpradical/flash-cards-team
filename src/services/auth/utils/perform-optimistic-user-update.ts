@@ -13,7 +13,6 @@ export function performOptimisticUserUpdate({
 }: PerformOptimisticUserUpdate) {
   const cachedUserArgsForQuery = authApi.util.selectCachedArgsForQuery(getState(), 'me')
 
-  debugger
   const patchUserResults: any[] = []
   const avatarImg = args.avatarURL
 
