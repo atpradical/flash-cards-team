@@ -85,11 +85,13 @@ export const DeckPage = () => {
             />
           </>
         )}
-        <CardDialogForm
-          onOpenChange={setShowCreateNewCardDialogForm}
-          onSearchClear={clearSearchHandler}
-          open={showCreateNewCardDialogForm}
-        />
+        {showCreateNewCardDialogForm && (
+          <CardDialogForm
+            onOpenChange={setShowCreateNewCardDialogForm}
+            onSearchClear={clearSearchHandler}
+            open={showCreateNewCardDialogForm}
+          />
+        )}
       </FlexContainer>
     </Page>
   )
