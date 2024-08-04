@@ -1,4 +1,5 @@
 export * from './use-auth-context'
+export * from './use-card-page-data'
 export * from './use-current-screen-width'
 export * from './use-deck-list-page-data'
 export * from './use-deck-list-table-data'
