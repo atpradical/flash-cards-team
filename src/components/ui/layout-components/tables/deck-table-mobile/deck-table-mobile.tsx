@@ -81,13 +81,15 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
           </TableContainer>
         )
       })}
-      <CardDialogForm
-        action={DIALOG_ACTION.UPDATE}
-        card={cardData}
-        key={cardData?.id}
-        onOpenChange={setShowUpdateCardDialogForm}
-        open={showUpdateCardDialogForm}
-      />
+      {showUpdateCardDialogForm && (
+        <CardDialogForm
+          action={DIALOG_ACTION.UPDATE}
+          card={cardData}
+          key={cardData?.id}
+          onOpenChange={setShowUpdateCardDialogForm}
+          open={showUpdateCardDialogForm}
+        />
+      )}
       <DeleteDialogForm
         entity={DIALOG_ENTITY.CARD}
         entityId={cardId}

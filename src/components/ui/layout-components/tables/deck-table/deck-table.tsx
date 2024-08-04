@@ -100,13 +100,15 @@ export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>{TableContent}</TableBody>
-      <CardDialogForm
-        action={DIALOG_ACTION.UPDATE}
-        card={cardData}
-        key={cardData?.id}
-        onOpenChange={setShowUpdateCardDialogForm}
-        open={showUpdateCardDialogForm}
-      />
+      {showUpdateCardDialogForm && (
+        <CardDialogForm
+          action={DIALOG_ACTION.UPDATE}
+          card={cardData}
+          key={cardData?.id}
+          onOpenChange={setShowUpdateCardDialogForm}
+          open={showUpdateCardDialogForm}
+        />
+      )}
       <DeleteDialogForm
         entity={DIALOG_ENTITY.CARD}
         entityId={cardId}

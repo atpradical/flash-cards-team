@@ -76,13 +76,15 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
           </TableContainer>
         )
       })}
-      <DeckDialogForm
-        action={DIALOG_ACTION.UPDATE}
-        deck={deckData}
-        key={deckData?.id}
-        onOpenChange={setShowEditDeckDialog}
-        open={showEditDeckDialog}
-      />
+      {showEditDeckDialog && (
+        <DeckDialogForm
+          action={DIALOG_ACTION.UPDATE}
+          deck={deckData}
+          key={deckData?.id}
+          onOpenChange={setShowEditDeckDialog}
+          open={showEditDeckDialog}
+        />
+      )}
       <DeleteDialogForm
         entity={DIALOG_ENTITY.DECK}
         entityId={deckId}
