@@ -65,11 +65,13 @@ export const DeckListPage = () => {
             pageSize={itemsPerPage}
             totalCount={decks.pagination.totalItems}
           />
-          <DeckDialogForm
-            clearFilters={clearFiltersHandler}
-            onOpenChange={setShowAddDeckDialog}
-            open={showAddDeckDialog}
-          />
+          {showAddDeckDialog && (
+            <DeckDialogForm
+              clearFilters={clearFiltersHandler}
+              onOpenChange={setShowAddDeckDialog}
+              open={showAddDeckDialog}
+            />
+          )}
         </FlexContainer>
       )}
     </Page>

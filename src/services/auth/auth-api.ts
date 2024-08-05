@@ -116,6 +116,7 @@ export const authApi = flashcardsApi.injectEndpoints({
         }),
       }),
       updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
+        invalidatesTags: ['Me'],
         async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
           const { patchUserResults } = performOptimisticUserUpdate({
             args,

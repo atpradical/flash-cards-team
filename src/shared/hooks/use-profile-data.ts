@@ -10,7 +10,7 @@ import {
 } from '@/services'
 import { combineLoadingStates } from '@/shared/utils'
 
-export const useProfile = () => {
+export const useProfileData = () => {
   const [editMode, setEditMode] = useState(false)
 
   const { data, isLoading } = useMeQuery()

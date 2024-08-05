@@ -3,7 +3,6 @@ export enum PATH {
   CONFIRM_EMAIL = '/confirm-email/:token',
   DECK = '/deck/:deckId',
   DECK_LIST = '/deck-list',
-  ERROR_404 = '/404',
   PROFILE = '/profile',
   PWD_RECOVERY = '/password-recovery',
   PWD_RESET = '/reset-password/:token',

@@ -77,14 +77,14 @@ export const Actions = ({
   ]
 
   return isMobile ? (
-    <FlexContainer fw={'wrap'}>
-      {getActionButtons(actionButtons, variant).map(el => {
-        if (isEmptyDeck && el.label === ACTIONS.LEARN) {
-          return null
-        }
+    <PositionCell>
+      <FlexContainer fw={'wrap'}>
+        {getActionButtons(actionButtons, variant).map(el => {
+          if (isEmptyDeck && el.label === ACTIONS.LEARN) {
+            return null
+          }
 
-        return (
-          <PositionCell className={cn.tableCell} key={el.label}>
+          return (
             <Button
               as={el.path ? Link : 'button'}
               className={cn.buttonMobile}
@@ -97,10 +97,10 @@ export const Actions = ({
             >
               {el.icon}
             </Button>
-          </PositionCell>
-        )
-      })}
-    </FlexContainer>
+          )
+        })}
+      </FlexContainer>
+    </PositionCell>
   ) : (
     <FlexContainer gap={'10px'} {...restFlexContainer}>
       {getActionButtons(actionButtons, variant).map(el => {

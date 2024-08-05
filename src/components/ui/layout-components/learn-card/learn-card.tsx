@@ -6,8 +6,8 @@ import { LearnCardAnswer as Answer, LearnCardQuestion as Question } from './cont
 import { cn } from './learn-card.styles'
 
 type LearnCardProps = {
-  card: GetRandomCardToLearnResponse
-  deckName: string
+  card?: GetRandomCardToLearnResponse
+  deckName?: string
   onNextQuestion: (cardId: string, grade: number) => void
   onShowAnswer: (show: boolean) => void
   showAnswer: boolean
@@ -20,6 +20,10 @@ export const LearnCard = ({
   onShowAnswer,
   showAnswer,
 }: LearnCardProps) => {
+  if (!card) {
+    return null
+  }
+
   const { answer, answerImg, id: cardId, question, questionImg, shots } = card
 
   const showAnswerHandler = () => {
@@ -30,7 +34,7 @@ export const LearnCard = ({
     <Card className={cn.container}>
       <FlexContainer ai={'flex-start'} fd={'column'} gap={'10px'}>
         <Typography as={'h1'} className={cn.title} variant={'h1'}>
-          Learn &ldquo;{deckName}&rdquo;
+          Learn &ldquo;{deckName ?? ''}&rdquo;
         </Typography>
         <Question question={question} questionImg={questionImg} shots={shots} />
         {showAnswer ? (
