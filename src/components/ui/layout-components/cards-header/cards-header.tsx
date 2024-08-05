@@ -15,14 +15,14 @@ type CardsHeaderProps = {
   userData?: User
 } & Omit<ComponentPropsWithoutRef<typeof Header>, 'load'>
 
-export const CardsHeader = ({ isAuth, userData, ...propsHeader }: CardsHeaderProps) => {
+export const CardsHeader = ({ isAuth, userData, ...props }: CardsHeaderProps) => {
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE
 
   const isMobile = currentScreenWidth <= breakpoint
 
   return (
-    <Header {...propsHeader}>
+    <Header {...props}>
       <FlexContainer jc={'space-between'} pd={'0 20px'}>
         <Button as={Link} title={'Return to main page'} to={PATH.DECK_LIST} variant={'icon'}>
           {isMobile ? <IncubatorLogoSmall /> : <IncubatorLogo />}

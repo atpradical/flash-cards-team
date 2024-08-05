@@ -70,7 +70,7 @@ const Item = React.forwardRef<DropdownMenuItemRef, DropdownMenuItemProps>(
   ({ className, ...rest }, ref) => {
     const cn = clsx(s.item, className)
 
-    return <DropdownMenuPrimitive.Item className={cn} ref={ref} {...rest} />
+    return <DropdownMenuPrimitive.Item asChild className={cn} ref={ref} {...rest} />
   }
 )
 

@@ -28,5 +28,8 @@
 .option {
   display: flex;
   gap: 6px;
+  justify-content: flex-start;
+
+  font-weight: var(--font-weight-regular);
   text-decoration: none;
 }
