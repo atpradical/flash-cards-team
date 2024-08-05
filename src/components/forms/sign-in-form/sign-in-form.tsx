@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
@@ -13,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 type SignInFormProps = {
+  isError: boolean
   onSubmit: (data: LoginFormValues) => void
 }
 
@@ -24,8 +26,8 @@ const SignInFormSchema = z.object({
 
 export type LoginFormValues = z.infer<typeof SignInFormSchema>
 
-export const SignInForm = ({ onSubmit }: SignInFormProps) => {
-  const { control, handleSubmit } = useForm<LoginFormValues>({
+export const SignInForm = ({ isError, onSubmit }: SignInFormProps) => {
+  const { control, handleSubmit, setError } = useForm<LoginFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -34,6 +36,14 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
     mode: 'onSubmit',
     resolver: zodResolver(SignInFormSchema),
   })
+
+  // todo: need review check
+  useEffect(() => {
+    if (isError) {
+      setError('email', {})
+      setError('password', {})
+    }
+  }, [isError, setError])
 
   const formHandler = handleSubmit(data => {
     onSubmit(data)

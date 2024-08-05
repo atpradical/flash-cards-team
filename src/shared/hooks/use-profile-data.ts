@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { PersonalInfoFromValues } from '@/components/forms'
 import {
@@ -59,12 +60,17 @@ export const useProfileData = () => {
     setEditMode(false)
   }
 
-  const deleteUserAccountHandler = () => {
-    deleteUser()
+  const deleteUserAccountHandler = async () => {
+    await deleteUser().unwrap()
+    toast.success(`user "${data?.name}" deleted`)
   }
 
   const resendEmailConfirmationRequestHandler = (userId: string) => {
     resendVerification({ userId })
+      .unwrap()
+      .then(() => {
+        toast.warning(`Verification request sent to ${data?.email}`)
+      })
   }
 
   return {

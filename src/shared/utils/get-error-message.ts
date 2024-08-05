@@ -1,10 +1,12 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
+export type FormErrorData = { field: string; message: string }
+
 export type ServerResponseError = {
-  errorMessages: string[]
+  errorMessages: FormErrorData[]
 }
 
-type ComponentResponseErrorData = {
+export type ServerErrorData = {
   message: string
   path: string
   statusCode: number
@@ -12,18 +14,35 @@ type ComponentResponseErrorData = {
 }
 
 export type CustomerError = {
-  data: ComponentResponseErrorData | ServerResponseError
+  data: ServerErrorData | ServerResponseError
   status: number
 }
 
-export function getErrorMessage(error: unknown) {
+export function getErrorMessageData(error: unknown) {
   if (isFetchBaseQueryError(error)) {
     if ('data' in error) {
       const errorData = error as CustomerError
 
       if ('errorMessages' in errorData.data) {
-        return errorData.data.errorMessages.join(' / ')
+        if (Array.isArray(errorData.data.errorMessages)) {
+          if (
+            errorData.data.errorMessages.length > 0 &&
+            typeof errorData.data.errorMessages[0] === 'string'
+          ) {
+            // Server found error while processing request because of user data in form (400 status) - return joined string
+            // example: errorMessages: ["Email already exists"] -> "Email already exists"
+            return errorData.data.errorMessages.join(' / ')
+          } else if (
+            errorData.data.errorMessages.length > 0 &&
+            typeof errorData.data.errorMessages[0] === 'object'
+          ) {
+            // Server found error in user form data, error contains array of { field, message } elements - return array
+            // example: errorMessages : [{field: "email", message: "email must be an email"}]
+            return errorData.data.errorMessages
+          }
+        }
       } else if ('message' in errorData.data) {
+        // Server found error while processing request because of user data in form (401 & 500 status) - return string
         return errorData.data.message
       }
     }
@@ -31,6 +50,7 @@ export function getErrorMessage(error: unknown) {
     return error.message
   }
 
+  // any other errors
   return JSON.stringify(error)
 }
 

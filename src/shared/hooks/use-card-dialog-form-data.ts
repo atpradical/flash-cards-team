@@ -1,12 +1,19 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { CardDialogFormScheme, CardDialogFormValues } from '@/components/forms'
 import { Card, useCreateCardMutation, useUpdateCardMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
+import { useFormErrors } from '@/shared/hooks/use-form-errors'
 import { Nullable } from '@/shared/types/common'
-import { combineLoadingStates, revokeImageUrl } from '@/shared/utils'
+import {
+  FormErrorData,
+  combineLoadingStates,
+  getErrorMessageData,
+  revokeImageUrl,
+} from '@/shared/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 type UseCardDialogFormData = {
@@ -22,6 +29,7 @@ export const useCardDialogFormData = ({
   onOpenChange,
   onSearchClear,
 }: UseCardDialogFormData) => {
+  const [formErrors, setFromErrors] = useState<Nullable<FormErrorData[] | string>>(null)
   const [questionCover, setQuestionCover] = useState<Nullable<File | string>>(
     card?.questionImg ?? null
   )
@@ -47,7 +55,6 @@ export const useCardDialogFormData = ({
 
   useEffect(() => {
     if (answerCover && typeof answerCover !== 'string') {
-      debugger
       const newPreview = URL.createObjectURL(answerCover)
 
       revokeImageUrl(answerPreview)
@@ -66,7 +73,7 @@ export const useCardDialogFormData = ({
   const [createCard, { isLoading: isLoadingCreateCard }] = useCreateCardMutation()
   const [updateCard, { isLoading: isLoadingUpdateCard }] = useUpdateCardMutation()
 
-  const { control, handleSubmit, reset } = useForm<CardDialogFormValues>({
+  const { control, handleSubmit, reset, setError } = useForm<CardDialogFormValues>({
     defaultValues: {
       answer: card?.answer,
       question: card?.question,
@@ -75,36 +82,46 @@ export const useCardDialogFormData = ({
     resolver: zodResolver(CardDialogFormScheme),
   })
 
-  const formHandler = handleSubmit(formData => {
+  const formHandler = handleSubmit(async formData => {
+    setFromErrors(null)
     const finalFormData = {
       ...formData,
       ...(typeof answerCover === 'string' ? {} : { answerImg: answerCover }),
       ...(typeof questionCover === 'string' ? {} : { questionImg: questionCover }),
     }
 
-    if (action === 'CREATE') {
-      createCard({
-        ...finalFormData,
-        deckId: deckId ?? '',
-      }).then(() => {
+    const successRequestHandler = () => {
+      setQuestionCover(null)
+      setAnswerCover(null)
+      cancelFormHandler()
+      reset()
+      toast.success(`Card successfully ${action === DIALOG_ACTION.CREATE ? 'created' : 'updated'}`)
+    }
+
+    try {
+      if (action === 'CREATE') {
+        await createCard({
+          ...finalFormData,
+          deckId: deckId ?? '',
+        }).unwrap()
         onSearchClear?.()
-        setQuestionCover(null)
-        setAnswerCover(null)
-        cancelFormHandler()
-        reset()
-      })
-    } else {
-      updateCard({
-        ...finalFormData,
-        id: card?.id ?? '',
-      }).then(() => {
-        setQuestionCover(null)
-        setAnswerCover(null)
-        cancelFormHandler()
-        reset()
-      })
+        successRequestHandler()
+      } else {
+        await updateCard({
+          ...finalFormData,
+          id: card?.id ?? '',
+        }).unwrap()
+        successRequestHandler()
+      }
+    } catch (e) {
+      const errors = getErrorMessageData(e)
+
+      setFromErrors(errors)
     }
   })
+
+  // todo: need review check
+  useFormErrors({ errors: formErrors, fields: ['answer', 'question'], setError })
 
   const cancelFormHandler = () => {
     reset()

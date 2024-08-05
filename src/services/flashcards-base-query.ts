@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify'
 
-import { ERROR_STATUS } from '@/shared/enums'
-import { getErrorMessage } from '@/shared/utils'
+import { router } from '@/app'
+import { ERROR_STATUS, SERVER_ERROR_STATUS } from '@/shared/enums'
+import { getErrorMessageData } from '@/shared/utils'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
@@ -78,11 +79,13 @@ export const baseQueryWithReauth: BaseQueryFn<
         result = await baseQuery(args, api, extraOptions)
       }
     } else if (result.error.status in ERROR_STATUS) {
-      const errorMessage = getErrorMessage(result.error)
+      const errorMessage = getErrorMessageData(result.error)
 
-      if (errorMessage) {
+      if (typeof errorMessage === 'string') {
         toast.error(errorMessage)
       }
+    } else if (result.error.status in SERVER_ERROR_STATUS) {
+      await router.navigate('/500')
     }
   }
 

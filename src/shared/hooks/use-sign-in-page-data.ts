@@ -5,17 +5,19 @@ import { toast } from 'react-toastify'
 import { LoginFormValues } from '@/components/forms'
 import { useLoginMutation } from '@/services'
 import { PATH } from '@/shared/enums'
-import { getErrorMessage } from '@/shared/utils/get-error-message'
+import { getErrorMessageData } from '@/shared/utils/get-error-message'
 
 export const useSignInPageData = () => {
   const navigate = useNavigate()
-  const [login, { error, isLoading, isSuccess }] = useLoginMutation()
+  const [login, { error, isError, isLoading, isSuccess }] = useLoginMutation()
 
   useEffect(() => {
     if (error) {
-      const message = getErrorMessage(error)
+      const errorMessage = getErrorMessageData(error)
 
-      toast.error(message)
+      if (typeof errorMessage === 'string') {
+        toast.error(errorMessage)
+      }
     }
 
     if (isSuccess) {
@@ -27,5 +29,5 @@ export const useSignInPageData = () => {
     await login(formData)
   }
 
-  return { isLoading, signInHandler }
+  return { isError, isLoading, signInHandler }
 }
