@@ -14,21 +14,16 @@
 }
 
 .buttonMobile {
+  flex: 1;
   padding: 8px 24px;
   color: var(--color-light-100);
-}
-
-.favorite {
-  color: var(--color-danger-300);
-}
-
-.tableCell {
-  flex: 1;
-  padding: 0;
-  border: 1px solid var(--color-dark-300);
-  border-radius: var(--border-radius-xs);
+  border: 1px solid var(--color-dark-500);
 
   &:active {
     background-color: var(--color-light-900);
   }
+}
+
+.favorite {
+  color: var(--color-danger-300);
 }

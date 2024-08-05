@@ -1,7 +1,3 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
-
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import {
   DialogBody as Body,
@@ -9,14 +5,12 @@ import {
   Dialog,
   Typography,
 } from '@/components/ui/primitives'
-import { Card, useCreateCardMutation, useUpdateCardMutation } from '@/services'
+import { Card } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
+import { useCardDialogFormData } from '@/shared/hooks'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
-import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
-import { revokeImageUrl } from '@/shared/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import {
@@ -25,12 +19,12 @@ import {
   DialogFormUploadImage as UploadImage,
 } from '../container-components'
 
-const CardDialogFormScheme = z.object({
+export const CardDialogFormScheme = z.object({
   answer: cardAnswerScheme,
   question: cardQuestionScheme,
 })
 
-type CardDialogFormValues = z.infer<typeof CardDialogFormScheme>
+export type CardDialogFormValues = z.infer<typeof CardDialogFormScheme>
 
 type CardDialogFormProps = {
   action?: DIALOG_ACTION
@@ -47,122 +41,24 @@ export const CardDialogForm = ({
   onSearchClear,
   open,
 }: CardDialogFormProps) => {
-  const [questionCover, setQuestionCover] = useState<Nullable<File | string>>(
-    card?.questionImg ?? null
-  )
-  const [answerCover, setAnswerCover] = useState<Nullable<File | string>>(card?.answerImg ?? null)
-  const [questionPreview, setQuestionPreview] = useState<Nullable<string>>(card?.questionImg ?? '')
-  const [answerPreview, setAnswerPreview] = useState<Nullable<string>>(card?.answerImg ?? '')
-
-  useEffect(() => {
-    if (questionCover && typeof questionCover !== 'string') {
-      const newPreview = URL.createObjectURL(questionCover)
-
-      setAnswerPreview(newPreview)
-      setQuestionPreview(newPreview)
-
-      return () => URL.revokeObjectURL(newPreview)
-    }
-
-    // 'previews' mustn't be added to avoid cyclical dependence
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questionCover])
-
-  useEffect(() => {
-    if (answerCover && typeof answerCover !== 'string') {
-      const newPreview = URL.createObjectURL(answerCover)
-
-      revokeImageUrl(answerPreview)
-      setAnswerPreview(newPreview)
-
-      return () => URL.revokeObjectURL(newPreview)
-    }
-    // 'previews' mustn't be added to avoid cyclical dependence
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerCover])
-
-  const title = action === DIALOG_ACTION.CREATE ? 'Create Card' : 'Change Card'
-
-  const { deckId } = useParams()
-
-  const [createCard, { isLoading: isLoadingCreateCard }] = useCreateCardMutation()
-  const [updateCard, { isLoading: isLoadingUpdateCard }] = useUpdateCardMutation()
-
-  const { control, handleSubmit, reset } = useForm<CardDialogFormValues>({
-    defaultValues: {
-      answer: card?.answer,
-      question: card?.question,
-    },
-    mode: 'onSubmit',
-    resolver: zodResolver(CardDialogFormScheme),
-  })
-
-  const formHandler = handleSubmit(formData => {
-    const finalFormData = {
-      ...formData,
-      ...(typeof answerCover === 'string' ? {} : { answerImg: answerCover }),
-      ...(typeof questionCover === 'string' ? {} : { questionImg: questionCover }),
-    }
-
-    if (action === 'CREATE') {
-      createCard({
-        ...finalFormData,
-        deckId: deckId ?? '',
-      }).then(() => {
-        onSearchClear?.()
-        setQuestionCover(null)
-        setAnswerCover(null)
-        cancelFormHandler()
-        reset()
-      })
-    } else {
-      updateCard({
-        ...finalFormData,
-        id: card?.id ?? '',
-      }).then(() => {
-        setQuestionCover(null)
-        setAnswerCover(null)
-        cancelFormHandler()
-        reset()
-      })
-    }
-  })
-
-  const cancelFormHandler = () => {
-    reset()
-    onOpenChange(false)
-  }
-
-  const uploadQuestionImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
-
-      setQuestionCover(file)
-    }
-  }
-
-  const deleteQuestionImageHandler = () => {
-    setQuestionCover(null)
-  }
-
-  const uploadAnswerImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
-
-      setAnswerCover(file)
-    }
-  }
-
-  const deleteAnswerImageHandler = () => {
-    setAnswerCover(null)
-  }
-
-  const isLoading = isLoadingCreateCard || isLoadingUpdateCard
+  const {
+    answerPreview,
+    cancelFormHandler,
+    control,
+    deleteAnswerImageHandler,
+    deleteQuestionImageHandler,
+    formHandler,
+    isLoad,
+    questionPreview,
+    title,
+    uploadAnswerImageHandler,
+    uploadQuestionImageHandler,
+  } = useCardDialogFormData({ action, card, onOpenChange, onSearchClear })
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <Content className={cn.container}>
-        <Header load={isLoading} title={title} />
+        <Header load={isLoad} title={title} />
         <Body>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'14px'}>

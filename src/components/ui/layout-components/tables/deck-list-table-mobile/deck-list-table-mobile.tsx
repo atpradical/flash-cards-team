@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components'
-import { Button, TableContainer, TableHeader, TableRow } from '@/components/ui/primitives'
+import { Button, TableBody, TableContainer, TableRow } from '@/components/ui/primitives'
 import { Deck, User } from '@/services'
 import { DIALOG_ACTION, DIALOG_ENTITY, VARIANT } from '@/shared/enums'
 import { useDeckListData } from '@/shared/hooks'
@@ -10,7 +10,7 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 
 import s from './deck-list-table-mobile.module.scss'
 
-import { HeaderCell, PositionCell } from '../container-components'
+import { PositionCell } from '../container-components'
 
 type DeckListTableMobileProps = {
   decks: Deck[]
@@ -30,57 +30,61 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
   } = useDeckListData(decks, user)
 
   return (
-    <TableContainer className={s.tableContainer}>
-      <FlexContainer fw={'wrap'} gap={'24px'} jc={'space-around'}>
-        {decks.map(el => {
-          const { cardsCount, cover, deckPath, isAuthor, learnDeckPath, updated } =
-            processDeckData(el)
+    <FlexContainer fw={'wrap'} gap={'24px'} jc={'space-around'}>
+      {decks.map(el => {
+        const { cardsCount, cover, deckPath, isAuthor, learnDeckPath, updated } =
+          processDeckData(el)
 
-          return (
-            <div className={s.tableItem} key={el.id}>
-              <TableHeader>
-                <TableRow>
-                  <PositionCell className={s.positionCell} image={cover} />
-                  <PositionCell className={s.positionCell} jc={'end'}>
-                    <Button as={Link} title={'Go to deck cards'} to={deckPath} variant={'link'}>
-                      {el.name}
-                    </Button>
-                  </PositionCell>
-                </TableRow>
-                <TableRow>
-                  <HeaderCell className={s.headerCell} content={'Cards'} sortable={false} />
-                  <PositionCell className={s.positionCell} content={cardsCount} jc={'end'} />
-                </TableRow>
-                <TableRow>
-                  <HeaderCell className={s.headerCell} content={'Last Updated'} sortable={false} />
-                  <PositionCell className={s.positionCell} content={updated} jc={'end'} />
-                </TableRow>
-                <TableRow>
-                  <HeaderCell className={s.headerCell} content={'Created by'} sortable={false} />
-                  <PositionCell className={s.positionCell} content={el.author.name} jc={'end'} />
-                </TableRow>
-              </TableHeader>
-              <Actions
-                id={el.id}
-                isEmptyDeck={el.cardsCount === 0}
-                isFavorite={el.isFavorite}
-                isMobile
-                onDelete={() => openDeleteDeckHandler(el.id)}
-                onEdit={() => openEditDeckHandler(el.id)}
-                onLearn={learnDeckPath}
-                variant={isAuthor ? VARIANT.ALL : VARIANT.ONLY_LEARN}
-              />
-            </div>
-          )
-        })}
-      </FlexContainer>
-      <DeckDialogForm
-        action={DIALOG_ACTION.UPDATE}
-        deck={deckData}
-        key={deckData?.id}
-        onOpenChange={setShowEditDeckDialog}
-        open={showEditDeckDialog}
-      />
+        return (
+          <TableContainer className={s.table} key={el.id}>
+            <TableBody>
+              <TableRow>
+                <PositionCell className={s.cell} image={cover} jc={'space-between'}>
+                  <Button as={Link} title={'Go to deck cards'} to={deckPath} variant={'link'}>
+                    {el.name}
+                  </Button>
+                </PositionCell>
+              </TableRow>
+              <TableRow>
+                <PositionCell className={s.cell} content={'Cards'} jc={'space-between'}>
+                  <div>{cardsCount}</div>
+                </PositionCell>
+              </TableRow>
+              <TableRow>
+                <PositionCell className={s.cell} content={'Last Updated'} jc={'space-between'}>
+                  <div>{updated}</div>
+                </PositionCell>
+              </TableRow>
+              <TableRow>
+                <PositionCell className={s.cell} content={'Created by'} jc={'space-between'}>
+                  <div>{el.author.name}</div>
+                </PositionCell>
+              </TableRow>
+              <TableRow>
+                <Actions
+                  id={el.id}
+                  isEmptyDeck={el.cardsCount === 0}
+                  isFavorite={el.isFavorite}
+                  isMobile
+                  onDelete={() => openDeleteDeckHandler(el.id)}
+                  onEdit={() => openEditDeckHandler(el.id)}
+                  onLearn={learnDeckPath}
+                  variant={isAuthor ? VARIANT.ALL : VARIANT.ONLY_LEARN}
+                />
+              </TableRow>
+            </TableBody>
+          </TableContainer>
+        )
+      })}
+      {showEditDeckDialog && (
+        <DeckDialogForm
+          action={DIALOG_ACTION.UPDATE}
+          deck={deckData}
+          key={deckData?.id}
+          onOpenChange={setShowEditDeckDialog}
+          open={showEditDeckDialog}
+        />
+      )}
       <DeleteDialogForm
         entity={DIALOG_ENTITY.DECK}
         entityId={deckId}
@@ -88,6 +92,6 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
         onOpenChange={setShowDeleteDeckDialog}
         open={showDeleteDeckDialog}
       />
-    </TableContainer>
+    </FlexContainer>
   )
 }

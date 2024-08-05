@@ -6,7 +6,6 @@ export const cn = {
   accent: clsx(s.icon, s.accent),
   avatar: s.avatar,
   bottom: s.bottom,
-  // checked: clsx(s.checked, s.icon),
   checked: s.checked,
   container: s.container,
   delete: s.delete,

@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react'
 
 import { TrashOutline } from '@/assets/icons'
 import { Button, Slider, TabSwitcher, TextField } from '@/components/ui/primitives'
+import { DEFAULT_CURRENT_PAGE } from '@/shared/constants'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth, useSearchParamUpdater } from '@/shared/hooks'
 import { Tab } from '@/shared/types/common'
@@ -45,7 +46,7 @@ export const TableFilterBar = ({
   }
 
   const tabHandler = (tab: string) => {
-    updateSearchParam({ currentPage: 1, tab })
+    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, tab })
   }
 
   return (
