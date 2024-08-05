@@ -5,7 +5,11 @@ export const nameScheme = z
   .min(3, "Name length can't be less than 3 characters")
   .max(30, "Name length can't be more than 30 characters")
 
-export const emailSchema = z.string().email('Please enter a valid email address.').toLowerCase()
+export const emailSchema = z
+  .string()
+  .email('Please enter a valid email address.')
+  .min(5, 'Email must be at least 5 characters long.')
+  .toLowerCase()
 
 export const passwordSchema = z
   .string()

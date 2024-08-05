@@ -3,7 +3,9 @@ import {
   CreateUserResponse,
   LoginArgs,
   LoginResponse,
+  RecoveryPasswordArgs,
   ResendVerifyEmailArgs,
+  ResetPasswordArgs,
   UpdateUserArgs,
   UpdateUserResponse,
   User,
@@ -11,7 +13,7 @@ import {
 } from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
 
-import { createUserHTML } from './auth-templates'
+import { createUserHTML, recoveryPasswordHTML } from './auth-templates'
 
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -71,6 +73,20 @@ export const authApi = flashcardsApi.injectEndpoints({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
+      recoveryPassword: builder.mutation<void, RecoveryPasswordArgs>({
+        // invalidatesTags: ['Me'],
+        query: ({ email }) => {
+          return {
+            body: {
+              email,
+              html: recoveryPasswordHTML,
+              subject: 'recovery password',
+            },
+            method: 'POST',
+            url: '/v1/auth/recover-password',
+          }
+        },
+      }),
       resendVerifyEmail: builder.mutation<void, ResendVerifyEmailArgs>({
         // invalidatesTags: ['Me'],?
         query: ({ userId }) => {
@@ -85,6 +101,16 @@ export const authApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
+      resetPassword: builder.mutation<void, ResetPasswordArgs>({
+        // invalidatesTags: ['Me'],
+        query: ({ password, token }) => {
+          return {
+            body: { password },
+            method: 'POST',
+            url: `/v1/auth/reset-password/${token}`,
+          }
+        },
+      }),
       updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
         invalidatesTags: ['Me'],
         query: ({ avatar, name }) => {
@@ -94,7 +120,9 @@ export const authApi = flashcardsApi.injectEndpoints({
             formData.append('name', name)
           }
 
-          formData.append('avatar', avatar ?? '')
+          if (avatar !== undefined) {
+            formData.append('avatar', avatar)
+          }
 
           return {
             body: formData,
@@ -103,7 +131,7 @@ export const authApi = flashcardsApi.injectEndpoints({
           }
         },
       }),
-      verifyEmail: builder.mutation<any, VerifyArgs>({
+      verifyEmail: builder.mutation<void, VerifyArgs>({
         invalidatesTags: ['Me'],
         query: body => {
           return {
@@ -124,7 +152,9 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  useRecoveryPasswordMutation,
   useResendVerifyEmailMutation,
+  useResetPasswordMutation,
   useUpdateUserMutation,
   useVerifyEmailMutation,
 } = authApi

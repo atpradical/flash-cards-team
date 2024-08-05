@@ -12,7 +12,7 @@ import { ConfirmEmailPage } from '@/pages/confirm-email-page'
 import { DeckListPage } from '@/pages/deck-list-page'
 import { DeckPage } from '@/pages/deck-page'
 import { PasswordRecoveryPage } from '@/pages/password-recovery-page'
-import { ResetPassword } from '@/pages/password-reset'
+import { ResetPasswordPage } from '@/pages/password-reset'
 import { ProfilePage } from '@/pages/profile-page'
 import { SignInPage } from '@/pages/sign-in-page'
 import { SignUpPage } from '@/pages/sign-up-page'
@@ -37,7 +37,7 @@ const publicRoutes: RouteObject[] = [
     path: PATH.PWD_RECOVERY,
   },
   {
-    element: <ResetPassword />,
+    element: <ResetPasswordPage />,
     path: PATH.PWD_RESET,
   },
   {

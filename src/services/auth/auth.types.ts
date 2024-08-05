@@ -42,3 +42,9 @@ export type UpdateUserArgs = {
 
 export type ResendVerifyEmailArgs = { userId: string }
 export type VerifyArgs = { code: string }
+
+export type RecoveryPasswordArgs = Pick<User, 'email'>
+
+export type ResetPasswordArgs = {
+  token: string
+} & Pick<LoginArgs, 'password'>

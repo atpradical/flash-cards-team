@@ -16,7 +16,7 @@ const CreateNewPasswordSchema = z.object({
   password: passwordSchema,
 })
 
-type FormValues = z.infer<typeof CreateNewPasswordSchema>
+export type FormValues = z.infer<typeof CreateNewPasswordSchema>
 
 export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) => {
   const { control, handleSubmit } = useForm<FormValues>({

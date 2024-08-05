@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { cn } from '@/components/forms/forgot-password-form/forgot-password-form.styles'
@@ -14,7 +14,7 @@ const ForgotPasswordScheme = z.object({
   email: emailSchema,
 })
 
-type ForgotPasswordFormValues = z.infer<typeof ForgotPasswordScheme>
+export type ForgotPasswordFormValues = z.infer<typeof ForgotPasswordScheme>
 
 type ForgotPasswordFormProps = {
   onSubmit: (data: ForgotPasswordFormValues) => void
@@ -25,8 +25,16 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
     mode: 'onSubmit',
     resolver: zodResolver(ForgotPasswordScheme),
   })
+
+  const emailValue = useWatch({
+    control,
+    defaultValue: '',
+    name: 'email',
+  })
+
   const formHandler = handleSubmit(data => {
     onSubmit(data)
+    console.log('ForgotPasswordForm data', data)
   })
 
   return (
@@ -46,7 +54,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
             <Typography className={cn.hint}>
               Enter your email address and we will send you further instructions
             </Typography>
-            <Button className={cn.button} fullWidth>
+            <Button className={cn.button} disabled={emailValue.length < 5} fullWidth>
               Send Instructions
             </Button>
           </FlexContainer>

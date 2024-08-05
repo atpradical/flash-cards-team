@@ -1,18 +1,34 @@
-import { ForgotPasswordForm } from '@/components/forms'
+import { useState } from 'react'
+
+import { ForgotPasswordForm, ForgotPasswordFormValues } from '@/components/forms'
+import { CheckEmail } from '@/components/ui/layout-components'
+import { useRecoveryPasswordMutation } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
 
 export const PasswordRecoveryPage = () => {
-  const foo = () => {
-    console.log('This is СheckEmail component, I need user email from RTK Query cash to display')
+  const [recoverPassword, { isLoading, isSuccess }] = useRecoveryPasswordMutation()
+  const [email, setEmail] = useState('')
+  const [forRecoveryPassword, setForRecoveryPassword] = useState(false)
 
-    return 'tes@test.com'
+  // const navigate = useNavigate()
+
+  const recoveryPasswordHandler = async ({ email }: ForgotPasswordFormValues) => {
+    setEmail(email)
+    setForRecoveryPassword(true)
+    await recoverPassword({ email })
+    // navigate(PATH.SIGN_IN)
+    console.log('recoveryPasswordHandler email', email)
   }
 
   return (
-    <Page>
+    <Page load={isLoading}>
       <FlexContainer jc={'center'} pd={'0 20px'}>
-        <ForgotPasswordForm onSubmit={foo} />
+        {isSuccess ? (
+          <CheckEmail email={email} forRecoveryPassword={forRecoveryPassword} />
+        ) : (
+          <ForgotPasswordForm onSubmit={recoveryPasswordHandler} />
+        )}
       </FlexContainer>
     </Page>
   )

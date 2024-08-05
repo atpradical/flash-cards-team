@@ -15,6 +15,7 @@ import { cn } from './check-email.styles'
 
 type CheckEmailProps = {
   email: string
+  forRecoveryPassword?: boolean
   name?: string
 }
 
@@ -22,7 +23,7 @@ const VerifyEmailCodeSchema = z.object({
   code: codeVerifySchema,
 })
 
-export const CheckEmail = ({ email }: CheckEmailProps) => {
+export const CheckEmail = ({ email, forRecoveryPassword }: CheckEmailProps) => {
   const { control, handleSubmit } = useForm<{ code: string }>({
     mode: 'onSubmit',
     resolver: zodResolver(VerifyEmailCodeSchema),
@@ -53,17 +54,19 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
         <Typography
           className={cn.reminder}
         >{`We've sent an Email with instructions to \n${email}`}</Typography>
-        <form className={cn.form} onSubmit={formHandler}>
-          <ControlledTextField
-            control={control}
-            label={'Enter code'}
-            name={'code'}
-            placeholder={'Enter your code'}
-          />
-          <Button className={cn.confirm} fullWidth variant={'secondary'}>
-            Confirm
-          </Button>
-        </form>
+        {!forRecoveryPassword && (
+          <form className={cn.form} onSubmit={formHandler}>
+            <ControlledTextField
+              control={control}
+              label={'Enter code'}
+              name={'code'}
+              placeholder={'Enter your code'}
+            />
+            <Button className={cn.confirm} fullWidth variant={'secondary'}>
+              Confirm
+            </Button>
+          </form>
+        )}
         <Button as={Link} className={cn.button} fullWidth to={PATH.SIGN_IN}>
           Back to Sign In
         </Button>

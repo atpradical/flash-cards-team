@@ -38,8 +38,10 @@
   }
 
   &:disabled {
+    cursor: not-allowed;
     color: var(--color-light-900);
     background-color: var(--color-accent-900);
+    box-shadow: none;
   }
 
   @media screen and (width <= 320px) {
