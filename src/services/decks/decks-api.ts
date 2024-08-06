@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import {
   CreateDeckArgs,
   CreateDeckResponse,
@@ -66,8 +68,8 @@ export const decksApi = flashcardsApi.injectEndpoints({
                 })
               )
             })
-          } catch (e) {
-            console.warn(JSON.stringify(e))
+          } catch {
+            toast.error('Deck creation request cancelled')
           }
         },
         query: args => {

@@ -3,12 +3,6 @@
   width: 100%;
   color: var(--color-dark-300);
 
-  &:focus-within {
-    color: var(--color-light-100);
-    border-radius: var(--border-radius-xs);
-    outline: var(--outline-width-m) solid var(--color-info-700);
-  }
-
   &:focus-visible {
     outline: none;
   }
@@ -40,8 +34,9 @@
     border: var(--border-width-s) solid var(--color-danger-300);
   }
 
-  &:focus-visible {
-    outline: none;
+  &:focus {
+    border-radius: var(--border-radius-xs);
+    outline: var(--outline-width-m) solid var(--color-info-700);
   }
 
   &:disabled {
@@ -91,6 +86,8 @@ Ensure consistent autofill styling in all states (hover, focus, active) */
   width: var(--icon-size-l);
   height: var(--icon-size-l);
   padding: var(--padding-xxs);
+
+  color: var(--color-light-100);
 
   &.disabled {
     cursor: not-allowed;

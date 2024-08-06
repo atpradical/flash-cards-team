@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>
 
 export const ForgotPasswordForm: Story = {
   args: {
+    errors: null,
     onSubmit: action('onSubmit action invoked!'),
   },
   render: args => (

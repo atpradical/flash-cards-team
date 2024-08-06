@@ -14,7 +14,7 @@ export const ExpiredLink = () => {
           Link Expired
         </Typography>
         <Typography className={s.reminder} gray variant={'body2'}>
-          The email confirmation link has expired. <br /> Please try to login.
+          The link you use is not valid any more.
         </Typography>
         <Button as={Link} fullWidth to={PATH.SIGN_IN}>
           Go to Sign In

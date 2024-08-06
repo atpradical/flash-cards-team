@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { DeleteDialogFormValues, DeleteFormScheme } from '@/components/forms'
 import { useDeleteCardMutation, useDeleteDeckMutation } from '@/services'
@@ -19,7 +20,6 @@ export const useDeleteDialogFormData = ({
 }: UseDeleteDialogFormData) => {
   const { deckId } = useParams()
   const navigate = useNavigate()
-
   const [deleteCard, { isLoading: isLoadingDeleteCard }] = useDeleteCardMutation()
   const [deleteDeck, { isLoading: isLoadingDeleteDeck }] = useDeleteDeckMutation()
 
@@ -28,18 +28,23 @@ export const useDeleteDialogFormData = ({
     resolver: zodResolver(DeleteFormScheme),
   })
 
-  const formHandler = handleSubmit(() => {
-    if (entity === DIALOG_ENTITY.CARD) {
-      deleteCard({ id: entityId }).then(() => cancelFormHandler())
-    }
-    if (entity === DIALOG_ENTITY.DECK) {
-      deleteDeck({ id: entityId }).then(() => {
-        cancelFormHandler()
+  const successRequestHandler = () => {
+    cancelFormHandler()
+    toast.success(`${entity} successfully deleted`)
+  }
 
-        if (deckId === entityId) {
-          navigate(-1)
-        }
-      })
+  const formHandler = handleSubmit(async () => {
+    if (entity === DIALOG_ENTITY.DECK) {
+      await deleteDeck({ id: entityId }).unwrap()
+      successRequestHandler()
+      if (deckId === entityId) {
+        // todo: need review check
+        return (() => navigate(-1))()
+      }
+    }
+    if (entity === DIALOG_ENTITY.CARD) {
+      await deleteCard({ id: entityId }).unwrap()
+      successRequestHandler()
     }
   })
 
