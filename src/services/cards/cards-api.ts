@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import {
   Card,
   CardId,
@@ -43,7 +45,7 @@ export const cardsApi = flashcardsApi.injectEndpoints({
               )
             })
           } catch (e) {
-            console.warn(JSON.stringify(e))
+            toast.error('Card creation request cancelled')
           }
         },
         query: ({ deckId, ...args }) => {

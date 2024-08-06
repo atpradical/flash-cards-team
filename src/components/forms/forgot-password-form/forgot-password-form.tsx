@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom'
 import { cn } from '@/components/forms/forgot-password-form/forgot-password-form.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
+import { useFormErrors } from '@/shared/hooks'
 import { emailSchema } from '@/shared/schemes'
+import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
+import { FormErrorData } from '@/shared/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -17,15 +20,19 @@ const ForgotPasswordScheme = z.object({
 export type ForgotPasswordFormValues = z.infer<typeof ForgotPasswordScheme>
 
 type ForgotPasswordFormProps = {
+  errors: Nullable<FormErrorData[]> | string
   onSubmit: (formData: ForgotPasswordFormValues) => void
 }
 
-export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
-  const { control, handleSubmit } = useForm<ForgotPasswordFormValues>({
+export const ForgotPasswordForm = ({ errors, onSubmit }: ForgotPasswordFormProps) => {
+  const { control, handleSubmit, setError } = useForm<ForgotPasswordFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(ForgotPasswordScheme),
   })
   const formHandler = handleSubmit(formData => onSubmit(formData))
+
+  // todo: need review check
+  useFormErrors({ errors, fields: ['email'], setError })
 
   return (
     <Card className={cn.container}>

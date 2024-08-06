@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom'
 import { cn } from '@/components/forms/sign-up-form/sign-up-form.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { PATH } from '@/shared/enums'
+import { useFormErrors } from '@/shared/hooks'
 import { emailSchema, nameScheme, passwordSchema } from '@/shared/schemes'
+import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
+import { FormErrorData } from '@/shared/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -18,22 +21,23 @@ const SignUpScheme = z
     password: passwordSchema,
   })
   .refine(val => val.password !== val.email, {
-    message: 'Bro... try to come up with something better than just repeating your email',
+    message: 'Password should not coincide with the email',
     path: ['password'],
   })
   .refine(val => val.password === val.confirmPassword, {
-    message: "Hey buddy, did you forget your password already? They don't match",
+    message: "Confirm password doesn't match password",
     path: ['confirmPassword'],
   })
 
 export type SignUpFormValues = z.infer<typeof SignUpScheme>
 
 type SignUpFormProps = {
+  errors: Nullable<FormErrorData[]> | string
   onSubmit: (formData: SignUpFormValues) => void
 }
 
-export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
-  const { control, handleSubmit } = useForm<SignUpFormValues>({
+export const SignUpForm = ({ errors, onSubmit }: SignUpFormProps) => {
+  const { control, handleSubmit, setError } = useForm<SignUpFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(SignUpScheme),
   })
@@ -41,6 +45,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const formHandler = handleSubmit(data => {
     onSubmit(data)
   })
+
+  // todo: need review check
+  useFormErrors({ errors, fields: ['name', 'email', 'password'], setError })
 
   return (
     <Card className={cn.container}>

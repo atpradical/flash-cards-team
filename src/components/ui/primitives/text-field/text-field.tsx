@@ -84,14 +84,18 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           {...rest}
         />
         {isPassword && !!inputValue && (
-          <Button disabled={disabled} onClick={showPasswordHandler} variant={'icon'}>
-            {inputValue && <EyeOutline className={cn.eye} />}
-            {showPassword && <EyeOffOutline className={cn.eye} />}
+          <Button
+            className={cn.eye}
+            disabled={disabled}
+            onClick={showPasswordHandler}
+            variant={'icon'}
+          >
+            {showPassword ? <EyeOffOutline /> : <EyeOutline />}
           </Button>
         )}
         {isSearch && !!inputValue && (
-          <Button onClick={clearInputHandler} variant={'icon'}>
-            <CloseOutline className={cn.icon} />
+          <Button className={cn.icon} onClick={clearInputHandler} variant={'icon'}>
+            <CloseOutline />
           </Button>
         )}
       </div>

@@ -1,4 +1,5 @@
 export * from './combine-loading-states'
 export * from './get-action-buttons.utils'
+export * from './get-error-message'
 export * from './revoke-image-url'
 export * from './truncate-string'

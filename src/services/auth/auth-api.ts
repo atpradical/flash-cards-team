@@ -54,12 +54,16 @@ export const authApi = flashcardsApi.injectEndpoints({
       }),
       login: builder.mutation<LoginResponse, LoginArgs>({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
-          const { data } = await queryFulfilled
+          try {
+            const { data } = await queryFulfilled
 
-          localStorage.setItem('accessToken', data.accessToken.trim())
-          localStorage.setItem('refreshToken', data.refreshToken.trim())
+            localStorage.setItem('accessToken', data.accessToken.trim())
+            localStorage.setItem('refreshToken', data.refreshToken.trim())
 
-          dispatch(authApi.util.invalidateTags(['Me']))
+            dispatch(authApi.util.invalidateTags(['Me']))
+          } catch (e) {
+            // error is catches in baseQueryWithReauth & sigInPage component
+          }
         },
         query: body => ({
           body,

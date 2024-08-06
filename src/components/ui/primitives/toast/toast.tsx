@@ -10,10 +10,8 @@ export const Toast = (props: ToastProps) => {
     <ToastContainer
       closeOnClick
       draggable
-      newestOnTop
       pauseOnHover
       position={'bottom-right'}
-      stacked
       theme={'dark'}
       toastClassName={s.toast}
       {...props}
