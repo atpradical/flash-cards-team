@@ -7,6 +7,7 @@ import { PATH, SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks/use-current-screen-width'
 import { useSearchParamUpdater } from '@/shared/hooks/use-search-param-updater'
 import { combineLoadingStates } from '@/shared/utils'
+import { useDebounceCallback } from 'usehooks-ts'
 
 export const useDeckPageData = () => {
   const currentScreenWidth = useCurrentScreenWidth()
@@ -55,11 +56,21 @@ export const useDeckPageData = () => {
     navigate(-1)
   }, [navigate])
 
+  const debouncedSearchHandler = useDebounceCallback((value: string) => {
+    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: value })
+  }, 500) // 500ms debounce delay
+
   const searchHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: e.currentTarget.value })
+      const searchValue = e.currentTarget.value
+
+      if (searchValue === '') {
+        updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: searchValue })
+      } else {
+        debouncedSearchHandler(searchValue)
+      }
     },
-    [updateSearchParam]
+    [debouncedSearchHandler, updateSearchParam]
   )
 
   const clearSearchHandler = useCallback(() => {

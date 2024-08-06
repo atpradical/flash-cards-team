@@ -3,6 +3,7 @@ import { ChangeEvent, useCallback, useMemo } from 'react'
 import { DEFAULT_CURRENT_PAGE } from '@/shared/constants'
 import { useSearchParamUpdater } from '@/shared/hooks/use-search-param-updater'
 import { Tab } from '@/shared/types/common'
+import { useDebounceCallback } from 'usehooks-ts'
 
 export const useTableFilterBarData = () => {
   const tabs: Tab[] = useMemo(
@@ -16,11 +17,23 @@ export const useTableFilterBarData = () => {
 
   const updateSearchParam = useSearchParamUpdater()
 
+  const debouncedSearchHandler = useDebounceCallback((value: string) => {
+    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: value })
+  }, 500) // 500ms debounce delay
+
   const searchHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: e.currentTarget.value })
+      const value = e.currentTarget.value
+
+      if (value === '') {
+        // no delay needed
+        updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: value })
+      } else {
+        // delay 500ms before search params update
+        debouncedSearchHandler(value)
+      }
     },
-    [updateSearchParam]
+    [debouncedSearchHandler, updateSearchParam]
   )
 
   const tabHandler = useCallback(
