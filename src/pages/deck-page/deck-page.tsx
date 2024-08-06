@@ -5,6 +5,7 @@ import { CardDialogForm } from '@/components/forms'
 import { DeckTable, DeckTableMobile, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Pagination, TextField } from '@/components/ui/primitives'
 import { cn } from '@/pages/deck-page/deck-page.styles'
+import { GetDeckResponse } from '@/services'
 import { useDeckPageData } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
@@ -31,13 +32,9 @@ export const DeckPage = () => {
     showCreateNewCardDialogForm,
   } = useDeckPageData()
 
-  if (!currentData || !data || !deck) {
-    return null
-  }
-
-  const cards = currentData.items ?? data.items
-  const pagination = currentData.pagination ?? data.pagination
-  const isEmpty = cards.length === 0 && !search && !isLoadingCards
+  const cards = currentData?.items ?? data?.items
+  const pagination = currentData?.pagination ?? data?.pagination
+  const isEmpty = cards?.length === 0 && !search && !isLoadingCards
 
   return (
     <Page load={isLoad}>
@@ -47,7 +44,11 @@ export const DeckPage = () => {
           Back to Decks List
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
-          <DeckTitle deck={deck} isAuthor={isAuthor} learnDeckPath={learnDeckPath} />
+          <DeckTitle
+            deck={deck ?? ({} as GetDeckResponse)}
+            isAuthor={isAuthor}
+            learnDeckPath={learnDeckPath}
+          />
           {!isEmpty && (
             <FlexContainer fd={'column'} gap={'20px'}>
               {isAuthor ? (
@@ -81,7 +82,7 @@ export const DeckPage = () => {
               className={cn.pagination}
               currentPage={currentPage}
               pageSize={itemsPerPage}
-              totalCount={pagination.totalItems}
+              totalCount={pagination?.totalItems ?? 1}
             />
           </>
         )}

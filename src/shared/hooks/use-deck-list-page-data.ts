@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { useGetDecksQuery, useGetMinMaxQuery, useMeQuery } from '@/services'
@@ -34,6 +34,7 @@ export const useDeckListPageData = () => {
     if (minMax) {
       if (sliderState[0] === 0 && sliderState[1] === 0) {
         setSliderState([minMax.min, minMax.max])
+        updateSearchParam({ max: minMax.max, min: minMax.min })
       }
       setSkip(false)
     }
@@ -41,8 +42,8 @@ export const useDeckListPageData = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minMax])
 
-  const { currentData, data, isFetching } = useGetDecksQuery(
-    {
+  const queryParams = useMemo(
+    () => ({
       authorId,
       currentPage,
       favoritedBy,
@@ -51,19 +52,25 @@ export const useDeckListPageData = () => {
       minCardsCount: min,
       name: search || undefined,
       orderBy: orderBy || undefined,
-    },
-    { skip }
+    }),
+    [authorId, currentPage, favoritedBy, itemsPerPage, max, min, search, orderBy]
   )
+
+  const { currentData, data, isFetching } = useGetDecksQuery(queryParams, { skip })
 
   const decks = currentData ?? data
 
-  const sliderRangeChangeHandler = (newRange: number[]) => {
+  const sliderRangeChangeHandler = useCallback((newRange: number[]) => {
     setSliderState(newRange)
-  }
-  const sliderValueCommitHandler = (newRange: number[]) => {
-    setSliderState(newRange)
-    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, max: newRange[1], min: newRange[0] })
-  }
+  }, [])
+
+  const sliderValueCommitHandler = useCallback(
+    (newRange: number[]) => {
+      setSliderState(newRange)
+      updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, max: newRange[1], min: newRange[0] })
+    },
+    [updateSearchParam]
+  )
 
   const clearFiltersHandler = () => {
     setSliderState([minMax.min, minMax.max])

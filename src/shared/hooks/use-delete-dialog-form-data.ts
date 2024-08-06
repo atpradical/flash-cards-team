@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -28,10 +29,14 @@ export const useDeleteDialogFormData = ({
     resolver: zodResolver(DeleteFormScheme),
   })
 
-  const successRequestHandler = () => {
+  const cancelFormHandler = useCallback(() => {
+    onOpenChange(false)
+  }, [onOpenChange])
+
+  const successRequestHandler = useCallback(() => {
     cancelFormHandler()
     toast.success(`${entity} successfully deleted`)
-  }
+  }, [entity, cancelFormHandler])
 
   const formHandler = handleSubmit(async () => {
     if (entity === DIALOG_ENTITY.DECK) {
@@ -47,10 +52,6 @@ export const useDeleteDialogFormData = ({
       successRequestHandler()
     }
   })
-
-  const cancelFormHandler = () => {
-    onOpenChange(false)
-  }
 
   const title = `Delete ${entity}`
   const isLoad = combineLoadingStates(isLoadingDeleteCard, isLoadingDeleteDeck)

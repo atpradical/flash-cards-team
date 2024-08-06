@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -17,17 +17,20 @@ export const ResetPasswordPage = () => {
 
   const [pwdReset, { isLoading }] = usePwdResetMutation()
 
-  const resetPasswordHandler = async (formData: CreateNewPasswordFormValues) => {
-    try {
-      await pwdReset({ ...formData, token }).unwrap()
-      toast.success(`Password reset successful`)
-      navigate(PATH.SIGN_IN)
-    } catch (e) {
-      const errors = getErrorMessageData(e)
+  const resetPasswordHandler = useCallback(
+    async (formData: CreateNewPasswordFormValues) => {
+      try {
+        await pwdReset({ ...formData, token }).unwrap()
+        toast.success(`Password reset successful`)
+        navigate(PATH.SIGN_IN)
+      } catch (e) {
+        const errors = getErrorMessageData(e)
 
-      setFromErrors(errors)
-    }
-  }
+        setFromErrors(errors)
+      }
+    },
+    [pwdReset, navigate, token]
+  )
 
   return (
     <Page load={isLoading}>

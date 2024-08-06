@@ -77,6 +77,13 @@ Ensure consistent autofill styling in all states (hover, focus, active) */
   -webkit-text-fill-color: var(--color-light-100);
 }
 
+.input.error:-webkit-autofill,
+.input.error:-webkit-autofill:hover,
+.input.error:-webkit-autofill:focus,
+.input.error:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-danger-300);
+}
+
 .icon {
   position: absolute;
   top: 50%;

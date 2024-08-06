@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -25,9 +25,12 @@ export const useSignInPageData = () => {
     }
   }, [error, isSuccess, navigate])
 
-  const signInHandler = async (formData: LoginFormValues) => {
-    await login(formData)
-  }
+  const signInHandler = useCallback(
+    async (formData: LoginFormValues) => {
+      await login(formData)
+    },
+    [login]
+  )
 
   return { isError, isLoading, signInHandler }
 }

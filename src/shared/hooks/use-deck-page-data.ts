@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { generatePath, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 import { useGetCardsQuery, useGetDeckQuery, useMeQuery } from '@/services'
@@ -33,30 +33,38 @@ export const useDeckPageData = () => {
     id: deckId,
   })
 
+  const queryParams = useMemo(
+    () => ({
+      currentPage,
+      deckId: deckId,
+      itemsPerPage,
+      orderBy: orderBy || undefined,
+      question: search || undefined,
+    }),
+    [currentPage, deckId, itemsPerPage, orderBy, search]
+  )
+
   const {
     currentData,
     data,
     isFetching: isFetchingCards,
     isLoading: isLoadingCards,
-  } = useGetCardsQuery({
-    currentPage,
-    deckId: deckId,
-    itemsPerPage,
-    orderBy: orderBy || undefined,
-    question: search || undefined,
-  })
+  } = useGetCardsQuery(queryParams)
 
-  const goBackHandler = () => {
+  const goBackHandler = useCallback(() => {
     navigate(-1)
-  }
+  }, [navigate])
 
-  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: e.currentTarget.value })
-  }
+  const searchHandler = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: e.currentTarget.value })
+    },
+    [updateSearchParam]
+  )
 
-  const clearSearchHandler = () => {
+  const clearSearchHandler = useCallback(() => {
     updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: undefined })
-  }
+  }, [updateSearchParam])
 
   let isAuthor = false
 

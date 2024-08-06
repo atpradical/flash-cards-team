@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -59,12 +59,17 @@ export const useDeckDialogFromData = ({
     mode: 'onSubmit',
     resolver: zodResolver(DeckDialogFormScheme),
   })
-  const onOpenChangeHandler = (open: boolean) => {
-    onOpenChange(open)
-    if (!open) {
-      reset()
-    }
-  }
+
+  const onOpenChangeHandler = useCallback(
+    (open: boolean) => {
+      onOpenChange(open)
+      if (!open) {
+        reset()
+      }
+    },
+    [onOpenChange, reset]
+  )
+
   const formHandler = handleSubmit(async formData => {
     setFromErrors(null)
 
@@ -101,22 +106,22 @@ export const useDeckDialogFromData = ({
   // todo: need review check
   useFormErrors({ errors: formErrors, fields: ['name'], setError })
 
-  const cancelFormHandler = () => {
+  const cancelFormHandler = useCallback(() => {
     reset()
     onOpenChange(false)
-  }
+  }, [reset, onOpenChange])
 
-  const uploadImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const uploadImageHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
       setCover(file)
     }
-  }
+  }, [])
 
-  const deleteImageHandler = () => {
+  const deleteImageHandler = useCallback(() => {
     setCover(null)
-  }
+  }, [])
 
   return {
     cancelFormHandler,

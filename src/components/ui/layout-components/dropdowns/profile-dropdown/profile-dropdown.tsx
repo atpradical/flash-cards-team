@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 
 import { LogOut, PersonOutline } from '@/assets/icons'
 import { Arrow, Content, Root, Trigger } from '@/components/ui/primitives'
@@ -17,7 +17,7 @@ const icons = {
   profile: <PersonOutline className={cn.icon} />,
 }
 
-export const ProfileDropdown = (props: Props) => {
+export const ProfileDropdown = memo((props: Props) => {
   const { avatar, email, name, trigger } = props
   const [logout] = useLogoutMutation()
 
@@ -36,4 +36,4 @@ export const ProfileDropdown = (props: Props) => {
       </Content>
     </Root>
   )
-}
+})

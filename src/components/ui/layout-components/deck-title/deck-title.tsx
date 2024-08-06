@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
@@ -16,19 +16,19 @@ type DeckTitleProps = {
   learnDeckPath: string
 }
 
-export const DeckTitle = ({ deck, isAuthor, learnDeckPath }: DeckTitleProps) => {
+export const DeckTitle = memo(({ deck, isAuthor, learnDeckPath }: DeckTitleProps) => {
   const [showUpdateDeckDialogForm, setShowUpdateDeckDialogForm] = useState(false)
   const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
 
   const { cover, id, name } = deck
 
-  const editHandler = () => {
+  const editHandler = useCallback(() => {
     setShowUpdateDeckDialogForm(true)
-  }
+  }, [])
 
-  const deleteHandler = () => {
+  const deleteHandler = useCallback(() => {
     setShowDeleteDeckDialogForm(true)
-  }
+  }, [])
 
   return (
     <div className={cn.container}>
@@ -60,4 +60,4 @@ export const DeckTitle = ({ deck, isAuthor, learnDeckPath }: DeckTitleProps) => 
       />
     </div>
   )
-}
+})

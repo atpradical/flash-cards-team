@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { GetRandomCardToLearnResponse } from '@/services'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -20,15 +22,15 @@ export const LearnCard = ({
   onShowAnswer,
   showAnswer,
 }: LearnCardProps) => {
+  const showAnswerHandler = useCallback(() => {
+    onShowAnswer(true)
+  }, [onShowAnswer])
+
   if (!card) {
     return null
   }
 
   const { answer, answerImg, id: cardId, question, questionImg, shots } = card
-
-  const showAnswerHandler = () => {
-    onShowAnswer(true)
-  }
 
   return (
     <Card className={cn.container}>
