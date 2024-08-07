@@ -1,7 +1,0 @@
-{
-  "routes": [
-    { "src": "/storybook(/.*)?", "dest": "/storybook", "status": 200 },
-    { "src": "/(.*)", "dest": "/", "status": 200 }
-  ],
-  "$schema": "https://openapi.vercel.sh/vercel.json"
-}
