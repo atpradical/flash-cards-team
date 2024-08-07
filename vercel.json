@@ -1,4 +1,5 @@
 {
+  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }],
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "pnpm run build-storybook",
   "devCommand": "pnpm run storybook",
