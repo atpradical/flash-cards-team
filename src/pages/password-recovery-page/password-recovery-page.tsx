@@ -11,14 +11,10 @@ export const PasswordRecoveryPage = () => {
   const [email, setEmail] = useState('')
   const [forRecoveryPassword, setForRecoveryPassword] = useState(false)
 
-  // const navigate = useNavigate()
-
   const recoveryPasswordHandler = async ({ email }: ForgotPasswordFormValues) => {
     setEmail(email)
     setForRecoveryPassword(true)
     await recoverPassword({ email })
-    // navigate(PATH.SIGN_IN)
-    console.log('recoveryPasswordHandler email', email)
   }
 
   return (

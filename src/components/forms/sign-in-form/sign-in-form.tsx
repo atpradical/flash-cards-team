@@ -12,20 +12,28 @@ import { ControlledTextField } from '@/shared/ui/form-components/controlled-text
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-type SignInFormProps = {
-  onSubmit: (data: LoginFormValues) => void
-}
-
 const SignInFormSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
   rememberMe: rememberMeSchema,
 })
 
+type SignInFormProps = {
+  onSubmit: (data: LoginFormValues) => void
+}
 export type LoginFormValues = z.infer<typeof SignInFormSchema>
 
 export const SignInForm = ({ onSubmit }: SignInFormProps) => {
-  const { control, handleSubmit } = useForm<LoginFormValues>({
+  const currentScreenWidth = useCurrentScreenWidth()
+  const breakpoint = SCREEN_SIZE.MOBILE_TINY
+  const isTinyScreen = currentScreenWidth <= breakpoint
+  const gap = isTinyScreen ? '12px' : '24px'
+
+  const {
+    control,
+    formState: { isDirty },
+    handleSubmit,
+  } = useForm<LoginFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -38,11 +46,6 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
   const formHandler = handleSubmit(data => {
     onSubmit(data)
   })
-
-  const currentScreenWidth = useCurrentScreenWidth()
-  const breakpoint = SCREEN_SIZE.MOBILE_TINY
-  const isTinyScreen = currentScreenWidth <= breakpoint
-  const gap = isTinyScreen ? '12px' : '24px'
 
   return (
     <Card className={cn.container}>
@@ -70,7 +73,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
               Forgot Password?
             </Typography>
           </FlexContainer>
-          <Button fullWidth variant={'primary'}>
+          <Button disabled={!isDirty} fullWidth variant={'primary'}>
             Sign In
           </Button>
         </form>

@@ -33,7 +33,17 @@ type SignUpFormProps = {
 }
 
 export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
-  const { control, handleSubmit } = useForm<SignUpFormValues>({
+  const {
+    control,
+    formState: { isDirty },
+    handleSubmit,
+  } = useForm<SignUpFormValues>({
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      name: '',
+      password: '',
+    },
     mode: 'onSubmit',
     resolver: zodResolver(SignUpScheme),
   })
@@ -76,7 +86,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
               placeholder={'Repeat your strong password'}
               variant={'password'}
             />
-            <Button fullWidth>Sign Up</Button>
+            <Button disabled={!isDirty} fullWidth>
+              Sign Up
+            </Button>
           </FlexContainer>
         </form>
         <Typography className={cn.reminder}>Already have an account?</Typography>

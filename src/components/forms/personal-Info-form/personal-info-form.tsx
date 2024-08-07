@@ -28,7 +28,11 @@ type PersonalInfoFormProps = {
 }
 
 export const PersonalInfoForm = ({ onCancel, onSubmit, personalData }: PersonalInfoFormProps) => {
-  const { control, handleSubmit } = useForm<PersonalInfoFromValues>({
+  const {
+    control,
+    formState: { isDirty },
+    handleSubmit,
+  } = useForm<PersonalInfoFromValues>({
     defaultValues: {
       nickname: personalData.name,
     },
@@ -57,7 +61,7 @@ export const PersonalInfoForm = ({ onCancel, onSubmit, personalData }: PersonalI
               <Button className={cn.button} fullWidth onClick={onCancel} variant={'secondary'}>
                 Cancel
               </Button>
-              <Button className={cn.button} fullWidth>
+              <Button className={cn.button} disabled={!isDirty} fullWidth>
                 Save
               </Button>
             </FlexContainer>

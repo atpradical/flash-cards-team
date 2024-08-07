@@ -74,7 +74,6 @@ export const authApi = flashcardsApi.injectEndpoints({
         query: () => `v1/auth/me`,
       }),
       recoveryPassword: builder.mutation<void, RecoveryPasswordArgs>({
-        // invalidatesTags: ['Me'],
         query: ({ email }) => {
           return {
             body: {
@@ -88,7 +87,6 @@ export const authApi = flashcardsApi.injectEndpoints({
         },
       }),
       resendVerifyEmail: builder.mutation<void, ResendVerifyEmailArgs>({
-        // invalidatesTags: ['Me'],?
         query: ({ userId }) => {
           return {
             body: {
@@ -102,7 +100,6 @@ export const authApi = flashcardsApi.injectEndpoints({
         },
       }),
       resetPassword: builder.mutation<void, ResetPasswordArgs>({
-        // invalidatesTags: ['Me'],
         query: ({ password, token }) => {
           return {
             body: { password },

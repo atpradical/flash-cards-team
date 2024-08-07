@@ -19,7 +19,11 @@ const CreateNewPasswordSchema = z.object({
 export type FormValues = z.infer<typeof CreateNewPasswordSchema>
 
 export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const {
+    control,
+    formState: { isDirty },
+    handleSubmit,
+  } = useForm<FormValues>({
     defaultValues: {
       password: '',
     },
@@ -48,7 +52,9 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
           <Typography className={cn.reminder}>
             Create new password and we will send you further instructions to email
           </Typography>
-          <Button fullWidth>Create New Password</Button>
+          <Button disabled={!isDirty} fullWidth>
+            Create New Password
+          </Button>
         </form>
       </FlexContainer>
     </Card>
