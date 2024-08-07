@@ -1,4 +1,4 @@
-export const emailConfirmationBodyHTML = `<b>Hello, ##name##!</b><br/>Please confirm your email by clicking on the link below:<br/><a href="https://flash-cards-team-atpradicals-projects.vercel.app/confirm-email/##token##">Confirm email</a>. If it doesn't work, copy and paste the following link in your browser:<br/>https://flash-cards-team-atpradicals-projects.vercel.app/confirm-email/##token##`
+export const emailConfirmationBodyHTML = `<b>Hi, ##name##!</b><br/>Please confirm your email by clicking on the link below:<br/><a href="https://flash-cards-team-atpradicals-projects.vercel.app/confirm-email/##token##">Confirm email</a>. If it doesn't work, copy and paste the following link in your browser:<br/>https://flash-cards-team-atpradicals-projects.vercel.app/confirm-email/##token##`
 
 export const emailConfirmationRequestSubjectHTML = 'Flashcards-app: email confirmation request'
 
