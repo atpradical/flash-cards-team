@@ -4,6 +4,5 @@
   "buildCommand": "pnpm run build",
   "devCommand": "pnpm run build",
   "installCommand": "pnpm i",
-  "framework": null,
-  "outputDirectory": "./storybook-static"
+  "framework": null
 }
