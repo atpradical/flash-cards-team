@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { generatePath, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 import { useGetCardsQuery, useGetDeckQuery, useMeQuery } from '@/services'
@@ -7,6 +7,7 @@ import { PATH, SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks/use-current-screen-width'
 import { useSearchParamUpdater } from '@/shared/hooks/use-search-param-updater'
 import { combineLoadingStates } from '@/shared/utils'
+import { useDebounceCallback } from 'usehooks-ts'
 
 export const useDeckPageData = () => {
   const currentScreenWidth = useCurrentScreenWidth()
@@ -33,30 +34,48 @@ export const useDeckPageData = () => {
     id: deckId,
   })
 
+  const queryParams = useMemo(
+    () => ({
+      currentPage,
+      deckId: deckId,
+      itemsPerPage,
+      orderBy: orderBy || undefined,
+      question: search || undefined,
+    }),
+    [currentPage, deckId, itemsPerPage, orderBy, search]
+  )
+
   const {
     currentData,
     data,
     isFetching: isFetchingCards,
     isLoading: isLoadingCards,
-  } = useGetCardsQuery({
-    currentPage,
-    deckId: deckId,
-    itemsPerPage,
-    orderBy: orderBy || undefined,
-    question: search || undefined,
-  })
+  } = useGetCardsQuery(queryParams)
 
-  const goBackHandler = () => {
+  const goBackHandler = useCallback(() => {
     navigate(-1)
-  }
+  }, [navigate])
 
-  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: e.currentTarget.value })
-  }
+  const debouncedSearchHandler = useDebounceCallback((value: string) => {
+    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: value })
+  }, 500) // 500ms debounce delay
 
-  const clearSearchHandler = () => {
+  const searchHandler = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const searchValue = e.currentTarget.value
+
+      if (searchValue === '') {
+        updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: searchValue })
+      } else {
+        debouncedSearchHandler(searchValue)
+      }
+    },
+    [debouncedSearchHandler, updateSearchParam]
+  )
+
+  const clearSearchHandler = useCallback(() => {
     updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, search: undefined })
-  }
+  }, [updateSearchParam])
 
   let isAuthor = false
 

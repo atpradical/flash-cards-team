@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -82,20 +82,25 @@ export const useCardDialogFormData = ({
     resolver: zodResolver(CardDialogFormScheme),
   })
 
+  const cancelFormHandler = useCallback(() => {
+    reset()
+    onOpenChange(false)
+  }, [reset, onOpenChange])
+
+  const successRequestHandler = useCallback(() => {
+    setQuestionCover(null)
+    setAnswerCover(null)
+    cancelFormHandler()
+    reset()
+    toast.success(`Card successfully ${action === DIALOG_ACTION.CREATE ? 'created' : 'updated'}`)
+  }, [action, cancelFormHandler, reset])
+
   const formHandler = handleSubmit(async formData => {
     setFromErrors(null)
     const finalFormData = {
       ...formData,
       ...(typeof answerCover === 'string' ? {} : { answerImg: answerCover }),
       ...(typeof questionCover === 'string' ? {} : { questionImg: questionCover }),
-    }
-
-    const successRequestHandler = () => {
-      setQuestionCover(null)
-      setAnswerCover(null)
-      cancelFormHandler()
-      reset()
-      toast.success(`Card successfully ${action === DIALOG_ACTION.CREATE ? 'created' : 'updated'}`)
     }
 
     try {
@@ -123,34 +128,29 @@ export const useCardDialogFormData = ({
   // todo: need review check
   useFormErrors({ errors: formErrors, fields: ['answer', 'question'], setError })
 
-  const cancelFormHandler = () => {
-    reset()
-    onOpenChange(false)
-  }
-
-  const uploadQuestionImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const uploadQuestionImageHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
       setQuestionCover(file)
     }
-  }
+  }, [])
 
-  const deleteQuestionImageHandler = () => {
+  const deleteQuestionImageHandler = useCallback(() => {
     setQuestionCover(null)
-  }
+  }, [])
 
-  const uploadAnswerImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const uploadAnswerImageHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
       setAnswerCover(file)
     }
-  }
+  }, [])
 
-  const deleteAnswerImageHandler = () => {
+  const deleteAnswerImageHandler = useCallback(() => {
     setAnswerCover(null)
-  }
+  }, [])
 
   const isLoad = combineLoadingStates(isLoadingCreateCard, isLoadingUpdateCard)
 

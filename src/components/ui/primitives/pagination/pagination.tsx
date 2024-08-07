@@ -1,6 +1,9 @@
+import { memo, useCallback, useMemo } from 'react'
+
 import { ArrowBack } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
 import { DOTS, usePagination } from '@/components/ui/primitives/pagination/hooks/usePagination'
+import { DEFAULT_ITEMS_PER_PAGE } from '@/shared/constants'
 import { useSearchParamUpdater } from '@/shared/hooks'
 import clsx from 'clsx'
 
@@ -16,8 +19,14 @@ type Props = {
   totalCount: number
 }
 
-export const Pagination = (props: Props) => {
-  const { className, currentPage, pageSize = 10, siblingCount = 1, totalCount = 1 } = props
+export const Pagination = memo((props: Props) => {
+  const {
+    className,
+    currentPage,
+    pageSize = DEFAULT_ITEMS_PER_PAGE,
+    siblingCount = 1,
+    totalCount = 1,
+  } = props
 
   const updateSearchParam = useSearchParamUpdater()
 
@@ -31,57 +40,70 @@ export const Pagination = (props: Props) => {
     totalPageCount,
   })
 
-  const nextPageHandler = () => {
+  const nextPageHandler = useCallback(() => {
     updateSearchParam({ currentPage: currentPage + 1 })
-  }
+  }, [currentPage, updateSearchParam])
 
-  const previousPageHandler = () => {
+  const previousPageHandler = useCallback(() => {
     updateSearchParam({ currentPage: currentPage - 1 })
-  }
+  }, [updateSearchParam, currentPage])
 
-  const changePageHandler = (page: number) => {
-    updateSearchParam({ currentPage: page })
-  }
+  const changePageHandler = useCallback(
+    (page: number) => {
+      updateSearchParam({ currentPage: page })
+    },
+    [updateSearchParam]
+  )
 
-  const changeDisplayPagesHandler = (pageSize: string) => {
-    updateSearchParam({ currentPage: 1, itemsPerPage: pageSize })
-  }
+  const changeDisplayPagesHandler = useCallback(
+    (pageSize: string) => {
+      updateSearchParam({ currentPage: 1, itemsPerPage: pageSize })
+    },
+    [updateSearchParam]
+  )
 
   const isFirstPage = currentPage === 1
   const isLastPage = currentPage === totalPageCount
 
-  const cn = {
-    arrow: s.arrow,
-    arrowRight: clsx(s.arrow, s.arrowRight),
-    container: clsx(s.paginationContainer, className),
-    dots: clsx(s.paginationOption, s.dots),
-    nowrap: s.nowrap,
-    option: s.paginationOption,
-    select: s.selectOption,
-    selectedOption: clsx(s.paginationOption, s.selected),
-  }
+  const cn = useMemo(
+    () => ({
+      arrow: s.arrow,
+      arrowRight: clsx(s.arrow, s.arrowRight),
+      container: clsx(s.paginationContainer, className),
+      dots: clsx(s.paginationOption, s.dots),
+      nowrap: s.nowrap,
+      option: s.paginationOption,
+      select: s.selectOption,
+      selectedOption: clsx(s.paginationOption, s.selected),
+    }),
+    [className]
+  )
 
-  const options = paginationRange.map((el, index) => {
-    const key = `${el}${index}`
-    const isOptionSelected = el === currentPage ? cn.selectedOption : cn.option
+  const options = useMemo(
+    () =>
+      paginationRange.map((el, index) => {
+        const key = `${el}${index}`
+        const isOptionSelected = el === currentPage ? cn.selectedOption : cn.option
 
-    // If the pageItem is a DOT, render the DOTS unicode character
-    if (el === DOTS) {
-      return (
-        <Typography as={'span'} className={cn.dots} key={key}>
-          &#8230;
-        </Typography>
-      )
-    }
+        // If the pageItem is a DOT, render the DOTS unicode character
+        if (el === DOTS) {
+          return (
+            <Typography as={'span'} className={cn.dots} key={key}>
+              &#8230;
+            </Typography>
+          )
+        }
 
-    return (
-      <Button className={isOptionSelected} key={key} onClick={() => changePageHandler(+el)}>
-        <Typography as={'span'} className={clsx(s.nowrap, isOptionSelected)}>
-          {el}
-        </Typography>
-      </Button>
-    )
-  })
+        return (
+          <Button className={isOptionSelected} key={key} onClick={() => changePageHandler(+el)}>
+            <Typography as={'span'} className={clsx(s.nowrap, isOptionSelected)}>
+              {el}
+            </Typography>
+          </Button>
+        )
+      }),
+    [paginationRange, currentPage, cn, changePageHandler]
+  )
 
   return (
     <div className={cn.container}>
@@ -106,4 +128,4 @@ export const Pagination = (props: Props) => {
       </Typography>
     </div>
   )
-}
+})

@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentPropsWithoutRef } from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, useMemo } from 'react'
 
 import s from './flex-container.module.scss'
 
@@ -25,17 +25,20 @@ export const FlexContainer = ({
   style,
   ...rest
 }: Props) => {
-  const containerStyles: CSSProperties = {
-    alignItems: ai,
-    flexDirection: fd,
-    flexGrow: fg,
-    flexWrap: fw,
-    gap: gap,
-    justifyContent: jc,
-    marginTop: mt,
-    padding: pd,
-    ...style,
-  }
+  const containerStyles = useMemo<CSSProperties>(
+    () => ({
+      alignItems: ai,
+      flexDirection: fd,
+      flexGrow: fg,
+      flexWrap: fw,
+      gap: gap,
+      justifyContent: jc,
+      marginTop: mt,
+      padding: pd,
+      ...style,
+    }),
+    [ai, fd, fg, fw, gap, jc, mt, pd, style]
+  )
 
   return <div className={s.container} style={containerStyles} {...rest} />
 }

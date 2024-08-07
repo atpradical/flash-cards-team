@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { generatePath } from 'react-router-dom'
 
 import dummyCover from '@/assets/webp/dummy-cover.webp'
@@ -11,35 +11,37 @@ export const useDeckListData = (decks: Deck[], user: User) => {
   const [showEditDeckDialog, setShowEditDeckDialog] = useState(false)
   const [showDeleteDeckDialog, setShowDeleteDeckDialog] = useState(false)
 
-  const deckData = decks.find(el => el.id === deckId)
+  const deckData = useMemo(() => decks.find(el => el.id === deckId), [decks, deckId])
 
-  const processDeckData = (el: Deck) => {
-    const cover = el.cover ?? dummyCover
-    const cardsCount = el.cardsCount.toString()
-    const updated = convertToDDMMYYYY(el.updated)
-    const deckPath = generatePath(PATH.DECK, { deckId: el.id })
-    const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
-    const isAuthor = el.userId === user.id
+  const processDeckData = useMemo(
+    () => (el: Deck) => {
+      const cover = el.cover ?? dummyCover
+      const cardsCount = el.cardsCount.toString()
+      const updated = convertToDDMMYYYY(el.updated)
+      const deckPath = generatePath(PATH.DECK, { deckId: el.id })
+      const learnDeckPath = generatePath(PATH.CARD_LEARN, { deckId: el.id })
+      const isAuthor = el.userId === user.id
 
-    return {
-      cardsCount,
-      cover,
-      deckPath,
-      isAuthor,
-      learnDeckPath,
-      updated,
-    }
-  }
-
-  const openEditDeckHandler = (deckId: string) => {
+      return {
+        cardsCount,
+        cover,
+        deckPath,
+        isAuthor,
+        learnDeckPath,
+        updated,
+      }
+    },
+    [user.id]
+  )
+  const openEditDeckHandler = useCallback((deckId: string) => {
     setDeckId(deckId)
     setShowEditDeckDialog(true)
-  }
+  }, [])
 
-  const openDeleteDeckHandler = (deckId: string) => {
+  const openDeleteDeckHandler = useCallback((deckId: string) => {
     setDeckId(deckId)
     setShowDeleteDeckDialog(true)
-  }
+  }, [])
 
   return {
     deckData,

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 
 import { CardDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components/actions'
@@ -13,18 +13,21 @@ import s from './deck-table.module.scss'
 import { HeaderCell, PositionCell } from '../container-components'
 
 type DeckTableProps = {
-  cards: Card[]
+  cards?: Card[]
   isAuthor: boolean
 }
 
-export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
+export const DeckTable = memo(({ cards = [], isAuthor }: DeckTableProps) => {
   const [sortId, setSortId] = useState('')
   const updateSearchParam = useSearchParamUpdater()
 
-  const sortHandler = (orderBy: string, sortId: string) => {
-    setSortId(sortId)
-    updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, orderBy })
-  }
+  const sortHandler = useCallback(
+    (orderBy: string, sortId: string) => {
+      setSortId(sortId)
+      updateSearchParam({ currentPage: DEFAULT_CURRENT_PAGE, orderBy })
+    },
+    [updateSearchParam]
+  )
 
   const {
     cardData,
@@ -38,31 +41,35 @@ export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
     showUpdateCardDialogForm,
   } = useDeckTableData(cards)
 
-  const TableContent = cards.map(el => {
-    const { answerCover, questionCover, truncatedAnswer, truncatedQuestion, updated } =
-      processCardData(el)
+  const TableContent = useMemo(
+    () =>
+      cards.map(el => {
+        const { answerCover, questionCover, truncatedAnswer, truncatedQuestion, updated } =
+          processCardData(el)
 
-    return (
-      <TableRow key={el.id}>
-        <PositionCell content={truncatedQuestion} entity={'Question'} image={questionCover} />
-        <PositionCell content={truncatedAnswer} entity={'Answer'} image={answerCover} />
-        <PositionCell content={updated} />
-        <PositionCell>
-          <Grade stars={el.grade} />
-        </PositionCell>
-        {isAuthor && (
-          <PositionCell>
-            <Actions
-              id={el.id}
-              onDelete={() => onDeleteHandler(el.id)}
-              onEdit={() => onEditHandler(el.id)}
-              variant={VARIANT.ONLY_EDITS}
-            />
-          </PositionCell>
-        )}
-      </TableRow>
-    )
-  })
+        return (
+          <TableRow key={el.id}>
+            <PositionCell content={truncatedQuestion} entity={'Question'} image={questionCover} />
+            <PositionCell content={truncatedAnswer} entity={'Answer'} image={answerCover} />
+            <PositionCell content={updated} />
+            <PositionCell>
+              <Grade stars={el.grade} />
+            </PositionCell>
+            {isAuthor && (
+              <PositionCell>
+                <Actions
+                  id={el.id}
+                  onDelete={() => onDeleteHandler(el.id)}
+                  onEdit={() => onEditHandler(el.id)}
+                  variant={VARIANT.ONLY_EDITS}
+                />
+              </PositionCell>
+            )}
+          </TableRow>
+        )
+      }),
+    [cards, isAuthor, onDeleteHandler, onEditHandler, processCardData]
+  )
 
   return (
     <TableContainer>
@@ -118,4 +125,4 @@ export const DeckTable = ({ cards, isAuthor }: DeckTableProps) => {
       />
     </TableContainer>
   )
-}
+})

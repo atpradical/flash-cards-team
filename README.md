@@ -1,11 +1,12 @@
 # Flash Cards
 
-React + TypeScript SPA 🚀
+React + TypeScript SPA + Vite 🚀
 
 ### Links:
-> [UI-kit](#) on Storybook
->
-> [Quiz-Cards](#) - web application
+> [Quiz-Cards](https://flash-cards-team-atpradicals-projects.vercel.app/) - web application
+> 
+> [UI-kit](https://storybook-flash-cards-team.vercel.app/) on Storybook
+
 
 ### Description:
 

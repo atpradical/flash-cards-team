@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { generatePath, useParams } from 'react-router-dom'
 
 import { useGetDeckQuery, useGetRandomCardQuery, useSaveGradeOfCardMutation } from '@/services'
@@ -18,13 +18,16 @@ export const useCardPageData = () => {
 
   const [saveGrade, { isLoading: isSaveGradeLoading }] = useSaveGradeOfCardMutation()
 
-  const nextQuestionHandler = async (cardId: string, grade: number) => {
-    const result = await saveGrade({ cardId, grade, id: deck?.id ?? '' })
+  const nextQuestionHandler = useCallback(
+    async (cardId: string, grade: number) => {
+      const result = await saveGrade({ cardId, grade, id: deck?.id ?? '' })
 
-    if (result) {
-      setShowAnswer(false)
-    }
-  }
+      if (result) {
+        setShowAnswer(false)
+      }
+    },
+    [deck?.id, saveGrade]
+  )
 
   const isLoad = combineLoadingStates(isDeckFetching, isRandomCardFetching, isSaveGradeLoading)
 

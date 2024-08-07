@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentPropsWithoutRef } from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, useMemo } from 'react'
 
 import * as ProgressPrimitive from '@radix-ui/react-progress'
 import clsx from 'clsx'
@@ -11,10 +11,13 @@ type ProgressProps = {
 
 export const Progress = (props: ProgressProps) => {
   const { className, color } = props
-  const cn = {
-    indicator: clsx(s.indicator, className),
-    root: s.root,
-  }
+  const cn = useMemo(
+    () => ({
+      indicator: clsx(s.indicator, className),
+      root: s.root,
+    }),
+    [className]
+  )
 
   return (
     <ProgressPrimitive.Root className={cn.root} {...props}>

@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef, useMemo } from 'react'
 
 import clsx from 'clsx'
 
@@ -18,7 +18,10 @@ export const Button = forwardRef(
   <T extends ElementType = 'button'>(props: Props<T>, ref: ForwardedRef<InferType<T>>) => {
     const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props
 
-    const cn = clsx(s.button, s[variant], className, fullWidth && s.fullWidth)
+    const cn = useMemo(
+      () => clsx(s.button, s[variant], className, fullWidth && s.fullWidth),
+      [className, fullWidth, variant]
+    )
 
     return <Component className={cn} ref={ref} {...rest} />
   }

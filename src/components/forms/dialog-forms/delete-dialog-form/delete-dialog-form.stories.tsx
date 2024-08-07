@@ -1,4 +1,5 @@
 import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
 
 import { DeleteDialogForm as DeleteDialogFormComponent } from '@/components/forms'
 import { store } from '@/services'
@@ -26,9 +27,11 @@ export const DeleteDialogForm: Story = {
   },
   render: args => {
     return (
-      <Provider store={store}>
-        <DeleteDialogFormComponent {...args} />
-      </Provider>
+      <MemoryRouter>
+        <Provider store={store}>
+          <DeleteDialogFormComponent {...args} />
+        </Provider>
+      </MemoryRouter>
     )
   },
 }

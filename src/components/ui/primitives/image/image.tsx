@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, ElementRef, forwardRef, useMemo } from 'react'
 
 import { RATIO } from '@/shared/enums'
 import * as AspectRatio from '@radix-ui/react-aspect-ratio'
@@ -18,10 +18,13 @@ type ImageRef = ElementRef<typeof AspectRatio.Root>
 
 export const Image = forwardRef<ImageRef, ImageProps>(
   ({ alt, className, ratio, src, variant, width, ...rest }, ref) => {
-    const cn = {
-      container: clsx(s.container, s[variant]),
-      image: s.image,
-    }
+    const cn = useMemo(
+      () => ({
+        container: clsx(s.container, s[variant]),
+        image: s.image,
+      }),
+      [variant]
+    )
     const containerStyles: CSSProperties = {
       width,
     }

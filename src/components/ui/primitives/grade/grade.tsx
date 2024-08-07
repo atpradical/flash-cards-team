@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useMemo } from 'react'
 
 import { Star, StarOutline } from '@/assets/icons'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -14,13 +14,17 @@ type Props = {
 export const Grade = ({ stars = 0, ...rest }: Props) => {
   const cn = s.star
 
-  const starElements = Array.from({ length: STARS_MAX }, (_, index) => {
-    return index < stars ? (
-      <Star className={cn} key={index} />
-    ) : (
-      <StarOutline className={cn} key={index} />
-    )
-  })
+  const starElements = useMemo(
+    () =>
+      Array.from({ length: STARS_MAX }, (_, index) => {
+        return index < stars ? (
+          <Star className={cn} key={index} />
+        ) : (
+          <StarOutline className={cn} key={index} />
+        )
+      }),
+    [stars, cn]
+  )
 
   return (
     <div className={s.container} {...rest}>

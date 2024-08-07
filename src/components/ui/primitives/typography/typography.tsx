@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType } from 'react'
+import { ComponentPropsWithoutRef, ElementType, useMemo } from 'react'
 
 import clsx from 'clsx'
 
@@ -28,7 +28,10 @@ type TypographyProps<T extends ElementType> = {
 export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T>) => {
   const { as: Component = 'p', className, gray, variant = 'body2', ...rest } = props
 
-  const classNames = clsx(s.typography, variant && s[variant], gray && s.gray, className)
+  const classNames = useMemo(
+    () => clsx(s.typography, variant && s[variant], gray && s.gray, className),
+    [className, variant, gray]
+  )
 
   return <Component className={classNames} {...rest} />
 }

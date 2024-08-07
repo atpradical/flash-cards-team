@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
@@ -40,44 +40,52 @@ export const DeckListTable = ({ decks, user }: DecksListTableProps) => {
     showEditDeckDialog,
   } = useDeckListData(decks, user)
 
-  const sortHandler = (orderBy: string, sortId: string) => {
-    setSortId(sortId)
-    updateSearchParam({ currentPage: 1, orderBy })
-  }
+  const sortHandler = useCallback(
+    (orderBy: string, sortId: string) => {
+      setSortId(sortId)
+      updateSearchParam({ currentPage: 1, orderBy })
+    },
+    [updateSearchParam]
+  )
 
-  const tableRows = decks.map(el => {
-    const { cardsCount, cover, deckPath, isAuthor, learnDeckPath, updated } = processDeckData(el)
+  const tableRows = useMemo(
+    () =>
+      decks.map(el => {
+        const { cardsCount, cover, deckPath, isAuthor, learnDeckPath, updated } =
+          processDeckData(el)
 
-    return (
-      <TableRow key={el.id}>
-        <PositionCell entity={'Deck'} image={cover}>
-          <Button
-            as={Link}
-            className={s.link}
-            title={'Go to deck cards'}
-            to={deckPath}
-            variant={'link'}
-          >
-            {el.name}
-          </Button>
-        </PositionCell>
-        <PositionCell content={cardsCount} />
-        <PositionCell content={updated} />
-        <PositionCell content={el.author.name} />
-        <PositionCell>
-          <Actions
-            id={el.id}
-            isEmptyDeck={el.cardsCount === 0}
-            isFavorite={el.isFavorite}
-            onDelete={() => openDeleteDeckHandler(el.id)}
-            onEdit={() => openEditDeckHandler(el.id)}
-            onLearn={learnDeckPath}
-            variant={isAuthor ? VARIANT.ALL : VARIANT.ONLY_LEARN}
-          />
-        </PositionCell>
-      </TableRow>
-    )
-  })
+        return (
+          <TableRow key={el.id}>
+            <PositionCell entity={'Deck'} image={cover}>
+              <Button
+                as={Link}
+                className={s.link}
+                title={'Go to deck cards'}
+                to={deckPath}
+                variant={'link'}
+              >
+                {el.name}
+              </Button>
+            </PositionCell>
+            <PositionCell content={cardsCount} />
+            <PositionCell content={updated} />
+            <PositionCell content={el.author.name} />
+            <PositionCell>
+              <Actions
+                id={el.id}
+                isEmptyDeck={el.cardsCount === 0}
+                isFavorite={el.isFavorite}
+                onDelete={() => openDeleteDeckHandler(el.id)}
+                onEdit={() => openEditDeckHandler(el.id)}
+                onLearn={learnDeckPath}
+                variant={isAuthor ? VARIANT.ALL : VARIANT.ONLY_LEARN}
+              />
+            </PositionCell>
+          </TableRow>
+        )
+      }),
+    [decks, openDeleteDeckHandler, openEditDeckHandler, processDeckData]
+  )
 
   return (
     <TableContainer style={{ maxWidth: '1280px' }}>

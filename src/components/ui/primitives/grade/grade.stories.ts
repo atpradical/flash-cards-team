@@ -16,20 +16,20 @@ type Story = StoryObj<typeof meta>
 
 export const GradeZeroStars: Story = {
   args: {
-    style: { margin: 0 },
+    style: { justifyContent: 'flex-start', margin: 0 },
   },
 }
 
 export const GradeThreeStars: Story = {
   args: {
     stars: 3,
-    style: { margin: 0 },
+    style: { justifyContent: 'flex-start', margin: 0 },
   },
 }
 
 export const GradeAllStars: Story = {
   args: {
     stars: 5,
-    style: { margin: 0 },
+    style: { justifyContent: 'flex-start', margin: 0 },
   },
 }
