@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import {
   useDeleteUserMutation,
@@ -21,7 +22,12 @@ export const useProfilePageData = () => {
   const navigate = useNavigate()
 
   const logoutHandler = () => {
-    logout()
+    try {
+      logout()
+      toast.success('You logout successfully')
+    } catch {
+      toast('Something went wrong') //todo: doesn't work offline mode
+    }
   }
 
   const uploadHandler = async (e: ChangeEvent<HTMLInputElement>) => {

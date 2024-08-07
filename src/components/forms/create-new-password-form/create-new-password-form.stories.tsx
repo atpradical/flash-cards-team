@@ -18,11 +18,9 @@ export const CreateNewPasswordForm: Story = {
   args: {
     onSubmit: action('onSubmit action invoked!'),
   },
-  render: args => {
-    return (
-      <MemoryRouter>
-        <CreateNewPasswordFormComponent {...args} />
-      </MemoryRouter>
-    )
-  },
+  render: args => (
+    <MemoryRouter>
+      <CreateNewPasswordFormComponent {...args} />
+    </MemoryRouter>
+  ),
 }

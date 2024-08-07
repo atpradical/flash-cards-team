@@ -1,68 +1,43 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useState } from 'react'
+import { toast } from 'react-toastify'
 
-import { action } from '@storybook/addon-actions'
+import { Button } from '@/components/ui/primitives/button'
 
-import { Button } from '../button'
-import { Toaster } from './toast'
+import { Toast } from './toast'
 
 const meta = {
-  argTypes: {
-    onOpenChange: {
-      action: action('onOpenChange button was clicked'),
-    },
-    open: {
-      control: 'boolean',
-    },
-    variant: {
-      control: 'select',
-      options: ['error', 'warning', 'success'],
-    },
-  },
-  component: Toaster,
-  tags: ['autodocs'],
-  title: 'Components/Toaster',
-} satisfies Meta<typeof Toaster>
+  argTypes: {},
+  component: Toast,
+  title: 'Components/Toast',
+} satisfies Meta<typeof Toast>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const storyCreator = (
-  title: string,
-  description: string,
-  variant: 'error' | 'success' | 'warning'
-): Story => ({
-  args: {
-    description,
-    onOpenChange: () => {},
-    open: false,
-    title,
-    variant,
-  },
-  render: ({ description, onOpenChange, open, title, variant }) => {
-    const [isOpen, setIsOpen] = useState(open)
+export const Success: Story = {
+  render: () => (
+    <>
+      <Button onClick={() => toast.success('This is a success message!')}>Show Success</Button>
+      <Toast />
+    </>
+  ),
+}
 
-    const handleOpenChange = (newOpen: boolean) => {
-      setIsOpen(newOpen)
-      onOpenChange(newOpen)
-    }
+export const Error: Story = {
+  render: () => (
+    <>
+      <Button onClick={() => toast.error('This is an error message!')}>Show Error</Button>
+      <Toast />
+    </>
+  ),
+}
 
-    return (
-      <>
-        <Button onClick={() => setIsOpen(!isOpen)}>Show Toast</Button>
-        <Toaster
-          description={description}
-          onOpenChange={handleOpenChange}
-          open={isOpen}
-          title={title}
-          variant={variant}
-        />
-      </>
-    )
-  },
-})
-
-export const ToastError = storyCreator('Error', 'An error occurred', 'error')
-export const ToastWarning = storyCreator('Warning', 'A warning occurred', 'warning')
-export const ToastSuccess = storyCreator('Success', 'An action was successful', 'success')
+export const Warning: Story = {
+  render: () => (
+    <>
+      <Button onClick={() => toast.warn('This is a warning message!')}>Show Warning</Button>
+      <Toast />
+    </>
+  ),
+}

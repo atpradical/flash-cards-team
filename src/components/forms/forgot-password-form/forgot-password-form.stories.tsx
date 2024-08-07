@@ -1,25 +1,25 @@
 import { MemoryRouter } from 'react-router-dom'
 
-import { ForgotPasswordForm } from '@/components/forms/forgot-password-form/forgot-password-form'
+import { ForgotPasswordForm as ForgotPasswordFormComponent } from '@/components/forms/forgot-password-form'
 import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: ForgotPasswordForm,
+  component: ForgotPasswordFormComponent,
   title: 'Forms/ForgotPasswordForm',
-} satisfies Meta<typeof ForgotPasswordForm>
+} satisfies Meta<typeof ForgotPasswordFormComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ForgotPasswordBase: Story = {
+export const ForgotPasswordForm: Story = {
   args: {
     onSubmit: action('onSubmit action invoked!'),
   },
-  render: () => (
+  render: args => (
     <MemoryRouter>
-      <ForgotPasswordForm {...ForgotPasswordBase.args} />
+      <ForgotPasswordFormComponent {...args} />
     </MemoryRouter>
   ),
 }
