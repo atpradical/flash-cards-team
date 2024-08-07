@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
@@ -16,7 +17,7 @@ type DeckListTableMobileProps = {
   decks: Deck[]
   user: User
 }
-export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) => {
+export const DeckListTableMobile = memo(({ decks, user }: DeckListTableMobileProps) => {
   const {
     deckData,
     deckId,
@@ -29,9 +30,9 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
     showEditDeckDialog,
   } = useDeckListData(decks, user)
 
-  return (
-    <FlexContainer fw={'wrap'} gap={'24px'} jc={'space-around'}>
-      {decks.map(el => {
+  const tableContent = useMemo(
+    () =>
+      decks.map(el => {
         const { cardsCount, cover, deckPath, isAuthor, learnDeckPath, updated } =
           processDeckData(el)
 
@@ -75,7 +76,13 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
             </TableBody>
           </TableContainer>
         )
-      })}
+      }),
+    [decks, openDeleteDeckHandler, openEditDeckHandler, processDeckData]
+  )
+
+  return (
+    <FlexContainer fw={'wrap'} gap={'24px'} jc={'space-around'}>
+      {tableContent}
       {showEditDeckDialog && (
         <DeckDialogForm
           action={DIALOG_ACTION.UPDATE}
@@ -94,4 +101,4 @@ export const DeckListTableMobile = ({ decks, user }: DeckListTableMobileProps) =
       />
     </FlexContainer>
   )
-}
+})

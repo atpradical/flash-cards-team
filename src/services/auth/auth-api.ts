@@ -39,7 +39,14 @@ export const authApi = flashcardsApi.injectEndpoints({
           const sendConfirmationEmail = true
 
           return {
-            body: { email, html: emailConfirmationBodyHTML, name, password, sendConfirmationEmail },
+            body: {
+              email,
+              html: emailConfirmationBodyHTML,
+              name,
+              password,
+              sendConfirmationEmail,
+              subject: emailConfirmationRequestSubjectHTML,
+            },
             method: 'POST',
             url: '/v1/auth/sign-up',
           }

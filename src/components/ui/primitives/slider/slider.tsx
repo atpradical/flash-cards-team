@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useMemo } from 'react'
 
 import { Typography } from '@/components/ui/primitives/typography'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -19,14 +19,17 @@ type SliderRef = ElementRef<typeof RadixSlider.Root>
 
 export const Slider = forwardRef<SliderRef, Props>(
   ({ label, max = 22, min = 0, onCommit, onRangeChange, range, ...rest }, ref) => {
-    const cn = {
-      container: s.container,
-      outputWrap: s.outputWrap,
-      range: s.range,
-      root: s.root,
-      thumb: s.thumb,
-      track: s.track,
-    }
+    const cn = useMemo(
+      () => ({
+        container: s.container,
+        outputWrap: s.outputWrap,
+        range: s.range,
+        root: s.root,
+        thumb: s.thumb,
+        track: s.track,
+      }),
+      []
+    )
 
     return (
       <div className={s.container}>

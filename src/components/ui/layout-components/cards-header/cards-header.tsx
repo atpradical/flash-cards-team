@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { IncubatorLogo, IncubatorLogoSmall } from '@/assets/icons'
@@ -15,7 +15,7 @@ type CardsHeaderProps = {
   userData?: User
 } & Omit<ComponentPropsWithoutRef<typeof Header>, 'load'>
 
-export const CardsHeader = ({ isAuth, userData, ...propsHeader }: CardsHeaderProps) => {
+export const CardsHeader = memo(({ isAuth, userData, ...propsHeader }: CardsHeaderProps) => {
   const currentScreenWidth = useCurrentScreenWidth()
   const breakpoint = SCREEN_SIZE.MOBILE
 
@@ -31,4 +31,4 @@ export const CardsHeader = ({ isAuth, userData, ...propsHeader }: CardsHeaderPro
       </FlexContainer>
     </Header>
   )
-}
+})

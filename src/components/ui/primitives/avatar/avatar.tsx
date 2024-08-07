@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, memo, useMemo } from 'react'
 
 import { Nullable } from '@/shared/types/common'
 import * as RadixAvatar from '@radix-ui/react-avatar'
@@ -12,16 +12,19 @@ type Props = {
   src?: Nullable<string>
 } & ComponentPropsWithoutRef<typeof RadixAvatar.Root>
 
-export const Avatar = (props: Props) => {
+export const Avatar = memo((props: Props) => {
   const { className, name, size = 'm', src, ...rest } = props
 
-  const cn = {
-    fallBack: clsx(s.avatarFallback, size === 'l' && s.bigLetter),
-    image: clsx(s.avatarImage),
-    root: clsx(s.avatarRoot, s[size], className),
-  }
+  const cn = useMemo(
+    () => ({
+      fallBack: clsx(s.avatarFallback, size === 'l' && s.bigLetter),
+      image: clsx(s.avatarImage),
+      root: clsx(s.avatarRoot, s[size], className),
+    }),
+    [className, size]
+  )
 
-  const fallBack = name?.[0].toUpperCase()
+  const fallBack = useMemo(() => name?.[0].toUpperCase(), [name])
 
   return (
     <RadixAvatar.Root className={cn.root} {...rest}>
@@ -29,4 +32,4 @@ export const Avatar = (props: Props) => {
       <RadixAvatar.Fallback className={cn.fallBack}>{fallBack}</RadixAvatar.Fallback>
     </RadixAvatar.Root>
   )
-}
+})

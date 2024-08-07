@@ -1,4 +1,12 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react'
+import {
+  ChangeEvent,
+  ComponentPropsWithoutRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import { CloseOutline, EyeOffOutline, EyeOutline, SearchOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components/ui/primitives'
@@ -29,13 +37,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     ...rest
   } = props
 
-  const cn = {
-    container: clsx(s.container, disabled && s.disabled),
-    eye: clsx(s.icon, error && s.error),
-    icon: clsx(s.icon, disabled && s.disabled),
-    iconSearch: clsx(s.icon, s.search),
-    input: clsx(s.input, s[variant], error && s.error, className),
-  }
+  const cn = useMemo(
+    () => ({
+      container: clsx(s.container, disabled && s.disabled),
+      eye: clsx(s.icon, error && s.error),
+      icon: clsx(s.icon, disabled && s.disabled),
+      iconSearch: clsx(s.icon, s.search),
+      input: clsx(s.input, s[variant], error && s.error, className),
+    }),
+    [disabled, variant, className, error]
+  )
 
   const [showPassword, setShowPassword] = useState(false)
   const [inputValue, setInputValue] = useState(value)
@@ -49,20 +60,23 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const inputType = !showPassword && isPassword ? 'password' : 'text'
   const isSearch = variant === 'search'
 
-  const showPasswordHandler = (e: ChangeEvent<HTMLButtonElement>) => {
+  const showPasswordHandler = useCallback((e: ChangeEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setShowPassword(prev => !prev)
-  }
+  }, [])
 
-  const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.currentTarget.value)
-    onChange?.(e)
-  }
+  const changeInputHandler = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.currentTarget.value)
+      onChange?.(e)
+    },
+    [onChange]
+  )
 
-  const clearInputHandler = () => {
+  const clearInputHandler = useCallback(() => {
     setInputValue('')
     updateSearchParam({ search: '' })
-  }
+  }, [updateSearchParam])
 
   return (
     <FlexContainer ai={'flex-start'} fd={'column'}>

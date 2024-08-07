@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { ForgotPasswordForm, ForgotPasswordFormValues } from '@/components/forms'
@@ -14,19 +14,22 @@ export const PasswordRecoveryPage = () => {
   const [formErrors, setFromErrors] = useState<Nullable<FormErrorData[] | string>>(null)
   const [pwdRecover, { isLoading, isSuccess }] = usePwdRecoverMutation()
 
-  const pwdRecoverHandler = async (formData: ForgotPasswordFormValues) => {
-    setEmail(formData.email)
-    setFromErrors(null)
-    try {
-      await pwdRecover(formData).unwrap()
+  const pwdRecoverHandler = useCallback(
+    async (formData: ForgotPasswordFormValues) => {
+      setEmail(formData.email)
+      setFromErrors(null)
+      try {
+        await pwdRecover(formData).unwrap()
 
-      toast.warning(`Further instructions sent to ${formData.email}`)
-    } catch (e) {
-      const errors = getErrorMessageData(e)
+        toast.warning(`Further instructions sent to ${formData.email}`)
+      } catch (e) {
+        const errors = getErrorMessageData(e)
 
-      setFromErrors(errors)
-    }
-  }
+        setFromErrors(errors)
+      }
+    },
+    [pwdRecover]
+  )
 
   return (
     <Page load={isLoading}>

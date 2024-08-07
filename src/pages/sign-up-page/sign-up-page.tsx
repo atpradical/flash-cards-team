@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { SignUpForm, SignUpFormValues } from '@/components/forms'
@@ -14,18 +14,21 @@ export const SignUpPage = () => {
   const [formErrors, setFromErrors] = useState<Nullable<FormErrorData[] | string>>(null)
   const [createUser, { isLoading, isSuccess }] = useCreateUserMutation()
 
-  const signUpFormHandler = async (formData: SignUpFormValues) => {
-    setEmail(formData.email)
-    try {
-      await createUser(formData).unwrap()
-      toast.success(`User successfully created!`)
-      toast.warning(`Verification request sent to ${formData.email}`)
-    } catch (e) {
-      const errors = getErrorMessageData(e)
+  const signUpFormHandler = useCallback(
+    async (formData: SignUpFormValues) => {
+      setEmail(formData.email)
+      try {
+        await createUser(formData).unwrap()
+        toast.success(`User successfully created!`)
+        toast.warning(`Verification request sent to ${formData.email}`)
+      } catch (e) {
+        const errors = getErrorMessageData(e)
 
-      setFromErrors(errors)
-    }
-  }
+        setFromErrors(errors)
+      }
+    },
+    [createUser]
+  )
 
   return (
     <Page load={isLoading}>

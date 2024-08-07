@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useMemo } from 'react'
 
 import { ArrowForward } from '@/assets/icons'
 import { Typography } from '@/components/ui/primitives/typography'
@@ -34,24 +34,31 @@ export const Select = forwardRef<SelectRef, SelectProps>(
     },
     ref
   ) => {
-    const cn = {
-      container: s.container,
-      disabled: s.disabled,
-      dropdownArrow: s.dropdownArrow,
-      label: clsx(s.label, disabled && s.disabled),
-      placeholder: s.placeholder,
-      selectContent: s.selectContent,
-      selectOption: s.selectItem,
-      selectTrigger: clsx(s.selectTrigger, className),
-    }
+    const cn = useMemo(
+      () => ({
+        container: s.container,
+        disabled: s.disabled,
+        dropdownArrow: s.dropdownArrow,
+        label: clsx(s.label, disabled && s.disabled),
+        placeholder: s.placeholder,
+        selectContent: s.selectContent,
+        selectOption: s.selectItem,
+        selectTrigger: clsx(s.selectTrigger, className),
+      }),
+      [className, disabled]
+    )
 
-    const selectItems = options?.map((option, index) => (
-      <RadixSelect.Item className={cn.selectOption} key={index + option} value={option}>
-        <RadixSelect.ItemText>
-          <Typography as={'span'}>{option}</Typography>
-        </RadixSelect.ItemText>
-      </RadixSelect.Item>
-    ))
+    const selectItems = useMemo(
+      () =>
+        options?.map((option, index) => (
+          <RadixSelect.Item className={cn.selectOption} key={index + option} value={option}>
+            <RadixSelect.ItemText>
+              <Typography as={'span'}>{option}</Typography>
+            </RadixSelect.ItemText>
+          </RadixSelect.Item>
+        )),
+      [cn, options]
+    )
 
     return (
       <RadixSelect.Root

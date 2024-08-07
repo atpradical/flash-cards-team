@@ -1,3 +1,5 @@
+import { memo, useMemo } from 'react'
+
 import { CardDialogForm, DeleteDialogForm } from '@/components/forms'
 import { Actions } from '@/components/ui/layout-components'
 import { PositionCell } from '@/components/ui/layout-components/tables/container-components'
@@ -10,11 +12,11 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import s from '../deck-list-table-mobile/deck-list-table-mobile.module.scss'
 
 type DeckTableMobileProps = {
-  cards: Card[]
+  cards?: Card[]
   isAuthor: boolean
 }
 
-export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
+export const DeckTableMobile = memo(({ cards = [], isAuthor }: DeckTableMobileProps) => {
   const {
     cardData,
     cardId,
@@ -27,9 +29,9 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
     showUpdateCardDialogForm,
   } = useDeckTableData(cards)
 
-  return (
-    <FlexContainer fw={'wrap'} gap={'24px'} jc={'space-around'}>
-      {cards.map(el => {
+  const tableContent = useMemo(
+    () =>
+      cards.map(el => {
         const { answerCover, questionCover, truncatedAnswer, truncatedQuestion, updated } =
           processCardData(el)
 
@@ -80,7 +82,13 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
             </TableBody>
           </TableContainer>
         )
-      })}
+      }),
+    [cards, isAuthor, onDeleteHandler, onEditHandler, processCardData]
+  )
+
+  return (
+    <FlexContainer fw={'wrap'} gap={'24px'} jc={'space-around'}>
+      {tableContent}
       {showUpdateCardDialogForm && (
         <CardDialogForm
           action={DIALOG_ACTION.UPDATE}
@@ -99,4 +107,4 @@ export const DeckTableMobile = ({ cards, isAuthor }: DeckTableMobileProps) => {
       />
     </FlexContainer>
   )
-}
+})

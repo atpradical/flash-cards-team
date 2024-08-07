@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ProfileDropdown } from '@/components/ui/layout-components'
@@ -13,7 +14,7 @@ type Props = {
   userData?: User
 }
 
-export const UserProfile = ({ isAuth, userData }: Props) => {
+export const UserProfile = memo(({ isAuth, userData }: Props) => {
   if (!isAuth || !userData) {
     return (
       <Button as={Link} to={PATH.SIGN_IN} variant={'secondary'}>
@@ -39,4 +40,4 @@ export const UserProfile = ({ isAuth, userData }: Props) => {
       trigger={trigger}
     />
   )
-}
+})
