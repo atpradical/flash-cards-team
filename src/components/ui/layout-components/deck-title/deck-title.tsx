@@ -3,19 +3,19 @@ import { useState } from 'react'
 import dummyCover from '@/assets/webp/dummy-cover.webp'
 import { DeckDialogForm, DeleteDialogForm } from '@/components/forms'
 import { SettingsDropdown } from '@/components/ui/layout-components'
+import { cn } from '@/components/ui/layout-components/deck-title/deck-title.styles'
 import { Image, Typography } from '@/components/ui/primitives'
 import { GetDeckResponse } from '@/services/decks/deck.types'
 import { DIALOG_ACTION, RATIO } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
-import { cn } from './deck-title.styles'
-
 type DeckTitleProps = {
   deck: GetDeckResponse
+  isAuthor: boolean
   learnDeckPath: string
 }
 
-export const DeckTitle = ({ deck, learnDeckPath }: DeckTitleProps) => {
+export const DeckTitle = ({ deck, isAuthor, learnDeckPath }: DeckTitleProps) => {
   const [showUpdateDeckDialogForm, setShowUpdateDeckDialogForm] = useState(false)
   const [showDeleteDeckDialogForm, setShowDeleteDeckDialogForm] = useState(false)
 
@@ -36,6 +36,7 @@ export const DeckTitle = ({ deck, learnDeckPath }: DeckTitleProps) => {
           {name}
         </Typography>
         <SettingsDropdown
+          isAuthor={isAuthor}
           learnDeckPath={learnDeckPath}
           onDelete={deleteHandler}
           onEdit={editHandler}

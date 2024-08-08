@@ -6,13 +6,12 @@ import { CardDialogForm } from '@/components/forms'
 import { DeckTable, DeckTableMobile, DeckTitle } from '@/components/ui/layout-components'
 import { Button, Pagination, TextField } from '@/components/ui/primitives'
 import { cn } from '@/pages/deck-page/deck-page.styles'
+import { EmptyDeck } from '@/pages/deck-page/empty-deck'
 import { PaginationModel, useGetCardsQuery, useGetDeckQuery, useMeQuery } from '@/services'
 import { PATH, SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth, useSearchParamUpdater } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
-
-import { EmptyDeck } from './empty-deck'
 
 export const DeckPage = () => {
   const [showCreateNewCardDialogForm, setShowCreateNewCardDialogForm] = useState(false)
@@ -76,7 +75,7 @@ export const DeckPage = () => {
           Back to Decks List
         </Button>
         <FlexContainer ai={'start'} jc={'start'}>
-          <DeckTitle deck={deck} learnDeckPath={learnDeckPath} />
+          <DeckTitle deck={deck} isAuthor={isAuthor} learnDeckPath={learnDeckPath} />
           {!isEmpty && (
             <FlexContainer fd={'column'} gap={'20px'}>
               {isAuthor ? (
