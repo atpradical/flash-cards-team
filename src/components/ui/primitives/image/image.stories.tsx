@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import myImage from '@/assets/webp/dummy-cover.webp'
 import { Image } from '@/components/ui/primitives/image/image'
@@ -7,31 +7,45 @@ import { RATIO } from '@/shared/enums'
 const meta = {
   component: Image,
   tags: ['autodocs'],
-  title: 'Components/Image',
+  title: 'Primitives/Image',
 } satisfies Meta<typeof Image>
 
+type Story = StoryObj<typeof meta>
 export default meta
 
-export const ImageS = {
-  render: () => {
-    return <Image alt={'Image'} ratio={RATIO.S} src={myImage} variant={'s'} />
+const commonArgs = {
+  alt: 'Image',
+  src: myImage,
+}
+
+export const ImageS: Story = {
+  args: {
+    ...commonArgs,
+    ratio: RATIO.S,
+    variant: 's',
   },
 }
 
-export const ImageM = {
-  render: () => {
-    return <Image alt={'Image'} ratio={RATIO.M} src={myImage} variant={'m'} />
+export const ImageM: Story = {
+  args: {
+    ...commonArgs,
+    ratio: RATIO.M,
+    variant: 'm',
   },
 }
 
-export const ImageL = {
-  render: () => {
-    return <Image alt={'Image'} ratio={RATIO.L} src={myImage} variant={'l'} />
+export const ImageL: Story = {
+  args: {
+    ...commonArgs,
+    ratio: RATIO.L,
+    variant: 'l',
   },
 }
 
-export const ImageXL = {
-  render: () => {
-    return <Image alt={'Image'} ratio={RATIO.XL} src={myImage} variant={'xl'} />
+export const ImageXL: Story = {
+  args: {
+    ...commonArgs,
+    ratio: RATIO.XL,
+    variant: 'xl',
   },
 }

@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import {
   EditOutline,
@@ -11,18 +11,20 @@ import {
 import { Avatar, Label, Typography } from '@/components/ui/primitives'
 import { Arrow, Content, Item, Root, Separator, Trigger } from '@/components/ui/primitives/dropdown'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
+import { action } from '@storybook/addon-actions'
 
 const meta = {
   component: Root,
   tags: ['autodocs'],
-  title: 'Components/Dropdown',
+  title: 'Primitives/Dropdown',
 } satisfies Meta<typeof Root>
 
+type Story = StoryObj<typeof meta>
 export default meta
 
 const { avatar, email, name } = mockUser
 
-export const DropdownWithUserAvatar = {
+export const WithUserAvatar: Story = {
   render: () => {
     return (
       <Root>
@@ -46,7 +48,7 @@ export const DropdownWithUserAvatar = {
             </div>
           </Label>
           <Separator />
-          <Item>
+          <Item onClick={action('MyProfile invoked')}>
             <Typography
               style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
               variant={'caption'}
@@ -56,7 +58,7 @@ export const DropdownWithUserAvatar = {
             </Typography>
           </Item>
           <Separator />
-          <Item>
+          <Item onClick={action('SignOut invoked')}>
             <Typography
               style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
               variant={'caption'}
@@ -71,7 +73,7 @@ export const DropdownWithUserAvatar = {
   },
 }
 
-export const DropdownWithSettings = {
+export const WithSettings = {
   render: () => {
     return (
       <Root>
@@ -80,7 +82,7 @@ export const DropdownWithSettings = {
         </Trigger>
         <Content>
           <Arrow />
-          <Item>
+          <Item onClick={action('Learn invoked')}>
             <Typography
               style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
               variant={'caption'}
@@ -90,7 +92,7 @@ export const DropdownWithSettings = {
             </Typography>
           </Item>
           <Separator />
-          <Item>
+          <Item onClick={action('Edit invoked')}>
             <Typography
               style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
               variant={'caption'}
@@ -100,7 +102,7 @@ export const DropdownWithSettings = {
             </Typography>
           </Item>
           <Separator />
-          <Item>
+          <Item onClick={action('Delete invoked')}>
             <Typography
               style={{ alignItems: 'center', display: 'flex', gap: '6px' }}
               variant={'caption'}

@@ -3,15 +3,15 @@ import { ComponentPropsWithoutRef } from 'react'
 import { Star, StarOutline } from '@/assets/icons'
 import { FlexContainer } from '@/shared/ui/flex-container'
 
-import s from './grade.module.scss'
+import s from '@/components/ui/primitives/grade/grade.module.scss'
 
 const STARS_MAX = 5
 
-type Props = {
+type GradeProps = {
   stars?: number
 } & ComponentPropsWithoutRef<typeof FlexContainer>
 
-export const Grade = ({ stars = 0, ...rest }: Props) => {
+export const Grade = ({ stars = 0, ...rest }: GradeProps) => {
   const cn = s.star
 
   const starElements = Array.from({ length: STARS_MAX }, (_, index) => {

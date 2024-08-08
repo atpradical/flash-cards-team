@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from '../button'
-import { Typography } from '../typography'
-import { Card } from './card'
+import { Button } from '@/components/ui/primitives/button'
+import { Card } from '@/components/ui/primitives/card'
+import { Typography } from '@/components/ui/primitives/typography'
 
 const meta = {
   argTypes: {
@@ -10,27 +10,14 @@ const meta = {
       control: { type: 'radio' },
       options: ['div', 'article', 'section', 'aside'],
     },
-    style: {
-      control: {
-        fields: {
-          height: {
-            control: { type: 'text' },
-          },
-          width: {
-            control: { type: 'text' },
-          },
-        },
-        type: 'object',
-      },
-    },
   },
   component: Card,
   tags: ['autodocs'],
-  title: 'Components/Card',
+  title: 'Primitives/Card',
 } satisfies Meta<typeof Card>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const CardSample: Story = {
   args: {
@@ -50,7 +37,9 @@ export const CardWithQuestion = () => {
       <Typography variant={'subtitle1'}>
         Question: How &quot;This&quot; works in JavaScript?
       </Typography>
-      <Typography>Количество попыток ответов на вопрос: 10</Typography>
+      <Typography style={{ marginBottom: '10px' }}>
+        Количество попыток ответов на вопрос: 10
+      </Typography>
       <Button fullWidth>Show Answer</Button>
     </Card>
   )

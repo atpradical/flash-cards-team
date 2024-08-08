@@ -5,9 +5,9 @@ import { MemoryRouter } from 'react-router-dom'
 
 import { CloseOutline, ImageOutline } from '@/assets/icons'
 import {
-  Dialog,
   DialogBody,
   DialogClose,
+  Dialog as DialogComponent,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -15,34 +15,33 @@ import {
   TextField,
   Typography,
 } from '@/components/ui/primitives'
+import { Button } from '@/components/ui/primitives/button'
+import { Checkbox } from '@/components/ui/primitives/checkbox'
 import { store } from '@/services'
 import { action } from '@storybook/addon-actions'
 
-import { Button } from '../button'
-import { Checkbox } from '../checkbox'
-
 const descriptionMockText =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamdsa'
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.'
 
 const meta = {
   argTypes: {},
-  component: Dialog,
+  component: DialogComponent,
   tags: ['autodocs'],
-  title: 'Components/Dialog',
-} satisfies Meta<typeof Dialog>
+  title: 'Primitives/Dialog',
+} satisfies Meta<typeof DialogComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
-export const DialogExample: Story = {
+export const Dialog: Story = {
   args: {},
   render: () => {
     return (
       <MemoryRouter>
         <Provider store={store}>
-          <Dialog>
+          <DialogComponent>
             <DialogTrigger asChild>
-              <Button>open dialog</Button>
+              <Button>Dialog</Button>
             </DialogTrigger>
             <DialogContent style={{ maxWidth: '542px' }}>
               <DialogHeader>
@@ -50,26 +49,26 @@ export const DialogExample: Story = {
                   Some Title
                 </Typography>
                 <DialogClose asChild>
-                  <CloseOutline onClick={action('button clicked!')} />
+                  <CloseOutline onClick={action('Button close invoked')} />
                 </DialogClose>
               </DialogHeader>
               <DialogBody>
                 <Typography variant={'body1'}>{descriptionMockText}</Typography>
                 <TextField label={'Label'} placeholder={'Just a placeholder'} />
-                <Button fullWidth onClick={action('button clicked!')} variant={'secondary'}>
+                <Button fullWidth onClick={action('Button checkbox checked')} variant={'secondary'}>
                   <ImageOutline style={{ height: '16px', width: '16px' }} />
                   Upload image
                 </Button>
-                <Checkbox label={'Private pack'} onClick={action('checkbox checked!')} />
+                <Checkbox label={'Private pack'} onClick={action('Button checkbox checked')} />
               </DialogBody>
               <DialogFooter flexContainerProps={{ jc: 'space-between' }}>
-                <Button onClick={action('Cancel button clicked!')} variant={'secondary'}>
+                <Button onClick={action('Button cancel invoked')} variant={'secondary'}>
                   Cancel
                 </Button>
-                <Button onClick={action('Submit button clicked!')}>Submit</Button>
+                <Button onClick={action('Button submit invoked')}>Submit</Button>
               </DialogFooter>
             </DialogContent>
-          </Dialog>
+          </DialogComponent>
         </Provider>
       </MemoryRouter>
     )

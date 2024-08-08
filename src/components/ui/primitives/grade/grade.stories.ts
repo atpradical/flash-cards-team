@@ -1,6 +1,5 @@
+import { Grade } from '@/components/ui/primitives/grade'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { Grade } from './grade'
 
 const meta = {
   argTypes: {
@@ -8,28 +7,22 @@ const meta = {
   },
   component: Grade,
   tags: ['autodocs'],
-  title: 'Components/Grade',
+  title: 'Primitives/Grade',
 } satisfies Meta<typeof Grade>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
-export const GradeZeroStars: Story = {
-  args: {
-    style: { margin: 0 },
-  },
-}
+export const ZeroStars: Story = {}
 
-export const GradeThreeStars: Story = {
+export const ThreeStars: Story = {
   args: {
     stars: 3,
-    style: { margin: 0 },
   },
 }
 
-export const GradeAllStars: Story = {
+export const AllStars: Story = {
   args: {
     stars: 5,
-    style: { margin: 0 },
   },
 }

@@ -1,51 +1,31 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Select as SelectComponent } from '@/components/ui/primitives/select'
 import { action } from '@storybook/addon-actions'
 
-import { Select } from './select'
-
 const meta = {
-  argTypes: {
-    disabled: { control: 'boolean' },
-    onValueChange: action('Mock action invoked'),
-  },
-  component: Select,
+  argTypes: {},
+  component: SelectComponent,
   tags: ['autodocs'],
-  title: 'Components/Select',
-} satisfies Meta<typeof Select>
+  title: 'Primitives/Select',
+} satisfies Meta<typeof SelectComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
-export const SelectBaseExample: Story = {
+export const Select: Story = {
   args: {
-    label: 'Select Box',
-    onValueChange: action('Mock action invoked'),
-    placeholder: 'just select some option',
+    label: 'Select',
+    onValueChange: action('Action invoked'),
+    placeholder: 'select some option',
     value: '',
   },
 }
 
-export const SelectWithDefaultValue: Story = {
+export const WithDefaultValue: Story = {
   args: {
     defaultValue: '10',
-    onValueChange: action('Mock action invoked'),
+    onValueChange: action('Action invoked'),
     value: '10',
-  },
-}
-
-export const SelectWithDisabled: Story = {
-  args: {
-    disabled: true,
-    onValueChange: action('Mock action invoked'),
-    value: '20',
-  },
-}
-
-export const SelectDisabled: Story = {
-  args: {
-    disabled: true,
-    onValueChange: action('Mock action invoked'),
-    value: '',
   },
 }

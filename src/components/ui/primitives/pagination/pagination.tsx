@@ -8,7 +8,7 @@ import s from './pagination.module.scss'
 
 import { Select } from '../select'
 
-type Props = {
+type PaginationProps = {
   className?: string
   currentPage: number
   pageSize?: number
@@ -16,9 +16,13 @@ type Props = {
   totalCount: number
 }
 
-export const Pagination = (props: Props) => {
-  const { className, currentPage, pageSize = 10, siblingCount = 1, totalCount = 1 } = props
-
+export const Pagination = ({
+  className,
+  currentPage,
+  pageSize = 10,
+  siblingCount = 1,
+  totalCount = 1,
+}: PaginationProps) => {
   const updateSearchParam = useSearchParamUpdater()
 
   const totalPageCount = Math.ceil(totalCount / pageSize)

@@ -9,45 +9,45 @@ const meta = {
   },
   component: Checkbox,
   tags: ['autodocs'],
-  title: 'Components/Checkbox',
+  title: 'Primitives/Checkbox',
 } satisfies Meta<typeof Checkbox>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const Default: Story = {
   args: {
     label: 'Checkbox',
-    onClick: action('action on checkbox click invoked'),
+    onClick: action('Button click invoked'),
   },
 }
 
 export const CheckboxWithoutLabel: Story = {
   args: {
-    onClick: action('action on button click invoked'),
+    onClick: action('Button click invoked'),
   },
 }
 export const CheckboxChecked: Story = {
   args: {
     defaultChecked: true,
-    label: 'Checked checkbox',
+    label: 'Checked',
   },
 }
 export const CheckboxUnchecked: Story = {
   args: {
-    label: 'Unchecked checkbox',
+    label: 'Unchecked',
   },
 }
 export const CheckboxDisabled: Story = {
   args: {
     disabled: true,
-    label: 'Disabled checkbox',
+    label: 'Disabled',
   },
 }
 export const CheckboxDisabledChecked: Story = {
   args: {
     defaultChecked: true,
     disabled: true,
-    label: 'Disabled checkbox',
+    label: 'Disabled',
   },
 }

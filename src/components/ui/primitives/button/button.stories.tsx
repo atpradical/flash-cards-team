@@ -8,36 +8,41 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'radio' },
-      options: ['primary', 'secondary', 'link'],
+      options: ['primary', 'secondary', 'link', 'icon', 'danger'],
     },
   },
   component: Button,
   tags: ['autodocs'],
-  title: 'Components/Button',
+  title: 'Primitives/Button',
 } satisfies Meta<typeof Button>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const Primary: Story = {
   args: {
-    children: 'Primary Button',
-    disabled: false,
-    onClick: action('action on button click invoked'),
-    variant: 'primary',
+    children: 'Primary',
+    onClick: action('Button click invoked'),
   },
 }
 
 export const Secondary: Story = {
   args: {
-    children: 'Secondary Button',
-    disabled: false,
-    onClick: action('action on button click invoked'),
+    children: 'Secondary',
+    onClick: action('Button click invoked'),
     variant: 'secondary',
   },
 }
 
-export const ButtonWithIcon: Story = {
+export const Danger: Story = {
+  args: {
+    children: 'Danger',
+    onClick: action('Button click invoked'),
+    variant: 'danger',
+  },
+}
+
+export const WithIcon: Story = {
   args: {
     children: (
       <>
@@ -45,17 +50,14 @@ export const ButtonWithIcon: Story = {
         Button with Icon
       </>
     ),
-    disabled: false,
-    onClick: action('action on button click invoked'),
-    variant: 'primary',
+    onClick: action('Button click invoked'),
   },
 }
 
-export const Icon: Story = {
+export const IconButton: Story = {
   args: {
     children: <Heart />,
-    disabled: false,
-    onClick: action('action on button click invoked'),
+    onClick: action('Button click invoked'),
     variant: 'icon',
   },
 }
@@ -69,20 +71,19 @@ export const BackButton: Story = {
         Go Back
       </>
     ),
-    disabled: false,
     href: 'https://google.com',
-    onClick: action('action on button click invoked'),
+    onClick: action('Button click invoked'),
     target: '_blank',
     variant: 'link',
   },
 }
 
-export const ButtonAsLink: Story = {
+export const AsLink: Story = {
   args: {
     as: 'a',
     children: 'Button as Link',
     href: 'https://google.com',
-    onClick: action('action on button click invoked'),
+    onClick: action('Button click invoked'),
     target: '_blank',
   },
 }

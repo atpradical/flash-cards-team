@@ -3,41 +3,27 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { toast } from 'react-toastify'
 
 import { Button } from '@/components/ui/primitives/button'
-
-import { Toast } from './toast'
+import { Toast as ToastComponent } from '@/components/ui/primitives/toast'
+import { FlexContainer } from '@/shared/ui/flex-container'
 
 const meta = {
   argTypes: {},
-  component: Toast,
-  title: 'Components/Toast',
-} satisfies Meta<typeof Toast>
+  component: ToastComponent,
+  tags: ['autodocs'],
+  title: 'Primitives/Toast',
+} satisfies Meta<typeof ToastComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
-export const Success: Story = {
+export const Toast: Story = {
   render: () => (
-    <>
-      <Button onClick={() => toast.success('This is a success message!')}>Show Success</Button>
-      <Toast />
-    </>
-  ),
-}
-
-export const Error: Story = {
-  render: () => (
-    <>
-      <Button onClick={() => toast.error('This is an error message!')}>Show Error</Button>
-      <Toast />
-    </>
-  ),
-}
-
-export const Warning: Story = {
-  render: () => (
-    <>
-      <Button onClick={() => toast.warn('This is a warning message!')}>Show Warning</Button>
-      <Toast />
-    </>
+    <FlexContainer gap={'15px'}>
+      <Button onClick={() => toast.success('This is a success message!')}>Success</Button>
+      <Button onClick={() => toast.error('This is an error message!')}>Error</Button>
+      <Button onClick={() => toast.warn('This is a warning message!')}>Warning</Button>
+      <Button onClick={() => toast.info('This is an info message!')}>Info</Button>
+      <ToastComponent />
+    </FlexContainer>
   ),
 }

@@ -37,11 +37,11 @@ const meta = {
   },
   component: Typography,
   tags: ['autodocs'],
-  title: 'Components/Typography',
+  title: 'Primitives/Typography',
 } satisfies Meta<typeof Typography>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const H1: Story = {
   args: {
@@ -85,7 +85,6 @@ export const Body1: Story = {
 export const Body2: Story = {
   args: {
     children: mocText,
-    variant: 'body2',
   },
 }
 
@@ -135,7 +134,7 @@ export const Link2: Story = {
   },
 }
 
-export const TypographyError: Story = {
+export const Error: Story = {
   args: {
     children: mocText,
     variant: 'error',

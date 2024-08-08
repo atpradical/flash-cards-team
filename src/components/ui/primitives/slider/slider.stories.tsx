@@ -1,21 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Slider as SliderComponent } from '@/components/ui/primitives/slider'
 import { action } from '@storybook/addon-actions'
 
-import { Slider as SliderComponent } from './slider'
-
 const meta = {
-  argTypes: {
-    onValueChange: action('slider onValueChange callback invoked'),
-    onValueCommit: action('slider onValueCommit callback invoked'),
-    value: { control: 'object' },
-  },
+  argTypes: {},
   component: SliderComponent,
-  title: 'Primitives Components/Slider',
+  tags: ['autodocs'],
+  title: 'Primitives/Slider',
 } satisfies Meta<typeof SliderComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const Slider: Story = {
   args: {

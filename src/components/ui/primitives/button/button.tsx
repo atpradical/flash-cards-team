@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef } from 
 
 import clsx from 'clsx'
 
-import s from './button.module.scss'
+import s from '@/components/ui/primitives/button/button.module.scss'
 
 // If T matches ElementType then we return T, otherwise Never (nothing).
 // https://medium.com/@developer.olly/understanding-typescript-infer-ac42bd018f3

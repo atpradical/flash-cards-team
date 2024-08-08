@@ -3,9 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
+import { TextField } from '@/components/ui/primitives/text-field'
 import { store } from '@/services'
-
-import { TextField } from './text-field'
 
 const withProviders = (StoryComponent: any) => (
   <MemoryRouter>
@@ -32,11 +31,11 @@ const meta = {
   component: TextField,
   decorators: [withProviders],
   tags: ['autodocs'],
-  title: 'Components/TextField',
+  title: 'Primitives/TextField',
 } satisfies Meta<typeof TextField>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const Text: Story = {
   args: {

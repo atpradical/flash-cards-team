@@ -1,15 +1,16 @@
-import { Progress } from '@/components/ui/primitives/progress'
-import { Meta } from '@storybook/react'
+import { Progress as ProgressComponent } from '@/components/ui/primitives/progress'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: Progress,
+  component: ProgressComponent,
   tags: ['autodocs'],
-  title: 'Components/Progress',
-} satisfies Meta<typeof Progress>
+  title: 'Primitives/Progress',
+} satisfies Meta<typeof ProgressComponent>
 
+type Story = StoryObj<typeof meta>
 export default meta
 
-export const ProgressBase = () => {
-  return <Progress />
+export const Progress: Story = {
+  render: () => <ProgressComponent />,
 }

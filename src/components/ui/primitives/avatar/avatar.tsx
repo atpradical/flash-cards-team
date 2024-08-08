@@ -3,17 +3,15 @@ import { ComponentPropsWithoutRef } from 'react'
 import * as RadixAvatar from '@radix-ui/react-avatar'
 import clsx from 'clsx'
 
-import s from './avatar.module.scss'
+import s from '@/components/ui/primitives/avatar/avatar.module.scss'
 
-type Props = {
+type AvatarProps = {
   name?: string
   size?: 'l' | 'm' | 's'
   src?: string
 } & ComponentPropsWithoutRef<typeof RadixAvatar.Root>
 
-export const Avatar = (props: Props) => {
-  const { className, name, size = 'm', src, ...rest } = props
-
+export const Avatar = ({ className, name, size = 'm', src, ...rest }: AvatarProps) => {
   const cn = {
     fallBack: clsx(s.avatarFallback, size === 'l' && s.bigLetter),
     image: s.avatarImage,
