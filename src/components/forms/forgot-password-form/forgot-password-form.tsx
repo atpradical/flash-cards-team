@@ -31,7 +31,6 @@ export const ForgotPasswordForm = ({ errors, onSubmit }: ForgotPasswordFormProps
   })
   const formHandler = handleSubmit(formData => onSubmit(formData))
 
-  // todo: need review check
   useFormErrors({ errors, fields: ['email'], setError })
 
   return (

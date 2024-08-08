@@ -43,7 +43,6 @@ export const useDeleteDialogFormData = ({
       await deleteDeck({ id: entityId }).unwrap()
       successRequestHandler()
       if (deckId === entityId) {
-        // todo: need review check
         return (() => navigate(-1))()
       }
     }

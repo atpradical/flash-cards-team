@@ -37,7 +37,6 @@ export const SignInForm = ({ isError, onSubmit }: SignInFormProps) => {
     resolver: zodResolver(SignInFormSchema),
   })
 
-  // todo: need review check
   useEffect(() => {
     if (isError) {
       setError('email', {})

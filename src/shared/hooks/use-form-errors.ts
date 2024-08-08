@@ -9,7 +9,18 @@ type UseFormErrorsProps<T extends FieldValues> = {
   fields: (keyof T)[]
   setError: UseFormSetError<T>
 }
-
+/**
+ * Custom hook to handle form errors.
+ *
+ * @template T - The type of the form fields, extending FieldValues.
+ *
+ * @param {UseFormErrorsProps<T>} props - The properties for the hook.
+ * @param {Nullable<FormErrorData[]> | string} props.errors - The errors to be handled. Can be an array of FormErrorData or a string.
+ * @param {(keyof T)[]} props.fields - The list of fields in the form.
+ * @param {UseFormSetError<T>} props.setError - The function to set errors for the form fields.
+ *
+ * @returns {void}
+ */
 export const useFormErrors = <T extends FieldValues>({
   errors,
   fields,
@@ -31,17 +42,3 @@ export const useFormErrors = <T extends FieldValues>({
     }
   }, [errors, setError, fields])
 }
-// todo: delete comment after review!
-// useEffect(() => {
-//   if (errors) {
-//     if (typeof errors !== 'string') {
-//       errors.forEach(el => {
-//         if (el.field === 'email') {
-//           setError(el.field, { message: el.message })
-//         }
-//       })
-//     } else {
-//       setError('email', {})
-//     }
-//   }
-// }, [errors, setError])

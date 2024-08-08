@@ -103,7 +103,6 @@ export const useDeckDialogFromData = ({
     }
   })
 
-  // todo: need review check
   useFormErrors({ errors: formErrors, fields: ['name'], setError })
 
   const cancelFormHandler = useCallback(() => {
