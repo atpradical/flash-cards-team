@@ -13,68 +13,46 @@ const meta = {
   title: 'Layout Components/Actions',
 } satisfies Meta<typeof Actions>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
+
+const commonArgs = {
+  id: '12345',
+  isFavorite: true,
+  onDelete: action('delete invoked!'),
+  onEdit: action('edit invoked!'),
+  onLearn: 'clyh5nywc001npb013u2y57ec',
+  style: { maxWidth: '100%' },
+}
+
+const renderWithProviders = (args: any) => (
+  <MemoryRouter>
+    <Provider store={store}>
+      <Actions {...args} />
+    </Provider>
+  </MemoryRouter>
+)
 
 export const ActionsAll: Story = {
   args: {
-    id: '12345',
-    isFavorite: true,
-    onDelete: action('delete invoked!'),
-    onEdit: action('edit invoked!'),
-    onLearn: 'clyh5nywc001npb013u2y57ec',
-    style: { maxWidth: '100%' },
+    ...commonArgs,
     variant: VARIANT.ALL,
   },
-  render: args => {
-    return (
-      <MemoryRouter>
-        <Provider store={store}>
-          <Actions {...args} />
-        </Provider>
-      </MemoryRouter>
-    )
-  },
+  render: renderWithProviders,
 }
 
 export const ActionsLearn: Story = {
   args: {
-    id: '12345',
-    isFavorite: true,
-    onDelete: action('delete invoked!'),
-    onEdit: action('edit invoked!'),
-    onLearn: 'clyh5nywc001npb013u2y57ec',
-    style: { maxWidth: '100%' },
+    ...commonArgs,
     variant: VARIANT.ONLY_LEARN,
   },
-  render: args => {
-    return (
-      <MemoryRouter>
-        <Provider store={store}>
-          <Actions {...args} />
-        </Provider>
-      </MemoryRouter>
-    )
-  },
+  render: renderWithProviders,
 }
 
 export const ActionsEdit: Story = {
   args: {
-    id: '12345',
-    isFavorite: true,
-    onDelete: action('delete invoked!'),
-    onEdit: action('edit invoked!'),
-    onLearn: 'clyh5nywc001npb013u2y57ec',
-    style: { maxWidth: '100%' },
+    ...commonArgs,
     variant: VARIANT.ONLY_EDITS,
   },
-  render: args => {
-    return (
-      <MemoryRouter>
-        <Provider store={store}>
-          <Actions {...args} />
-        </Provider>
-      </MemoryRouter>
-    )
-  },
+  render: renderWithProviders,
 }

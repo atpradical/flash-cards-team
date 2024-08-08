@@ -6,11 +6,11 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: LearnCardComponent,
-  title: 'Components/LearnCard',
+  title: 'Layout Components',
 } satisfies Meta<typeof LearnCardComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const LearnCard: Story = {
   args: {

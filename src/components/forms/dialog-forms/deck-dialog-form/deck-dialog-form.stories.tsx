@@ -9,21 +9,13 @@ import { DIALOG_ACTION } from '@/shared/enums'
 import { action } from '@storybook/addon-actions'
 
 const meta = {
-  argTypes: {
-    action: {
-      control: {
-        options: [DIALOG_ACTION.CREATE, DIALOG_ACTION.UPDATE],
-        type: 'select',
-      },
-    },
-    open: { control: 'boolean' },
-  },
+  argTypes: {},
   component: DeckDialogFormComponent,
-  title: 'Forms/DeckDialogForm',
+  title: 'Forms/Deck Dialog Form',
 } satisfies Meta<typeof DeckDialogFormComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const DeckDialogForm: Story = {
   args: {

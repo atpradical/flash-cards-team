@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import { CardsHeader as CardsHeaderComponent } from './cards-header'
+import { CardsHeader as CardsHeaderComponent } from '@/components/ui/layout-components/cards-header'
 
 const meta = {
   argTypes: {},
@@ -10,8 +10,8 @@ const meta = {
   title: 'Layout Components',
 } satisfies Meta<typeof CardsHeaderComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const CardsHeader: Story = {
   args: {

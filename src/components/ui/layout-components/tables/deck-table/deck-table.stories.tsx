@@ -3,10 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
+import { DeckTable as DeckTableComponent } from '@/components/ui/layout-components/tables/deck-table'
+import { CardListExample } from '@/components/ui/layout-components/tables/deck-table/deck-table.mock'
 import { store } from '@/services'
-
-import { DeckTable as DeckTableComponent } from './deck-table'
-import { CardListExample } from './deck-table.mock'
 
 const meta = {
   argTypes: {},
@@ -22,10 +21,10 @@ export const DeckTable: Story = {
     cards: CardListExample,
     isAuthor: true,
   },
-  render: () => (
+  render: args => (
     <MemoryRouter>
       <Provider store={store}>
-        <DeckTableComponent {...DeckTable.args} />
+        <DeckTableComponent {...args} />
       </Provider>
     </MemoryRouter>
   ),

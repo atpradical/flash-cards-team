@@ -9,8 +9,8 @@ const meta = {
   title: 'Design System/Iconography',
 } satisfies Meta<typeof IconographyComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const Iconography: Story = {
   args: { icons: iconList },

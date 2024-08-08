@@ -2,10 +2,9 @@ import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
 import { CardListExample } from '@/components/ui/layout-components/tables/deck-table/deck-table.mock'
+import { DeckTableMobile as DeckTableMobileComponent } from '@/components/ui/layout-components/tables/deck-table-mobile'
 import { store } from '@/services'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { DeckTableMobile as DeckTableMobileComponent } from './deck-table-mobile'
 
 const meta = {
   argTypes: {},

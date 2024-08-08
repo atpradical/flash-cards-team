@@ -3,11 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
+import { DeckListExample } from '@/components/ui/layout-components/tables/deck-list-table/deck-list-table.mock'
+import { DeckListTableMobile as DeckListTableMobileComponent } from '@/components/ui/layout-components/tables/deck-list-table-mobile'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
 import { store } from '@/services'
-
-import { DeckListExample } from '../deck-list-table/deck-list-table.mock'
-import { DeckListTableMobile as DeckListTableMobileComponent } from './deck-list-table-mobile'
 
 const meta = {
   argTypes: {},

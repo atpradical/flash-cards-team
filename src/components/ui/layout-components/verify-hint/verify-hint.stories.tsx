@@ -7,14 +7,21 @@ import { VerifyHint as VerifyHintComponent } from './verify-hint'
 const meta = {
   argTypes: {},
   component: VerifyHintComponent,
-  title: 'Layout Components/VerifyHint',
+  title: 'Layout Components/Verify Hint',
 } satisfies Meta<typeof VerifyHintComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const VerifyHint: Story = {
   args: {
     verify: action('Verify button was invoked'),
+  },
+  render: args => {
+    return (
+      <div style={{ width: '280px' }}>
+        <VerifyHintComponent {...args} />
+      </div>
+    )
   },
 }

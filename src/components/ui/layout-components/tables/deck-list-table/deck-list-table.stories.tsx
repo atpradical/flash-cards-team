@@ -3,11 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
+import { DeckListTable as DeckListTableComponent } from '@/components/ui/layout-components/tables/deck-list-table'
+import { DeckListExample } from '@/components/ui/layout-components/tables/deck-list-table/deck-list-table.mock'
 import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
 import { store } from '@/services'
-
-import { DeckListTable as DeckListTableComponent } from './deck-list-table'
-import { DeckListExample } from './deck-list-table.mock'
 
 const meta = {
   argTypes: {},
@@ -23,10 +22,10 @@ export const DeckListTable: Story = {
     decks: DeckListExample,
     user: mockUser,
   },
-  render: () => (
+  render: args => (
     <MemoryRouter>
       <Provider store={store}>
-        <DeckListTableComponent {...DeckListTable.args} />
+        <DeckListTableComponent {...args} />
       </Provider>
     </MemoryRouter>
   ),

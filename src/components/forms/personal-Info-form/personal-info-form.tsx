@@ -58,7 +58,13 @@ export const PersonalInfoForm = ({ onCancel, onSubmit, personalData }: PersonalI
               placeholder={'what name should we call you by?'}
             />
             <FlexContainer gap={'10px'}>
-              <Button className={cn.button} fullWidth onClick={onCancel} variant={'secondary'}>
+              <Button
+                className={cn.button}
+                fullWidth
+                onClick={onCancel}
+                type={'button'}
+                variant={'secondary'}
+              >
                 Cancel
               </Button>
               <Button className={cn.button} disabled={!isDirty} fullWidth>

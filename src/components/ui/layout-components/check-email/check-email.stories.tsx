@@ -1,31 +1,32 @@
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
-import { CheckEmail } from '@/components/ui/layout-components/check-email/check-email'
+import { CheckEmail as CheckEmailComponent } from '@/components/ui/layout-components/check-email'
+import { mockUser } from '@/components/ui/primitives/dropdown/dropdown.mock'
 import { store } from '@/services'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { mockUser } from '../../primitives/dropdown/dropdown.mock'
-
 const meta = {
   argTypes: {},
-  component: CheckEmail,
-  title: 'Components/CheckEmail',
-} satisfies Meta<typeof CheckEmail>
+  component: CheckEmailComponent,
+  title: 'Layout Components',
+} satisfies Meta<typeof CheckEmailComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
-export const CheckEmailExample: Story = {
+export const CheckEmail: Story = {
   args: {
-    email: 'test@email.com',
+    email: mockUser.email,
     name: mockUser.name,
   },
-  render: () => (
-    <MemoryRouter>
-      <Provider store={store}>
-        <CheckEmail {...CheckEmailExample.args} />
-      </Provider>
-    </MemoryRouter>
-  ),
+  render: args => {
+    return (
+      <MemoryRouter>
+        <Provider store={store}>
+          <CheckEmailComponent {...args} />
+        </Provider>
+      </MemoryRouter>
+    )
+  },
 }

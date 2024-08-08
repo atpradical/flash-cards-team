@@ -9,11 +9,11 @@ import { action } from '@storybook/addon-actions'
 const meta = {
   argTypes: {},
   component: PersonalInfoFormComponent,
-  title: 'Forms/PersonalInfoForm',
+  title: 'Forms/Personal Info Form',
 } satisfies Meta<typeof PersonalInfoFormComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const PersonalInfoForm: Story = {
   args: {

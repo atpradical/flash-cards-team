@@ -5,11 +5,11 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: SelfRateFormComponent,
-  title: 'Forms/SelfRateForm',
+  title: 'Forms/Self Rate Form',
 } satisfies Meta<typeof SelfRateFormComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const SelfRateForm: Story = {
   args: {

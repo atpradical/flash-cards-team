@@ -10,21 +10,20 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: PersonalInfoComponent,
-  title: 'Layout Components/PersonalInfo',
+  title: 'Layout Components/Personal Info',
 } satisfies Meta<typeof PersonalInfoComponent>
 
-export default meta
-
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const PersonalInfo: Story = {
   args: {
-    deleteAvatar: action('Delete Avatar'),
-    deleteUser: action('Delete user'),
-    editName: action('Edit Name'),
-    logout: action('Logout'),
+    deleteAvatar: action('Delete avatar action invoked!'),
+    deleteUser: action('Delete user action invoked!'),
+    editName: action('Edit Name action invoked!'),
+    logout: action('Logout action invoked!'),
     uploadAvatar: (e: ChangeEvent<HTMLInputElement>) => {
-      action('upload avatar')(e)
+      action('upload avatar action invoked!')(e)
 
       return Promise.resolve()
     },

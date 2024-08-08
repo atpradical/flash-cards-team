@@ -9,8 +9,8 @@ const meta = {
   title: 'Design System/Colors',
 } satisfies Meta<typeof ColorPaletteComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const Colors: Story = {
   args: { colors: colors },

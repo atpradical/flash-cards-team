@@ -1,18 +1,17 @@
 import { MemoryRouter } from 'react-router-dom'
 
+import { SignInForm as SignInFormComponent } from '@/components/forms/sign-in-form'
 import { action } from '@storybook/addon-actions'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { SignInForm as SignInFormComponent } from './sign-in-form'
 
 const meta = {
   argTypes: {},
   component: SignInFormComponent,
-  title: 'Forms/SignInForm',
+  title: 'Forms/Sign In Form',
 } satisfies Meta<typeof SignInFormComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const SignInForm: Story = {
   args: {

@@ -7,11 +7,11 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   argTypes: {},
   component: ForgotPasswordFormComponent,
-  title: 'Forms/ForgotPasswordForm',
+  title: 'Forms/Forgot Password Form',
 } satisfies Meta<typeof ForgotPasswordFormComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const ForgotPasswordForm: Story = {
   args: {

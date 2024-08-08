@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions'
 const meta = {
   argTypes: {},
   component: SettingsDropdownComponent,
-  title: 'Layout Components/Dropdowns/SettingsDropdown',
+  title: 'Layout Components/Dropdowns/Settings Dropdown',
 } satisfies Meta<typeof SettingsDropdownComponent>
 
 export default meta

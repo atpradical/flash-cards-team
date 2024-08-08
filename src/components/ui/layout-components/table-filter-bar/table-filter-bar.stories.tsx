@@ -7,11 +7,11 @@ import { TableFilterBar as TableFilterBarComponent } from '@/components/ui/layou
 const meta = {
   argTypes: {},
   component: TableFilterBarComponent,
-  title: 'Layout Components/TableFilterBar',
+  title: 'Layout Components',
 } satisfies Meta<typeof TableFilterBarComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const TableFilterBar: Story = {
   args: {

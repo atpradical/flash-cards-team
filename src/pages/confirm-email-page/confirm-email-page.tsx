@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { ConfirmEmail } from '@/components/ui/layout-components/confirm-email'
+import { LinkExpired } from '@/components/ui/layout-components/link-expired'
 import { useVerifyEmailMutation } from '@/services'
-import { PATH } from '@/shared/enums'
+import { FlexContainer } from '@/shared/ui/flex-container'
 import { Page } from '@/shared/ui/page'
-
-import { ConfirmEmail } from './confirm-email'
 
 export const ConfirmEmailPage = () => {
   const { token } = useParams()
@@ -30,22 +30,10 @@ export const ConfirmEmailPage = () => {
 
   return (
     <Page load={isLoading}>
-      {isSuccess && (
-        <ConfirmEmail
-          buttonText={'Back to home page'}
-          description={false}
-          path={PATH.SIGN_IN}
-          title={'You confirmed your email successfully'}
-        />
-      )}
-      {isError && (
-        <ConfirmEmail
-          buttonText={'Back to profile'}
-          icon={false}
-          path={PATH.PROFILE}
-          title={'Link expired'}
-        />
-      )}
+      <FlexContainer jc={'center'} pd={'0 20px'}>
+        {isSuccess && <ConfirmEmail />}
+        {isError && <LinkExpired />}
+      </FlexContainer>
     </Page>
   )
 }

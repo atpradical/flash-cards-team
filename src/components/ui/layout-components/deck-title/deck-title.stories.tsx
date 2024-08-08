@@ -9,7 +9,7 @@ import { GetDeckResponse } from '@/services/decks/deck.types'
 const meta = {
   argTypes: {},
   component: DeckTitleComponent,
-  title: 'Layout Components/DeckTitle',
+  title: 'Layout Components',
 } satisfies Meta<typeof DeckTitleComponent>
 
 type Story = StoryObj<typeof meta>

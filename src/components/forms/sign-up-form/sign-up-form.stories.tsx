@@ -2,17 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { MemoryRouter } from 'react-router-dom'
 
-import { SignUpForm as SignUpFormComponent } from '@/components/forms/sign-up-form/sign-up-form'
+import { SignUpForm as SignUpFormComponent } from '@/components/forms/sign-up-form'
 import { action } from '@storybook/addon-actions'
 
 const meta = {
   argTypes: {},
   component: SignUpFormComponent,
-  title: 'Forms/SignUpForm',
+  title: 'Forms/Sign Up Form',
 } satisfies Meta<typeof SignUpFormComponent>
 
-export default meta
 type Story = StoryObj<typeof meta>
+export default meta
 
 export const SignUpForm: Story = {
   args: {
