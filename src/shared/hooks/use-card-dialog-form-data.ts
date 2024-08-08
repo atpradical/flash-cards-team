@@ -125,7 +125,6 @@ export const useCardDialogFormData = ({
     }
   })
 
-  // todo: need review check
   useFormErrors({ errors: formErrors, fields: ['answer', 'question'], setError })
 
   const uploadQuestionImageHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {

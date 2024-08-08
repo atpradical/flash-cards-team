@@ -33,7 +33,6 @@ export const CreateNewPasswordForm = ({ errors, onSubmit }: CreateNewPasswordFor
 
   const formHandler = handleSubmit(data => onSubmit(data))
 
-  // todo: need review check
   useFormErrors({ errors, fields: ['password'], setError })
 
   return (

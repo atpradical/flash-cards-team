@@ -46,7 +46,6 @@ export const SignUpForm = ({ errors, onSubmit }: SignUpFormProps) => {
     onSubmit(data)
   })
 
-  // todo: need review check
   useFormErrors({ errors, fields: ['name', 'email', 'password'], setError })
 
   return (
