@@ -29,7 +29,7 @@ const CardDialogFormScheme = z.object({
   question: cardQuestionScheme,
 })
 
-type CardDialogFormValues = z.infer<typeof CardDialogFormScheme>
+type CardDialogFormValues = { cover?: File | null } & z.infer<typeof CardDialogFormScheme>
 
 type CardDialogFormProps = {
   action?: DIALOG_ACTION

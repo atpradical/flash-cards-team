@@ -21,7 +21,13 @@ export const DialogImageDelete = ({ onClick, ...args }: Props) => {
 
   return (
     <div>
-      <Button className={cn.delete} onClick={deleteFlagHandler} variant={'icon'} {...args}>
+      <Button
+        className={cn.delete}
+        onClick={deleteFlagHandler}
+        variant={'icon'}
+        {...args}
+        type={'button'}
+      >
         {deleteFlag ? <Trash className={cn.trash} /> : <TrashOutline className={cn.trash} />}
       </Button>
       {deleteFlag && <Typography variant={'error'}>Image will be deleted after submit</Typography>}

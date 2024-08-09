@@ -24,7 +24,7 @@ const DeckDialogFormScheme = z.object({
   name: deckNameScheme,
 })
 
-type DeckDialogFormValues = z.infer<typeof DeckDialogFormScheme>
+type DeckDialogFormValues = { cover?: File | null } & z.infer<typeof DeckDialogFormScheme>
 
 type DeckDialogFormProps = {
   action?: DIALOG_ACTION
