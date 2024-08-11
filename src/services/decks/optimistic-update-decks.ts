@@ -1,14 +1,29 @@
 import { Nullable } from '@/shared/types/common'
 
+import { AppDispatch, RootState } from '../store'
 import { UpdateDeckArgs } from './deck.types'
 import { decksApi } from './decks-api'
 
+type OptimisticUpdateContext = {
+  dispatch: AppDispatch
+  getState: () => RootState
+  queryFulfilled: Promise<any>
+}
+
 export async function optimisticUpdate(
   { cover, id, ...args }: UpdateDeckArgs,
-  { dispatch, getState, queryFulfilled }: any
+  { dispatch, getState, queryFulfilled }: OptimisticUpdateContext
 ) {
   const cachedArgsForQuery = decksApi.util.selectCachedArgsForQuery(getState(), 'getDecks')
   const patchResults: any[] = []
+
+  let uploadedImageUrl: Nullable<string | undefined>
+
+  if (cover === null) {
+    uploadedImageUrl = null
+  } else if (cover && cover instanceof File) {
+    uploadedImageUrl = URL.createObjectURL(cover)
+  }
 
   cachedArgsForQuery.forEach(cachedArgs => {
     patchResults.push(
@@ -16,35 +31,29 @@ export async function optimisticUpdate(
         decksApi.util.updateQueryData('getDecks', cachedArgs, draft => {
           const itemToUpdateIndex = draft.items.findIndex(deck => deck.id === id)
 
-          console.log('draft.items', draft.items)
-          console.log('itemToUpdateIndex', itemToUpdateIndex)
           if (itemToUpdateIndex === -1) {
             return
-          }
-
-          let coverString: Nullable<string> = null
-
-          // debugger
-          console.log('cover', cover) //сюда при смене картинки приходит File тип
-          if (typeof cover === 'string') {
-            coverString = cover
           }
 
           draft.items[itemToUpdateIndex] = {
             ...draft.items[itemToUpdateIndex],
             ...args,
-            cover: coverString,
+            cover: uploadedImageUrl ?? null,
           }
         })
       )
     )
   })
-  console.log('patchResults', patchResults)
+
   try {
     await queryFulfilled
   } catch (e) {
     patchResults.forEach(patchResult => {
       patchResult.undo()
     })
+  } finally {
+    if (uploadedImageUrl) {
+      URL.revokeObjectURL(uploadedImageUrl)
+    }
   }
 }

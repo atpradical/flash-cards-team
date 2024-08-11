@@ -28,7 +28,9 @@ export const decksApi = flashcardsApi.injectEndpoints({
           const { cover, isPrivate, name } = args
           const formData = new FormData()
 
-          formData.append('name', name)
+          if (name) {
+            formData.append('name', name)
+          }
 
           if (cover) {
             formData.append('cover', cover)
