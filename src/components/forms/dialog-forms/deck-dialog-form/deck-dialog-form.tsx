@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
@@ -39,6 +40,7 @@ export const DeckDialogForm = ({
   onOpenChange,
   open,
 }: DeckDialogFormProps) => {
+  console.log('render DeckDialogForm')
   const {
     cover: deckCover,
     id = '',
@@ -83,9 +85,22 @@ export const DeckDialogForm = ({
   })
 
   const formHandler = handleSubmit(formData => {
+    const hasChanges =
+      formData.name !== name ||
+      (typeof cover !== 'string' && cover !== deckCover) ||
+      formData.isPrivate !== isPrivate
+
+    if (!hasChanges) {
+      cancelFormHandler()
+      toast.info('No changes detected')
+
+      return
+    }
+
     const finalFormData = {
       ...formData,
       ...(typeof cover === 'string' ? {} : { cover }),
+      ...(formData.name !== name ? { name: formData.name } : {}),
     }
 
     if (action === DIALOG_ACTION.CREATE) {
@@ -120,6 +135,7 @@ export const DeckDialogForm = ({
 
   const deleteImageHandler = () => {
     setCover(null)
+    setPreview(null)
   }
 
   return (
