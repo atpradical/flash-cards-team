@@ -9,7 +9,7 @@ import {
   UpdateDeckArgs,
   UpdateDeckResponse,
 } from '@/services/decks/deck.types'
-import { optimisticUpdate } from '@/services/decks/optimistic-update-decks'
+import { optimisticUpdateDecks } from '@/services/decks/optimistic-update-decks'
 import { flashcardsApi } from '@/services/flashcards-api'
 
 export const decksApi = flashcardsApi.injectEndpoints({
@@ -91,7 +91,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
       }),
       updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
         invalidatesTags: ['Decks', 'Deck'],
-        onQueryStarted: optimisticUpdate,
+        onQueryStarted: optimisticUpdateDecks,
         query: ({ cover, id, isPrivate, name }) => {
           const formData = new FormData()
 

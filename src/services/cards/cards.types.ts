@@ -1,6 +1,5 @@
+import { DeckId } from '@/services/decks'
 import { Nullable } from '@/shared/types/common'
-
-import { DeckId } from '../decks'
 
 export type Card = {
   answer: string

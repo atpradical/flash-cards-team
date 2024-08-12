@@ -1,16 +1,15 @@
+import { AppDispatch, RootState } from '@/services'
+import { UpdateDeckArgs, UpdateDeckResponse } from '@/services/decks'
+import { decksApi } from '@/services/decks/decks-api'
 import { Nullable } from '@/shared/types/common'
-
-import { AppDispatch, RootState } from '../store'
-import { UpdateDeckArgs } from './deck.types'
-import { decksApi } from './decks-api'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch
   getState: () => RootState
-  queryFulfilled: Promise<any>
+  queryFulfilled: Promise<{ data: UpdateDeckResponse }>
 }
 
-export async function optimisticUpdate(
+export async function optimisticUpdateDecks(
   { cover, id, ...args }: UpdateDeckArgs,
   { dispatch, getState, queryFulfilled }: OptimisticUpdateContext
 ) {

@@ -1,3 +1,4 @@
+import { optimisticUpdateCards } from '@/services/cards'
 import {
   Card,
   CardId,
@@ -84,6 +85,7 @@ export const cardsApi = flashcardsApi.injectEndpoints({
       }),
       updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
         invalidatesTags: ['Cards'],
+        onQueryStarted: optimisticUpdateCards,
         query: ({ answer, answerImg, id, question, questionImg }) => {
           const formData = new FormData()
 

@@ -2,6 +2,11 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import {
+  DialogFormFooter as Footer,
+  DialogFromHeader as Header,
+  DialogFormUploadImage as UploadImage,
+} from '@/components/forms/dialog-forms/container-components'
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
 import { Deck, GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
@@ -13,12 +18,6 @@ import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-check
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-
-import {
-  DialogFormFooter as Footer,
-  DialogFromHeader as Header,
-  DialogFormUploadImage as UploadImage,
-} from '../container-components'
 
 const DeckDialogFormScheme = z.object({
   isPrivate: privateDeckScheme,

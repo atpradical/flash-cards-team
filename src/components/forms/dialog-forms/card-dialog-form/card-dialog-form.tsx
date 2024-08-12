@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import {
@@ -99,6 +100,19 @@ export const CardDialogForm = ({
   })
 
   const formHandler = handleSubmit(formData => {
+    const hasChanges =
+      formData.question !== card?.question ||
+      formData.answer !== card?.answer ||
+      (typeof answerCover !== 'string' && answerCover !== card.answerImg) ||
+      (typeof questionCover !== 'string' && questionCover !== card.questionImg)
+
+    if (!hasChanges) {
+      cancelFormHandler()
+      toast.info('No changes detected')
+
+      return
+    }
+
     const finalFormData = {
       ...formData,
       ...(typeof answerCover === 'string' ? {} : { answerImg: answerCover }),
