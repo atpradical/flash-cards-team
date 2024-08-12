@@ -44,6 +44,16 @@ export async function optimisticUpdateDecks(
     )
   })
 
+  patchResults.push(
+    dispatch(
+      decksApi.util.updateQueryData('getDeck', { id }, draft => {
+        draft.name = args.name ?? draft.name
+        draft.isPrivate = args.isPrivate ?? draft.isPrivate
+        draft.cover = uploadedImageUrl ?? draft.cover
+      })
+    )
+  )
+
   try {
     await queryFulfilled
   } catch (e) {
