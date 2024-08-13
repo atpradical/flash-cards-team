@@ -39,7 +39,6 @@ export const DeckDialogForm = ({
   onOpenChange,
   open,
 }: DeckDialogFormProps) => {
-  console.log('render DeckDialogForm')
   const {
     cover: deckCover,
     id = '',

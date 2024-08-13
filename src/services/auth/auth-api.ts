@@ -1,3 +1,4 @@
+import { createUserHTML, optimisticUpdateAuth, recoveryPasswordHTML } from '@/services/auth'
 import {
   CreateUserArgs,
   CreateUserResponse,
@@ -12,8 +13,6 @@ import {
   VerifyArgs,
 } from '@/services/auth/auth.types'
 import { flashcardsApi } from '@/services/flashcards-api'
-
-import { createUserHTML, recoveryPasswordHTML } from './auth-templates'
 
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -110,6 +109,7 @@ export const authApi = flashcardsApi.injectEndpoints({
       }),
       updateUser: builder.mutation<UpdateUserResponse, UpdateUserArgs>({
         invalidatesTags: ['Me'],
+        onQueryStarted: optimisticUpdateAuth,
         query: ({ avatar, name }) => {
           const formData = new FormData()
 

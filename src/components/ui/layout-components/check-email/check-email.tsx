@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { CheckEmailIcon } from '@/assets/icons'
+import { cn } from '@/components/ui/layout-components/check-email/check-email.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { useVerifyEmailMutation } from '@/services'
 import { PATH } from '@/shared/enums'
@@ -10,8 +11,6 @@ import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-
-import { cn } from './check-email.styles'
 
 type CheckEmailProps = {
   email: string

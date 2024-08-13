@@ -8,8 +8,7 @@ import {
   useMeQuery,
   useUpdateUserMutation,
 } from '@/services'
-
-import { PATH } from '../enums'
+import { PATH } from '@/shared/enums'
 
 export const useProfilePageData = () => {
   const { data: user, isFetching } = useMeQuery()
@@ -48,6 +47,13 @@ export const useProfilePageData = () => {
 
   const saveNameHandler = async (data: { nickname: string }) => {
     const { nickname } = data
+
+    if (nickname === user?.name) {
+      toast.info('No changes detected')
+      setIsEditMode(false)
+
+      return
+    }
 
     await updateUser({ name: nickname })
     setIsEditMode(false)

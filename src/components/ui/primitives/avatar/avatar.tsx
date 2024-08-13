@@ -23,7 +23,7 @@ export const Avatar = ({ className, name, size = 'm', src, ...rest }: AvatarProp
   return (
     <RadixAvatar.Root className={cn.root} {...rest}>
       <RadixAvatar.Image alt={'user avatar'} className={cn.image} src={src} />
-      <RadixAvatar.Fallback className={cn.fallBack} delayMs={500}>
+      <RadixAvatar.Fallback className={cn.fallBack} delayMs={3000}>
         {fallBack}
       </RadixAvatar.Fallback>
     </RadixAvatar.Root>
