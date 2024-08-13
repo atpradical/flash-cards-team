@@ -1,15 +1,14 @@
 import { ChangeEvent } from 'react'
 
 import { EditOutline, EmailOk, LogOut, TrashOutline } from '@/assets/icons'
+import { CheckEmail } from '@/components/ui/layout-components/check-email'
+import { cn } from '@/components/ui/layout-components/personal-info/personal-info.styles'
+import { VerifyHint } from '@/components/ui/layout-components/verify-hint'
 import { Avatar, Button, Card, Typography } from '@/components/ui/primitives'
 import { User, useResendVerifyEmailMutation } from '@/services'
 import { SCREEN_SIZE } from '@/shared/enums'
 import { useCurrentScreenWidth } from '@/shared/hooks'
 import { FlexContainer } from '@/shared/ui/flex-container'
-
-import { CheckEmail } from '../check-email'
-import { VerifyHint } from '../verify-hint'
-import { cn } from './personal-info.styles'
 
 type PersonalInfoProps = {
   deleteAvatar: () => void

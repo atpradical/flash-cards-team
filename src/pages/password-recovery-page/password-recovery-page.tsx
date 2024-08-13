@@ -11,10 +11,10 @@ export const PasswordRecoveryPage = () => {
   const [email, setEmail] = useState('')
   const [forRecoveryPassword, setForRecoveryPassword] = useState(false)
 
-  const recoveryPasswordHandler = async ({ email }: ForgotPasswordFormValues) => {
+  const recoveryPasswordHandler = ({ email }: ForgotPasswordFormValues) => {
+    recoverPassword({ email })
     setEmail(email)
     setForRecoveryPassword(true)
-    await recoverPassword({ email })
   }
 
   return (
