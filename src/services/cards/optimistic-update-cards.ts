@@ -1,7 +1,7 @@
 import { AppDispatch, RootState } from '@/services'
 import { UpdateCardArgs, UpdateCardResponse } from '@/services/cards'
 import { cardsApi } from '@/services/cards/cards-api'
-import { Nullable } from '@/shared/types/common'
+import { createUploadedImageURL } from '@/shared/utils'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch
@@ -15,17 +15,6 @@ export async function optimisticUpdateCards(
 ) {
   const cachedArgsForQuery = cardsApi.util.selectCachedArgsForQuery(getState(), 'getCards')
   const patchResults: any[] = []
-
-  function createUploadedImageURL(image: Nullable<File> | undefined): Nullable<string> {
-    if (image === null) {
-      return null
-    }
-    if (image instanceof File) {
-      return URL.createObjectURL(image)
-    }
-
-    return null
-  }
 
   const uploadedImageAnswer = createUploadedImageURL(answerImg)
   const uploadedImageQuestion = createUploadedImageURL(questionImg)

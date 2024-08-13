@@ -1,5 +1,5 @@
 import { AppDispatch, RootState, UpdateUserArgs, UpdateUserResponse, authApi } from '@/services'
-import { Nullable } from '@/shared/types/common'
+import { createUploadedImageURL } from '@/shared/utils'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch
@@ -14,13 +14,7 @@ export async function optimisticUpdateAuth(
   const cachedArgsForQuery = authApi.util.selectCachedArgsForQuery(getState(), 'me')
   const patchResults: any[] = []
 
-  let uploadedImageUrl: Nullable<string | undefined>
-
-  if (avatar === null) {
-    uploadedImageUrl = null
-  } else if (avatar && avatar instanceof File) {
-    uploadedImageUrl = URL.createObjectURL(avatar)
-  }
+  const uploadedImageUrl = createUploadedImageURL(avatar)
 
   cachedArgsForQuery.forEach(cachedArgs => {
     patchResults.push(

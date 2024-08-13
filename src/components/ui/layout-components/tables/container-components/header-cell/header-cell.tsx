@@ -4,10 +4,10 @@ import { ArrowUp } from '@/assets/icons'
 import { TableHeaderCell } from '@/components/ui/primitives'
 import { ORDER } from '@/shared/enums'
 import { FlexContainer } from '@/shared/ui/flex-container'
-import { getOrderByString } from '@/shared/utils/get-order-by-string'
+import { getOrderByString } from '@/shared/utils'
 import clsx from 'clsx'
 
-import s from './header-cell.module.scss'
+import s from '@/components/ui/layout-components/tables/container-components/header-cell/header-cell.module.scss'
 
 type Props = {
   content: string

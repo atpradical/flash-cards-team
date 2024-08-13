@@ -2,6 +2,7 @@ import { AppDispatch, RootState } from '@/services'
 import { UpdateDeckArgs, UpdateDeckResponse } from '@/services/decks'
 import { decksApi } from '@/services/decks/decks-api'
 import { Nullable } from '@/shared/types/common'
+import { createUploadedImageURL } from '@/shared/utils'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch
@@ -16,13 +17,7 @@ export async function optimisticUpdateDecks(
   const cachedArgsForQuery = decksApi.util.selectCachedArgsForQuery(getState(), 'getDecks')
   const patchResults: any[] = []
 
-  let uploadedImageUrl: Nullable<string | undefined>
-
-  if (cover === null) {
-    uploadedImageUrl = null
-  } else if (cover && cover instanceof File) {
-    uploadedImageUrl = URL.createObjectURL(cover)
-  }
+  const uploadedImageUrl = createUploadedImageURL(cover)
 
   cachedArgsForQuery.forEach(cachedArgs => {
     patchResults.push(
