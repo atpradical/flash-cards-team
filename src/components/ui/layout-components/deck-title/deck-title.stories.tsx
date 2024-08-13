@@ -18,6 +18,7 @@ export default meta
 export const DeckTitle: Story = {
   args: {
     deck: { name: "Friend's Deck" } as GetDeckResponse,
+    isAuthor: false,
     learnDeckPath: '',
   },
   render: args => {

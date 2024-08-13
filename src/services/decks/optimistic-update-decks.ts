@@ -1,7 +1,6 @@
 import { AppDispatch, RootState } from '@/services'
 import { UpdateDeckArgs, UpdateDeckResponse } from '@/services/decks'
 import { decksApi } from '@/services/decks/decks-api'
-import { Nullable } from '@/shared/types/common'
 import { createUploadedImageURL } from '@/shared/utils'
 
 type OptimisticUpdateContext = {

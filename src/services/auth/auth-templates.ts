@@ -15,7 +15,7 @@ export const createUserHTML = `
       Or confirm by following the link below:
     </p>
     <p>
-      <a href="http://localhost:5173/confirm-email/##token##" 
+      <a href="https://flash-cards-team-atpradicals-projects.vercel.app/confirm-email/##token##" 
          style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color:#8c61ff; text-decoration: none; border-radius: 5px;"
          target="_blank" rel="noopener noreferrer">
         Click to Verify Email
@@ -37,7 +37,7 @@ export const recoveryPasswordHTML = `
       We received a request to reset your password. If you didn't make the request, just ignore this email. Otherwise, you can reset your password using this link:
     </p>
     <p>
-      <a href="http://localhost:5173/reset-password/##token##"
+      <a href="https://flash-cards-team-atpradicals-projects.vercel.app/reset-password/##token##"
          style="display: inline-block; width: auto; max-width: 100%; padding: 10px 20px; font-size: 16px; color: #fff; background-color:#8c61ff; text-decoration: none; border-radius: 5px;"
          target="_blank" rel="noopener noreferrer">
         Reset Password
