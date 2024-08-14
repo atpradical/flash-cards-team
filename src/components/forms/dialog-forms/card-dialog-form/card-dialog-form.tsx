@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/primitives'
 import { Card, useCreateCardMutation, useUpdateCardMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
-import { useCurrentPage, useSearchParamUpdater } from '@/shared/hooks'
+import { useCurrentPage, useDisableOnLoading, useSearchParamUpdater } from '@/shared/hooks'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -182,12 +182,13 @@ export const CardDialogForm = ({
   }
 
   const isLoading = isLoadingCreateCard || isLoadingUpdateCard
+  const disabled = useDisableOnLoading(isLoading)
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <Content className={cn.container}>
         <Header load={isLoading} title={title} />
-        <Body>
+        <Body disabled={disabled}>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'14px'}>
               <Typography variant={'subtitle1'}>{`Question:`}</Typography>
@@ -219,7 +220,12 @@ export const CardDialogForm = ({
             </FlexContainer>
           </form>
         </Body>
-        <Footer onCancel={cancelFormHandler} onSubmit={formHandler} title={title} />
+        <Footer
+          disabled={disabled}
+          onCancel={cancelFormHandler}
+          onSubmit={formHandler}
+          title={title}
+        />
       </Content>
     </Dialog>
   )

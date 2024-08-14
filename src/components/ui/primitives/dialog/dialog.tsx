@@ -68,10 +68,17 @@ const DialogHeader = ({ children, className, flexContainerProps, ...rest }: Dial
 }
 
 type DialogBodyProps = {
+  disabled: boolean
   flexContainerProps?: ComponentPropsWithoutRef<typeof FlexContainer>
 } & HTMLAttributes<HTMLDivElement>
-const DialogBody = ({ children, className, flexContainerProps, ...rest }: DialogBodyProps) => {
-  const cn = clsx(s.body, className)
+const DialogBody = ({
+  children,
+  className,
+  disabled,
+  flexContainerProps,
+  ...rest
+}: DialogBodyProps) => {
+  const cn = clsx(s.body, className, disabled && s.disabled)
 
   return (
     <div className={cn} {...rest}>
@@ -85,7 +92,13 @@ const DialogBody = ({ children, className, flexContainerProps, ...rest }: Dialog
 type DialogFooterProps = {
   flexContainerProps?: ComponentPropsWithoutRef<typeof FlexContainer>
 } & HTMLAttributes<HTMLDivElement>
-const DialogFooter = ({ children, className, flexContainerProps, ...rest }: DialogFooterProps) => {
+const DialogFooter = ({
+  children,
+  className,
+
+  flexContainerProps,
+  ...rest
+}: DialogFooterProps) => {
   const cn = clsx(s.footer, className)
 
   return (

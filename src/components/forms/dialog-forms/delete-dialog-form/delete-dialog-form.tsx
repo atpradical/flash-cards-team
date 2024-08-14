@@ -1,14 +1,15 @@
 import { useForm } from 'react-hook-form'
 
-import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogDescription as Description, Dialog, DialogContent } from '@/components/ui/primitives'
 import { useDeleteCardMutation, useDeleteDeckMutation } from '@/services'
 import { DIALOG_ENTITY } from '@/shared/enums'
+import { useDisableOnLoading } from '@/shared/hooks'
 import { entityIdScheme } from '@/shared/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import { DialogFormFooter as Footer, DialogFromHeader as Header } from '../container-components'
+import { cn } from './../dialog-forms.styles'
 
 const DeleteFormScheme = z.object({
   entityId: entityIdScheme,
@@ -53,6 +54,7 @@ export const DeleteDialogForm = ({
   }
 
   const isLoading = isLoadingDeleteCard || isLoadingDeleteDeck
+  const disabled = useDisableOnLoading(isLoading)
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
@@ -66,7 +68,12 @@ export const DeleteDialogForm = ({
           {entity === DIALOG_ENTITY.DECK ? 'All cards will be deleted.' : ''}
         </Description>
         <form className={cn.form} onSubmit={formHandler}>
-          <Footer onCancel={cancelFormHandler} onSubmit={formHandler} title={title} />
+          <Footer
+            disabled={disabled}
+            onCancel={cancelFormHandler}
+            onSubmit={formHandler}
+            title={title}
+          />
         </form>
       </DialogContent>
     </Dialog>

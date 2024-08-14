@@ -52,7 +52,7 @@ export const Dialog: Story = {
                   <CloseOutline onClick={action('Button close invoked')} />
                 </DialogClose>
               </DialogHeader>
-              <DialogBody>
+              <DialogBody disabled={false}>
                 <Typography variant={'body1'}>{descriptionMockText}</Typography>
                 <TextField label={'Label'} placeholder={'Just a placeholder'} />
                 <Button fullWidth onClick={action('Button checkbox checked')} variant={'secondary'}>
@@ -62,7 +62,7 @@ export const Dialog: Story = {
                 <Checkbox label={'Private pack'} onClick={action('Button checkbox checked')} />
               </DialogBody>
               <DialogFooter flexContainerProps={{ jc: 'space-between' }}>
-                <Button onClick={action('Button cancel invoked')} variant={'secondary'}>
+                <Button disabled onClick={action('Button cancel invoked')} variant={'secondary'}>
                   Cancel
                 </Button>
                 <Button onClick={action('Button submit invoked')}>Submit</Button>

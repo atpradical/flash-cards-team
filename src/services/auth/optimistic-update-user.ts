@@ -10,7 +10,7 @@ type OptimisticUpdateContext = {
   queryFulfilled: Promise<{ data: UpdateUserResponse }>
 }
 
-export async function optimisticUpdateAuth(
+export async function optimisticUpdateUser(
   { avatar, ...args }: UpdateUserArgs,
   { dispatch, getState, queryFulfilled }: OptimisticUpdateContext
 ) {

@@ -12,7 +12,7 @@ import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
 import { Deck, GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
-import { useSearchParamUpdater } from '@/shared/hooks'
+import { useDisableOnLoading, useSearchParamUpdater } from '@/shared/hooks'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -80,7 +80,6 @@ export const DeckDialogForm = ({
 
   const [createDeck, { isLoading: isCreateLoading }] = useCreateDeckMutation()
   const [updateDeck, { isLoading: isUpdateLoading }] = useUpdateDeckMutation()
-  const isLoading = isCreateLoading || isUpdateLoading
 
   const { control, handleSubmit, reset } = useForm<DeckDialogFormValues>({
     defaultValues: {
@@ -147,12 +146,14 @@ export const DeckDialogForm = ({
     setCover(null)
     setPreview(null)
   }
+  const isLoading = isCreateLoading || isUpdateLoading
+  const disabled = useDisableOnLoading(isLoading)
 
   return (
     <Dialog modal onOpenChange={onOpenChange} open={open}>
       <DialogContent className={cn.container}>
         <Header load={isLoading} title={title} />
-        <Body>
+        <Body disabled={disabled}>
           <form className={cn.form} onSubmit={formHandler}>
             <FlexContainer ai={'flex-start'} fd={'column'} gap={'24px'}>
               <ControlledTextField
@@ -171,7 +172,12 @@ export const DeckDialogForm = ({
             </FlexContainer>
           </form>
         </Body>
-        <Footer onCancel={cancelFormHandler} onSubmit={formHandler} title={title} />
+        <Footer
+          disabled={disabled}
+          onCancel={cancelFormHandler}
+          onSubmit={formHandler}
+          title={title}
+        />
       </DialogContent>
     </Dialog>
   )

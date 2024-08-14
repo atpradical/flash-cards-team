@@ -25,7 +25,7 @@ export const useProfilePageData = () => {
       logout()
       toast.success('You logout successfully')
     } catch {
-      toast('Something went wrong') //todo: doesn't work offline mode
+      toast.error('Something went wrong') //todo: doesn't work offline mode
     }
   }
 
@@ -68,7 +68,7 @@ export const useProfilePageData = () => {
     await deleteUser()
       .then(() => navigate(PATH.SIGN_IN))
       .catch(e => {
-        console.log(`User wasn't deleted, ${e}`)
+        toast.error(`User wasn't deleted, ${e}`)
       })
   }
 
