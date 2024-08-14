@@ -1,5 +1,8 @@
-import { AppDispatch, RootState, UpdateUserArgs, UpdateUserResponse, authApi } from '@/services'
-import { createUploadedImageURL } from '@/shared/utils'
+import { AppDispatch, RootState } from '@/services'
+import { createUploadedImageURL, revokeObjectURL } from '@/shared/utils'
+
+import { UpdateUserArgs, UpdateUserResponse } from './auth.types'
+import { authApi } from './auth-api'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch
@@ -38,8 +41,6 @@ export async function optimisticUpdateAuth(
       patchResult.undo()
     })
   } finally {
-    if (uploadedImageUrl) {
-      URL.revokeObjectURL(uploadedImageUrl)
-    }
+    revokeObjectURL(uploadedImageUrl)
   }
 }

@@ -1,4 +1,6 @@
 import { createUserHTML, optimisticUpdateAuth, recoveryPasswordHTML } from '@/services/auth'
+import { flashcardsApi } from '@/services/flashcards-api'
+
 import {
   CreateUserArgs,
   CreateUserResponse,
@@ -11,13 +13,13 @@ import {
   UpdateUserResponse,
   User,
   VerifyArgs,
-} from '@/services/auth/auth.types'
-import { flashcardsApi } from '@/services/flashcards-api'
+} from './auth.types'
 
 export const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       createUser: builder.mutation<CreateUserResponse, CreateUserArgs>({
+        // onQueryStarted: pessimisticUpdateAuth,
         query: args => {
           const { email, name, password } = args
 

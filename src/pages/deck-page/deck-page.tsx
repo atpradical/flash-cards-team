@@ -48,7 +48,6 @@ export const DeckPage = () => {
 
   const cardsData = currentData ?? data
 
-  console.log('cardsData', cardsData)
   const { items: cards = [], pagination = {} as PaginationModel } = cardsData ?? {}
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {

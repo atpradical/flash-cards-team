@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import {
   DialogBody as Body,
   DialogContent as Content,
@@ -12,6 +11,7 @@ import {
 } from '@/components/ui/primitives'
 import { Card, useCreateCardMutation, useUpdateCardMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
+import { useCurrentPage, useSearchParamUpdater } from '@/shared/hooks'
 import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -24,6 +24,7 @@ import {
   DialogFromHeader as Header,
   DialogFormUploadImage as UploadImage,
 } from '../container-components'
+import { cn } from './../dialog-forms.styles'
 
 const CardDialogFormScheme = z.object({
   answer: cardAnswerScheme,
@@ -51,6 +52,9 @@ export const CardDialogForm = ({
   const [answerCover, setAnswerCover] = useState<Nullable<File | string>>(card?.answerImg ?? null)
   const [questionPreview, setQuestionPreview] = useState<Nullable<string>>(card?.questionImg ?? '')
   const [answerPreview, setAnswerPreview] = useState<Nullable<string>>(card?.answerImg ?? '')
+
+  const currentPage = useCurrentPage()
+  const updateSearchParam = useSearchParamUpdater()
 
   useEffect(() => {
     if (questionCover && typeof questionCover !== 'string') {
@@ -120,12 +124,13 @@ export const CardDialogForm = ({
     }
 
     if (action === 'CREATE') {
-      //hook useSearchParams
-      //стрелочки
       createCard({
         ...finalFormData,
         deckId: deckId ?? '',
       }).then(() => {
+        if (currentPage !== 1) {
+          updateSearchParam({ currentPage: 1 })
+        }
         setQuestionCover(null)
         setAnswerCover(null)
         cancelFormHandler()
@@ -136,6 +141,9 @@ export const CardDialogForm = ({
         ...finalFormData,
         id: card?.id ?? '',
       }).then(() => {
+        if (currentPage !== 1) {
+          updateSearchParam({ currentPage: 1 })
+        }
         setQuestionCover(null)
         setAnswerCover(null)
         cancelFormHandler()

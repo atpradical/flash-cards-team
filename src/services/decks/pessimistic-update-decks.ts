@@ -1,8 +1,9 @@
 import { toast } from 'react-toastify'
 
-import { router } from '@/app'
-import { AppDispatch, CreateDeckArgs, Deck, GetDecksArgs, RootState, decksApi } from '@/services'
-import { PATH } from '@/shared/enums'
+import { AppDispatch, RootState } from '@/services'
+
+import { CreateDeckArgs, Deck, GetDecksArgs } from './deck.types'
+import { decksApi } from './decks-api'
 
 type PessimisticUpdateContext = {
   dispatch: AppDispatch
@@ -19,11 +20,8 @@ export async function pessimisticUpdateDecks(
     'getDecks'
   ) as GetDecksArgs[]
 
-  console.log('pessimisticUpdateDecks')
   try {
     const { data } = await queryFulfilled
-
-    console.log('data', data)
 
     cachedArgsForQuery.forEach(cachedArgs => {
       dispatch(
@@ -37,8 +35,6 @@ export async function pessimisticUpdateDecks(
         })
       )
     })
-
-    router.navigate(`${PATH.DECK_LIST}?currentPage=1`)
   } catch (e: any) {
     toast.error(e.error.error as string)
   }

@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react'
 import * as RadixAvatar from '@radix-ui/react-avatar'
 import clsx from 'clsx'
 
-import s from '@/components/ui/primitives/avatar/avatar.module.scss'
+import s from './avatar.module.scss'
 
 type AvatarProps = {
   name?: string
@@ -23,9 +23,7 @@ export const Avatar = ({ className, name, size = 'm', src, ...rest }: AvatarProp
   return (
     <RadixAvatar.Root className={cn.root} {...rest}>
       <RadixAvatar.Image alt={'user avatar'} className={cn.image} src={src} />
-      <RadixAvatar.Fallback className={cn.fallBack} delayMs={3000}>
-        {fallBack}
-      </RadixAvatar.Fallback>
+      <RadixAvatar.Fallback className={cn.fallBack}>{fallBack}</RadixAvatar.Fallback>
     </RadixAvatar.Root>
   )
 }

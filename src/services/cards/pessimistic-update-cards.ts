@@ -1,8 +1,9 @@
 import { toast } from 'react-toastify'
 
 import { AppDispatch, RootState } from '@/services'
-import { CreateCardArgs, CreateCardResponse, GetCardsArgs } from '@/services/cards'
-import { cardsApi } from '@/services/cards/cards-api'
+
+import { CreateCardArgs, CreateCardResponse, GetCardsArgs } from './cards.types'
+import { cardsApi } from './cards-api'
 
 type PessimisticUpdateContext = {
   dispatch: AppDispatch
@@ -19,14 +20,12 @@ export async function pessimisticUpdateCards(
     'getCards'
   ) as GetCardsArgs[]
 
-  console.log('pessimisticUpdateCards')
   try {
     const { data } = await queryFulfilled
 
     cachedArgsForQuery.forEach(cachedArgs => {
       dispatch(
         cardsApi.util.updateQueryData('getCards', cachedArgs, draft => {
-          console.log('pessimisticUpdateCards data')
           draft.items.unshift(data)
           draft.items.pop()
         })

@@ -1,7 +1,7 @@
 import { AppDispatch, RootState } from '@/services'
 import { UpdateDeckArgs, UpdateDeckResponse } from '@/services/decks'
 import { decksApi } from '@/services/decks/decks-api'
-import { createUploadedImageURL } from '@/shared/utils'
+import { createUploadedImageURL, revokeObjectURL } from '@/shared/utils'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch
@@ -55,9 +55,6 @@ export async function optimisticUpdateDecks(
       patchResult.undo()
     })
   } finally {
-    // 60 sec
-    if (uploadedImageUrl) {
-      URL.revokeObjectURL(uploadedImageUrl)
-    }
+    revokeObjectURL(uploadedImageUrl)
   }
 }

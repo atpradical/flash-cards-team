@@ -1,7 +1,8 @@
 import { AppDispatch, RootState } from '@/services'
-import { UpdateCardArgs, UpdateCardResponse } from '@/services/cards'
-import { cardsApi } from '@/services/cards/cards-api'
 import { createUploadedImageURL, revokeObjectURL } from '@/shared/utils'
+
+import { UpdateCardArgs, UpdateCardResponse } from './cards.types'
+import { cardsApi } from './cards-api'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch

@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import {
@@ -11,6 +12,7 @@ import { cn } from '@/components/forms/dialog-forms/dialog-forms.styles'
 import { DialogBody as Body, Dialog, DialogContent } from '@/components/ui/primitives'
 import { Deck, GetDeckResponse, useCreateDeckMutation, useUpdateDeckMutation } from '@/services'
 import { DIALOG_ACTION } from '@/shared/enums'
+import { useSearchParamUpdater } from '@/shared/hooks'
 import { deckNameScheme, privateDeckScheme } from '@/shared/schemes'
 import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
@@ -48,6 +50,13 @@ export const DeckDialogForm = ({
 
   const [cover, setCover] = useState<Nullable<File | string>>(deckCover ?? null)
   const [preview, setPreview] = useState<Nullable<string>>(deckCover)
+
+  const updateSearchParam = useSearchParamUpdater()
+
+  const location = useLocation()
+
+  const searchParams = new URLSearchParams(location.search)
+  const currentPage = searchParams.get('currentPage')
 
   useEffect(() => {
     if (cover && typeof cover !== 'string') {
@@ -105,6 +114,9 @@ export const DeckDialogForm = ({
       createDeck({
         ...finalFormData,
       }).then(() => {
+        if (Number(currentPage) !== 1) {
+          updateSearchParam({ currentPage: 1 })
+        }
         setCover(null)
         cancelFormHandler()
         reset()
