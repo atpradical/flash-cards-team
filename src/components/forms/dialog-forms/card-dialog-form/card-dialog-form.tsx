@@ -120,6 +120,8 @@ export const CardDialogForm = ({
     }
 
     if (action === 'CREATE') {
+      //hook useSearchParams
+      //стрелочки
       createCard({
         ...finalFormData,
         deckId: deckId ?? '',

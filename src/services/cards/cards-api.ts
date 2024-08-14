@@ -1,4 +1,3 @@
-import { optimisticUpdateCards } from '@/services/cards'
 import {
   Card,
   CardId,
@@ -15,11 +14,15 @@ import {
 } from '@/services/cards/cards.types'
 import { flashcardsApi } from '@/services/flashcards-api'
 
+import { optimisticUpdateCards } from './optimistic-update-cards'
+import { pessimisticUpdateCards } from './pessimistic-update-cards'
+
 export const cardsApi = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       createCard: builder.mutation<CreateCardResponse, CreateCardArgs>({
         invalidatesTags: ['Cards'],
+        onQueryStarted: pessimisticUpdateCards,
         query: ({ answer, answerImg, deckId, question, questionImg }) => {
           const formData = new FormData()
 

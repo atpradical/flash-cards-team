@@ -34,7 +34,8 @@ export const DeckPage = () => {
   })
 
   const {
-    data: cardsData,
+    currentData,
+    data,
     isFetching: isFetchingCards,
     isLoading: isLoadingCards,
   } = useGetCardsQuery({
@@ -45,6 +46,9 @@ export const DeckPage = () => {
     question: search || undefined,
   })
 
+  const cardsData = currentData ?? data
+
+  console.log('cardsData', cardsData)
   const { items: cards = [], pagination = {} as PaginationModel } = cardsData ?? {}
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {

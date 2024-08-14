@@ -55,6 +55,7 @@ export async function optimisticUpdateDecks(
       patchResult.undo()
     })
   } finally {
+    // 60 sec
     if (uploadedImageUrl) {
       URL.revokeObjectURL(uploadedImageUrl)
     }

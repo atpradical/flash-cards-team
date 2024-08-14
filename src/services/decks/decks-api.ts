@@ -1,3 +1,4 @@
+import { pessimisticUpdateDecks } from '@/services/decks'
 import {
   CreateDeckArgs,
   CreateDeckResponse,
@@ -24,6 +25,7 @@ export const decksApi = flashcardsApi.injectEndpoints({
       }),
       createDeck: builder.mutation<CreateDeckResponse, CreateDeckArgs>({
         invalidatesTags: ['Decks'],
+        onQueryStarted: pessimisticUpdateDecks,
         query: args => {
           const { cover, isPrivate, name } = args
           const formData = new FormData()

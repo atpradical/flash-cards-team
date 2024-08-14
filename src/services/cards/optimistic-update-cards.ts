@@ -1,7 +1,7 @@
 import { AppDispatch, RootState } from '@/services'
 import { UpdateCardArgs, UpdateCardResponse } from '@/services/cards'
 import { cardsApi } from '@/services/cards/cards-api'
-import { createUploadedImageURL } from '@/shared/utils'
+import { createUploadedImageURL, revokeObjectURL } from '@/shared/utils'
 
 type OptimisticUpdateContext = {
   dispatch: AppDispatch
@@ -47,11 +47,7 @@ export async function optimisticUpdateCards(
       patchResult.undo()
     })
   } finally {
-    if (uploadedImageAnswer) {
-      URL.revokeObjectURL(uploadedImageAnswer)
-    }
-    if (uploadedImageQuestion) {
-      URL.revokeObjectURL(uploadedImageQuestion)
-    }
+    revokeObjectURL(uploadedImageAnswer)
+    revokeObjectURL(uploadedImageQuestion)
   }
 }
