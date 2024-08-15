@@ -1,16 +1,19 @@
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { CheckEmailIcon } from '@/assets/icons'
-import { cn } from '@/components/ui/layout-components/check-email/check-email.styles'
 import { Button, Card, Typography } from '@/components/ui/primitives'
 import { useVerifyEmailMutation } from '@/services'
 import { PATH } from '@/shared/enums'
+import { useDisableOnLoading } from '@/shared/hooks'
 import { codeVerifySchema } from '@/shared/schemes'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+
+import { cn } from './check-email.styles'
 
 type CheckEmailProps = {
   email: string
@@ -23,25 +26,30 @@ const VerifyEmailCodeSchema = z.object({
 })
 
 export const CheckEmail = ({ email, forRecoveryPassword }: CheckEmailProps) => {
-  const { control, handleSubmit } = useForm<{ code: string }>({
+  const {
+    control,
+    formState: { isDirty },
+    handleSubmit,
+  } = useForm<{ code: string }>({
     mode: 'onSubmit',
     resolver: zodResolver(VerifyEmailCodeSchema),
   })
 
   const navigate = useNavigate()
 
-  const [verifyEmail, { isSuccess }] = useVerifyEmailMutation()
+  const [verifyEmail, { isLoading }] = useVerifyEmailMutation()
 
   const formHandler = handleSubmit(data => {
     verifyEmail(data)
       .unwrap()
-      .then(() => console.log('Verification was successly'))
-      .catch(error => console.error('Verification failed', error.status))
+      .then(() => {
+        navigate(PATH.ROOT)
+        toast.success('Verification was successly')
+      })
+      .catch(error => toast.error('Verification failed', error.status))
   })
 
-  if (isSuccess) {
-    navigate(PATH.ROOT)
-  }
+  const disabled = useDisableOnLoading(isLoading)
 
   return (
     <Card className={cn.container}>
@@ -57,11 +65,17 @@ export const CheckEmail = ({ email, forRecoveryPassword }: CheckEmailProps) => {
           <form className={cn.form} onSubmit={formHandler}>
             <ControlledTextField
               control={control}
+              disabled={disabled}
               label={'Enter code'}
               name={'code'}
               placeholder={'Enter your code'}
             />
-            <Button className={cn.confirm} fullWidth variant={'secondary'}>
+            <Button
+              className={cn.confirm}
+              disabled={disabled || !isDirty}
+              fullWidth
+              variant={'secondary'}
+            >
               Confirm
             </Button>
           </form>

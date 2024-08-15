@@ -17,9 +17,10 @@ export default meta
 
 export const PersonalInfoForm: Story = {
   args: {
+    isLoading: false,
     onCancel: action('onCancel action invoked!'),
     onSubmit: action('onSubmit action invoked!'),
-    personalData: mockUser,
+    userData: mockUser,
   },
   render: args => {
     return (

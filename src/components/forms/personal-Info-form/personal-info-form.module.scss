@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   max-width: var(--max-width-s);
+  padding: 0;
 }
 
 .avatar {
@@ -9,8 +10,14 @@
 
 .form {
   width: 100%;
+  padding: 0 36px 36px;
 }
 
-.button {
-  margin-bottom: 60px;
+.typography {
+  padding: 34px 36px 0;
+}
+
+.footer {
+  margin: 36px 0 20px;
+  padding: 0;
 }

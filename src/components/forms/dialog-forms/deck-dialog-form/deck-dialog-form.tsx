@@ -18,6 +18,7 @@ import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledCheckbox } from '@/shared/ui/form-components/controlled-checkbox'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
+import { revokeObjectURL } from '@/shared/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -64,9 +65,8 @@ export const DeckDialogForm = ({
       const newPreview = URL.createObjectURL(cover)
 
       // clear old preview to clear memory
-      if (preview) {
-        URL.revokeObjectURL(preview)
-      }
+      revokeObjectURL(preview)
+
       setPreview(newPreview)
 
       // clear new preview to clear memory

@@ -16,6 +16,7 @@ import { cardAnswerScheme, cardQuestionScheme } from '@/shared/schemes'
 import { Nullable } from '@/shared/types/common'
 import { FlexContainer } from '@/shared/ui/flex-container'
 import { ControlledTextField } from '@/shared/ui/form-components/controlled-text-field'
+import { revokeObjectURL } from '@/shared/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -60,9 +61,8 @@ export const CardDialogForm = ({
     if (questionCover && typeof questionCover !== 'string') {
       const newPreview = URL.createObjectURL(questionCover)
 
-      if (questionPreview) {
-        URL.revokeObjectURL(questionPreview)
-      }
+      revokeObjectURL(questionPreview)
+
       setQuestionPreview(newPreview)
 
       return () => URL.revokeObjectURL(newPreview)
@@ -76,9 +76,8 @@ export const CardDialogForm = ({
     if (answerCover && typeof answerCover !== 'string') {
       const newPreview = URL.createObjectURL(answerCover)
 
-      if (answerPreview) {
-        URL.revokeObjectURL(answerPreview)
-      }
+      revokeObjectURL(answerPreview)
+
       setAnswerPreview(newPreview)
 
       return () => URL.revokeObjectURL(newPreview)

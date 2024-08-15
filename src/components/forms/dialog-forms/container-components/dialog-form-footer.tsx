@@ -1,16 +1,17 @@
 import { Button, DialogFooter } from '@/components/ui/primitives'
 
 type Props = {
+  className?: string
   disabled: boolean
   onCancel: () => void
   onSubmit: () => void
   title: string
 }
 
-export const DialogFormFooter = ({ disabled, onCancel, onSubmit, title }: Props) => {
+export const DialogFormFooter = ({ className, disabled, onCancel, onSubmit, title }: Props) => {
   return (
-    <DialogFooter flexContainerProps={{ jc: 'space-between' }}>
-      <Button disabled={disabled} onClick={onCancel} variant={'secondary'}>
+    <DialogFooter className={className} flexContainerProps={{ jc: 'space-between' }}>
+      <Button onClick={onCancel} type={'button'} variant={'secondary'}>
         Cancel
       </Button>
       <Button disabled={disabled} onClick={onSubmit}>

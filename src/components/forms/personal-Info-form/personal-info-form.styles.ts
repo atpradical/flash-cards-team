@@ -2,7 +2,8 @@ import s from './personal-info-form.module.scss'
 
 export const cn = {
   avatar: s.avatar,
-  button: s.button,
   container: s.container,
+  footer: s.footer,
   form: s.form,
+  typography: s.typography,
 }

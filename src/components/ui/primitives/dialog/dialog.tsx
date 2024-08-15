@@ -92,13 +92,7 @@ const DialogBody = ({
 type DialogFooterProps = {
   flexContainerProps?: ComponentPropsWithoutRef<typeof FlexContainer>
 } & HTMLAttributes<HTMLDivElement>
-const DialogFooter = ({
-  children,
-  className,
-
-  flexContainerProps,
-  ...rest
-}: DialogFooterProps) => {
+const DialogFooter = ({ children, className, flexContainerProps, ...rest }: DialogFooterProps) => {
   const cn = clsx(s.footer, className)
 
   return (

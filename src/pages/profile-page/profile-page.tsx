@@ -27,9 +27,10 @@ export const ProfilePage = () => {
       <FlexContainer jc={'center'} pd={'0 20px'}>
         {isEditMode ? (
           <PersonalInfoForm
+            isLoading={isLoading}
             onCancel={cancelPersonalInfoHandler}
             onSubmit={saveNameHandler}
-            personalData={user}
+            userData={user}
           />
         ) : (
           <PersonalInfo

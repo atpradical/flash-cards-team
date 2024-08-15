@@ -59,8 +59,8 @@ export const useProfilePageData = () => {
     setIsEditMode(false)
   }
 
-  const cancelPersonalInfoHandler = (e: ChangeEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+  const cancelPersonalInfoHandler = () => {
+    // e.preventDefault()
     setIsEditMode(false)
   }
 
